@@ -166,7 +166,7 @@ function LangSwitcher({ lang, setLang }: { lang: LangCode; setLang: (l: LangCode
         }}
       >
         <span style={{ fontSize: "17px", lineHeight: 1 }}>{current.flag}</span>
-        <span style={{ letterSpacing: "0.4px" }}>{current.code.toUpperCase()}</span>
+        <span style={{ letterSpacing: "0.4px", fontSize: "13px" }}>{current.name}</span>
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.22, ease: appleEase }}
