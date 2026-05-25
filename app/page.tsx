@@ -498,7 +498,7 @@ export default function Home() {
                 }}
               >
                 <p style={{ color: "#64748B", fontSize: "11px", margin: "0 0 6px 0", letterSpacing: "1.2px", fontWeight: 600 }}>TELEFON</p>
-                <span style={{ color: "#0F172A", fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em" }}>
+                <span style={{ color: "#0EA5E9", fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em" }}>
                   0151 29436338
                 </span>
               </motion.a>
