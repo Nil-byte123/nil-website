@@ -505,7 +505,7 @@ export default function Home() {
 
               {/* E-Mail (Platzhalter bis du die Adresse gibst) */}
               <motion.a
-                href="mailto:kontakt@nil.de"
+                href="mailto:info@nilogik.com"
                 whileHover={{ scale: 1.03, boxShadow: "0 20px 50px rgba(0,0,0,0.07)" }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 style={{
@@ -518,7 +518,7 @@ export default function Home() {
               >
                 <p style={{ color: "#64748B", fontSize: "11px", margin: "0 0 6px 0", letterSpacing: "1.2px", fontWeight: 600 }}>E-MAIL</p>
                 <span style={{ color: "#0EA5E9", fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em" }}>
-                  kontakt@nil.de
+                  info@nilogik.com
                 </span>
               </motion.a>
             </div>
