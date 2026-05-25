@@ -483,16 +483,45 @@ export default function Home() {
               visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.9, ease: appleEase } },
             }}
           >
-            <motion.div
-              whileHover={{ scale: 1.03, boxShadow: "0 20px 50px rgba(0,0,0,0.07)" }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              style={{ display: "inline-block", background: "#FFFFFF", border: "1px solid rgba(15, 23, 42, 0.06)", padding: "18px 36px", borderRadius: "16px", boxShadow: "0 10px 30px rgba(0,0,0,0.02)" }}
-            >
-              <p style={{ color: "#64748B", fontSize: "11px", margin: "0 0 6px 0", letterSpacing: "1.2px", fontWeight: 600 }}>DIREKTER KONTAKT</p>
-              <a href="mailto:kontakt@nil.de" style={{ color: "#0EA5E9", fontSize: "22px", fontWeight: 700, textDecoration: "none", letterSpacing: "-0.02em" }}>
-                kontakt@nil.de
-              </a>
-            </motion.div>
+            <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
+              {/* Telefon */}
+              <motion.a
+                href="tel:+4915129436338"
+                whileHover={{ scale: 1.03, boxShadow: "0 20px 50px rgba(0,0,0,0.07)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                style={{
+                  display: "flex", flexDirection: "column", alignItems: "center",
+                  background: "#FFFFFF", border: "1px solid rgba(15, 23, 42, 0.06)",
+                  padding: "20px 32px", borderRadius: "16px",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.02)", textDecoration: "none",
+                  minWidth: "180px",
+                }}
+              >
+                <p style={{ color: "#64748B", fontSize: "11px", margin: "0 0 6px 0", letterSpacing: "1.2px", fontWeight: 600 }}>TELEFON</p>
+                <span style={{ color: "#0F172A", fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em" }}>
+                  0151 29436338
+                </span>
+              </motion.a>
+
+              {/* E-Mail (Platzhalter bis du die Adresse gibst) */}
+              <motion.a
+                href="mailto:kontakt@nil.de"
+                whileHover={{ scale: 1.03, boxShadow: "0 20px 50px rgba(0,0,0,0.07)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                style={{
+                  display: "flex", flexDirection: "column", alignItems: "center",
+                  background: "#FFFFFF", border: "1px solid rgba(15, 23, 42, 0.06)",
+                  padding: "20px 32px", borderRadius: "16px",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.02)", textDecoration: "none",
+                  minWidth: "180px",
+                }}
+              >
+                <p style={{ color: "#64748B", fontSize: "11px", margin: "0 0 6px 0", letterSpacing: "1.2px", fontWeight: 600 }}>E-MAIL</p>
+                <span style={{ color: "#0EA5E9", fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em" }}>
+                  kontakt@nil.de
+                </span>
+              </motion.a>
+            </div>
           </motion.div>
         </motion.div>
       </section>
