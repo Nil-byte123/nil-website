@@ -352,7 +352,9 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
   useEffect(() => {
     const el = messagesContainerRef.current;
     if (!el) return;
-    el.scrollTop = el.scrollHeight;
+    requestAnimationFrame(() => {
+      el.scrollTop = el.scrollHeight;
+    });
   }, [messages, loading]);
 
   const send = async () => {
@@ -424,7 +426,9 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
       <div ref={messagesContainerRef} style={{
         background: "#F1F5F9",
         height: "330px",
+        maxHeight: "330px",
         overflowY: "auto",
+        overscrollBehavior: "contain",
         padding: "18px 16px 12px",
         display: "flex", flexDirection: "column", gap: "10px",
         scrollbarWidth: "none",
