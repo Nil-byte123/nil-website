@@ -41,11 +41,10 @@ export default function Impressum() {
         <section style={sectionStyle}>
           <h2 style={h2Style}>Anbieter</h2>
           <p style={pStyle}>
-            {/* ⚠️ PLATZHALTER – bitte mit echten Daten ersetzen */}
-            <strong>[VORNAME NACHNAME]</strong><br />
+            <strong>Nil Elian Quezada Capa</strong><br />
             NIL – Automatisierung mit Verstand<br />
-            [STRASSE UND HAUSNUMMER]<br />
-            [PLZ] [STADT]<br />
+            Aschauerstraße 17<br />
+            82445 Schwaigen<br />
             Deutschland
           </p>
         </section>
@@ -70,9 +69,9 @@ export default function Impressum() {
         <section style={sectionStyle}>
           <h2 style={h2Style}>Verantwortlich für den Inhalt</h2>
           <p style={pStyle}>
-            [VORNAME NACHNAME]<br />
-            [STRASSE UND HAUSNUMMER]<br />
-            [PLZ] [STADT]
+            Nil Elian Quezada Capa<br />
+            Aschauerstraße 17<br />
+            82445 Schwaigen
           </p>
         </section>
 

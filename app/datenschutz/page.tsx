@@ -42,11 +42,10 @@ export default function Datenschutz() {
           <h2 style={h2Style}>1. Verantwortlicher</h2>
           <p style={pStyle}>
             Verantwortlicher im Sinne der DSGVO ist:<br /><br />
-            {/* ⚠️ PLATZHALTER – bitte mit echten Daten ersetzen */}
-            [VORNAME NACHNAME]<br />
+            Nil Elian Quezada Capa<br />
             NIL – Automatisierung mit Verstand<br />
-            [STRASSE UND HAUSNUMMER]<br />
-            [PLZ] [STADT]<br />
+            Aschauerstraße 17<br />
+            82445 Schwaigen<br />
             E-Mail: <a href="mailto:info@nilogik.de" style={linkStyle}>info@nilogik.de</a>
           </p>
         </section>
