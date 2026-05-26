@@ -492,13 +492,50 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6, duration: 0.8 }}
-          style={{ position: "absolute", bottom: "36px", left: "50%", transform: "translateX(-50%)",
-            display: "flex", flexDirection: "column", alignItems: "center", gap: "6px", pointerEvents: "none" }}>
-          <span style={{ fontSize: "10px", color: "#94A3B8", letterSpacing: "2px", fontWeight: 600 }}>SCROLL</span>
-          <motion.div animate={{ y: [0, 7, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-            style={{ width: "1px", height: "32px", background: "linear-gradient(to bottom, #94A3B8, transparent)" }} />
+        {/* Scroll Indicator — kaskadierende Chevrons */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.8, duration: 0.9, ease: appleEase }}
+          style={{ position: "absolute", bottom: "28px", left: "50%", transform: "translateX(-50%)",
+            display: "flex", flexDirection: "column", alignItems: "center", gap: "2px", pointerEvents: "none" }}
+        >
+          {/* "SCROLL" Label */}
+          <motion.span
+            animate={{ opacity: [0.4, 0.8, 0.4] }}
+            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+            style={{ fontSize: "9px", color: "#94A3B8", letterSpacing: "3px", fontWeight: 700, marginBottom: "10px" }}
+          >
+            SCROLL
+          </motion.span>
+
+          {/* 3 kaskadierende Chevrons */}
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              animate={{
+                opacity: [0, 0.35, 1, 0.35, 0],
+                y:       [0,    4,  8,   12, 16],
+              }}
+              transition={{
+                duration: 1.4,
+                repeat: Infinity,
+                delay: i * 0.22,
+                ease: "easeInOut",
+              }}
+            >
+              <svg width="22" height="13" viewBox="0 0 22 13" fill="none">
+                <motion.path
+                  d="M1 1L11 11L21 1"
+                  stroke={i === 2 ? "#0EA5E9" : i === 1 ? "#7DD3FC" : "#CBD5E1"}
+                  strokeWidth={i === 2 ? "2.5" : "2"}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  style={i === 2 ? { filter: "drop-shadow(0 0 4px #0EA5E9)" } : undefined}
+                />
+              </svg>
+            </motion.div>
+          ))}
         </motion.div>
       </section>
 
