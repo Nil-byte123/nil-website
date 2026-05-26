@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 
 const appleEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -569,6 +570,111 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
   );
 }
 
+/* ─── Contact Form ──────────────────────────────────────────── */
+function ContactForm({ lang }: { lang: LangCode }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const labels = {
+    de: { name: "Name", email: "E-Mail", message: "Nachricht", send: "Nachricht senden", success: "Nachricht gesendet! Wir melden uns bald. ✨", error: "Fehler beim Senden. Bitte versuche es erneut.", placeholder_name: "Dein Name", placeholder_email: "deine@email.de", placeholder_msg: "Wie können wir dir helfen?" },
+    en: { name: "Name", email: "Email", message: "Message", send: "Send message", success: "Message sent! We'll be in touch soon. ✨", error: "Error sending. Please try again.", placeholder_name: "Your name", placeholder_email: "your@email.com", placeholder_msg: "How can we help you?" },
+    es: { name: "Nombre", email: "Correo", message: "Mensaje", send: "Enviar mensaje", success: "¡Mensaje enviado! Nos pondremos en contacto pronto. ✨", error: "Error al enviar. Por favor, inténtalo de nuevo.", placeholder_name: "Tu nombre", placeholder_email: "tu@email.com", placeholder_msg: "¿Cómo podemos ayudarte?" },
+    fr: { name: "Nom", email: "E-mail", message: "Message", send: "Envoyer le message", success: "Message envoyé ! Nous vous contacterons bientôt. ✨", error: "Erreur lors de l'envoi. Veuillez réessayer.", placeholder_name: "Votre nom", placeholder_email: "votre@email.fr", placeholder_msg: "Comment pouvons-nous vous aider ?" },
+    it: { name: "Nome", email: "E-mail", message: "Messaggio", send: "Invia messaggio", success: "Messaggio inviato! Ti contatteremo presto. ✨", error: "Errore nell'invio. Per favore riprova.", placeholder_name: "Il tuo nome", placeholder_email: "tua@email.it", placeholder_msg: "Come possiamo aiutarti?" },
+  };
+  const l = labels[lang];
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !email || !message) return;
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setName(""); setEmail(""); setMessage("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%", padding: "12px 16px", borderRadius: "12px",
+    border: "1.5px solid rgba(15,23,42,0.1)", fontSize: "14px",
+    background: "#FFFFFF", color: "#0F172A", outline: "none",
+    fontFamily: "inherit", boxSizing: "border-box",
+    transition: "border-color 0.2s, box-shadow 0.2s",
+  };
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+        <div>
+          <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#64748B", letterSpacing: "1px", marginBottom: "6px" }}>{l.name.toUpperCase()}</label>
+          <input value={name} onChange={e => setName(e.target.value)} placeholder={l.placeholder_name} required
+            style={inputStyle}
+            onFocus={e => { e.target.style.borderColor = "rgba(14,165,233,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(14,165,233,0.1)"; }}
+            onBlur={e => { e.target.style.borderColor = "rgba(15,23,42,0.1)"; e.target.style.boxShadow = "none"; }}
+          />
+        </div>
+        <div>
+          <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#64748B", letterSpacing: "1px", marginBottom: "6px" }}>{l.email.toUpperCase()}</label>
+          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder={l.placeholder_email} required
+            style={inputStyle}
+            onFocus={e => { e.target.style.borderColor = "rgba(14,165,233,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(14,165,233,0.1)"; }}
+            onBlur={e => { e.target.style.borderColor = "rgba(15,23,42,0.1)"; e.target.style.boxShadow = "none"; }}
+          />
+        </div>
+      </div>
+      <div>
+        <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#64748B", letterSpacing: "1px", marginBottom: "6px" }}>{l.message.toUpperCase()}</label>
+        <textarea value={message} onChange={e => setMessage(e.target.value)} placeholder={l.placeholder_msg} required rows={4}
+          style={{ ...inputStyle, resize: "vertical", minHeight: "110px" }}
+          onFocus={e => { e.target.style.borderColor = "rgba(14,165,233,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(14,165,233,0.1)"; }}
+          onBlur={e => { e.target.style.borderColor = "rgba(15,23,42,0.1)"; e.target.style.boxShadow = "none"; }}
+        />
+      </div>
+
+      <AnimatePresence mode="wait">
+        {status === "success" ? (
+          <motion.p key="success" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+            style={{ color: "#22C55E", fontSize: "14px", fontWeight: 500, textAlign: "center", padding: "12px" }}>
+            {l.success}
+          </motion.p>
+        ) : status === "error" ? (
+          <motion.p key="error" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+            style={{ color: "#EF4444", fontSize: "14px", textAlign: "center", padding: "12px" }}>
+            {l.error}
+          </motion.p>
+        ) : (
+          <motion.button key="btn" type="submit" disabled={status === "sending"}
+            whileHover={{ scale: 1.02, boxShadow: "0 12px 30px rgba(15,23,42,0.2)" }}
+            whileTap={{ scale: 0.98 }}
+            style={{
+              background: status === "sending" ? "#94A3B8" : "#0F172A",
+              color: "#FFFFFF", border: "none", borderRadius: "12px",
+              padding: "14px 32px", fontSize: "14px", fontWeight: 500,
+              cursor: status === "sending" ? "default" : "pointer",
+              transition: "background 0.2s", fontFamily: "inherit",
+              boxShadow: "0 6px 20px rgba(15,23,42,0.12)",
+            }}>
+            {status === "sending" ? "..." : l.send}
+          </motion.button>
+        )}
+      </AnimatePresence>
+    </form>
+  );
+}
+
 /* ─── Main Page ─────────────────────────────────────────────── */
 export default function Home() {
   const [lang, setLang] = useState<LangCode>("de");
@@ -930,7 +1036,7 @@ export default function Home() {
       </section>
 
       {/* ── KONTAKT ── */}
-      <section id="kontakt" style={{ padding: "120px 20px 100px", textAlign: "center",
+      <section id="kontakt" style={{ padding: "120px 20px 80px", textAlign: "center",
         background: "linear-gradient(to bottom, #E2EEF9 0%, #EFF4FB 60px, #E8EFF8 100%)" }}>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.16 } } }}
@@ -992,8 +1098,45 @@ export default function Home() {
               </motion.a>
             </div>
           </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.9, ease: appleEase, delay: 0.2 }}
+            style={{ marginTop: "56px", maxWidth: "520px", margin: "56px auto 0" }}
+          >
+            <ContactForm lang={lang} />
+          </motion.div>
         </motion.div>
       </section>
+
+      {/* ── FOOTER ── */}
+      <footer style={{
+        background: "#08152A", color: "rgba(255,255,255,0.55)",
+        padding: "32px 24px", textAlign: "center",
+        fontSize: "13px", letterSpacing: "0.2px",
+      }}>
+        <div style={{ maxWidth: "1050px", margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "center", gap: "8px 24px" }}>
+          <span style={{ color: "rgba(255,255,255,0.35)" }}>© {new Date().getFullYear()} NIL – nilogik.de</span>
+          <Link href="/impressum" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none", transition: "color 0.2s" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "#0EA5E9")}
+            onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}>
+            Impressum
+          </Link>
+          <Link href="/datenschutz" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none", transition: "color 0.2s" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "#0EA5E9")}
+            onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}>
+            Datenschutz
+          </Link>
+          <a href="mailto:info@nilogik.de" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none", transition: "color 0.2s" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "#0EA5E9")}
+            onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}>
+            info@nilogik.de
+          </a>
+        </div>
+      </footer>
     </main>
   );
 }
