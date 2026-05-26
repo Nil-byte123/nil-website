@@ -347,15 +347,12 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const endRef = useRef<HTMLDivElement>(null);
-  const isFirstRender = useRef(true);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = messagesContainerRef.current;
+    if (!el) return;
+    el.scrollTop = el.scrollHeight;
   }, [messages, loading]);
 
   const send = async () => {
@@ -424,7 +421,7 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
       </div>
 
       {/* ── Messages ── */}
-      <div style={{
+      <div ref={messagesContainerRef} style={{
         background: "#F1F5F9",
         height: "330px",
         overflowY: "auto",
@@ -508,7 +505,6 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
             </motion.div>
           )}
         </AnimatePresence>
-        <div ref={endRef} />
       </div>
 
       {/* ── Input ── */}
