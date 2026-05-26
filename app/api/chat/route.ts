@@ -17,35 +17,34 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ response: "Bitte senden Sie eine gültige Nachricht." });
     }
 
-    const apiKey = process.env.ANTHROPIC_API_KEY;
+    const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
       return NextResponse.json({ response: "API-Schlüssel nicht konfiguriert." }, { status: 500 });
     }
 
-    // Build message history
+    // Build message history (OpenAI-compatible format)
     const messagesForAI = [
+      { role: "system", content: SYSTEM_PROMPT },
       ...(Array.isArray(history)
         ? history
             .filter((m: { role: string; content: string }) => m.content?.trim())
             .map((m: { role: string; content: string }) => ({
-              role: m.role === "system" ? "user" : m.role,
+              role: m.role === "bot" ? "assistant" : m.role,
               content: m.content,
             }))
         : []),
       { role: "user", content: message },
     ];
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
-        "x-api-key": apiKey,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "claude-3-5-haiku-20241022",
+        model: "llama-3.3-70b-versatile",
         max_tokens: 300,
-        system: SYSTEM_PROMPT,
         messages: messagesForAI,
       }),
     });
@@ -53,7 +52,7 @@ export async function POST(req: NextRequest) {
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("Anthropic API error:", data);
+      console.error("GROQ API error:", data);
       return NextResponse.json(
         { response: "Es tut mir leid, ich bin gerade nicht erreichbar. Bitte versuche es gleich nochmal! ✂️" },
         { status: 200 }
@@ -61,7 +60,7 @@ export async function POST(req: NextRequest) {
     }
 
     const botReply =
-      data?.content?.[0]?.text ??
+      data?.choices?.[0]?.message?.content ??
       "Hallo! Ich bin NIL, dein digitaler Salon-Assistent. Wie kann ich dir heute helfen? ✂️";
 
     return NextResponse.json({ response: botReply });
