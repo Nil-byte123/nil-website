@@ -9,10 +9,6 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: "NIL – Automatisierung mit Verstand",
   description: "Intelligente KI-Agenten und maßgeschneiderte Softwarelösungen für Entwickler, Salons und Gastronomie.",
-  icons: {
-    icon: "/icon.png",
-    apple: "/icon.png",
-  },
 };
 
 export default function RootLayout({
