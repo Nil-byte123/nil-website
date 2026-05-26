@@ -19,10 +19,9 @@ export async function POST(req: NextRequest) {
 
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
-      return NextResponse.json({ response: "API-Schlüssel nicht konfiguriert." }, { status: 500 });
+      return NextResponse.json({ response: "Es tut mir leid, ich bin gerade nicht erreichbar. ✂️" });
     }
 
-    // Build message history (OpenAI-compatible format)
     const messagesForAI = [
       { role: "system", content: SYSTEM_PROMPT },
       ...(Array.isArray(history)
