@@ -8,7 +8,7 @@ const appleEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 /* ─── Übersetzungen ─────────────────────────────────────────── */
 const translations = {
   de: {
-    nav: { advantages: "Vorteile", services: "Services", contact: "Kontakt" },
+    nav: { advantages: "Vorteile", services: "Services", demo: "Demo", contact: "Kontakt" },
     hero: {
       headline: "Automatisierung mit Verstand.",
       subtext: "Intelligente KI-Agenten und maßgeschneiderte Softwarelösungen. Wir machen die Abläufe für Entwickler, Salons und Gastronomie spürbar effizienter.",
@@ -23,6 +23,13 @@ const translations = {
       chat2: "Natürlich! Dein Termin steht für 14:00 Uhr und der Kaffeetisch ist ab 15:00 Uhr für dich gebucht. ✨",
       chatLabel: "LIVE DEMO CHAT",
     },
+    demo: {
+      label: "LIVE DEMO",
+      headline: "Einfach ausprobieren.",
+      subtext: "Schreib unserem KI-Salon-Assistenten live – genau so sieht die Lösung für deinen Betrieb aus.",
+      greeting: "Hallo! Ich bin NIL, dein digitaler Salon-Assistent. Wie kann ich dir heute helfen? ✂️",
+      placeholder: "Nachricht schreiben …",
+    },
     contact: {
       headline: "Bereit für die Zukunft?",
       subtext: "Lass uns gemeinsam deine Prozesse intelligent automatisieren.",
@@ -31,7 +38,7 @@ const translations = {
     },
   },
   en: {
-    nav: { advantages: "Benefits", services: "Services", contact: "Contact" },
+    nav: { advantages: "Benefits", services: "Services", demo: "Demo", contact: "Contact" },
     hero: {
       headline: "Automation with intelligence.",
       subtext: "Smart AI agents and tailor-made software solutions. We make workflows for developers, salons and hospitality measurably more efficient.",
@@ -46,6 +53,13 @@ const translations = {
       chat2: "Of course! Your appointment is set for 2:00 PM and the café table is reserved from 3:00 PM. ✨",
       chatLabel: "LIVE DEMO CHAT",
     },
+    demo: {
+      label: "LIVE DEMO",
+      headline: "Try it right now.",
+      subtext: "Chat with our AI salon assistant live – this is exactly what the solution looks like for your business.",
+      greeting: "Hallo! Ich bin NIL, dein digitaler Salon-Assistent. Wie kann ich dir heute helfen? ✂️",
+      placeholder: "Write a message …",
+    },
     contact: {
       headline: "Ready for the future?",
       subtext: "Let's intelligently automate your processes together.",
@@ -54,7 +68,7 @@ const translations = {
     },
   },
   es: {
-    nav: { advantages: "Ventajas", services: "Servicios", contact: "Contacto" },
+    nav: { advantages: "Ventajas", services: "Servicios", demo: "Demo", contact: "Contacto" },
     hero: {
       headline: "Automatización con inteligencia.",
       subtext: "Agentes de IA inteligentes y soluciones de software a medida. Hacemos los procesos para desarrolladores, salones y gastronomía notablemente más eficientes.",
@@ -69,6 +83,13 @@ const translations = {
       chat2: "¡Por supuesto! Tu cita está a las 14:00 h y la mesa del café está reservada desde las 15:00 h. ✨",
       chatLabel: "DEMO EN VIVO",
     },
+    demo: {
+      label: "DEMO EN VIVO",
+      headline: "Pruébalo ahora mismo.",
+      subtext: "Chatea con nuestro asistente de IA en vivo – así es exactamente como se ve la solución para tu negocio.",
+      greeting: "Hallo! Ich bin NIL, dein digitaler Salon-Assistent. Wie kann ich dir heute helfen? ✂️",
+      placeholder: "Escribe un mensaje …",
+    },
     contact: {
       headline: "¿Listo para el futuro?",
       subtext: "Automaticemos juntos tus procesos de forma inteligente.",
@@ -77,7 +98,7 @@ const translations = {
     },
   },
   fr: {
-    nav: { advantages: "Avantages", services: "Services", contact: "Contact" },
+    nav: { advantages: "Avantages", services: "Services", demo: "Démo", contact: "Contact" },
     hero: {
       headline: "L'automatisation intelligente.",
       subtext: "Agents IA intelligents et solutions logicielles sur mesure. Nous rendons les processus pour développeurs, salons et restauration bien plus efficaces.",
@@ -92,6 +113,13 @@ const translations = {
       chat2: "Bien sûr ! Votre rendez-vous est fixé à 14h00 et la table du café est réservée à partir de 15h00. ✨",
       chatLabel: "DÉMO EN DIRECT",
     },
+    demo: {
+      label: "DÉMO EN DIRECT",
+      headline: "Essayez-le maintenant.",
+      subtext: "Chattez avec notre assistant IA en direct – c'est exactement à quoi ressemble la solution pour votre entreprise.",
+      greeting: "Hallo! Ich bin NIL, dein digitaler Salon-Assistent. Wie kann ich dir heute helfen? ✂️",
+      placeholder: "Écrire un message …",
+    },
     contact: {
       headline: "Prêt pour l'avenir ?",
       subtext: "Automatisons ensemble vos processus de manière intelligente.",
@@ -100,7 +128,7 @@ const translations = {
     },
   },
   it: {
-    nav: { advantages: "Vantaggi", services: "Servizi", contact: "Contatti" },
+    nav: { advantages: "Vantaggi", services: "Servizi", demo: "Demo", contact: "Contatti" },
     hero: {
       headline: "Automazione con intelligenza.",
       subtext: "Agenti IA intelligenti e soluzioni software su misura. Rendiamo i processi per sviluppatori, salon e ristorazione notevolmente più efficienti.",
@@ -114,6 +142,13 @@ const translations = {
       chat1: "Ciao! Posso prenotare un taglio di capelli e un tavolo per domani?",
       chat2: "Certo! Il tuo appuntamento è fissato per le 14:00 e il tavolo del caffè è prenotato dalle 15:00. ✨",
       chatLabel: "DEMO DAL VIVO",
+    },
+    demo: {
+      label: "DEMO DAL VIVO",
+      headline: "Provalo subito.",
+      subtext: "Chatta con il nostro assistente IA dal vivo – è esattamente così che appare la soluzione per la tua attività.",
+      greeting: "Hallo! Ich bin NIL, dein digitaler Salon-Assistent. Wie kann ich dir heute helfen? ✂️",
+      placeholder: "Scrivi un messaggio …",
     },
     contact: {
       headline: "Pronto per il futuro?",
@@ -150,7 +185,6 @@ function LangSwitcher({ lang, setLang }: { lang: LangCode; setLang: (l: LangCode
 
   return (
     <div ref={ref} style={{ position: "relative" }}>
-      {/* Trigger */}
       <motion.button
         onClick={() => setOpen(v => !v)}
         whileHover={{ scale: 1.04 }}
@@ -171,12 +205,9 @@ function LangSwitcher({ lang, setLang }: { lang: LangCode; setLang: (l: LangCode
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.22, ease: appleEase }}
           style={{ fontSize: "9px", opacity: 0.55, marginTop: "1px" }}
-        >
-          ▼
-        </motion.span>
+        >▼</motion.span>
       </motion.button>
 
-      {/* Dropdown */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -223,9 +254,7 @@ function LangSwitcher({ lang, setLang }: { lang: LangCode; setLang: (l: LangCode
                       exit={{ scale: 0, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                       style={{ color: "#0EA5E9", fontSize: "13px", fontWeight: 700 }}
-                    >
-                      ✓
-                    </motion.span>
+                    >✓</motion.span>
                   )}
                 </AnimatePresence>
               </motion.button>
@@ -238,7 +267,7 @@ function LangSwitcher({ lang, setLang }: { lang: LangCode; setLang: (l: LangCode
 }
 
 /* ─── NIL Logo ──────────────────────────────────────────────── */
-function FinalBrandingLogo({ width = 260, height = 100 }) {
+function FinalBrandingLogo({ width = 260, height = 100 }: { width?: number; height?: number }) {
   return (
     <svg width={width} height={height} viewBox="0 0 280 100"
       fill="none" xmlns="http://www.w3.org/2000/svg" style={{ overflow: "visible" }}>
@@ -264,6 +293,33 @@ function FinalBrandingLogo({ width = 260, height = 100 }) {
   );
 }
 
+/* ─── Logo (white variant for dark backgrounds) ─────────────── */
+function FinalBrandingLogoWhite({ width = 260, height = 100 }: { width?: number; height?: number }) {
+  return (
+    <svg width={width} height={height} viewBox="0 0 280 100"
+      fill="none" xmlns="http://www.w3.org/2000/svg" style={{ overflow: "visible" }}>
+      <path d="M15 82V18L75 82V18" stroke="rgba(255,255,255,0.9)" strokeWidth="10"
+        strokeLinecap="round" strokeLinejoin="round" />
+      <motion.g
+        animate={{ opacity: [1, 0.88, 1, 0.94, 1, 0.91, 1] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", times: [0, 0.15, 0.3, 0.5, 0.65, 0.8, 1] }}
+      >
+        <line x1="140" y1="18" x2="140" y2="82" stroke="#38BDF8" strokeWidth="40"
+          strokeLinecap="round" opacity="0.15" style={{ filter: "blur(14px)" }} />
+        <line x1="140" y1="18" x2="140" y2="82" stroke="#0EA5E9" strokeWidth="22"
+          strokeLinecap="round" opacity="0.4" style={{ filter: "blur(7px)" }} />
+        <line x1="140" y1="18" x2="140" y2="82" stroke="#0EA5E9" strokeWidth="11"
+          strokeLinecap="round" opacity="0.7" style={{ filter: "blur(2.5px)" }} />
+        <line x1="140" y1="18" x2="140" y2="82" stroke="#BAE6FD" strokeWidth="5.5"
+          strokeLinecap="round" style={{ filter: "drop-shadow(0 0 6px #0EA5E9) drop-shadow(0 0 14px #38BDF8)" }} />
+        <line x1="140" y1="20" x2="140" y2="80" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+      </motion.g>
+      <path d="M205 18V82H265" stroke="rgba(255,255,255,0.9)" strokeWidth="10"
+        strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 /* ─── Hilfsfunktion: animierter Text ────────────────────────── */
 function AnimText({ children, langKey, style }: { children: React.ReactNode; langKey: string; style?: React.CSSProperties }) {
   return (
@@ -279,6 +335,232 @@ function AnimText({ children, langKey, style }: { children: React.ReactNode; lan
         {children}
       </motion.span>
     </AnimatePresence>
+  );
+}
+
+/* ─── Demo Chat Widget ──────────────────────────────────────── */
+type ChatMessage = { role: "user" | "bot"; content: string };
+
+function DemoChat({ t }: { t: typeof translations["de"] }) {
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    { role: "bot", content: t.demo.greeting },
+  ]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const endRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
+
+  const send = async () => {
+    if (!input.trim() || loading) return;
+    const text = input.trim();
+    setInput("");
+    const newMessages: ChatMessage[] = [...messages, { role: "user", content: text }];
+    setMessages(newMessages);
+    setLoading(true);
+    try {
+      const history = messages.map(m => ({
+        role: m.role === "bot" ? "assistant" : "user",
+        content: m.content,
+      }));
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ message: text, history }),
+      });
+      const data = await res.json();
+      setMessages(prev => [...prev, { role: "bot", content: data.response }]);
+    } catch {
+      setMessages(prev => [...prev, { role: "bot", content: "Verbindungsfehler. Bitte erneut versuchen. ✂️" }]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 44, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 1.05, ease: appleEase, delay: 0.3 }}
+      style={{
+        maxWidth: "500px",
+        margin: "0 auto",
+        borderRadius: "28px",
+        overflow: "hidden",
+        boxShadow: "0 48px 110px rgba(8,21,42,0.24), 0 16px 40px rgba(8,21,42,0.12)",
+        border: "1px solid rgba(8,21,42,0.14)",
+      }}
+    >
+      {/* ── Header ── */}
+      <div style={{
+        background: "linear-gradient(135deg, #060E1E 0%, #0D1F3C 100%)",
+        padding: "18px 22px",
+        display: "flex", alignItems: "center", gap: "14px",
+      }}>
+        <FinalBrandingLogoWhite width={64} height={24} />
+        <div style={{ flex: 1 }}>
+          <div style={{ color: "rgba(255,255,255,0.92)", fontSize: "13px", fontWeight: 600, letterSpacing: "0.2px" }}>
+            Salon-Assistent
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "5px", marginTop: "3px" }}>
+            <motion.div
+              animate={{ scale: [1, 1.5, 1], opacity: [1, 0.55, 1] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+              style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#22C55E",
+                boxShadow: "0 0 6px rgba(34,197,94,0.7)" }}
+            />
+            <span style={{ color: "#64748B", fontSize: "11px", letterSpacing: "0.3px" }}>Online</span>
+          </div>
+        </div>
+        <span style={{ fontSize: "22px", opacity: 0.65 }}>✂️</span>
+      </div>
+
+      {/* ── Messages ── */}
+      <div style={{
+        background: "#F1F5F9",
+        height: "330px",
+        overflowY: "auto",
+        padding: "18px 16px 12px",
+        display: "flex", flexDirection: "column", gap: "10px",
+        scrollbarWidth: "none",
+      }}>
+        <AnimatePresence initial={false}>
+          {messages.map((msg, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 12, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.32, ease: appleEase }}
+              style={{
+                display: "flex",
+                justifyContent: msg.role === "user" ? "flex-end" : "flex-start",
+              }}
+            >
+              {msg.role === "bot" && (
+                <div style={{
+                  width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
+                  background: "linear-gradient(135deg, #060E1E, #0D1F3C)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  marginRight: "8px", marginTop: "2px", fontSize: "12px",
+                }}>✂️</div>
+              )}
+              <div style={{
+                maxWidth: "75%",
+                padding: "11px 15px",
+                borderRadius: msg.role === "user"
+                  ? "18px 18px 4px 18px"
+                  : "18px 18px 18px 4px",
+                background: msg.role === "user"
+                  ? "linear-gradient(135deg, #0D1F3C 0%, #08152A 100%)"
+                  : "#FFFFFF",
+                border: msg.role === "bot" ? "1px solid rgba(15,23,42,0.07)" : "none",
+                boxShadow: msg.role === "user"
+                  ? "0 4px 14px rgba(8,21,42,0.28)"
+                  : "0 2px 8px rgba(0,0,0,0.06)",
+                color: msg.role === "user" ? "#FFFFFF" : "#0F172A",
+                fontSize: "14px", lineHeight: 1.55,
+              }}>
+                {msg.content}
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Typing indicator */}
+          {loading && (
+            <motion.div
+              key="typing"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.25 }}
+              style={{ display: "flex", justifyContent: "flex-start", alignItems: "flex-end" }}
+            >
+              <div style={{
+                width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
+                background: "linear-gradient(135deg, #060E1E, #0D1F3C)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                marginRight: "8px", fontSize: "12px",
+              }}>✂️</div>
+              <div style={{
+                background: "#FFFFFF", border: "1px solid rgba(15,23,42,0.07)",
+                borderRadius: "18px 18px 18px 4px",
+                padding: "13px 18px",
+                display: "flex", alignItems: "center", gap: "5px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+              }}>
+                {[0, 1, 2].map(d => (
+                  <motion.div
+                    key={d}
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{ duration: 0.6, repeat: Infinity, delay: d * 0.18, ease: "easeInOut" }}
+                    style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#94A3B8" }}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <div ref={endRef} />
+      </div>
+
+      {/* ── Input ── */}
+      <div style={{
+        background: "#FFFFFF",
+        borderTop: "1px solid rgba(15,23,42,0.07)",
+        padding: "14px 16px",
+        display: "flex", gap: "10px", alignItems: "center",
+      }}>
+        <input
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+          placeholder={t.demo.placeholder}
+          disabled={loading}
+          style={{
+            flex: 1, border: "1.5px solid rgba(15,23,42,0.1)", borderRadius: "22px",
+            padding: "10px 18px", fontSize: "14px", outline: "none",
+            background: "#F8FAFC", color: "#0F172A",
+            transition: "border-color 0.2s, box-shadow 0.2s",
+            fontFamily: "inherit",
+          }}
+          onFocus={e => {
+            e.target.style.borderColor = "rgba(14,165,233,0.5)";
+            e.target.style.boxShadow = "0 0 0 3px rgba(14,165,233,0.1)";
+          }}
+          onBlur={e => {
+            e.target.style.borderColor = "rgba(15,23,42,0.1)";
+            e.target.style.boxShadow = "none";
+          }}
+        />
+        <motion.button
+          onClick={send}
+          disabled={!input.trim() || loading}
+          whileHover={input.trim() && !loading ? { scale: 1.08 } : {}}
+          whileTap={input.trim() && !loading ? { scale: 0.93 } : {}}
+          transition={{ type: "spring", stiffness: 400, damping: 20 }}
+          style={{
+            width: "44px", height: "44px", borderRadius: "50%", flexShrink: 0,
+            background: input.trim() && !loading
+              ? "linear-gradient(135deg, #0EA5E9, #0284C7)"
+              : "#E2E8F0",
+            border: "none",
+            cursor: input.trim() && !loading ? "pointer" : "default",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            transition: "background 0.22s",
+            boxShadow: input.trim() && !loading ? "0 4px 14px rgba(14,165,233,0.4)" : "none",
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M16 9H2M9 2l7 7-7 7"
+              stroke={input.trim() && !loading ? "#FFFFFF" : "#94A3B8"}
+              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </motion.button>
+      </div>
+    </motion.div>
   );
 }
 
@@ -319,11 +601,11 @@ export default function Home() {
           <FinalBrandingLogo width={112} height={40} />
 
           <div style={{ display: "flex", alignItems: "center", gap: "36px" }}>
-            {/* Nav-Links */}
             <div style={{ display: "flex", gap: "36px", fontSize: "13px", color: "#475569", fontWeight: 500, letterSpacing: "0.3px" }}>
               {([
                 { href: "#vorteile", label: t.nav.advantages },
                 { href: "#services", label: t.nav.services },
+                { href: "#demo",     label: t.nav.demo },
                 { href: "#kontakt",  label: t.nav.contact  },
               ] as { href: string; label: string }[]).map(({ href, label }, i) => (
                 <motion.a key={href} href={href}
@@ -342,7 +624,6 @@ export default function Home() {
                 </motion.a>
               ))}
             </div>
-            {/* Language Switcher */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -448,7 +729,7 @@ export default function Home() {
             <FinalBrandingLogo width={260} height={95} />
           </motion.div>
 
-          {/* Headline — Wort für Wort, wechselt bei Sprachwahl */}
+          {/* Headline */}
           <AnimatePresence mode="wait">
             <motion.h1 key={`headline-${lang}`}
               exit={{ opacity: 0, filter: "blur(4px)", transition: { duration: 0.18 } }}
@@ -492,7 +773,7 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator — kaskadierende Chevrons */}
+        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -500,7 +781,6 @@ export default function Home() {
           style={{ position: "absolute", bottom: "28px", left: "50%", transform: "translateX(-50%)",
             display: "flex", flexDirection: "column", alignItems: "center", gap: "2px", pointerEvents: "none" }}
         >
-          {/* "SCROLL" Label */}
           <motion.span
             animate={{ opacity: [0.4, 0.8, 0.4] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
@@ -508,29 +788,18 @@ export default function Home() {
           >
             SCROLL
           </motion.span>
-
-          {/* 3 kaskadierende Chevrons */}
           {[0, 1, 2].map((i) => (
             <motion.div
               key={i}
-              animate={{
-                opacity: [0, 0.35, 1, 0.35, 0],
-                y:       [0,    4,  8,   12, 16],
-              }}
-              transition={{
-                duration: 1.4,
-                repeat: Infinity,
-                delay: i * 0.22,
-                ease: "easeInOut",
-              }}
+              animate={{ opacity: [0, 0.35, 1, 0.35, 0], y: [0, 4, 8, 12, 16] }}
+              transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.22, ease: "easeInOut" }}
             >
               <svg width="22" height="13" viewBox="0 0 22 13" fill="none">
                 <motion.path
                   d="M1 1L11 11L21 1"
                   stroke={i === 2 ? "#0EA5E9" : i === 1 ? "#7DD3FC" : "#CBD5E1"}
                   strokeWidth={i === 2 ? "2.5" : "2"}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                  strokeLinecap="round" strokeLinejoin="round"
                   style={i === 2 ? { filter: "drop-shadow(0 0 4px #0EA5E9)" } : undefined}
                 />
               </svg>
@@ -617,9 +886,47 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── DEMO ── */}
+      <section id="demo" style={{
+        padding: "120px 20px",
+        background: "linear-gradient(to bottom, #FFFFFF 0%, #EBF4FF 60%, #E2EEF9 100%)",
+      }}>
+        <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+
+          {/* Section Header */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.14 } } }}
+            style={{ textAlign: "center", marginBottom: "64px" }}>
+
+            <motion.p variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" },
+              visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: appleEase } } }}
+              style={{ color: "#0EA5E9", fontSize: "12px", fontWeight: 600, letterSpacing: "2px", marginBottom: "12px" }}>
+              <AnimText langKey={`demo-label-${lang}`}>{t.demo.label}</AnimText>
+            </motion.p>
+
+            <motion.h2 variants={{ hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
+              visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease: appleEase } } }}
+              style={{ fontSize: "clamp(28px, 4vw, 38px)", fontWeight: 700, letterSpacing: "-0.04em",
+                color: "#0F172A", marginBottom: "18px", margin: "0 0 18px 0" }}>
+              <AnimText langKey={`demo-h2-${lang}`}>{t.demo.headline}</AnimText>
+            </motion.h2>
+
+            <motion.p variants={{ hidden: { opacity: 0, y: 16, filter: "blur(4px)" },
+              visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: appleEase } } }}
+              style={{ color: "#475569", fontSize: "16px", lineHeight: 1.65,
+                maxWidth: "480px", margin: "0 auto" }}>
+              <AnimText langKey={`demo-sub-${lang}`}>{t.demo.subtext}</AnimText>
+            </motion.p>
+          </motion.div>
+
+          {/* Chat Widget */}
+          <DemoChat t={t} />
+        </div>
+      </section>
+
       {/* ── KONTAKT ── */}
       <section id="kontakt" style={{ padding: "120px 20px 100px", textAlign: "center",
-        background: "linear-gradient(to bottom, #FFFFFF 0%, #EFF4FB 100px, #E8EFF8 100%)" }}>
+        background: "linear-gradient(to bottom, #E2EEF9 0%, #EFF4FB 60px, #E8EFF8 100%)" }}>
         <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
           variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.16 } } }}
           style={{ maxWidth: "550px", margin: "0 auto" }}>
