@@ -11,7 +11,7 @@ const translations = {
   de: {
     nav: { advantages: "Vorteile", services: "Services", demo: "Demo", contact: "Kontakt" },
     hero: {
-      headline: "Automatisierung mit Verstand.",
+      headline: "Dein Betrieb. KI-gesteuert. 24/7.",
       subtext: "Intelligente KI-Agenten und maßgeschneiderte Softwarelösungen. Wir machen die Abläufe für Entwickler, Salons und Gastronomie spürbar effizienter.",
       cta: "Jetzt anfragen",
     },
@@ -41,7 +41,7 @@ const translations = {
   en: {
     nav: { advantages: "Benefits", services: "Services", demo: "Demo", contact: "Contact" },
     hero: {
-      headline: "Automation with intelligence.",
+      headline: "Your business. AI-powered. 24/7.",
       subtext: "Smart AI agents and tailor-made software solutions. We make workflows for developers, salons and hospitality measurably more efficient.",
       cta: "Get in touch",
     },
@@ -71,7 +71,7 @@ const translations = {
   es: {
     nav: { advantages: "Ventajas", services: "Servicios", demo: "Demo", contact: "Contacto" },
     hero: {
-      headline: "Automatización con inteligencia.",
+      headline: "Tu negocio. Con IA. 24/7.",
       subtext: "Agentes de IA inteligentes y soluciones de software a medida. Hacemos los procesos para desarrolladores, salones y gastronomía notablemente más eficientes.",
       cta: "Solicitar ahora",
     },
@@ -101,7 +101,7 @@ const translations = {
   fr: {
     nav: { advantages: "Avantages", services: "Services", demo: "Démo", contact: "Contact" },
     hero: {
-      headline: "L'automatisation intelligente.",
+      headline: "Votre business. Piloté par l'IA. 24/7.",
       subtext: "Agents IA intelligents et solutions logicielles sur mesure. Nous rendons les processus pour développeurs, salons et restauration bien plus efficaces.",
       cta: "Demander maintenant",
     },
@@ -131,7 +131,7 @@ const translations = {
   it: {
     nav: { advantages: "Vantaggi", services: "Servizi", demo: "Demo", contact: "Contatti" },
     hero: {
-      headline: "Automazione con intelligenza.",
+      headline: "Il tuo business. Con l'IA. 24/7.",
       subtext: "Agenti IA intelligenti e soluzioni software su misura. Rendiamo i processi per sviluppatori, salon e ristorazione notevolmente più efficienti.",
       cta: "Richiedi ora",
     },
@@ -175,6 +175,35 @@ const sl: Record<LangCode, {
   es: { srvLabel: "SERVICIOS", srvHl: "La solución adecuada para cada sector.", faqLabel: "FAQ", faqHl: "Preguntas frecuentes.", tstLabel: "OPINIONES", tstHl: "Lo que dicen nuestros clientes.", calendly: "Reservar cita", nlHeading: "Mantenerse informado", nlPlaceholder: "Tu correo electrónico", nlBtn: "Suscribirse", nlSuccess: "¡Suscrito! ✨" },
   fr: { srvLabel: "SERVICES", srvHl: "La bonne solution pour chaque secteur.", faqLabel: "FAQ", faqHl: "Questions fréquentes.", tstLabel: "TÉMOIGNAGES", tstHl: "Ce que disent nos clients.", calendly: "Prendre RDV", nlHeading: "Restez informé", nlPlaceholder: "Votre adresse e-mail", nlBtn: "S'inscrire", nlSuccess: "Inscrit(e) ! ✨" },
   it: { srvLabel: "SERVIZI", srvHl: "La soluzione giusta per ogni settore.", faqLabel: "FAQ", faqHl: "Domande frequenti.", tstLabel: "TESTIMONIANZE", tstHl: "Cosa dicono i nostri clienti.", calendly: "Prenota un incontro", nlHeading: "Rimani aggiornato", nlPlaceholder: "Il tuo indirizzo e-mail", nlBtn: "Iscriviti", nlSuccess: "Iscritto! ✨" },
+};
+
+/* ─── Rotating Hero Taglines ────────────────────────────────── */
+const rotatingTaglines: Record<LangCode, string[]> = {
+  de: [
+    "✂️  Salons: Termine & Kundenkommunikation – automatisch, rund um die Uhr.",
+    "🍽️  Restaurants: Reservierungen & Bestellungen ohne manuellen Aufwand.",
+    "💻  Dev-Teams: KI-Support, der niemals schläft.",
+  ],
+  en: [
+    "✂️  Salons: Appointments & customer care – automated, around the clock.",
+    "🍽️  Restaurants: Reservations & orders without manual effort.",
+    "💻  Dev teams: AI support that never sleeps.",
+  ],
+  es: [
+    "✂️  Salones: Citas y comunicación con clientes – automatizados, 24/7.",
+    "🍽️  Restaurantes: Reservas y pedidos sin esfuerzo manual.",
+    "💻  Dev-teams: Soporte IA que nunca descansa.",
+  ],
+  fr: [
+    "✂️  Salons : Rendez-vous & relation client – automatisés, 24h/24.",
+    "🍽️  Restaurants : Réservations & commandes sans effort manuel.",
+    "💻  Dev-teams : Support IA qui ne dort jamais.",
+  ],
+  it: [
+    "✂️  Salon: Appuntamenti & comunicazione clienti – automatizzati, 24/7.",
+    "🍽️  Ristoranti: Prenotazioni & ordini senza sforzo manuale.",
+    "💻  Dev-team: Supporto IA che non dorme mai.",
+  ],
 };
 
 /* ─── Service Cards (statisch) ──────────────────────────────── */
@@ -881,6 +910,17 @@ export default function Home() {
   const s = sl[lang];
   const heroRef = useRef<HTMLElement>(null);
 
+  /* ── Mobile menu ── */
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(1200);
+  useEffect(() => {
+    const handler = () => setWindowWidth(window.innerWidth);
+    setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handler);
+    return () => window.removeEventListener("resize", handler);
+  }, []);
+  const isMobile = windowWidth < 860;
+
   /* ── Dark Mode ── */
   const [isDark, setIsDark] = useState(false);
 
@@ -892,6 +932,13 @@ export default function Home() {
     localStorage.setItem("nil-dark", String(isDark));
     document.documentElement.setAttribute("data-dark", String(isDark));
   }, [isDark]);
+
+  /* ── Rotating tagline ── */
+  const [taglineIndex, setTaglineIndex] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => setTaglineIndex(i => (i + 1) % 3), 3400);
+    return () => clearInterval(timer);
+  }, []);
 
   /* ── Theme color map ── */
   const c = {
@@ -948,158 +995,323 @@ export default function Home() {
         <div style={{ maxWidth: "1150px", width: "100%", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <FinalBrandingLogo width={112} height={40} />
 
-          <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-            {/* Nav links */}
-            <div style={{ display: "flex", gap: "28px", fontSize: "13px", color: c.text2, fontWeight: 500, letterSpacing: "0.3px" }}>
-              {([
-                { href: "#vorteile", label: t.nav.advantages },
-                { href: "#services", label: t.nav.services },
-                { href: "#demo",     label: t.nav.demo },
-                { href: "#kontakt",  label: t.nav.contact  },
-              ] as { href: string; label: string }[]).map(({ href, label }, i) => (
-                <motion.a key={href} href={href}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, ease: appleEase, delay: 0.35 + i * 0.07 }}
-                  whileHover={{ color: "#0EA5E9" }}
-                  style={{ color: "inherit", textDecoration: "none", transition: "color 0.2s" }}
-                >
-                  <AnimatePresence mode="wait">
-                    <motion.span key={`${lang}-nav-${i}`}
-                      initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2 }}
-                    >{label}</motion.span>
-                  </AnimatePresence>
-                </motion.a>
-              ))}
-            </div>
-            {/* Social Icons */}
-            <motion.div
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              style={{ display: "flex", alignItems: "center", gap: "10px" }}
-            >
-              {[
-                { href: "https://instagram.com", label: "Instagram", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg> },
-                { href: "https://linkedin.com/company/nilogik", label: "LinkedIn", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> },
-                { href: "https://youtube.com/@nilogik", label: "YouTube", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg> },
-              ].map(({ href, label, svg }) => (
-                <motion.a key={label} href={href} target="_blank" rel="noopener noreferrer"
-                  aria-label={label}
-                  whileHover={{ scale: 1.18, color: "#0EA5E9" }}
-                  style={{ color: c.text3, display: "flex", alignItems: "center" }}
-                >
-                  {svg}
-                </motion.a>
-              ))}
-            </motion.div>
-
-            {/* Dark Mode Toggle */}
-            <motion.button
-              onClick={() => setIsDark(v => !v)}
-              whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.65 }}
-              aria-label="Dark/Light Mode"
-              style={{
-                background: isDark ? "rgba(255,255,255,0.08)" : "rgba(15,23,42,0.05)",
-                border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(15,23,42,0.1)"}`,
-                borderRadius: "50%", width: "34px", height: "34px",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: "pointer", fontSize: "15px",
-                transition: "background 0.2s, border-color 0.2s",
-              }}
-            >
-              {isDark ? "☀️" : "🌙"}
-            </motion.button>
-
-            {/* LangSwitcher */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, ease: appleEase, delay: 0.6 }}
-            >
+          <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+            {/* ── DESKTOP NAV ── */}
+            {!isMobile && <>
+              <div style={{ display: "flex", gap: "28px", fontSize: "13px", color: c.text2, fontWeight: 500, letterSpacing: "0.3px" }}>
+                {([
+                  { href: "#vorteile", label: t.nav.advantages },
+                  { href: "#services", label: t.nav.services },
+                  { href: "#demo",     label: t.nav.demo },
+                  { href: "#kontakt",  label: t.nav.contact  },
+                ] as { href: string; label: string }[]).map(({ href, label }, i) => (
+                  <motion.a key={href} href={href}
+                    initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, ease: appleEase, delay: 0.35 + i * 0.07 }}
+                    whileHover={{ color: "#0EA5E9" }}
+                    style={{ color: "inherit", textDecoration: "none", transition: "color 0.2s" }}
+                  >
+                    <AnimatePresence mode="wait">
+                      <motion.span key={`${lang}-nav-${i}`}
+                        initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }} transition={{ duration: 0.2 }}
+                      >{label}</motion.span>
+                    </AnimatePresence>
+                  </motion.a>
+                ))}
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                {[
+                  { href: "https://instagram.com", label: "Instagram", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg> },
+                  { href: "https://linkedin.com/company/nilogik", label: "LinkedIn", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> },
+                  { href: "https://youtube.com/@nilogik", label: "YouTube", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg> },
+                ].map(({ href, label, svg }) => (
+                  <motion.a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                    whileHover={{ scale: 1.18, color: "#0EA5E9" }}
+                    style={{ color: c.text3, display: "flex", alignItems: "center" }}
+                  >{svg}</motion.a>
+                ))}
+              </div>
+              <motion.button onClick={() => setIsDark(v => !v)}
+                whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
+                aria-label="Dark/Light Mode"
+                style={{ background: isDark ? "rgba(255,255,255,0.08)" : "rgba(15,23,42,0.05)", border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(15,23,42,0.1)"}`, borderRadius: "50%", width: "34px", height: "34px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "15px", transition: "background 0.2s" }}
+              >{isDark ? "☀️" : "🌙"}</motion.button>
               <LangSwitcher lang={lang} setLang={setLang} />
-            </motion.div>
+            </>}
+
+            {/* ── MOBILE: Dark Toggle + Hamburger ── */}
+            {isMobile && <>
+              <motion.button onClick={() => setIsDark(v => !v)}
+                whileTap={{ scale: 0.9 }}
+                aria-label="Dark/Light Mode"
+                style={{ background: "none", border: "none", fontSize: "18px", cursor: "pointer", padding: "4px", display: "flex", alignItems: "center" }}
+              >{isDark ? "☀️" : "🌙"}</motion.button>
+
+              <motion.button
+                onClick={() => setMobileMenuOpen(v => !v)}
+                whileTap={{ scale: 0.92 }}
+                aria-label="Menü"
+                style={{ background: isDark ? "rgba(255,255,255,0.08)" : "rgba(15,23,42,0.06)", border: `1px solid ${c.border}`, borderRadius: "10px", width: "40px", height: "40px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "5px", cursor: "pointer", padding: "0" }}
+              >
+                {[0,1,2].map(i => (
+                  <motion.span key={i}
+                    animate={mobileMenuOpen ? (i === 1 ? { opacity: 0, scaleX: 0 } : i === 0 ? { rotate: 45, y: 10 } : { rotate: -45, y: -10 }) : { rotate: 0, y: 0, opacity: 1, scaleX: 1 }}
+                    transition={{ duration: 0.25 }}
+                    style={{ display: "block", width: "18px", height: "2px", background: c.text, borderRadius: "2px", transformOrigin: "center" }}
+                  />
+                ))}
+              </motion.button>
+            </>}
           </div>
         </div>
       </motion.nav>
 
+      {/* ── MOBILE MENU ── */}
+      <AnimatePresence>
+        {isMobile && mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.28, ease: appleEase }}
+            style={{
+              position: "fixed", top: "68px", left: 0, right: 0, zIndex: 999,
+              background: isDark ? "rgba(7,16,30,0.98)" : "rgba(248,250,252,0.98)",
+              backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)",
+              borderBottom: `1px solid ${c.navBorder}`,
+              padding: "20px 24px 28px",
+            }}
+          >
+            {/* Nav Links */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "4px", marginBottom: "20px" }}>
+              {([
+                { href: "#vorteile", label: t.nav.advantages },
+                { href: "#services", label: t.nav.services },
+                { href: "#demo",     label: t.nav.demo },
+                { href: "#kontakt",  label: t.nav.contact },
+                { href: "/preise",   label: "Preise" },
+                { href: "/ueber-uns", label: "Über uns" },
+              ] as { href: string; label: string }[]).map(({ href, label }, i) => (
+                <motion.a key={href} href={href}
+                  initial={{ opacity: 0, x: -14 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05, duration: 0.22 }}
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{ display: "block", padding: "12px 4px", fontSize: "17px", fontWeight: 500, color: c.text, textDecoration: "none", borderBottom: `1px solid ${c.border}` }}
+                >
+                  {label}
+                </motion.a>
+              ))}
+            </div>
+
+            {/* Social + LangSwitcher */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
+              <div style={{ display: "flex", gap: "16px" }}>
+                {[
+                  { href: "https://instagram.com", label: "Instagram", svg: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg> },
+                  { href: "https://linkedin.com/company/nilogik", label: "LinkedIn", svg: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> },
+                  { href: "https://youtube.com/@nilogik", label: "YouTube", svg: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg> },
+                ].map(({ href, label, svg }) => (
+                  <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                    style={{ color: c.text2, display: "flex", alignItems: "center" }}>
+                    {svg}
+                  </a>
+                ))}
+              </div>
+              <LangSwitcher lang={lang} setLang={setLang} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* ── HERO ── */}
       <section ref={heroRef} style={{
-        position: "relative", height: "100vh",
+        position: "relative",
+        minHeight: "100svh",
+        height: isMobile ? "auto" : "100vh",
         display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-        textAlign: "center", padding: "68px 20px 0", boxSizing: "border-box",
+        textAlign: "center",
+        padding: isMobile ? "80px 24px 56px" : "68px 20px 0",
+        boxSizing: "border-box",
         overflow: "hidden",
         background: c.heroGrad,
         transition: "background 0.4s ease",
       }}>
 
-        {/* Laptop */}
-        <div style={{ position: "absolute", left: "2%", top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }}>
-          <motion.div style={{ y: laptopY, width: "300px", opacity: 0.18 }}
-            initial={{ opacity: 0, x: -60 }} animate={{ opacity: 0.18, x: 0 }}
+        {/* Laptop – AI Chat Interface Mockup */}
+        <div style={{ position: "absolute", left: "2%", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", display: isMobile ? "none" : "block" }}>
+          <motion.div style={{ y: laptopY, width: "310px", opacity: 0 }}
+            initial={{ opacity: 0, x: -60 }} animate={{ opacity: 0.28, x: 0 }}
             transition={{ duration: 1.2, ease: appleEase, delay: 0.6 }}>
-            <motion.div animate={{ y: [0, -10, 0], rotate: [-0.4, 0.4, -0.4] }}
+            <motion.div animate={{ y: [0, -8, 0], rotate: [-0.3, 0.3, -0.3] }}
               transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
-              <svg viewBox="0 0 300 210" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="2" width="296" height="185" rx="10" stroke="#0D1B2E" strokeWidth="2.5" fill="#F8FAFC"/>
-                <circle cx="150" cy="10" r="3" fill="#64748B"/>
-                <rect x="12" y="18" width="276" height="162" rx="5" fill="#E2E8F0"/>
-                <rect x="18" y="24" width="264" height="16" rx="3" fill="#F1F5F9"/>
-                <rect x="23" y="27" width="32" height="10" rx="2" fill="#0D1B2E" opacity="0.6"/>
-                <rect x="190" y="28" width="22" height="7" rx="2" fill="#94A3B8"/>
-                <rect x="217" y="28" width="22" height="7" rx="2" fill="#94A3B8"/>
-                <rect x="244" y="27" width="32" height="9" rx="4" fill="#0D1B2E" opacity="0.5"/>
-                <rect x="80" y="58" width="140" height="16" rx="4" fill="#0D1B2E" opacity="0.45"/>
-                <rect x="95" y="81" width="110" height="9" rx="3" fill="#94A3B8"/>
-                <rect x="100" y="96" width="100" height="9" rx="3" fill="#CBD5E1"/>
-                <rect x="110" y="120" width="80" height="24" rx="12" fill="#0D1B2E" opacity="0.6"/>
-                <path d="M0 188 L300 188 L292 206 L8 206 Z" stroke="#0D1B2E" strokeWidth="2" fill="#F1F5F9"/>
-                <rect x="115" y="193" width="70" height="9" rx="4" stroke="#94A3B8" strokeWidth="1.5" fill="none"/>
+              <svg viewBox="0 0 310 218" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Laptop screen body */}
+                <rect x="2" y="2" width="306" height="192" rx="10" stroke="#0D1B2E" strokeWidth="2" fill="#0D1B2E"/>
+                <circle cx="155" cy="9" r="2.5" fill="#475569"/>
+                {/* Screen area */}
+                <rect x="10" y="16" width="290" height="172" rx="4" fill="#F1F5F9"/>
+                {/* Browser chrome */}
+                <rect x="10" y="16" width="290" height="22" rx="4" fill="#E2E8F0"/>
+                {/* Traffic lights */}
+                <circle cx="24" cy="27" r="4" fill="#FC5858"/>
+                <circle cx="36" cy="27" r="4" fill="#FBB040"/>
+                <circle cx="48" cy="27" r="4" fill="#29C941"/>
+                {/* URL bar */}
+                <rect x="62" y="21" width="170" height="12" rx="6" fill="#F8FAFC"/>
+                <circle cx="71" cy="27" r="3" fill="#94A3B8"/>
+                <rect x="78" y="25" width="80" height="4" rx="2" fill="#94A3B8"/>
+                {/* Chat sidebar */}
+                <rect x="10" y="38" width="68" height="150" fill="#E8EDF4"/>
+                {/* Sidebar items */}
+                <rect x="16" y="46" width="56" height="8" rx="4" fill="#0EA5E9" opacity="0.8"/>
+                <rect x="16" y="61" width="44" height="6" rx="3" fill="#CBD5E1"/>
+                <rect x="16" y="73" width="50" height="6" rx="3" fill="#CBD5E1"/>
+                <rect x="16" y="85" width="40" height="6" rx="3" fill="#CBD5E1"/>
+                {/* Chat area header */}
+                <rect x="78" y="38" width="222" height="20" fill="#FFFFFF"/>
+                <circle cx="91" cy="48" r="6" fill="#0EA5E9" opacity="0.7"/>
+                <rect x="102" y="44" width="60" height="5" rx="2.5" fill="#0D1B2E" opacity="0.7"/>
+                <rect x="102" y="52" width="40" height="4" rx="2" fill="#22C55E"/>
+                {/* Chat messages */}
+                {/* Bot message 1 */}
+                <rect x="84" y="66" width="120" height="18" rx="9" fill="#E2E8F0"/>
+                <rect x="90" y="71" width="96" height="5" rx="2.5" fill="#64748B"/>
+                <rect x="90" y="79" width="72" height="4" rx="2" fill="#94A3B8"/>
+                {/* User message 1 */}
+                <rect x="164" y="92" width="110" height="14" rx="7" fill="#0EA5E9" opacity="0.85"/>
+                <rect x="170" y="97" width="78" height="4" rx="2" fill="white" opacity="0.9"/>
+                {/* Bot message 2 */}
+                <rect x="84" y="114" width="140" height="22" rx="9" fill="#E2E8F0"/>
+                <rect x="90" y="119" width="112" height="4" rx="2" fill="#64748B"/>
+                <rect x="90" y="127" width="88" height="4" rx="2" fill="#94A3B8"/>
+                {/* User message 2 */}
+                <rect x="204" y="144" width="70" height="14" rx="7" fill="#0EA5E9" opacity="0.85"/>
+                <rect x="210" y="149" width="52" height="4" rx="2" fill="white" opacity="0.9"/>
+                {/* Typing indicator */}
+                <rect x="84" y="166" width="52" height="14" rx="7" fill="#E2E8F0"/>
+                <circle cx="96" cy="173" r="2.5" fill="#94A3B8"/>
+                <circle cx="104" cy="173" r="2.5" fill="#94A3B8"/>
+                <circle cx="112" cy="173" r="2.5" fill="#94A3B8"/>
+                {/* Input bar */}
+                <rect x="78" y="183" width="222" height="17" fill="#FFFFFF"/>
+                <rect x="84" y="187" width="170" height="9" rx="4.5" fill="#E2E8F0"/>
+                <rect x="284" y="186" width="12" height="11" rx="5.5" fill="#0EA5E9" opacity="0.8"/>
+                {/* Laptop base */}
+                <path d="M0 195 L310 195 L302 216 L8 216 Z" fill="#CBD5E1"/>
+                <rect x="120" y="200" width="70" height="8" rx="4" fill="#B0BEC5"/>
               </svg>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Tablet + Smartphone */}
-        <div style={{ position: "absolute", right: "2%", top: "50%", transform: "translateY(-50%)", pointerEvents: "none" }}>
-          <motion.div style={{ y: devicesY, opacity: 0.18 }}
-            initial={{ opacity: 0, x: 60 }} animate={{ opacity: 0.18, x: 0 }}
+        {/* Tablet – Analytics Dashboard + Smartphone – Booking UI */}
+        <div style={{ position: "absolute", right: "2%", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", display: isMobile ? "none" : "block" }}>
+          <motion.div style={{ y: devicesY, opacity: 0 }}
+            initial={{ opacity: 0, x: 60 }} animate={{ opacity: 0.28, x: 0 }}
             transition={{ duration: 1.2, ease: appleEase, delay: 0.7 }}>
             <motion.div animate={{ y: [0, 10, 0], rotate: [0.4, -0.4, 0.4] }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}>
-              <div style={{ width: "138px" }}>
-                <svg viewBox="0 0 150 215" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="2" width="146" height="211" rx="16" stroke="#0D1B2E" strokeWidth="2.5" fill="#F8FAFC"/>
-                  <circle cx="75" cy="12" r="3.5" fill="#64748B"/>
-                  <rect x="10" y="24" width="130" height="170" rx="5" fill="#E2E8F0"/>
-                  <rect x="52" y="202" width="46" height="5" rx="2.5" fill="#94A3B8"/>
-                  <rect x="18" y="32" width="114" height="12" rx="3" fill="#CBD5E1"/>
-                  <rect x="18" y="52" width="114" height="55" rx="6" fill="#CBD5E1" opacity="0.55"/>
-                  <rect x="18" y="115" width="60" height="8" rx="3" fill="#0D1B2E" opacity="0.4"/>
-                  <rect x="18" y="130" width="114" height="6" rx="3" fill="#CBD5E1"/>
-                  <rect x="18" y="142" width="90" height="6" rx="3" fill="#CBD5E1"/>
-                  <rect x="35" y="162" width="80" height="22" rx="11" fill="#0D1B2E" opacity="0.55"/>
+
+              {/* Tablet – Dashboard */}
+              <div style={{ width: "150px" }}>
+                <svg viewBox="0 0 160 226" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Body */}
+                  <rect x="2" y="2" width="156" height="222" rx="16" stroke="#0D1B2E" strokeWidth="2" fill="#0D1B2E"/>
+                  <circle cx="80" cy="12" r="3" fill="#475569"/>
+                  {/* Screen */}
+                  <rect x="8" y="22" width="144" height="188" rx="4" fill="#F1F5F9"/>
+                  {/* Header bar */}
+                  <rect x="8" y="22" width="144" height="26" fill="#0D1B2E" rx="4"/>
+                  <rect x="14" y="29" width="40" height="6" rx="3" fill="#0EA5E9" opacity="0.9"/>
+                  <circle cx="140" cy="32" r="5" fill="#0EA5E9" opacity="0.5"/>
+                  {/* Stat cards row */}
+                  <rect x="12" y="54" width="40" height="30" rx="6" fill="#FFFFFF"/>
+                  <rect x="14" y="58" width="20" height="4" rx="2" fill="#94A3B8"/>
+                  <rect x="14" y="66" width="30" height="7" rx="3" fill="#0EA5E9" opacity="0.85"/>
+                  <rect x="58" y="54" width="40" height="30" rx="6" fill="#FFFFFF"/>
+                  <rect x="60" y="58" width="16" height="4" rx="2" fill="#94A3B8"/>
+                  <rect x="60" y="66" width="28" height="7" rx="3" fill="#22C55E" opacity="0.85"/>
+                  <rect x="104" y="54" width="40" height="30" rx="6" fill="#FFFFFF"/>
+                  <rect x="106" y="58" width="22" height="4" rx="2" fill="#94A3B8"/>
+                  <rect x="106" y="66" width="26" height="7" rx="3" fill="#F59E0B" opacity="0.85"/>
+                  {/* Chart area */}
+                  <rect x="12" y="90" width="132" height="58" rx="6" fill="#FFFFFF"/>
+                  <rect x="16" y="94" width="50" height="5" rx="2.5" fill="#0D1B2E" opacity="0.5"/>
+                  {/* Bar chart */}
+                  <rect x="18" y="128" width="12" height="14" rx="2" fill="#0EA5E9" opacity="0.6"/>
+                  <rect x="34" y="120" width="12" height="22" rx="2" fill="#0EA5E9" opacity="0.7"/>
+                  <rect x="50" y="114" width="12" height="28" rx="2" fill="#0EA5E9" opacity="0.8"/>
+                  <rect x="66" y="118" width="12" height="24" rx="2" fill="#0EA5E9" opacity="0.7"/>
+                  <rect x="82" y="108" width="12" height="34" rx="2" fill="#0EA5E9" opacity="0.9"/>
+                  <rect x="98" y="112" width="12" height="30" rx="2" fill="#0EA5E9" opacity="0.8"/>
+                  <rect x="114" y="104" width="12" height="38" rx="2" fill="#0EA5E9"/>
+                  <rect x="130" y="110" width="10" height="32" rx="2" fill="#0EA5E9" opacity="0.75"/>
+                  {/* Status rows */}
+                  <rect x="12" y="154" width="132" height="14" rx="6" fill="#FFFFFF"/>
+                  <circle cx="22" cy="161" r="4" fill="#22C55E"/>
+                  <rect x="30" y="158" width="60" height="4" rx="2" fill="#0D1B2E" opacity="0.5"/>
+                  <rect x="118" y="158" width="22" height="4" rx="2" fill="#22C55E" opacity="0.7"/>
+                  <rect x="12" y="173" width="132" height="14" rx="6" fill="#FFFFFF"/>
+                  <circle cx="22" cy="180" r="4" fill="#0EA5E9"/>
+                  <rect x="30" y="177" width="48" height="4" rx="2" fill="#0D1B2E" opacity="0.5"/>
+                  <rect x="118" y="177" width="22" height="4" rx="2" fill="#0EA5E9" opacity="0.7"/>
+                  <rect x="12" y="192" width="132" height="14" rx="6" fill="#FFFFFF"/>
+                  <circle cx="22" cy="199" r="4" fill="#F59E0B"/>
+                  <rect x="30" y="196" width="54" height="4" rx="2" fill="#0D1B2E" opacity="0.5"/>
+                  <rect x="118" y="196" width="22" height="4" rx="2" fill="#F59E0B" opacity="0.7"/>
+                  {/* Home indicator */}
+                  <rect x="60" y="214" width="40" height="4" rx="2" fill="#475569"/>
                 </svg>
               </div>
-              <div style={{ width: "88px", marginTop: "28px" }}>
-                <svg viewBox="0 0 100 205" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="2" y="2" width="96" height="201" rx="22" stroke="#0D1B2E" strokeWidth="2.5" fill="#F8FAFC"/>
-                  <rect x="28" y="10" width="44" height="11" rx="5.5" fill="#0D1B2E"/>
-                  <rect x="8" y="26" width="84" height="160" rx="7" fill="#E2E8F0"/>
-                  <rect x="32" y="194" width="36" height="4" rx="2" fill="#94A3B8"/>
-                  <rect x="96" y="68" width="4" height="28" rx="2" fill="#94A3B8"/>
-                  <rect x="0" y="62" width="4" height="18" rx="2" fill="#94A3B8"/>
-                  <rect x="0" y="86" width="4" height="18" rx="2" fill="#94A3B8"/>
-                  <rect x="16" y="36" width="68" height="10" rx="3" fill="#CBD5E1"/>
-                  <rect x="16" y="54" width="68" height="42" rx="5" fill="#CBD5E1" opacity="0.55"/>
-                  <rect x="16" y="104" width="45" height="7" rx="3" fill="#0D1B2E" opacity="0.4"/>
-                  <rect x="16" y="117" width="68" height="5" rx="2.5" fill="#CBD5E1"/>
-                  <rect x="16" y="128" width="55" height="5" rx="2.5" fill="#CBD5E1"/>
-                  <rect x="20" y="148" width="60" height="20" rx="10" fill="#0D1B2E" opacity="0.55"/>
+
+              {/* Smartphone – Booking UI */}
+              <div style={{ width: "90px", marginTop: "24px" }}>
+                <svg viewBox="0 0 100 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Body */}
+                  <rect x="2" y="2" width="96" height="206" rx="22" stroke="#0D1B2E" strokeWidth="2" fill="#0D1B2E"/>
+                  <rect x="28" y="9" width="44" height="10" rx="5" fill="#1E2D42"/>
+                  {/* Screen */}
+                  <rect x="8" y="22" width="84" height="170" rx="6" fill="#F8FAFC"/>
+                  {/* Status bar */}
+                  <rect x="10" y="24" width="80" height="8" fill="#F8FAFC"/>
+                  <rect x="12" y="26" width="20" height="4" rx="2" fill="#0D1B2E" opacity="0.3"/>
+                  <rect x="72" y="26" width="14" height="4" rx="2" fill="#0D1B2E" opacity="0.3"/>
+                  {/* Header */}
+                  <rect x="8" y="32" width="84" height="18" fill="#0D1B2E"/>
+                  <rect x="14" y="37" width="36" height="5" rx="2.5" fill="#0EA5E9" opacity="0.9"/>
+                  {/* Month label */}
+                  <rect x="20" y="56" width="30" height="5" rx="2.5" fill="#0D1B2E" opacity="0.5"/>
+                  <rect x="70" y="56" width="10" height="5" rx="2.5" fill="#0D1B2E" opacity="0.3"/>
+                  {/* Day headers */}
+                  {[0,1,2,3,4,5,6].map(d => (
+                    <rect key={d} x={12 + d*12} y="66" width="8" height="4" rx="2" fill="#94A3B8" opacity="0.6"/>
+                  ))}
+                  {/* Calendar grid */}
+                  {[0,1,2,3,4].map(row =>
+                    [0,1,2,3,4,5,6].map(col => (
+                      <rect key={`${row}-${col}`} x={12 + col*12} y={76 + row*11} width="8" height="8" rx="2"
+                        fill={row === 2 && col === 3 ? "#0EA5E9" : "#E2E8F0"} opacity={row === 2 && col === 3 ? 1 : 0.7}/>
+                    ))
+                  )}
+                  {/* Time slots */}
+                  <rect x="12" y="136" width="36" height="10" rx="5" fill="#0EA5E9" opacity="0.85"/>
+                  <rect x="52" y="136" width="36" height="10" rx="5" fill="#E2E8F0"/>
+                  <rect x="12" y="151" width="36" height="10" rx="5" fill="#E2E8F0"/>
+                  <rect x="52" y="151" width="36" height="10" rx="5" fill="#E2E8F0"/>
+                  {/* Book button */}
+                  <rect x="14" y="168" width="72" height="18" rx="9" fill="#0D1B2E"/>
+                  <rect x="28" y="173" width="44" height="5" rx="2.5" fill="#0EA5E9" opacity="0.9"/>
+                  {/* Home bar */}
+                  <rect x="32" y="197" width="36" height="4" rx="2" fill="#475569"/>
+                  {/* Volume buttons */}
+                  <rect x="0" y="62" width="3" height="16" rx="1.5" fill="#475569"/>
+                  <rect x="0" y="84" width="3" height="16" rx="1.5" fill="#475569"/>
+                  <rect x="97" y="68" width="3" height="24" rx="1.5" fill="#475569"/>
                 </svg>
               </div>
+
             </motion.div>
           </motion.div>
         </div>
@@ -1110,7 +1322,7 @@ export default function Home() {
           {/* Logo */}
           <motion.div initial={{ opacity: 0, scale: 0.85, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.1, ease: appleEase }}
-            style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "36px", position: "relative" }}>
+            style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: isMobile ? "20px" : "32px", position: "relative" }}>
             <motion.div
               animate={{ opacity: [0.5, 0.9, 0.5], scale: [1, 1.12, 1] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -1124,23 +1336,58 @@ export default function Home() {
           <AnimatePresence mode="wait">
             <motion.h1 key={`headline-${lang}`}
               exit={{ opacity: 0, filter: "blur(4px)", transition: { duration: 0.18 } }}
-              style={{ fontSize: "clamp(26px, 5vw, 45px)", color: "#0F172A", marginBottom: "20px",
-                fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 1.15 }}>
+              style={{ fontSize: isMobile ? "clamp(28px, 8vw, 38px)" : "clamp(34px, 5vw, 52px)",
+                color: c.text, marginBottom: "16px",
+                fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 1.1 }}>
               {t.hero.headline.split(" ").map((word, i) => (
                 <motion.span key={i}
-                  initial={{ opacity: 0, y: 22, filter: "blur(6px)" }}
+                  initial={{ opacity: 0, y: 26, filter: "blur(8px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  transition={{ duration: 0.75, ease: appleEase, delay: 0.2 + i * 0.08 }}
-                  style={{ display: "inline-block", marginRight: "0.28em" }}>
+                  transition={{ duration: 0.8, ease: appleEase, delay: 0.15 + i * 0.09 }}
+                  style={{ display: "inline-block", marginRight: "0.25em" }}>
                   {word}
                 </motion.span>
               ))}
             </motion.h1>
           </AnimatePresence>
 
-          {/* Subtext */}
-          <div style={{ fontSize: "16px", color: "#475569", maxWidth: "560px", margin: "0 auto 40px auto", lineHeight: 1.65 }}>
-            <AnimText langKey={`sub-${lang}`} style={{ fontWeight: 400 }}>{t.hero.subtext}</AnimText>
+          {/* Rotating Tagline */}
+          <div style={{ height: "52px", display: "flex", alignItems: "center", justifyContent: "center",
+            maxWidth: "600px", margin: "0 auto 36px auto" }}>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={`tagline-${lang}-${taglineIndex}`}
+                initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+                transition={{ duration: 0.55, ease: appleEase }}
+                style={{
+                  fontSize: isMobile ? "14px" : "15.5px",
+                  color: c.text2,
+                  lineHeight: 1.6,
+                  fontWeight: 400,
+                  margin: 0,
+                  textAlign: "center",
+                }}
+              >
+                {rotatingTaglines[lang][taglineIndex]}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+
+          {/* Tagline dots indicator */}
+          <div style={{ display: "flex", gap: "6px", justifyContent: "center", marginBottom: "32px", marginTop: "-20px" }}>
+            {[0, 1, 2].map(i => (
+              <motion.div key={i}
+                animate={{ scale: i === taglineIndex ? 1 : 0.7, opacity: i === taglineIndex ? 1 : 0.35 }}
+                transition={{ duration: 0.3, ease: appleEase }}
+                style={{ width: i === taglineIndex ? "20px" : "6px", height: "6px",
+                  borderRadius: "99px",
+                  background: i === taglineIndex ? "#0EA5E9" : c.text2,
+                  transition: "width 0.3s ease",
+                }}
+              />
+            ))}
           </div>
 
           {/* CTA Buttons */}
@@ -1149,12 +1396,15 @@ export default function Home() {
             style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}
           >
             <motion.a href="#kontakt"
-              whileHover={{ scale: 1.04, boxShadow: "0 16px 40px rgba(15,23,42,0.28)" }}
+              whileHover={{ scale: 1.05, boxShadow: "0 18px 44px rgba(14,165,233,0.35), 0 6px 20px rgba(15,23,42,0.2)" }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 350, damping: 22 }}
-              style={{ display: "inline-block", background: "#0F172A", color: "#FFFFFF",
-                padding: "16px 40px", borderRadius: "9999px", fontWeight: 500, fontSize: "14px",
-                textDecoration: "none", boxShadow: "0 10px 30px rgba(15,23,42,0.15)" }}>
+              style={{ display: "inline-block",
+                background: "linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%)",
+                color: "#FFFFFF",
+                padding: "16px 40px", borderRadius: "9999px", fontWeight: 600, fontSize: "14px",
+                textDecoration: "none", boxShadow: "0 10px 30px rgba(15,23,42,0.18), inset 0 1px 0 rgba(255,255,255,0.08)",
+                letterSpacing: "0.2px" }}>
               <AnimatePresence mode="wait">
                 <motion.span key={`cta-${lang}`}
                   initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
@@ -1168,15 +1418,17 @@ export default function Home() {
             <motion.a
               href={process.env.NEXT_PUBLIC_CALENDLY_URL ?? "https://calendly.com/nilogik"}
               target="_blank" rel="noopener noreferrer"
-              whileHover={{ scale: 1.04, boxShadow: "0 12px 28px rgba(14,165,233,0.25)" }}
+              whileHover={{ scale: 1.05, boxShadow: "0 14px 36px rgba(14,165,233,0.32)", background: "rgba(14,165,233,0.08)" }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 350, damping: 22 }}
               style={{ display: "inline-flex", alignItems: "center", gap: "7px",
-                background: "transparent",
-                border: "1.5px solid rgba(14,165,233,0.45)",
+                background: "rgba(14,165,233,0.04)",
+                border: "1.5px solid rgba(14,165,233,0.5)",
                 color: "#0EA5E9",
-                padding: "15px 32px", borderRadius: "9999px", fontWeight: 500, fontSize: "14px",
-                textDecoration: "none" }}>
+                padding: "15px 32px", borderRadius: "9999px", fontWeight: 600, fontSize: "14px",
+                textDecoration: "none",
+                backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)",
+                letterSpacing: "0.2px" }}>
               📅{" "}
               <AnimatePresence mode="wait">
                 <motion.span key={`calendly-${lang}`}
@@ -1189,39 +1441,29 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.8, duration: 0.9, ease: appleEase }}
-          style={{ position: "absolute", bottom: "28px", left: 0, right: 0,
-            display: "flex", flexDirection: "column", alignItems: "center", gap: "2px", pointerEvents: "none" }}
-        >
-          <motion.span
-            animate={{ opacity: [0.4, 0.8, 0.4] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-            style={{ fontSize: "9px", color: "#94A3B8", letterSpacing: "3px", fontWeight: 700, marginBottom: "10px" }}
+        {/* Scroll Indicator – modern animated arrow */}
+        {!isMobile && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.0, duration: 0.8, ease: appleEase }}
+            style={{ position: "absolute", bottom: "32px", left: 0, right: 0,
+              display: "flex", flexDirection: "column", alignItems: "center", gap: "0px", pointerEvents: "none" }}
           >
-            SCROLL
-          </motion.span>
-          {[0, 1, 2].map((i) => (
             <motion.div
-              key={i}
-              animate={{ opacity: [0, 0.35, 1, 0.35, 0], y: [0, 4, 8, 12, 16] }}
-              transition={{ duration: 1.4, repeat: Infinity, delay: i * 0.22, ease: "easeInOut" }}
+              animate={{ y: [0, 9, 0] }}
+              transition={{ duration: 1.9, repeat: Infinity, ease: [0.45, 0, 0.55, 1] }}
             >
-              <svg width="22" height="13" viewBox="0 0 22 13" fill="none">
-                <motion.path
-                  d="M1 1L11 11L21 1"
-                  stroke={i === 2 ? "#0EA5E9" : i === 1 ? "#7DD3FC" : "#CBD5E1"}
-                  strokeWidth={i === 2 ? "2.5" : "2"}
-                  strokeLinecap="round" strokeLinejoin="round"
-                  style={i === 2 ? { filter: "drop-shadow(0 0 4px #0EA5E9)" } : undefined}
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                <circle cx="18" cy="18" r="17" stroke="rgba(14,165,233,0.22)" strokeWidth="1.5"/>
+                <path d="M12 15.5L18 21.5L24 15.5"
+                  stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                  style={{ filter: "drop-shadow(0 0 5px rgba(14,165,233,0.6))" }}
                 />
               </svg>
             </motion.div>
-          ))}
-        </motion.div>
+          </motion.div>
+        )}
       </section>
 
       {/* ── SHOWCASE ── */}

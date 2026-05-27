@@ -31,18 +31,20 @@ export default function CookieBanner() {
           exit={{ y: 120, opacity: 0 }}
           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            position: "fixed", bottom: "20px", left: "50%",
-            transform: "translateX(-50%)",
-            width: "min(94vw, 620px)",
-            background: "rgba(8,21,42,0.97)",
+            position: "fixed", bottom: 0, left: 0, right: 0,
+            width: "100%",
+            background: "rgba(8,21,42,0.98)",
             backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)",
-            border: "1px solid rgba(14,165,233,0.18)",
-            borderRadius: "20px", padding: "20px 24px",
-            boxShadow: "0 24px 60px rgba(0,0,0,0.35)",
+            borderTop: "1px solid rgba(14,165,233,0.18)",
+            borderRadius: "0",
+            padding: "16px 20px",
+            paddingBottom: "calc(16px + env(safe-area-inset-bottom, 8px))",
+            boxShadow: "0 -8px 32px rgba(0,0,0,0.3)",
             zIndex: 9999,
             fontFamily: "system-ui, -apple-system, sans-serif",
           }}
         >
+          <div style={{ maxWidth: "900px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "flex-start", gap: "14px", marginBottom: "16px" }}>
             <span style={{ fontSize: "22px", flexShrink: 0, marginTop: "1px" }}>🍪</span>
             <div>
@@ -91,6 +93,7 @@ export default function CookieBanner() {
             >
               Alle akzeptieren ✓
             </motion.button>
+          </div>
           </div>
         </motion.div>
       )}
