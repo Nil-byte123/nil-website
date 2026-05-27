@@ -21,14 +21,14 @@ export const metadata: Metadata = {
     "Softwareentwicklung", "Unternehmensautomatisierung", "Gastronomie Automatisierung",
     "nilogik", "NIL", "Bayern", "digitaler Assistent",
   ],
-  authors: [{ name: "NIL", url: "https://www.nilogik.de" }],
+  authors: [{ name: "NIL", url: "https://nilogik.de" }],
   creator: "NIL",
-  metadataBase: new URL("https://www.nilogik.de"),
-  alternates: { canonical: "https://www.nilogik.de" },
+  metadataBase: new URL("https://nilogik.de"),
+  alternates: { canonical: "https://nilogik.de" },
   openGraph: {
     type: "website",
     locale: "de_DE",
-    url: "https://www.nilogik.de",
+    url: "https://nilogik.de",
     siteName: "NIL",
     title: "NIL – Smarte Automatisierung für jedes Unternehmen",
     description:
