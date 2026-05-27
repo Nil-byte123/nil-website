@@ -11,15 +11,15 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default: "NIL – Automatisierung mit Verstand | nilogik.de",
+    default: "NIL – Smarte Automatisierung für jedes Unternehmen",
     template: "%s | NIL",
   },
   description:
-    "Intelligente KI-Agenten und maßgeschneiderte Softwarelösungen für Entwickler, Salons und Gastronomie. 24/7 verfügbar, ohne Personalaufwand.",
+    "Smarte Softwarelösungen und digitale Automatisierung für Unternehmen jeder Branche. Mehr Zeit, mehr Umsatz – automatisch. 24/7 verfügbar, ohne Personalaufwand.",
   keywords: [
-    "KI-Automatisierung", "Künstliche Intelligenz", "KI-Agenten", "Chatbot",
-    "Softwareentwicklung", "Salon Software", "Gastronomie Automatisierung",
-    "nilogik", "NIL", "Bayern", "Automatisierung",
+    "Automatisierung", "Softwarelösung", "Digitalisierung", "Terminbuchung",
+    "Softwareentwicklung", "Unternehmensautomatisierung", "Gastronomie Automatisierung",
+    "nilogik", "NIL", "Bayern", "digitaler Assistent",
   ],
   authors: [{ name: "NIL", url: "https://www.nilogik.de" }],
   creator: "NIL",
@@ -29,17 +29,17 @@ export const metadata: Metadata = {
     type: "website",
     locale: "de_DE",
     url: "https://www.nilogik.de",
-    siteName: "NIL – Automatisierung mit Verstand",
-    title: "NIL – Automatisierung mit Verstand",
+    siteName: "NIL",
+    title: "NIL – Smarte Automatisierung für jedes Unternehmen",
     description:
-      "Intelligente KI-Agenten und maßgeschneiderte Softwarelösungen. Wir machen die Abläufe für Entwickler, Salons und Gastronomie spürbar effizienter.",
+      "Smarte Softwarelösungen und digitale Automatisierung für Unternehmen jeder Branche. Mehr Zeit, mehr Umsatz – automatisch.",
     images: [{ url: "/icon.png", width: 612, height: 628, alt: "NIL Logo" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NIL – Automatisierung mit Verstand",
+    title: "NIL – Smarte Automatisierung für jedes Unternehmen",
     description:
-      "Intelligente KI-Agenten und maßgeschneiderte Softwarelösungen für Entwickler, Salons und Gastronomie.",
+      "Smarte Softwarelösungen und digitale Automatisierung für Unternehmen jeder Branche. Mehr Zeit, mehr Umsatz – automatisch.",
     images: ["/icon.png"],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
