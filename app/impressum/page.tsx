@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { NilLogo } from "../components/NilLogo";
 
 export const metadata: Metadata = {
   title: "Impressum – NIL | nilogik.de",
@@ -22,8 +23,8 @@ export default function Impressum() {
         display: "flex", alignItems: "center", justifyContent: "space-between",
         zIndex: 100,
       }}>
-        <Link href="/" style={{ textDecoration: "none", color: "#0F172A", fontWeight: 700, fontSize: "20px", letterSpacing: "-0.04em" }}>
-          NIL
+        <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+          <NilLogo width={90} height={32} />
         </Link>
         <Link href="/" style={{
           textDecoration: "none", color: "#0EA5E9", fontSize: "14px", fontWeight: 500,
