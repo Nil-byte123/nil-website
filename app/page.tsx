@@ -523,13 +523,47 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
   const [loading, setLoading] = useState(false);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
+  /* auto-scroll to bottom on new message */
   useEffect(() => {
     const el = messagesContainerRef.current;
     if (!el) return;
-    requestAnimationFrame(() => {
-      el.scrollTop = el.scrollHeight;
-    });
+    requestAnimationFrame(() => { el.scrollTop = el.scrollHeight; });
   }, [messages, loading]);
+
+  /* prevent chat from blocking page scroll on desktop + mobile */
+  useEffect(() => {
+    const el = messagesContainerRef.current;
+    if (!el) return;
+    let startY = 0;
+
+    const onWheel = (e: WheelEvent) => {
+      const { scrollTop, scrollHeight, clientHeight } = el;
+      const cantScroll = scrollHeight <= clientHeight;
+      const atTop    = scrollTop <= 0 && e.deltaY < 0;
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 1 && e.deltaY > 0;
+      if (cantScroll || atTop || atBottom) return; // let page scroll
+      e.stopPropagation();
+    };
+    const onTouchStart = (e: TouchEvent) => { startY = e.touches[0].clientY; };
+    const onTouchMove  = (e: TouchEvent) => {
+      const { scrollTop, scrollHeight, clientHeight } = el;
+      const dy = startY - e.touches[0].clientY; // + = finger moving up = scroll down
+      const cantScroll = scrollHeight <= clientHeight;
+      const atTop    = scrollTop <= 0 && dy < 0;
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 1 && dy > 0;
+      if (cantScroll || atTop || atBottom) return;
+      e.stopPropagation();
+    };
+
+    el.addEventListener("wheel",       onWheel,       { passive: true });
+    el.addEventListener("touchstart",  onTouchStart,  { passive: true });
+    el.addEventListener("touchmove",   onTouchMove,   { passive: true });
+    return () => {
+      el.removeEventListener("wheel",       onWheel);
+      el.removeEventListener("touchstart",  onTouchStart);
+      el.removeEventListener("touchmove",   onTouchMove);
+    };
+  }, []);
 
   const send = async () => {
     if (!input.trim() || loading) return;
@@ -598,21 +632,12 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
 
       {/* ── Messages ── */}
       <div ref={messagesContainerRef}
-        onWheel={(e) => {
-          const el = e.currentTarget;
-          const notScrollable = el.scrollHeight <= el.clientHeight;
-          const atTop    = el.scrollTop <= 0 && e.deltaY < 0;
-          const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1 && e.deltaY > 0;
-          if (notScrollable || atTop || atBottom) return; // let page scroll
-          e.stopPropagation();
-        }}
         style={{
           background: "#F1F5F9",
           height: "330px",
           maxHeight: "330px",
           overflowY: "auto",
           overscrollBehavior: "contain",
-          WebkitOverflowScrolling: "touch" as never,
           padding: "18px 16px 12px",
           display: "flex", flexDirection: "column", gap: "10px",
           scrollbarWidth: "none",
@@ -980,12 +1005,12 @@ export default function Home() {
     nav:         isDark ? "rgba(7,16,30,0.92)" : "rgba(248,250,252,0.78)",
     navBorder:   isDark ? "rgba(255,255,255,0.05)" : "rgba(15,23,42,0.06)",
     heroGrad:    isDark
-      ? "radial-gradient(ellipse at 50% 30%, #0d2444 0%, #091828 50%, #060e1a 100%)"
+      ? "radial-gradient(ellipse at 50% 30%, #0d2444 0%, #0a1830 60%, #07101e 100%)"
       : "radial-gradient(ellipse at 50% 30%, #DCEEFF 0%, #E8F2FF 40%, #EEF2F7 100%)",
-    sec1:        isDark ? "linear-gradient(to bottom, #07101e, #091828)" : "linear-gradient(to bottom, #EEF2F7 0%, #F0F5FB 60%, #F4F7FB 100%)",
-    sec2:        isDark ? "#091828" : "#F4F7FB",
-    demoBg:      isDark ? "linear-gradient(to bottom, #07101e 0%, #0b1828 60%, #0a1728 100%)" : "linear-gradient(to bottom, #EEF2F7 0%, #E8F0F9 60%, #E2EBF5 100%)",
-    contactBg:   isDark ? "linear-gradient(to bottom, #0a1728 0%, #07101e 60px, #091520 100%)" : "linear-gradient(to bottom, #E2EBF5 0%, #EAF0F8 60px, #EEF2F7 100%)",
+    sec1:        isDark ? "#07101e" : "linear-gradient(to bottom, #EEF2F7 0%, #F0F5FB 60%, #F4F7FB 100%)",
+    sec2:        isDark ? "#07101e" : "#F4F7FB",
+    demoBg:      isDark ? "#07101e" : "linear-gradient(to bottom, #EEF2F7 0%, #E8F0F9 60%, #E2EBF5 100%)",
+    contactBg:   isDark ? "#07101e" : "linear-gradient(to bottom, #E2EBF5 0%, #EAF0F8 60px, #EEF2F7 100%)",
     chatBg:      isDark ? "#111f35" : "#F1F5F9",
     inputBg:     isDark ? "#0a1628" : "#F8FAFC",
     inputBorder: isDark ? "rgba(255,255,255,0.1)" : "rgba(15,23,42,0.1)",
@@ -1627,7 +1652,7 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ── */}
-      <section style={{ padding: "100px 20px", background: isDark ? "linear-gradient(to bottom,#07101e,#091828)" : "linear-gradient(to bottom,#F4F7FB 0%,#EEF2F7 100%)", transition: "background 0.3s ease" }}>
+      <section style={{ padding: "100px 20px", background: isDark ? "#07101e" : "linear-gradient(to bottom,#F4F7FB 0%,#EEF2F7 100%)", transition: "background 0.3s ease" }}>
         <div style={{ maxWidth: "720px", margin: "0 auto" }}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
@@ -1686,7 +1711,7 @@ export default function Home() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section style={{ padding: "100px 20px", background: isDark ? "linear-gradient(to bottom,#091828,#07101e)" : "linear-gradient(to bottom,#E2EBF5 0%,#E8F0F8 100%)", transition: "background 0.3s ease" }}>
+      <section style={{ padding: "100px 20px", background: isDark ? "#07101e" : "linear-gradient(to bottom,#E2EBF5 0%,#E8F0F8 100%)", transition: "background 0.3s ease" }}>
         <div style={{ maxWidth: "1050px", margin: "0 auto" }}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
