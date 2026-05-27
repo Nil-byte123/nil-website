@@ -211,6 +211,7 @@ const serviceCards = [
   { icon: "✂️", title: "Dienstleister & Beauty", text: { de: "Automatische Terminbuchung, Kundenkommunikation und Erinnerungen – damit du dich auf deine Arbeit konzentrierst, nicht auf Verwaltung.", en: "Automatic appointment booking, customer communication and reminders – so you focus on your craft, not admin.", es: "Reservas automáticas, comunicación con clientes y recordatorios – para que te centres en tu trabajo.", fr: "Réservations automatiques, communication client et rappels – pour vous concentrer sur votre métier.", it: "Prenotazioni automatiche, comunicazione clienti e promemoria – per concentrarti sul tuo lavoro." } },
   { icon: "🍽️", title: "Gastronomie & Handel", text: { de: "Tischreservierungen, Bestellannahme, Anfragen und Gästekommunikation – vollautomatisch, rund um die Uhr.", en: "Table reservations, orders, inquiries and guest communication – fully automated, around the clock.", es: "Reservas, pedidos, consultas y comunicación con clientes – completamente automatizados.", fr: "Réservations, commandes, demandes et communication client – entièrement automatisés.", it: "Prenotazioni, ordini, richieste e comunicazione ospiti – completamente automatizzati." } },
   { icon: "💼", title: "Unternehmen & Teams", text: { de: "Smarte Softwarelösungen und digitale Assistenten für jede Branche – individuell auf deinen Betrieb zugeschnitten.", en: "Smart software solutions and digital assistants for any industry – tailored to your business.", es: "Soluciones de software inteligentes y asistentes digitales para cualquier sector.", fr: "Solutions logicielles intelligentes et assistants numériques pour tout secteur.", it: "Soluzioni software intelligenti e assistenti digitali per qualsiasi settore." } },
+  { icon: "🏥", title: "Gesundheit & Beratung", text: { de: "Terminvergabe, Patientenkommunikation und Beratungsanfragen – zuverlässig automatisiert, damit du dich auf deine Klienten konzentrierst.", en: "Appointment scheduling, patient communication and consultation inquiries – reliably automated so you focus on your clients.", es: "Programación de citas, comunicación con pacientes y consultas – automatizados de forma fiable.", fr: "Prise de rendez-vous, communication patients et demandes de consultation – automatisés de manière fiable.", it: "Prenotazioni, comunicazione pazienti e richieste di consulenza – automatizzati in modo affidabile." } },
 ];
 
 /* ─── FAQ Items ─────────────────────────────────────────────── */
@@ -259,9 +260,11 @@ const faqItems: Record<LangCode, { q: string; a: string }[]> = {
 
 /* ─── Testimonials (statisch) ───────────────────────────────── */
 const testimonials = [
-  { name: "Marie K.", role: "Inhaberin, Salon Aura München", text: "Seit wir den NIL-Assistenten nutzen, bearbeite ich nur noch die Hälfte der Kundenanfragen manuell. Mein Team kann sich auf das Wesentliche konzentrieren.", stars: 5 },
+  { name: "Marie K.", role: "Inhaberin, Salon Aura München", text: "Seit wir NIL nutzen, bearbeite ich nur noch die Hälfte der Kundenanfragen manuell. Mein Team kann sich auf das Wesentliche konzentrieren.", stars: 5 },
   { name: "Thomas B.", role: "Gastronom, Café Central", text: "Die Tischreservierungen laufen jetzt komplett automatisch. Kein verpasster Anruf mehr, und die Gäste sind begeistert vom schnellen Feedback.", stars: 5 },
   { name: "Lena M.", role: "Gründerin, Tech-Startup", text: "Als wachsendes Startup konnten wir uns kein Support-Team leisten. NIL hat das Problem in einer Woche gelöst – zum Bruchteil der Kosten.", stars: 5 },
+  { name: "Stefan R.", role: "Geschäftsführer, Autohaus Riedl", text: "Probefahrt-Anfragen und Servicetermine werden jetzt rund um die Uhr entgegengenommen. Unsere Mitarbeiter konzentrieren sich auf den Verkauf.", stars: 5 },
+  { name: "Petra W.", role: "Physiotherapeutin, Praxis am Park", text: "Die Terminverwaltung hat mich früher täglich eine Stunde gekostet. Heute läuft das vollautomatisch – ich bin begeistert, wie einfach das war.", stars: 5 },
 ];
 
 /* ─── Newsletter Form ───────────────────────────────────────── */
@@ -940,12 +943,25 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  /* ── Testimonials slideshow ── */
+  const [tstIndex, setTstIndex] = useState(0);
+  const [tstDir, setTstDir] = useState(1);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTstDir(1);
+      setTstIndex(i => (i + 1) % testimonials.length);
+    }, 4800);
+    return () => clearInterval(timer);
+  }, []);
+  const prevTst = () => { setTstDir(-1); setTstIndex(i => (i - 1 + testimonials.length) % testimonials.length); };
+  const nextTst = () => { setTstDir(1);  setTstIndex(i => (i + 1) % testimonials.length); };
+
   /* ── Theme color map ── */
   const c = {
-    bg:          isDark ? "#07101e" : "#F8FAFC",
+    bg:          isDark ? "#07101e" : "#EEF2F7",
     card:        isDark ? "#0d1f3c" : "#FFFFFF",
-    card2:       isDark ? "#091520" : "#F8FAFC",
-    card3:       isDark ? "#0a1728" : "#F1F5F9",
+    card2:       isDark ? "#091520" : "#F4F7FB",
+    card3:       isDark ? "#0a1728" : "#EAF0F8",
     text:        isDark ? "#F1F5F9" : "#0F172A",
     text2:       isDark ? "#94A3B8" : "#475569",
     text3:       isDark ? "#64748B" : "#64748B",
@@ -955,11 +971,11 @@ export default function Home() {
     navBorder:   isDark ? "rgba(255,255,255,0.05)" : "rgba(15,23,42,0.06)",
     heroGrad:    isDark
       ? "radial-gradient(ellipse at 50% 30%, #0d2444 0%, #091828 50%, #060e1a 100%)"
-      : "radial-gradient(ellipse at 50% 30%, #EBF4FF 0%, #F0F7FF 40%, #F8FAFC 100%)",
-    sec1:        isDark ? "linear-gradient(to bottom, #07101e 0%, #07101e 80px)" : "linear-gradient(to bottom, #EFF4FB 0%, #FFFFFF 80px)",
-    sec2:        isDark ? "#07101e" : "#FFFFFF",
-    demoBg:      isDark ? "linear-gradient(to bottom, #07101e 0%, #0b1828 60%, #0a1728 100%)" : "linear-gradient(to bottom, #FFFFFF 0%, #EBF4FF 60%, #E2EEF9 100%)",
-    contactBg:   isDark ? "linear-gradient(to bottom, #0a1728 0%, #07101e 60px, #091520 100%)" : "linear-gradient(to bottom, #E2EEF9 0%, #EFF4FB 60px, #E8EFF8 100%)",
+      : "radial-gradient(ellipse at 50% 30%, #DCEEFF 0%, #E8F2FF 40%, #EEF2F7 100%)",
+    sec1:        isDark ? "linear-gradient(to bottom, #07101e 0%, #07101e 80px)" : "linear-gradient(to bottom, #E8EFF8 0%, #F4F7FB 80px)",
+    sec2:        isDark ? "#07101e" : "#F4F7FB",
+    demoBg:      isDark ? "linear-gradient(to bottom, #07101e 0%, #0b1828 60%, #0a1728 100%)" : "linear-gradient(to bottom, #EEF2F7 0%, #E8F0F9 60%, #E2EBF5 100%)",
+    contactBg:   isDark ? "linear-gradient(to bottom, #0a1728 0%, #07101e 60px, #091520 100%)" : "linear-gradient(to bottom, #E2EBF5 0%, #EAF0F8 60px, #EEF2F7 100%)",
     chatBg:      isDark ? "#111f35" : "#F1F5F9",
     inputBg:     isDark ? "#0a1628" : "#F8FAFC",
     inputBorder: isDark ? "rgba(255,255,255,0.1)" : "rgba(15,23,42,0.1)",
@@ -1675,44 +1691,93 @@ export default function Home() {
             </motion.h2>
           </motion.div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
-            {testimonials.map((t, i) => (
-              <motion.div key={i}
-                initial={{ opacity: 0, y: 32, scale: 0.97 }} whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.75, ease: appleEase, delay: i * 0.12 }}
+          {/* Slideshow */}
+          <div style={{ position: "relative", overflow: "hidden" }}>
+            <AnimatePresence mode="wait" custom={tstDir}>
+              <motion.div
+                key={tstIndex}
+                custom={tstDir}
+                variants={{
+                  enter:  (d: number) => ({ x: d * 120, opacity: 0, filter: "blur(6px)" }),
+                  center: { x: 0, opacity: 1, filter: "blur(0px)" },
+                  exit:   (d: number) => ({ x: d * -120, opacity: 0, filter: "blur(4px)" }),
+                }}
+                initial="enter" animate="center" exit="exit"
+                transition={{ duration: 0.52, ease: appleEase }}
                 style={{
-                  background: isDark ? "#0d1f3c" : "#FFFFFF",
-                  border: `1px solid ${isDark ? "rgba(255,255,255,0.07)" : "rgba(15,23,42,0.07)"}`,
-                  borderRadius: "24px", padding: "32px 28px",
-                  boxShadow: "0 8px 28px rgba(0,0,0,0.06)",
-                  transition: "background 0.3s",
-                }}>
-                {/* Stars */}
-                <div style={{ display: "flex", gap: "3px", marginBottom: "16px" }}>
-                  {Array.from({ length: t.stars }).map((_, si) => (
-                    <span key={si} style={{ color: "#FBBF24", fontSize: "16px" }}>★</span>
-                  ))}
-                </div>
-                <p style={{ color: isDark ? "#CBD5E1" : "#334155", fontSize: "15px", lineHeight: 1.7, marginBottom: "22px", fontStyle: "italic" }}>
-                  &ldquo;{t.text}&rdquo;
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <div style={{
-                    width: "40px", height: "40px", borderRadius: "50%", flexShrink: 0,
-                    background: "linear-gradient(135deg, #0D1F3C, #0EA5E9)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: "15px", fontWeight: 700, color: "#FFFFFF",
-                  }}>
-                    {t.name[0]}
-                  </div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: "14px", color: isDark ? "#F1F5F9" : "#0F172A" }}>{t.name}</div>
-                    <div style={{ fontSize: "12px", color: "#64748B" }}>{t.role}</div>
-                  </div>
-                </div>
+                  display: "grid",
+                  gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)",
+                  gap: "24px",
+                }}
+              >
+                {[tstIndex, (tstIndex + 1) % testimonials.length].map((idx, pos) => {
+                  const item = testimonials[idx];
+                  if (isMobile && pos === 1) return null;
+                  return (
+                    <div key={idx} style={{
+                      background: c.card,
+                      border: `1px solid ${c.border}`,
+                      borderRadius: "24px", padding: "32px 28px",
+                      boxShadow: "0 8px 28px rgba(0,0,0,0.06)",
+                      transition: "background 0.3s",
+                    }}>
+                      <div style={{ display: "flex", gap: "3px", marginBottom: "16px" }}>
+                        {Array.from({ length: item.stars }).map((_, si) => (
+                          <span key={si} style={{ color: "#FBBF24", fontSize: "16px" }}>★</span>
+                        ))}
+                      </div>
+                      <p style={{ color: c.text2, fontSize: "15px", lineHeight: 1.7, marginBottom: "22px", fontStyle: "italic" }}>
+                        &ldquo;{item.text}&rdquo;
+                      </p>
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                        <div style={{
+                          width: "40px", height: "40px", borderRadius: "50%", flexShrink: 0,
+                          background: "linear-gradient(135deg, #0D1F3C, #0EA5E9)",
+                          display: "flex", alignItems: "center", justifyContent: "center",
+                          fontSize: "15px", fontWeight: 700, color: "#FFFFFF",
+                        }}>
+                          {item.name[0]}
+                        </div>
+                        <div>
+                          <div style={{ fontWeight: 600, fontSize: "14px", color: c.text }}>{item.name}</div>
+                          <div style={{ fontSize: "12px", color: "#64748B" }}>{item.role}</div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </motion.div>
-            ))}
+            </AnimatePresence>
+
+            {/* Controls */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginTop: "36px" }}>
+              <motion.button onClick={prevTst} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.93 }}
+                style={{ width: "40px", height: "40px", borderRadius: "50%", border: `1px solid ${c.border}`,
+                  background: c.card, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                  color: c.text2, transition: "background 0.2s" }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </motion.button>
+
+              <div style={{ display: "flex", gap: "7px" }}>
+                {testimonials.map((_, i) => (
+                  <motion.button key={i} onClick={() => { setTstDir(i > tstIndex ? 1 : -1); setTstIndex(i); }}
+                    animate={{ scale: i === tstIndex ? 1 : 0.7, opacity: i === tstIndex ? 1 : 0.4 }}
+                    transition={{ duration: 0.25 }}
+                    style={{ width: i === tstIndex ? "22px" : "7px", height: "7px",
+                      borderRadius: "99px", border: "none", cursor: "pointer",
+                      background: i === tstIndex ? "#0EA5E9" : c.text2,
+                      padding: 0, transition: "width 0.3s ease" }}
+                  />
+                ))}
+              </div>
+
+              <motion.button onClick={nextTst} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.93 }}
+                style={{ width: "40px", height: "40px", borderRadius: "50%", border: `1px solid ${c.border}`,
+                  background: c.card, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                  color: c.text2, transition: "background 0.2s" }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </motion.button>
+            </div>
           </div>
         </div>
       </section>
