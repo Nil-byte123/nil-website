@@ -641,6 +641,7 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
           padding: "18px 16px 12px",
           display: "flex", flexDirection: "column", gap: "10px",
           scrollbarWidth: "none",
+          pointerEvents: "none",   /* let scroll events fall through to page */
         }}>
         <AnimatePresence initial={false}>
           {messages.map((msg, i) => (
