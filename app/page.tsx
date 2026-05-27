@@ -11,7 +11,7 @@ const translations = {
   de: {
     nav: { advantages: "Vorteile", services: "Services", demo: "Demo", contact: "Kontakt" },
     hero: {
-      headline: "Dein Betrieb. KI-gesteuert. 24/7.",
+      headline: "Mehr Zeit. Mehr Umsatz. Automatisch.",
       subtext: "Intelligente KI-Agenten und maßgeschneiderte Softwarelösungen. Wir machen die Abläufe für Entwickler, Salons und Gastronomie spürbar effizienter.",
       cta: "Jetzt anfragen",
     },
@@ -41,7 +41,7 @@ const translations = {
   en: {
     nav: { advantages: "Benefits", services: "Services", demo: "Demo", contact: "Contact" },
     hero: {
-      headline: "Your business. AI-powered. 24/7.",
+      headline: "More time. More revenue. Automated.",
       subtext: "Smart AI agents and tailor-made software solutions. We make workflows for developers, salons and hospitality measurably more efficient.",
       cta: "Get in touch",
     },
@@ -71,7 +71,7 @@ const translations = {
   es: {
     nav: { advantages: "Ventajas", services: "Servicios", demo: "Demo", contact: "Contacto" },
     hero: {
-      headline: "Tu negocio. Con IA. 24/7.",
+      headline: "Más tiempo. Más ingresos. Automatizado.",
       subtext: "Agentes de IA inteligentes y soluciones de software a medida. Hacemos los procesos para desarrolladores, salones y gastronomía notablemente más eficientes.",
       cta: "Solicitar ahora",
     },
@@ -101,7 +101,7 @@ const translations = {
   fr: {
     nav: { advantages: "Avantages", services: "Services", demo: "Démo", contact: "Contact" },
     hero: {
-      headline: "Votre business. Piloté par l'IA. 24/7.",
+      headline: "Plus de temps. Plus de revenus. Automatisé.",
       subtext: "Agents IA intelligents et solutions logicielles sur mesure. Nous rendons les processus pour développeurs, salons et restauration bien plus efficaces.",
       cta: "Demander maintenant",
     },
@@ -131,7 +131,7 @@ const translations = {
   it: {
     nav: { advantages: "Vantaggi", services: "Servizi", demo: "Demo", contact: "Contatti" },
     hero: {
-      headline: "Il tuo business. Con l'IA. 24/7.",
+      headline: "Più tempo. Più guadagni. Automatico.",
       subtext: "Agenti IA intelligenti e soluzioni software su misura. Rendiamo i processi per sviluppatori, salon e ristorazione notevolmente più efficienti.",
       cta: "Richiedi ora",
     },
@@ -170,7 +170,7 @@ const sl: Record<LangCode, {
   calendly: string;
   nlHeading: string; nlPlaceholder: string; nlBtn: string; nlSuccess: string;
 }> = {
-  de: { srvLabel: "LEISTUNGEN", srvHl: "Für jede Branche die passende Lösung.", faqLabel: "FAQ", faqHl: "Häufig gestellte Fragen.", tstLabel: "KUNDENSTIMMEN", tstHl: "Was unsere Kunden sagen.", calendly: "Termin buchen", nlHeading: "Updates & Insights", nlPlaceholder: "Deine E-Mail-Adresse", nlBtn: "Anmelden", nlSuccess: "Angemeldet! ✨" },
+  de: { srvLabel: "LEISTUNGEN", srvHl: "Smarte Lösungen für jede Branche.", faqLabel: "FAQ", faqHl: "Häufig gestellte Fragen.", tstLabel: "KUNDENSTIMMEN", tstHl: "Was unsere Kunden sagen.", calendly: "Termin buchen", nlHeading: "Updates & Insights", nlPlaceholder: "Deine E-Mail-Adresse", nlBtn: "Anmelden", nlSuccess: "Angemeldet! ✨" },
   en: { srvLabel: "SERVICES", srvHl: "The right solution for every industry.", faqLabel: "FAQ", faqHl: "Frequently asked questions.", tstLabel: "TESTIMONIALS", tstHl: "What our clients say.", calendly: "Book a meeting", nlHeading: "Stay updated", nlPlaceholder: "Your email address", nlBtn: "Subscribe", nlSuccess: "Subscribed! ✨" },
   es: { srvLabel: "SERVICIOS", srvHl: "La solución adecuada para cada sector.", faqLabel: "FAQ", faqHl: "Preguntas frecuentes.", tstLabel: "OPINIONES", tstHl: "Lo que dicen nuestros clientes.", calendly: "Reservar cita", nlHeading: "Mantenerse informado", nlPlaceholder: "Tu correo electrónico", nlBtn: "Suscribirse", nlSuccess: "¡Suscrito! ✨" },
   fr: { srvLabel: "SERVICES", srvHl: "La bonne solution pour chaque secteur.", faqLabel: "FAQ", faqHl: "Questions fréquentes.", tstLabel: "TÉMOIGNAGES", tstHl: "Ce que disent nos clients.", calendly: "Prendre RDV", nlHeading: "Restez informé", nlPlaceholder: "Votre adresse e-mail", nlBtn: "S'inscrire", nlSuccess: "Inscrit(e) ! ✨" },
@@ -180,37 +180,37 @@ const sl: Record<LangCode, {
 /* ─── Rotating Hero Taglines ────────────────────────────────── */
 const rotatingTaglines: Record<LangCode, string[]> = {
   de: [
-    "✂️  Salons: Termine & Kundenkommunikation – automatisch, rund um die Uhr.",
-    "🍽️  Restaurants: Reservierungen & Bestellungen ohne manuellen Aufwand.",
-    "💻  Dev-Teams: KI-Support, der niemals schläft.",
+    "✂️  Dienstleister: Termine & Kundenkommunikation – vollautomatisch, rund um die Uhr.",
+    "🍽️  Gastronomie & Handel: Reservierungen, Bestellungen & Anfragen automatisch bearbeiten.",
+    "💻  Unternehmen & Teams: Smarte Automatisierung für jeden Betrieb – unabhängig der Branche.",
   ],
   en: [
-    "✂️  Salons: Appointments & customer care – automated, around the clock.",
-    "🍽️  Restaurants: Reservations & orders without manual effort.",
-    "💻  Dev teams: AI support that never sleeps.",
+    "✂️  Service businesses: Appointments & customer communication – fully automated, 24/7.",
+    "🍽️  Hospitality & retail: Handle reservations, orders & inquiries automatically.",
+    "💻  Companies & teams: Smart automation for any business – whatever the industry.",
   ],
   es: [
-    "✂️  Salones: Citas y comunicación con clientes – automatizados, 24/7.",
-    "🍽️  Restaurantes: Reservas y pedidos sin esfuerzo manual.",
-    "💻  Dev-teams: Soporte IA que nunca descansa.",
+    "✂️  Negocios de servicios: Citas y comunicación con clientes – totalmente automatizados, 24/7.",
+    "🍽️  Hostelería y comercio: Gestiona reservas, pedidos y consultas automáticamente.",
+    "💻  Empresas y equipos: Automatización inteligente para cualquier negocio.",
   ],
   fr: [
-    "✂️  Salons : Rendez-vous & relation client – automatisés, 24h/24.",
-    "🍽️  Restaurants : Réservations & commandes sans effort manuel.",
-    "💻  Dev-teams : Support IA qui ne dort jamais.",
+    "✂️  Prestataires de services : Rendez-vous & relation client – entièrement automatisés, 24h/24.",
+    "🍽️  Restauration & commerce : Gérez réservations, commandes et demandes automatiquement.",
+    "💻  Entreprises & équipes : Automatisation intelligente pour tout type de business.",
   ],
   it: [
-    "✂️  Salon: Appuntamenti & comunicazione clienti – automatizzati, 24/7.",
-    "🍽️  Ristoranti: Prenotazioni & ordini senza sforzo manuale.",
-    "💻  Dev-team: Supporto IA che non dorme mai.",
+    "✂️  Servizi: Appuntamenti & comunicazione clienti – completamente automatizzati, 24/7.",
+    "🍽️  Ristorazione & commercio: Gestisci prenotazioni, ordini e richieste automaticamente.",
+    "💻  Aziende & team: Automazione intelligente per qualsiasi tipo di business.",
   ],
 };
 
 /* ─── Service Cards (statisch) ──────────────────────────────── */
 const serviceCards = [
-  { icon: "✂️", title: "Salon & Beauty", text: { de: "Automatische Terminbuchung, Kundenkommunikation und Erinnerungen – rund um die Uhr.", en: "Automatic appointment booking, customer communication and reminders – 24/7.", es: "Reservas automáticas, comunicación con clientes y recordatorios – las 24 horas.", fr: "Réservations automatiques, communication client et rappels – 24h/24.", it: "Prenotazioni automatiche, comunicazione clienti e promemoria – 24 ore su 24." } },
-  { icon: "🍽️", title: "Gastronomie", text: { de: "Tischreservierungen, Bestellannahme und Gästekommunikation vollautomatisch.", en: "Table reservations, order management and guest communication fully automated.", es: "Reservas de mesa, gestión de pedidos y comunicación con huéspedes automatizadas.", fr: "Réservations de table, gestion des commandes et communication client automatisées.", it: "Prenotazioni tavoli, gestione ordini e comunicazione con gli ospiti automatizzate." } },
-  { icon: "💻", title: "Tech & Software", text: { de: "KI-Agenten, Support-Automation und individuelle Softwarelösungen für dein Team.", en: "AI agents, support automation and custom software solutions for your team.", es: "Agentes IA, automatización de soporte y soluciones de software personalizadas.", fr: "Agents IA, automatisation du support et solutions logicielles sur mesure.", it: "Agenti IA, automazione del supporto e soluzioni software personalizzate." } },
+  { icon: "✂️", title: "Dienstleister & Beauty", text: { de: "Automatische Terminbuchung, Kundenkommunikation und Erinnerungen – damit du dich auf deine Arbeit konzentrierst, nicht auf Verwaltung.", en: "Automatic appointment booking, customer communication and reminders – so you focus on your craft, not admin.", es: "Reservas automáticas, comunicación con clientes y recordatorios – para que te centres en tu trabajo.", fr: "Réservations automatiques, communication client et rappels – pour vous concentrer sur votre métier.", it: "Prenotazioni automatiche, comunicazione clienti e promemoria – per concentrarti sul tuo lavoro." } },
+  { icon: "🍽️", title: "Gastronomie & Handel", text: { de: "Tischreservierungen, Bestellannahme, Anfragen und Gästekommunikation – vollautomatisch, rund um die Uhr.", en: "Table reservations, orders, inquiries and guest communication – fully automated, around the clock.", es: "Reservas, pedidos, consultas y comunicación con clientes – completamente automatizados.", fr: "Réservations, commandes, demandes et communication client – entièrement automatisés.", it: "Prenotazioni, ordini, richieste e comunicazione ospiti – completamente automatizzati." } },
+  { icon: "💼", title: "Unternehmen & Teams", text: { de: "Smarte Softwarelösungen und digitale Assistenten für jede Branche – individuell auf deinen Betrieb zugeschnitten.", en: "Smart software solutions and digital assistants for any industry – tailored to your business.", es: "Soluciones de software inteligentes y asistentes digitales para cualquier sector.", fr: "Solutions logicielles intelligentes et assistants numériques pour tout secteur.", it: "Soluzioni software intelligenti e assistenti digitali per qualsiasi settore." } },
 ];
 
 /* ─── FAQ Items ─────────────────────────────────────────────── */
@@ -953,7 +953,9 @@ export default function Home() {
     border2:     isDark ? "rgba(255,255,255,0.06)" : "rgba(15,23,42,0.06)",
     nav:         isDark ? "rgba(7,16,30,0.92)" : "rgba(248,250,252,0.78)",
     navBorder:   isDark ? "rgba(255,255,255,0.05)" : "rgba(15,23,42,0.06)",
-    heroGrad:    isDark ? "radial-gradient(ellipse at 50% 40%, #0d1f3c 0%, #07101e 100%)" : "radial-gradient(ellipse at 50% 40%, #FFFFFF 0%, #EFF4FB 100%)",
+    heroGrad:    isDark
+      ? "radial-gradient(ellipse at 50% 30%, #0d2444 0%, #091828 50%, #060e1a 100%)"
+      : "radial-gradient(ellipse at 50% 30%, #EBF4FF 0%, #F0F7FF 40%, #F8FAFC 100%)",
     sec1:        isDark ? "linear-gradient(to bottom, #07101e 0%, #07101e 80px)" : "linear-gradient(to bottom, #EFF4FB 0%, #FFFFFF 80px)",
     sec2:        isDark ? "#07101e" : "#FFFFFF",
     demoBg:      isDark ? "linear-gradient(to bottom, #07101e 0%, #0b1828 60%, #0a1728 100%)" : "linear-gradient(to bottom, #FFFFFF 0%, #EBF4FF 60%, #E2EEF9 100%)",
@@ -1329,7 +1331,10 @@ export default function Home() {
               style={{ position: "absolute", width: "70px", height: "180px",
                 background: "radial-gradient(ellipse at center, rgba(14,165,233,0.28) 0%, rgba(56,189,248,0.10) 55%, transparent 80%)",
                 borderRadius: "50%", filter: "blur(10px)", pointerEvents: "none" }} />
-            <FinalBrandingLogo width={260} height={95} />
+            {isDark
+              ? <FinalBrandingLogoWhite width={260} height={95} />
+              : <FinalBrandingLogo width={260} height={95} />
+            }
           </motion.div>
 
           {/* Headline */}
@@ -1482,7 +1487,7 @@ export default function Home() {
             </motion.p>
             <motion.h2 variants={{ hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
               visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease: appleEase } } }}
-              style={{ fontSize: "clamp(30px, 4vw, 40px)", fontWeight: 700, letterSpacing: "-0.04em", color: "#0F172A" }}>
+              style={{ fontSize: "clamp(30px, 4vw, 40px)", fontWeight: 700, letterSpacing: "-0.04em", color: c.text }}>
               <AnimText langKey={`sh2-${lang}`}>{t.showcase.headline}</AnimText>
             </motion.h2>
           </motion.div>
@@ -1495,7 +1500,7 @@ export default function Home() {
               <h3 style={{ fontSize: "24px", marginBottom: "18px", fontWeight: 600, letterSpacing: "-0.02em" }}>
                 <AnimText langKey={`sh3-${lang}`}>{t.showcase.h3}</AnimText>
               </h3>
-              <p style={{ color: "#475569", fontSize: "16px", lineHeight: 1.65, marginBottom: "32px" }}>
+              <p style={{ color: c.text2, fontSize: "16px", lineHeight: 1.65, marginBottom: "32px" }}>
                 <AnimText langKey={`stext-${lang}`}>{t.showcase.text}</AnimText>
               </p>
             </motion.div>
@@ -1504,10 +1509,11 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 1, ease: appleEase, delay: 0.2 }}
-              style={{ background: "#F8FAFC", border: "1px solid rgba(15,23,42,0.06)",
-                borderRadius: "24px", padding: "32px", boxShadow: "0 20px 60px rgba(15,23,42,0.06)" }}>
+              style={{ background: c.card, border: `1px solid ${c.border}`,
+                borderRadius: "24px", padding: "32px", boxShadow: "0 20px 60px rgba(15,23,42,0.06)",
+                transition: "background 0.3s ease" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "22px",
-                paddingBottom: "14px", borderBottom: "1px solid rgba(15,23,42,0.06)" }}>
+                paddingBottom: "14px", borderBottom: `1px solid ${c.border}` }}>
                 <motion.div animate={{ scale: [1, 1.4, 1] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                   style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#0EA5E9" }} />
                 <AnimatePresence mode="wait">
@@ -1636,13 +1642,13 @@ export default function Home() {
             <motion.h2 variants={{ hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
               visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease: appleEase } } }}
               style={{ fontSize: "clamp(28px, 4vw, 38px)", fontWeight: 700, letterSpacing: "-0.04em",
-                color: "#0F172A", marginBottom: "18px", margin: "0 0 18px 0" }}>
+                color: c.text, marginBottom: "18px", margin: "0 0 18px 0" }}>
               <AnimText langKey={`demo-h2-${lang}`}>{t.demo.headline}</AnimText>
             </motion.h2>
 
             <motion.p variants={{ hidden: { opacity: 0, y: 16, filter: "blur(4px)" },
               visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: appleEase } } }}
-              style={{ color: "#475569", fontSize: "16px", lineHeight: 1.65,
+              style={{ color: c.text2, fontSize: "16px", lineHeight: 1.65,
                 maxWidth: "480px", margin: "0 auto" }}>
               <AnimText langKey={`demo-sub-${lang}`}>{t.demo.subtext}</AnimText>
             </motion.p>
@@ -1720,13 +1726,13 @@ export default function Home() {
 
           <motion.h2 variants={{ hidden: { opacity: 0, scale: 0.92, y: 24, filter: "blur(6px)" },
             visible: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", transition: { duration: 1, ease: appleEase } } }}
-            style={{ fontSize: "clamp(28px, 4vw, 36px)", fontWeight: 700, letterSpacing: "-0.03em", marginBottom: "18px", color: "#0F172A" }}>
+            style={{ fontSize: "clamp(28px, 4vw, 36px)", fontWeight: 700, letterSpacing: "-0.03em", marginBottom: "18px", color: c.text }}>
             <AnimText langKey={`ch2-${lang}`}>{t.contact.headline}</AnimText>
           </motion.h2>
 
           <motion.p variants={{ hidden: { opacity: 0, y: 18, filter: "blur(4px)" },
             visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.85, ease: appleEase } } }}
-            style={{ color: "#475569", fontSize: "16px", marginBottom: "38px" }}>
+            style={{ color: c.text2, fontSize: "16px", marginBottom: "38px" }}>
             <AnimText langKey={`csub-${lang}`}>{t.contact.subtext}</AnimText>
           </motion.p>
 
