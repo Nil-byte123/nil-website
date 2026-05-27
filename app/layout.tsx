@@ -55,6 +55,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="theme-color" content="#0F172A" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "NIL",
+              "alternateName": "NIL – Smarte Automatisierung",
+              "url": "https://www.nilogik.de",
+            }),
+          }}
+        />
       </head>
       <body className={geist.className}>
         <GoogleAnalytics />
