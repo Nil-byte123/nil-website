@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef } from "react";
-import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { NilLogo } from "../components/NilLogo";
 
 const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 type Bubble = { id: number; x: number; y: number; size: number; color: string; dx: number; delay: number };
+type Rect = { x: number; y: number; w: number; h: number };
 
 const plans = [
   {
@@ -73,12 +74,42 @@ const BUBBLE_COLORS = ["#0EA5E9", "#38BDF8", "#7DD3FC", "#BAE6FD", "#0284C7"];
 export default function Preise() {
   const [selected, setSelected] = useState("Pro");
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
+  const [slime, setSlime] = useState<Rect | null>(null);
+
   const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const measureCard = (name: string): Rect | null => {
+    const card = cardRefs.current[name];
+    const container = containerRef.current;
+    if (!card || !container) return null;
+    const cR = container.getBoundingClientRect();
+    const kR = card.getBoundingClientRect();
+    return { x: kR.left - cR.left, y: kR.top - cR.top, w: kR.width, h: kR.height };
+  };
+
+  // Set initial slime position before first paint
+  useLayoutEffect(() => {
+    const r = measureCard("Pro");
+    if (r) setSlime(r);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Re-measure on resize
+  useEffect(() => {
+    const onResize = () => {
+      const r = measureCard(selected);
+      if (r) setSlime(r);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected]);
 
   const handleSelect = (planName: string) => {
     if (planName === selected) return;
 
-    // Spawn bubbles at the OLD selected card
+    // Spawn bubbles at OLD card
     const oldCard = cardRefs.current[selected];
     if (oldCard) {
       const rect = oldCard.getBoundingClientRect();
@@ -96,6 +127,10 @@ export default function Preise() {
       setTimeout(() => setBubbles(prev => prev.filter(b => !ids.has(b.id))), 1300);
     }
 
+    // Slide slime to new card
+    const r = measureCard(planName);
+    if (r) setSlime(r);
+
     setSelected(planName);
   };
 
@@ -105,7 +140,7 @@ export default function Preise() {
       fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
     }}>
 
-      {/* ── Bubble overlay (fixed, above everything) ── */}
+      {/* ── Bubble overlay ── */}
       <div style={{ position: "fixed", inset: 0, pointerEvents: "none", zIndex: 9999 }}>
         <AnimatePresence>
           {bubbles.map(b => (
@@ -117,8 +152,7 @@ export default function Preise() {
               transition={{ duration: 0.75 + Math.random() * 0.35, ease: "easeOut", delay: b.delay }}
               style={{
                 position: "fixed", left: 0, top: 0,
-                width: b.size, height: b.size,
-                borderRadius: "50%",
+                width: b.size, height: b.size, borderRadius: "50%",
                 background: b.color,
                 boxShadow: `0 0 ${b.size * 1.2}px ${b.color}99`,
                 transform: `translate(${b.x}px, ${b.y}px)`,
@@ -141,9 +175,7 @@ export default function Preise() {
         <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
           <NilLogo width={90} height={32} />
         </Link>
-        <Link href="/" style={{
-          textDecoration: "none", color: "#0EA5E9", fontSize: "14px", fontWeight: 500,
-        }}>
+        <Link href="/" style={{ textDecoration: "none", color: "#0EA5E9", fontSize: "14px", fontWeight: 500 }}>
           ← Zurück zur Startseite
         </Link>
       </nav>
@@ -180,11 +212,56 @@ export default function Preise() {
 
       {/* ── Pricing Cards ── */}
       <div style={{ maxWidth: "1120px", margin: "0 auto", padding: "0 20px 100px" }}>
-        <LayoutGroup>
+
+        {/* Relative container — slime lives here, cards float above */}
+        <div ref={containerRef} style={{ position: "relative", isolation: "isolate" }}>
+
+          {/* THE SLIME — single element that stretches between cards */}
+          {slime && (
+            <motion.div
+              animate={{ x: slime.x, y: slime.y, width: slime.w, height: slime.h }}
+              initial={{ x: slime.x, y: slime.y, width: slime.w, height: slime.h }}
+              transition={{
+                // position leads — pulls toward new card first
+                x: { type: "spring", stiffness: 300, damping: 28, mass: 0.85 },
+                y: { type: "spring", stiffness: 300, damping: 28, mass: 0.85 },
+                // size lags — creates the organic stretch/slime look
+                width:  { type: "spring", stiffness: 160, damping: 22, mass: 1.2 },
+                height: { type: "spring", stiffness: 160, damping: 22, mass: 1.2 },
+              }}
+              style={{
+                position: "absolute", top: 0, left: 0,
+                background: "linear-gradient(145deg, #0D1F3C 0%, #08152A 100%)",
+                borderRadius: "28px",
+                zIndex: 0,
+                pointerEvents: "none",
+                boxShadow: [
+                  "0 40px 100px rgba(8,21,42,0.45)",
+                  "0 0 0 1.5px rgba(14,165,233,0.35)",
+                  "0 0 80px rgba(14,165,233,0.1)",
+                ].join(", "),
+                overflow: "hidden",
+              }}
+            >
+              {/* inner cyan glow */}
+              <div style={{
+                position: "absolute", top: "-80px", left: "50%",
+                transform: "translateX(-50%)",
+                width: "320px", height: "320px",
+                background: "radial-gradient(ellipse, rgba(14,165,233,0.28) 0%, transparent 68%)",
+                pointerEvents: "none",
+              }} />
+            </motion.div>
+          )}
+
+          {/* Cards — rendered above slime via z-index on the grid */}
           <div style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "24px", alignItems: "center",
+            gap: "24px",
+            alignItems: "stretch",
+            position: "relative",
+            zIndex: 1,
           }}>
             {plans.map((plan, i) => {
               const isSel = selected === plan.name;
@@ -193,60 +270,34 @@ export default function Preise() {
                   key={plan.name}
                   ref={el => { cardRefs.current[plan.name] = el; }}
                   onClick={() => handleSelect(plan.name)}
-                  initial={{ opacity: 0, y: 40, scale: 0.97 }}
-                  animate={{
-                    opacity: 1, y: 0,
-                    scale: isSel ? 1.04 : 1,
-                  }}
-                  whileHover={{ y: isSel ? 0 : -5 }}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  whileHover={{ y: isSel ? 0 : -4 }}
                   transition={{ duration: 0.75, ease, delay: 0.2 + i * 0.12 }}
                   style={{
-                    position: "relative", overflow: "hidden",
+                    position: "relative",
                     borderRadius: "28px",
                     cursor: "pointer",
-                    border: isSel ? "1.5px solid rgba(14,165,233,0.35)" : "1px solid rgba(15,23,42,0.08)",
-                    boxShadow: isSel
-                      ? "0 40px 100px rgba(8,21,42,0.32), 0 0 0 1px rgba(14,165,233,0.12)"
-                      : "0 8px 30px rgba(15,23,42,0.06)",
-                    background: "#FFFFFF",
-                    transition: "border 0.35s, box-shadow 0.35s",
+                    // transparent when selected — slime behind shows through
+                    background: isSel ? "transparent" : "#FFFFFF",
+                    border: isSel
+                      ? "1.5px solid rgba(14,165,233,0.4)"
+                      : "1px solid rgba(15,23,42,0.08)",
+                    boxShadow: isSel ? "none" : "0 8px 30px rgba(15,23,42,0.06)",
+                    transition: "background 0.3s, border 0.3s, box-shadow 0.3s",
                     userSelect: "none",
                   }}
                 >
-                  {/* Animated dark background (shared layout) */}
-                  {isSel && (
-                    <motion.div
-                      layoutId="card-selected-bg"
-                      style={{
-                        position: "absolute", inset: 0,
-                        background: "linear-gradient(145deg, #0D1F3C 0%, #08152A 100%)",
-                        zIndex: 0,
-                      }}
-                      transition={{ type: "spring", stiffness: 260, damping: 28 }}
-                    />
-                  )}
-
-                  {/* Cyan glow top (shared layout) */}
-                  {isSel && (
-                    <motion.div
-                      layoutId="card-glow"
-                      style={{
-                        position: "absolute", top: "-50px", left: "50%",
-                        transform: "translateX(-50%)",
-                        width: "220px", height: "220px",
-                        background: "radial-gradient(ellipse, rgba(14,165,233,0.18) 0%, transparent 70%)",
-                        zIndex: 0, pointerEvents: "none",
-                      }}
-                      transition={{ type: "spring", stiffness: 260, damping: 28 }}
-                    />
-                  )}
-
-                  {/* Card content */}
-                  <div style={{ position: "relative", zIndex: 1, padding: isSel ? "44px 36px" : "36px 32px", display: "flex", flexDirection: "column" }}>
+                  <div style={{
+                    position: "relative", zIndex: 1,
+                    padding: "40px 34px",
+                    display: "flex", flexDirection: "column",
+                    height: "100%", boxSizing: "border-box",
+                  }}>
 
                     {plan.tag && (
                       <div style={{
-                        position: "absolute", top: isSel ? "20px" : "16px", right: isSel ? "20px" : "16px",
+                        position: "absolute", top: "20px", right: "20px",
                         background: "linear-gradient(135deg, #0EA5E9, #0284C7)",
                         color: "#FFFFFF", fontSize: "11px", fontWeight: 700,
                         padding: "5px 12px", borderRadius: "22px", letterSpacing: "0.4px",
@@ -269,7 +320,8 @@ export default function Preise() {
                       background: isSel ? "rgba(14,165,233,0.12)" : "rgba(14,165,233,0.05)",
                       border: `1px solid ${isSel ? "rgba(14,165,233,0.3)" : "rgba(14,165,233,0.15)"}`,
                       borderRadius: "20px", padding: "20px 24px",
-                      margin: "20px 0", transition: "background 0.3s, border 0.3s",
+                      margin: "20px 0",
+                      transition: "background 0.3s, border 0.3s",
                     }}>
                       <div style={{ display: "flex", alignItems: "baseline", gap: "6px" }}>
                         {plan.price !== "Individuell" && (
@@ -328,15 +380,11 @@ export default function Preise() {
                     <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
                       <Link href={plan.ctaHref} onClick={e => e.stopPropagation()} style={{
                         display: "block", textAlign: "center",
-                        background: isSel
-                          ? "linear-gradient(135deg, #0EA5E9, #0284C7)"
-                          : "#0F172A",
+                        background: isSel ? "linear-gradient(135deg, #0EA5E9, #0284C7)" : "#0F172A",
                         color: "#FFFFFF", padding: "15px 24px",
                         borderRadius: "14px", fontWeight: 700, fontSize: "15px",
                         textDecoration: "none", letterSpacing: "0.2px",
-                        boxShadow: isSel
-                          ? "0 8px 28px rgba(14,165,233,0.5)"
-                          : "0 6px 20px rgba(15,23,42,0.15)",
+                        boxShadow: isSel ? "0 8px 28px rgba(14,165,233,0.5)" : "0 6px 20px rgba(15,23,42,0.15)",
                         transition: "background 0.3s, box-shadow 0.3s",
                       }}>
                         {plan.cta} →
@@ -347,7 +395,7 @@ export default function Preise() {
               );
             })}
           </div>
-        </LayoutGroup>
+        </div>
       </div>
 
       {/* Bottom note */}
