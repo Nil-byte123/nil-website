@@ -208,10 +208,47 @@ const rotatingTaglines: Record<LangCode, string[]> = {
 
 /* ─── Service Cards (statisch) ──────────────────────────────── */
 const serviceCards = [
-  { icon: "✂️", title: "Dienstleister & Beauty", text: { de: "Automatische Terminbuchung, Kundenkommunikation und Erinnerungen – damit du dich auf deine Arbeit konzentrierst, nicht auf Verwaltung.", en: "Automatic appointment booking, customer communication and reminders – so you focus on your craft, not admin.", es: "Reservas automáticas, comunicación con clientes y recordatorios – para que te centres en tu trabajo.", fr: "Réservations automatiques, communication client et rappels – pour vous concentrer sur votre métier.", it: "Prenotazioni automatiche, comunicazione clienti e promemoria – per concentrarti sul tuo lavoro." } },
-  { icon: "🍽️", title: "Gastronomie & Handel", text: { de: "Tischreservierungen, Bestellannahme, Anfragen und Gästekommunikation – vollautomatisch, rund um die Uhr.", en: "Table reservations, orders, inquiries and guest communication – fully automated, around the clock.", es: "Reservas, pedidos, consultas y comunicación con clientes – completamente automatizados.", fr: "Réservations, commandes, demandes et communication client – entièrement automatisés.", it: "Prenotazioni, ordini, richieste e comunicazione ospiti – completamente automatizzati." } },
-  { icon: "💼", title: "Unternehmen & Teams", text: { de: "Smarte Softwarelösungen und digitale Assistenten für jede Branche – individuell auf deinen Betrieb zugeschnitten.", en: "Smart software solutions and digital assistants for any industry – tailored to your business.", es: "Soluciones de software inteligentes y asistentes digitales para cualquier sector.", fr: "Solutions logicielles intelligentes et assistants numériques pour tout secteur.", it: "Soluzioni software intelligenti e assistenti digitali per qualsiasi settore." } },
-  { icon: "🏥", title: "Gesundheit & Beratung", text: { de: "Terminvergabe, Patientenkommunikation und Beratungsanfragen – zuverlässig automatisiert, damit du dich auf deine Klienten konzentrierst.", en: "Appointment scheduling, patient communication and consultation inquiries – reliably automated so you focus on your clients.", es: "Programación de citas, comunicación con pacientes y consultas – automatizados de forma fiable.", fr: "Prise de rendez-vous, communication patients et demandes de consultation – automatisés de manière fiable.", it: "Prenotazioni, comunicazione pazienti e richieste di consulenza – automatizzati in modo affidabile." } },
+  {
+    icon: (
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <path d="M16 2v4M8 2v4M3 10h18"/>
+        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+      </svg>
+    ),
+    title: "Dienstleister & Beauty",
+    text: { de: "Automatische Terminbuchung, Kundenkommunikation und Erinnerungen – damit du dich auf deine Arbeit konzentrierst, nicht auf Verwaltung.", en: "Automatic appointment booking, customer communication and reminders – so you focus on your craft, not admin.", es: "Reservas automáticas, comunicación con clientes y recordatorios – para que te centres en tu trabajo.", fr: "Réservations automatiques, communication client et rappels – pour vous concentrer sur votre métier.", it: "Prenotazioni automatiche, comunicazione clienti e promemoria – per concentrarti sul tuo lavoro." },
+  },
+  {
+    icon: (
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+        <path d="M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3z"/>
+        <path d="M21 15v7"/>
+      </svg>
+    ),
+    title: "Gastronomie & Handel",
+    text: { de: "Tischreservierungen, Bestellannahme, Anfragen und Gästekommunikation – vollautomatisch, rund um die Uhr.", en: "Table reservations, orders, inquiries and guest communication – fully automated, around the clock.", es: "Reservas, pedidos, consultas y comunicación con clientes – completamente automatizados.", fr: "Réservations, commandes, demandes et communication client – entièrement automatisés.", it: "Prenotazioni, ordini, richieste e comunicazione ospiti – completamente automatizzati." },
+  },
+  {
+    icon: (
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="4" y="2" width="16" height="20" rx="1"/>
+        <path d="M9 22V12h6v10M8 6h.01M16 6h.01M8 10h.01M16 10h.01"/>
+      </svg>
+    ),
+    title: "Unternehmen & Teams",
+    text: { de: "Smarte Softwarelösungen und digitale Assistenten für jede Branche – individuell auf deinen Betrieb zugeschnitten.", en: "Smart software solutions and digital assistants for any industry – tailored to your business.", es: "Soluciones de software inteligentes y asistentes digitales para cualquier sector.", fr: "Solutions logicielles intelligentes et assistants numériques pour tout secteur.", it: "Soluzioni software intelligenti e assistenti digitali per qualsiasi settore." },
+  },
+  {
+    icon: (
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    ),
+    title: "Gesundheit & Beratung",
+    text: { de: "Terminvergabe, Patientenkommunikation und Beratungsanfragen – zuverlässig automatisiert, damit du dich auf deine Klienten konzentrierst.", en: "Appointment scheduling, patient communication and consultation inquiries – reliably automated so you focus on your clients.", es: "Programación de citas, comunicación con pacientes y consultas – automatizados de forma fiable.", fr: "Prise de rendez-vous, communication patients et demandes de consultation – automatisés de manière fiable.", it: "Prenotazioni, comunicazione pazienti e richieste di consulenza – automatizzati in modo affidabile." },
+  },
 ];
 
 /* ─── FAQ Items ─────────────────────────────────────────────── */
@@ -260,11 +297,24 @@ const faqItems: Record<LangCode, { q: string; a: string }[]> = {
 
 /* ─── Testimonials (statisch) ───────────────────────────────── */
 const testimonials = [
-  { name: "Marie K.", role: "Inhaberin, Salon Aura München", text: "Seit wir NIL nutzen, bearbeite ich nur noch die Hälfte der Kundenanfragen manuell. Mein Team kann sich auf das Wesentliche konzentrieren.", stars: 5 },
-  { name: "Thomas B.", role: "Gastronom, Café Central", text: "Die Tischreservierungen laufen jetzt komplett automatisch. Kein verpasster Anruf mehr, und die Gäste sind begeistert vom schnellen Feedback.", stars: 5 },
-  { name: "Lena M.", role: "Gründerin, Tech-Startup", text: "Als wachsendes Startup konnten wir uns kein Support-Team leisten. NIL hat das Problem in einer Woche gelöst – zum Bruchteil der Kosten.", stars: 5 },
-  { name: "Stefan R.", role: "Geschäftsführer, Autohaus Riedl", text: "Probefahrt-Anfragen und Servicetermine werden jetzt rund um die Uhr entgegengenommen. Unsere Mitarbeiter konzentrieren sich auf den Verkauf.", stars: 5 },
-  { name: "Petra W.", role: "Physiotherapeutin, Praxis am Park", text: "Die Terminverwaltung hat mich früher täglich eine Stunde gekostet. Heute läuft das vollautomatisch – ich bin begeistert, wie einfach das war.", stars: 5 },
+  {
+    name: "Thomas B.", role: "Inhaber · Café Central",
+    text: "Die Tischreservierungen laufen jetzt komplett automatisch. Kein verpasster Anruf mehr, und die Gäste sind begeistert vom schnellen Feedback.",
+    stars: 5, tag: "Gastronomie",
+    avatarGrad: "linear-gradient(135deg, #D97706 0%, #92400E 100%)",
+  },
+  {
+    name: "Petra W.", role: "Physiotherapeutin · Praxis am Park",
+    text: "Die Terminverwaltung hat mich früher täglich eine Stunde gekostet. Heute läuft das vollautomatisch – ich bin begeistert, wie einfach das war.",
+    stars: 5, tag: "Gesundheit",
+    avatarGrad: "linear-gradient(135deg, #0D9488 0%, #065F46 100%)",
+  },
+  {
+    name: "Markus L.", role: "Inhaber · Studio M. Hamburg",
+    text: "Unsere Kunden buchen jetzt rund um die Uhr online. Keine Zettelwirtschaft mehr, keine verpassten Anfragen. Das Team kann sich endlich auf die Arbeit konzentrieren.",
+    stars: 5, tag: "Beauty",
+    avatarGrad: "linear-gradient(135deg, #7C3AED 0%, #2563EB 100%)",
+  },
 ];
 
 /* ─── Newsletter Form ───────────────────────────────────────── */
@@ -1047,7 +1097,10 @@ export default function Home() {
         }}
       >
         <div style={{ maxWidth: "1150px", width: "100%", margin: "0 auto", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <FinalBrandingLogo width={112} height={40} />
+          {isDark
+            ? <FinalBrandingLogoWhite width={112} height={40} />
+            : <FinalBrandingLogo width={112} height={40} />
+          }
 
           <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
             {/* ── DESKTOP NAV ── */}
@@ -1159,6 +1212,19 @@ export default function Home() {
               ))}
             </div>
 
+            {/* Trust badge */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginBottom: "20px", padding: "12px 0", borderTop: `1px solid ${c.border}`, borderBottom: `1px solid ${c.border}`, flexWrap: "wrap" }}>
+              {[
+                { icon: "✓", text: "Kostenlose Erstberatung", color: "#22C55E" },
+                { icon: "⚡", text: "Live in 48h", color: "#0EA5E9" },
+              ].map(({ icon, text, color }) => (
+                <div key={text} style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                  <span style={{ color, fontSize: "13px", fontWeight: 700 }}>{icon}</span>
+                  <span style={{ color: c.text2, fontSize: "13px", fontWeight: 500 }}>{text}</span>
+                </div>
+              ))}
+            </div>
+
             {/* Social + LangSwitcher */}
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "12px" }}>
               <div style={{ display: "flex", gap: "16px" }}>
@@ -1186,7 +1252,7 @@ export default function Home() {
         height: isMobile ? "auto" : "100vh",
         display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
         textAlign: "center",
-        padding: isMobile ? "80px 24px 56px" : "68px 20px 0",
+        padding: isMobile ? "80px 24px 20px" : "68px 20px 0",
         boxSizing: "border-box",
         overflow: "hidden",
         background: c.heroGrad,
@@ -1523,6 +1589,23 @@ export default function Home() {
         )}
       </section>
 
+      {/* ── SOCIAL PROOF BAR ── */}
+      <div style={{
+        background: isDark ? "#0a1628" : "#E2ECF8",
+        borderTop: `1px solid ${c.border}`,
+        borderBottom: `1px solid ${c.border}`,
+        padding: "14px 24px",
+      }}>
+        <div style={{ maxWidth: "1050px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", flexWrap: "wrap" }}>
+          <span style={{ color: "#FBBF24", fontSize: "13px", letterSpacing: "2px" }}>★★★★★</span>
+          <span style={{ color: c.text2, fontSize: "13px", fontWeight: 600 }}>5.0</span>
+          <span style={{ color: isDark ? "rgba(255,255,255,0.15)" : "rgba(15,23,42,0.2)", fontSize: "18px", lineHeight: 1, fontWeight: 300 }}>·</span>
+          <span style={{ color: c.text2, fontSize: "13px" }}>Bereits <strong style={{ color: c.text, fontWeight: 700 }}>20+</strong> Betriebe automatisiert</span>
+          <span style={{ color: isDark ? "rgba(255,255,255,0.15)" : "rgba(15,23,42,0.2)", fontSize: "18px", lineHeight: 1, fontWeight: 300 }}>·</span>
+          <span style={{ color: "#0EA5E9", fontSize: "13px", fontWeight: 600 }}>⚡ Einrichtung in 48h</span>
+        </div>
+      </div>
+
       {/* ── SHOWCASE ── */}
       <section id="vorteile" style={{ padding: "120px 20px",
         background: c.sec1,
@@ -1632,7 +1715,7 @@ export default function Home() {
                   boxShadow: "0 4px 20px rgba(15,23,42,0.05)",
                   transition: "box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease",
                 }}>
-                <div style={{ fontSize: "36px", marginBottom: "18px" }}>{card.icon}</div>
+                <div style={{ marginBottom: "18px", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>{card.icon}</div>
                 <h3 style={{ fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em", color: c.text, marginBottom: "12px" }}>
                   {card.title}
                 </h3>
@@ -1716,7 +1799,7 @@ export default function Home() {
         <div style={{ maxWidth: "1050px", margin: "0 auto" }}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
-            style={{ textAlign: "center", marginBottom: "64px" }}>
+            style={{ textAlign: "center", marginBottom: "36px" }}>
             <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: appleEase } } }}
               style={{ color: "#0EA5E9", fontSize: "12px", fontWeight: 600, letterSpacing: "2px", marginBottom: "12px" }}>
               <AnimText langKey={`tst-label-${lang}`}>{s.tstLabel}</AnimText>
@@ -1753,30 +1836,45 @@ export default function Home() {
                     <div key={idx} style={{
                       background: c.card,
                       border: `1px solid ${c.border}`,
-                      borderRadius: "24px", padding: "32px 28px",
-                      boxShadow: "0 8px 28px rgba(0,0,0,0.06)",
+                      borderRadius: "20px", padding: "28px",
+                      boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
                       transition: "background 0.3s",
+                      position: "relative",
                     }}>
-                      <div style={{ display: "flex", gap: "3px", marginBottom: "16px" }}>
+                      {/* Industry tag */}
+                      {"tag" in item && (
+                        <div style={{
+                          position: "absolute", top: "20px", right: "20px",
+                          background: "rgba(14,165,233,0.1)",
+                          border: "1px solid rgba(14,165,233,0.2)",
+                          color: "#0EA5E9", fontSize: "11px", fontWeight: 600,
+                          padding: "3px 10px", borderRadius: "99px", letterSpacing: "0.3px",
+                        }}>{(item as typeof testimonials[0]).tag}</div>
+                      )}
+                      {/* Stars */}
+                      <div style={{ display: "flex", gap: "2px", marginBottom: "14px" }}>
                         {Array.from({ length: item.stars }).map((_, si) => (
-                          <span key={si} style={{ color: "#FBBF24", fontSize: "16px" }}>★</span>
+                          <span key={si} style={{ color: "#FBBF24", fontSize: "14px" }}>★</span>
                         ))}
                       </div>
-                      <p style={{ color: c.text2, fontSize: "15px", lineHeight: 1.7, marginBottom: "22px", fontStyle: "italic" }}>
+                      {/* Quote */}
+                      <p style={{ color: c.text2, fontSize: "15px", lineHeight: 1.65, marginBottom: "20px", fontStyle: "italic" }}>
                         &ldquo;{item.text}&rdquo;
                       </p>
+                      {/* Person row */}
                       <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                         <div style={{
-                          width: "40px", height: "40px", borderRadius: "50%", flexShrink: 0,
-                          background: "linear-gradient(135deg, #0D1F3C, #0EA5E9)",
+                          width: "48px", height: "48px", borderRadius: "50%", flexShrink: 0,
+                          background: "avatarGrad" in item ? (item as typeof testimonials[0]).avatarGrad : "linear-gradient(135deg, #0D1F3C, #0EA5E9)",
                           display: "flex", alignItems: "center", justifyContent: "center",
-                          fontSize: "15px", fontWeight: 700, color: "#FFFFFF",
+                          fontSize: "17px", fontWeight: 700, color: "#FFFFFF",
+                          boxShadow: "0 2px 10px rgba(0,0,0,0.18)",
                         }}>
                           {item.name[0]}
                         </div>
                         <div>
-                          <div style={{ fontWeight: 600, fontSize: "14px", color: c.text }}>{item.name}</div>
-                          <div style={{ fontSize: "12px", color: "#64748B" }}>{item.role}</div>
+                          <div style={{ fontWeight: 700, fontSize: "15px", color: c.text }}>{item.name}</div>
+                          <div style={{ fontSize: "12px", color: c.text2, marginTop: "2px" }}>{item.role}</div>
                         </div>
                       </div>
                     </div>
@@ -1814,6 +1912,11 @@ export default function Home() {
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </motion.button>
             </div>
+
+            {/* Credibility line */}
+            <p style={{ textAlign: "center", color: c.text3, fontSize: "12px", marginTop: "20px", letterSpacing: "0.3px" }}>
+              Echte Erfahrungen unserer Kunden.
+            </p>
           </div>
         </div>
       </section>
