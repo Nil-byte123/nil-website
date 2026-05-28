@@ -254,44 +254,134 @@ const serviceCards = [
 /* ─── FAQ Items ─────────────────────────────────────────────── */
 const faqItems: Record<LangCode, { q: string; a: string }[]> = {
   de: [
-    { q: "Wie schnell ist die Einrichtung?", a: "In der Regel ist dein Assistent innerhalb von 3–5 Werktagen live – ohne technisches Vorwissen deinerseits." },
-    { q: "Brauche ich IT-Kenntnisse?", a: "Nein. Wir übernehmen die komplette technische Einrichtung. Du erhältst eine fertige, einsatzbereite Lösung." },
-    { q: "Welche Sprachen versteht der Assistent?", a: "Standardmäßig Deutsch und Englisch. Weitere Sprachen sind auf Anfrage möglich." },
-    { q: "Kann ich den Assistenten anpassen?", a: "Ja – Ton, Persönlichkeit, Wissen und Integrationen sind vollständig auf dein Unternehmen zugeschnitten." },
-    { q: "Wie sicher sind meine Daten?", a: "Alle Daten werden DSGVO-konform verarbeitet. Keine dauerhafte Speicherung von Gesprächsinhalten." },
-    { q: "Was passiert nach der Kündigung?", a: "Die Nutzung endet sofort. Es gibt keine versteckten Gebühren oder Bindungsfristen." },
+    {
+      q: "Wie schnell ist die Einrichtung?",
+      a: "Du gibst uns die Infos zu deinem Betrieb – wir erledigen den Rest. In der Regel ist dein Assistent innerhalb von 48 Stunden live und einsatzbereit. Kein technisches Vorwissen nötig, keine lange Einarbeitungsphase. Du startest sofort – und sparst ab Tag eins Zeit.",
+    },
+    {
+      q: "Brauche ich IT-Kenntnisse?",
+      a: "Überhaupt nicht. Du musst keine einzige Zeile Code verstehen. Wir übernehmen die komplette technische Einrichtung – von der KI-Konfiguration bis zur Integration in deine bestehenden Tools. Du bekommst eine fertige Lösung geliefert und kannst sofort loslegen. Einfach so.",
+    },
+    {
+      q: "Welche Sprachen versteht der Assistent?",
+      a: "Standardmäßig kommt dein Assistent mit Deutsch und Englisch – perfekt für den Alltag. Brauchst du weitere Sprachen für internationale Kunden? Kein Problem. Spanisch, Französisch, Italienisch und mehr sind auf Anfrage möglich. Wir richten es ein.",
+    },
+    {
+      q: "Kann ich den Assistenten anpassen?",
+      a: "Ja – und das ist genau der Unterschied zu einer Standardlösung. Dein Assistent bekommt deinen Ton, deine Persönlichkeit, dein Branchenwissen. Er kennt deine Preise, deine Öffnungszeiten, deine häufigsten Kundenfragen. Kein generischer Bot – sondern ein digitaler Mitarbeiter, der wirklich zu dir passt.",
+    },
+    {
+      q: "Wie sicher sind meine Daten?",
+      a: "Datenschutz ist für uns keine Nebensache. Alle Daten werden vollständig DSGVO-konform verarbeitet – kein dauerhaftes Speichern von Gesprächsinhalten, keine Weitergabe an Dritte. Deine Kundendaten bleiben deine Kundendaten. Punkt.",
+    },
+    {
+      q: "Was passiert nach der Kündigung?",
+      a: "Die Nutzung endet sauber zum Ende des Abrechnungszeitraums – keine Überraschungen, keine versteckten Gebühren, keine Mindestlaufzeit. Du kannst monatlich kündigen. Und dank unserer 30 Tage Geld-zurück-Garantie gehst du ohnehin kein Risiko ein.",
+    },
   ],
   en: [
-    { q: "How fast is the setup?", a: "Your assistant is usually live within 3–5 business days – no technical knowledge required from you." },
-    { q: "Do I need IT knowledge?", a: "No. We handle the complete technical setup. You receive a ready-to-use solution." },
-    { q: "What languages does the assistant understand?", a: "German and English by default. Additional languages available on request." },
-    { q: "Can I customize the assistant?", a: "Yes – tone, personality, knowledge and integrations are fully tailored to your business." },
-    { q: "How secure is my data?", a: "All data is processed in accordance with GDPR. No permanent storage of conversation content." },
-    { q: "What happens after cancellation?", a: "Usage ends immediately. No hidden fees or lock-in periods." },
+    {
+      q: "How fast is the setup?",
+      a: "You give us the details about your business — we handle everything else. Your assistant is usually live within 48 hours, ready to go. No technical knowledge needed, no lengthy onboarding. You start immediately — and save time from day one.",
+    },
+    {
+      q: "Do I need IT knowledge?",
+      a: "Not at all. You don't need to understand a single line of code. We handle the complete technical setup — from AI configuration to integration with your existing tools. You receive a ready-to-use solution and can get started right away. Just like that.",
+    },
+    {
+      q: "What languages does the assistant understand?",
+      a: "By default, your assistant comes with German and English — perfect for everyday use. Need more languages for international customers? No problem. Spanish, French, Italian and more are available on request. We'll set it up.",
+    },
+    {
+      q: "Can I customize the assistant?",
+      a: "Yes — and that's exactly what sets this apart from off-the-shelf solutions. Your assistant gets your tone, your personality, your industry knowledge. It knows your prices, your opening hours, your most common customer questions. Not a generic bot — a digital team member that truly fits your business.",
+    },
+    {
+      q: "How secure is my data?",
+      a: "Data protection is not an afterthought for us. All data is processed in full compliance with GDPR — no permanent storage of conversation content, no sharing with third parties. Your customer data stays your customer data. Period.",
+    },
+    {
+      q: "What happens after cancellation?",
+      a: "Usage ends cleanly at the end of the billing period — no surprises, no hidden fees, no minimum terms. You can cancel monthly. And with our 30-day money-back guarantee, you're not taking any risk anyway.",
+    },
   ],
   es: [
-    { q: "¿Qué tan rápida es la configuración?", a: "Tu asistente suele estar en funcionamiento en 3–5 días laborables." },
-    { q: "¿Necesito conocimientos de IT?", a: "No. Nos encargamos de toda la configuración técnica. Recibes una solución lista para usar." },
-    { q: "¿Qué idiomas entiende el asistente?", a: "Alemán e inglés por defecto. Otros idiomas disponibles bajo petición." },
-    { q: "¿Puedo personalizar el asistente?", a: "Sí – el tono, la personalidad y las integraciones están totalmente adaptados a tu empresa." },
-    { q: "¿Qué tan seguros están mis datos?", a: "Todos los datos se procesan conforme al RGPD. Sin almacenamiento permanente de conversaciones." },
-    { q: "¿Qué ocurre tras la cancelación?", a: "El uso termina inmediatamente. Sin tarifas ocultas ni períodos de permanencia." },
+    {
+      q: "¿Qué tan rápida es la configuración?",
+      a: "Tú nos das los detalles de tu negocio — nosotros nos encargamos del resto. Tu asistente suele estar en funcionamiento en 48 horas, listo para usar. Sin conocimientos técnicos, sin largas incorporaciones. Empiezas de inmediato y ahorras tiempo desde el primer día.",
+    },
+    {
+      q: "¿Necesito conocimientos de IT?",
+      a: "Para nada. No necesitas entender ni una línea de código. Nos encargamos de toda la configuración técnica — desde la configuración de la IA hasta la integración con tus herramientas existentes. Recibes una solución lista para usar. Así de simple.",
+    },
+    {
+      q: "¿Qué idiomas entiende el asistente?",
+      a: "Por defecto, tu asistente viene con alemán e inglés — perfecto para el día a día. ¿Necesitas más idiomas para clientes internacionales? Sin problema. Español, francés, italiano y más están disponibles bajo petición. Nosotros lo configuramos.",
+    },
+    {
+      q: "¿Puedo personalizar el asistente?",
+      a: "Sí — y eso es exactamente lo que lo diferencia de las soluciones estándar. Tu asistente recibe tu tono, tu personalidad, tu conocimiento del sector. Conoce tus precios, tus horarios, las preguntas más frecuentes de tus clientes. No un bot genérico — un empleado digital que realmente encaja con tu negocio.",
+    },
+    {
+      q: "¿Qué tan seguros están mis datos?",
+      a: "La protección de datos no es un detalle menor para nosotros. Todos los datos se procesan en total conformidad con el RGPD — sin almacenamiento permanente de conversaciones, sin compartir con terceros. Tus datos de clientes siguen siendo tuyos. Punto.",
+    },
+    {
+      q: "¿Qué ocurre tras la cancelación?",
+      a: "El uso termina al final del período de facturación — sin sorpresas, sin tarifas ocultas, sin permanencia mínima. Puedes cancelar mensualmente. Y con nuestra garantía de devolución de 30 días, de todos modos no corres ningún riesgo.",
+    },
   ],
   fr: [
-    { q: "Quelle est la rapidité de mise en place ?", a: "Votre assistant est généralement opérationnel en 3 à 5 jours ouvrés." },
-    { q: "Ai-je besoin de compétences IT ?", a: "Non. Nous gérons la configuration technique complète. Vous recevez une solution prête à l'emploi." },
-    { q: "Quelles langues l'assistant comprend-il ?", a: "Allemand et anglais par défaut. D'autres langues sont disponibles sur demande." },
-    { q: "Puis-je personnaliser l'assistant ?", a: "Oui – le ton, la personnalité et les intégrations sont entièrement adaptés à votre entreprise." },
-    { q: "Mes données sont-elles sécurisées ?", a: "Toutes les données sont traitées conformément au RGPD. Pas de stockage permanent des conversations." },
-    { q: "Que se passe-t-il après la résiliation ?", a: "L'utilisation prend fin immédiatement. Aucun frais caché ni période d'engagement." },
+    {
+      q: "Quelle est la rapidité de mise en place ?",
+      a: "Vous nous donnez les informations sur votre activité — nous nous occupons du reste. Votre assistant est généralement opérationnel en 48 heures. Aucune compétence technique requise, aucune longue phase d'intégration. Vous démarrez immédiatement et gagnez du temps dès le premier jour.",
+    },
+    {
+      q: "Ai-je besoin de compétences IT ?",
+      a: "Pas du tout. Vous n'avez pas besoin de comprendre une seule ligne de code. Nous gérons la configuration technique complète — de la configuration de l'IA à l'intégration avec vos outils existants. Vous recevez une solution clé en main. Aussi simple que ça.",
+    },
+    {
+      q: "Quelles langues l'assistant comprend-il ?",
+      a: "Par défaut, votre assistant maîtrise l'allemand et l'anglais — parfait pour le quotidien. Besoin d'autres langues pour vos clients internationaux ? Pas de problème. L'espagnol, le français, l'italien et d'autres sont disponibles sur demande. Nous nous en chargeons.",
+    },
+    {
+      q: "Puis-je personnaliser l'assistant ?",
+      a: "Oui — et c'est exactement ce qui le différencie des solutions standard. Votre assistant reçoit votre ton, votre personnalité, vos connaissances sectorielles. Il connaît vos tarifs, vos horaires, les questions les plus fréquentes de vos clients. Pas un bot générique — un collaborateur digital qui vous ressemble vraiment.",
+    },
+    {
+      q: "Mes données sont-elles sécurisées ?",
+      a: "La protection des données n'est pas un détail pour nous. Toutes les données sont traitées en conformité totale avec le RGPD — aucun stockage permanent des conversations, aucun partage avec des tiers. Vos données clients restent les vôtres. Point.",
+    },
+    {
+      q: "Que se passe-t-il après la résiliation ?",
+      a: "L'utilisation prend fin proprement à la fin de la période de facturation — sans surprises, sans frais cachés, sans durée minimale. Vous pouvez résilier chaque mois. Et grâce à notre garantie satisfait ou remboursé de 30 jours, vous ne prenez de toute façon aucun risque.",
+    },
   ],
   it: [
-    { q: "Quanto tempo richiede la configurazione?", a: "Il tuo assistente di solito è operativo entro 3–5 giorni lavorativi." },
-    { q: "Ho bisogno di competenze IT?", a: "No. Ci occupiamo di tutta la configurazione tecnica. Ricevi una soluzione pronta all'uso." },
-    { q: "Quali lingue capisce l'assistente?", a: "Tedesco e inglese di default. Altre lingue disponibili su richiesta." },
-    { q: "Posso personalizzare l'assistente?", a: "Sì – tono, personalità e integrazioni sono completamente su misura per la tua azienda." },
-    { q: "I miei dati sono al sicuro?", a: "Tutti i dati vengono trattati in conformità al GDPR. Nessuna memorizzazione permanente delle conversazioni." },
-    { q: "Cosa succede dopo la disdetta?", a: "L'utilizzo termina immediatamente. Nessuna tariffa nascosta o vincolo." },
+    {
+      q: "Quanto tempo richiede la configurazione?",
+      a: "Tu ci dai i dettagli della tua attività — noi pensiamo al resto. Il tuo assistente di solito è operativo entro 48 ore, pronto all'uso. Nessuna competenza tecnica richiesta, nessuna lunga fase di onboarding. Inizi subito e risparmi tempo dal primo giorno.",
+    },
+    {
+      q: "Ho bisogno di competenze IT?",
+      a: "Per niente. Non devi capire una sola riga di codice. Ci occupiamo di tutta la configurazione tecnica — dalla configurazione dell'IA all'integrazione con i tuoi strumenti esistenti. Ricevi una soluzione pronta all'uso. Semplice così.",
+    },
+    {
+      q: "Quali lingue capisce l'assistente?",
+      a: "Di default, il tuo assistente conosce il tedesco e l'inglese — perfetto per il quotidiano. Hai bisogno di altre lingue per clienti internazionali? Nessun problema. Spagnolo, francese, italiano e altro sono disponibili su richiesta. Ci pensiamo noi.",
+    },
+    {
+      q: "Posso personalizzare l'assistente?",
+      a: "Sì — ed è proprio questo che lo distingue dalle soluzioni standard. Il tuo assistente riceve il tuo tono, la tua personalità, la tua conoscenza del settore. Conosce i tuoi prezzi, i tuoi orari, le domande più frequenti dei tuoi clienti. Non un bot generico — un collaboratore digitale che si adatta davvero a te.",
+    },
+    {
+      q: "I miei dati sono al sicuro?",
+      a: "La protezione dei dati non è un dettaglio per noi. Tutti i dati vengono trattati in piena conformità con il GDPR — nessuna memorizzazione permanente delle conversazioni, nessuna condivisione con terzi. I tuoi dati dei clienti rimangono tuoi. Punto.",
+    },
+    {
+      q: "Cosa succede dopo la disdetta?",
+      a: "L'utilizzo termina correttamente alla fine del periodo di fatturazione — nessuna sorpresa, nessuna tariffa nascosta, nessun vincolo minimo. Puoi disdire mensilmente. E con la nostra garanzia soddisfatti o rimborsati di 30 giorni, non corri comunque nessun rischio.",
+    },
   ],
 };
 
