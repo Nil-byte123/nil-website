@@ -2224,9 +2224,10 @@ export default function Home() {
             style={{
               position: "fixed", inset: 0, zIndex: 9999,
               pointerEvents: "none",
+              // dark→light = weißer Strahl, light→dark = blauer Strahl
               background: themeOverlay.toDark
-                ? "radial-gradient(circle at center, rgba(14,165,233,0.35) 0%, rgba(14,165,233,0.12) 45%, transparent 72%)"
-                : "radial-gradient(circle at center, rgba(255,255,255,0.75) 0%, rgba(200,225,255,0.3) 45%, transparent 72%)",
+                ? `radial-gradient(circle at ${themeOverlay.x}px ${themeOverlay.y}px, rgba(56,189,248,0.95) 0%, rgba(14,165,233,0.55) 12%, rgba(14,165,233,0.2) 32%, transparent 62%)`
+                : `radial-gradient(circle at ${themeOverlay.x}px ${themeOverlay.y}px, rgba(255,255,255,0.98) 0%, rgba(220,240,255,0.6) 12%, rgba(200,225,255,0.2) 32%, transparent 62%)`,
             }}
           />
         )}
