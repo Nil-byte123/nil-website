@@ -916,39 +916,68 @@ function ContactForm({ lang }: { lang: LangCode }) {
 /* ─── FAQ Accordion ─────────────────────────────────────────── */
 function FAQList({ items, isDark }: { items: { q: string; a: string }[]; isDark: boolean }) {
   const [open, setOpen] = useState<number | null>(null);
-  const border = isDark ? "rgba(255,255,255,0.08)" : "rgba(15,23,42,0.08)";
-  const card   = isDark ? "#0d1f3c" : "#FFFFFF";
-  const text   = isDark ? "#F1F5F9" : "#0F172A";
-  const text2  = isDark ? "#94A3B8" : "#475569";
+  const divider = isDark ? "rgba(255,255,255,0.07)" : "rgba(15,23,42,0.08)";
+  const text    = isDark ? "#F1F5F9" : "#0F172A";
+  const text2   = isDark ? "#94A3B8" : "#475569";
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+    <div style={{ borderTop: `1px solid ${divider}` }}>
       {items.map((item, i) => (
         <motion.div key={i}
-          initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.55, ease: [0.16,1,0.3,1], delay: i * 0.07 }}
-          style={{
-            background: card, border: `1px solid ${border}`,
-            borderRadius: "16px", overflow: "hidden",
-            boxShadow: open === i ? "0 8px 28px rgba(14,165,233,0.1)" : "0 2px 10px rgba(0,0,0,0.04)",
-            transition: "box-shadow 0.25s, background 0.3s",
-          }}>
+          initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.55, ease: [0.16,1,0.3,1], delay: i * 0.06 }}
+          style={{ borderBottom: `1px solid ${divider}` }}
+        >
           <button
             onClick={() => setOpen(open === i ? null : i)}
             style={{
-              width: "100%", padding: "20px 24px",
-              display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px",
+              width: "100%", padding: "22px 0",
+              display: "flex", alignItems: "center", justifyContent: "space-between", gap: "20px",
               background: "none", border: "none", cursor: "pointer",
               textAlign: "left", fontFamily: "inherit",
             }}
           >
-            <span style={{ fontWeight: 600, fontSize: "15px", color: text, flex: 1 }}>{item.q}</span>
+            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+              {/* Number badge */}
+              <span style={{
+                width: "30px", height: "30px", borderRadius: "8px", flexShrink: 0,
+                background: open === i
+                  ? "linear-gradient(135deg, rgba(14,165,233,0.18) 0%, rgba(14,165,233,0.08) 100%)"
+                  : isDark ? "rgba(255,255,255,0.05)" : "rgba(15,23,42,0.05)",
+                border: open === i ? "1px solid rgba(14,165,233,0.25)" : "1px solid transparent",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "11px", fontWeight: 700, letterSpacing: "0.3px",
+                color: open === i ? "#0EA5E9" : text2,
+                transition: "background 0.25s, color 0.25s, border 0.25s",
+                fontFamily: "inherit",
+              }}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span style={{
+                fontWeight: 600, fontSize: "15.5px", lineHeight: 1.4,
+                color: open === i ? "#0EA5E9" : text,
+                transition: "color 0.25s",
+              }}>
+                {item.q}
+              </span>
+            </div>
+
+            {/* Chevron */}
             <motion.span
-              animate={{ rotate: open === i ? 45 : 0 }}
-              transition={{ duration: 0.22, ease: [0.16,1,0.3,1] }}
-              style={{ color: "#0EA5E9", fontSize: "22px", lineHeight: 1, flexShrink: 0, fontWeight: 300 }}
-            >+</motion.span>
+              animate={{ rotate: open === i ? 180 : 0 }}
+              transition={{ duration: 0.3, ease: [0.16,1,0.3,1] }}
+              style={{
+                flexShrink: 0, display: "flex",
+                color: open === i ? "#0EA5E9" : text2,
+                transition: "color 0.25s",
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </motion.span>
           </button>
+
           <AnimatePresence initial={false}>
             {open === i && (
               <motion.div
@@ -956,10 +985,13 @@ function FAQList({ items, isDark }: { items: { q: string; a: string }[]; isDark:
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3, ease: [0.16,1,0.3,1] }}
+                transition={{ duration: 0.32, ease: [0.16,1,0.3,1] }}
                 style={{ overflow: "hidden" }}
               >
-                <p style={{ padding: "0 24px 20px", color: text2, fontSize: "14px", lineHeight: 1.7, margin: 0 }}>
+                <p style={{
+                  padding: "0 0 22px 46px",
+                  color: text2, fontSize: "14.5px", lineHeight: 1.75, margin: 0,
+                }}>
                   {item.a}
                 </p>
               </motion.div>
@@ -1707,7 +1739,7 @@ export default function Home() {
 
       {/* ── FAQ ── */}
       <section style={{ padding: "100px 20px", background: isDark ? "#07101e" : "linear-gradient(to bottom,#F4F7FB 0%,#EEF2F7 100%)", transition: "background 0.3s ease" }}>
-        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+        <div style={{ maxWidth: "760px", margin: "0 auto" }}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
             style={{ textAlign: "center", marginBottom: "64px" }}>
