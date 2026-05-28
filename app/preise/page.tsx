@@ -207,7 +207,9 @@ export default function Preise() {
   const [slime,     setSlime]     = useState<Rect | null>(null);
   const [selEpoch,  setSelEpoch]  = useState(0);
   const [ctaHover,  setCtaHover]  = useState<string | null>(null);
-  const [isMobile,  setIsMobile]  = useState(false);
+  const [isMobile,  setIsMobile]  = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth < 768 : false
+  );
 
   const cardRefs    = useRef<Record<string, HTMLDivElement | null>>({});
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -252,6 +254,15 @@ export default function Preise() {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
+
+  // Re-measure when mobile layout changes (card order flips)
+  useEffect(() => {
+    const t = setTimeout(() => {
+      const r = measureCard(selectedRef.current);
+      if (r) setSlime(r);
+    }, 30);
+    return () => clearTimeout(t);
+  }, [isMobile]);
 
   // Re-measure when billing changes (card heights may shift)
   useEffect(() => {
