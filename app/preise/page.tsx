@@ -75,6 +75,8 @@ export default function Preise() {
   const [selected, setSelected] = useState("Pro");
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
   const [slime, setSlime] = useState<Rect | null>(null);
+  // increments every time a card is selected → triggers entrance animation
+  const [selEpoch, setSelEpoch] = useState(0);
 
   const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -126,26 +128,26 @@ export default function Preise() {
         dirY = vy / dist;
       }
 
-      const newBubbles: Bubble[] = Array.from({ length: 16 }, (_, i) => ({
+      const newBubbles: Bubble[] = Array.from({ length: 8 }, (_, i) => ({
         id: Date.now() + i,
-        x: rect.left + Math.random() * rect.width,
-        y: rect.top + rect.height * 0.3 + Math.random() * rect.height * 0.5,
-        size: Math.random() * 22 + 6,
+        x: rect.left + rect.width * 0.2 + Math.random() * rect.width * 0.6,
+        y: rect.top  + rect.height * 0.35 + Math.random() * rect.height * 0.3,
+        size: Math.random() * 10 + 3,
         color: BUBBLE_COLORS[Math.floor(Math.random() * BUBBLE_COLORS.length)],
-        // bias in travel direction + small random spread
-        dx: dirX * (55 + Math.random() * 45) + (Math.random() - 0.5) * 22,
-        dy: dirY * (55 + Math.random() * 45) + (Math.random() - 0.5) * 22 - 28,
-        delay: Math.random() * 0.18,
+        dx: dirX * (40 + Math.random() * 30) + (Math.random() - 0.5) * 14,
+        dy: dirY * (40 + Math.random() * 30) + (Math.random() - 0.5) * 14 - 20,
+        delay: Math.random() * 0.14,
       }));
       setBubbles(prev => [...prev, ...newBubbles]);
       const ids = new Set(newBubbles.map(b => b.id));
-      setTimeout(() => setBubbles(prev => prev.filter(b => !ids.has(b.id))), 1300);
+      setTimeout(() => setBubbles(prev => prev.filter(b => !ids.has(b.id))), 1000);
     }
 
     // Slide slime to new card
     const r = measureCard(planName);
     if (r) setSlime(r);
 
+    setSelEpoch(e => e + 1);
     setSelected(planName);
   };
 
@@ -161,10 +163,10 @@ export default function Preise() {
           {bubbles.map(b => (
             <motion.div
               key={b.id}
-              initial={{ opacity: 0.9, scale: 1, x: b.x, y: b.y }}
-              animate={{ opacity: 0, scale: 0.15, x: b.x + b.dx, y: b.y + b.dy }}
+              initial={{ opacity: 0.65, scale: 1, x: b.x, y: b.y }}
+              animate={{ opacity: 0, scale: 0.1, x: b.x + b.dx, y: b.y + b.dy }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.75 + Math.random() * 0.35, ease: "easeOut", delay: b.delay }}
+              transition={{ duration: 0.55 + Math.random() * 0.2, ease: "easeOut", delay: b.delay }}
               style={{
                 position: "fixed", left: 0, top: 0,
                 width: b.size, height: b.size, borderRadius: "50%",
@@ -299,15 +301,21 @@ export default function Preise() {
                       ? "1.5px solid rgba(14,165,233,0.4)"
                       : "1px solid rgba(15,23,42,0.08)",
                     boxShadow: isSel ? "none" : "0 8px 30px rgba(15,23,42,0.06)",
-                    transition: "background 0.3s, border 0.3s, box-shadow 0.3s",
+                    // no background transition when becoming selected → instantly transparent
+                    // (same as first-load state, avoids white→transparent flash)
+                    transition: isSel
+                      ? "border 0.3s, box-shadow 0.3s"
+                      : "background 0.35s, border 0.3s, box-shadow 0.3s",
                     userSelect: "none",
                   }}
                 >
                   <motion.div
-                    key={`${plan.name}-${isSel}`}
-                    initial={{ opacity: 0, y: isSel ? 14 : -8, scale: isSel ? 0.97 : 1 }}
+                    // key only changes when the card BECOMES selected (selEpoch)
+                    // → entrance animation fires on selection, not on deselection
+                    key={isSel ? `${plan.name}-${selEpoch}` : `${plan.name}-idle`}
+                    initial={{ opacity: isSel ? 0 : 1, y: isSel ? 12 : 0, scale: isSel ? 0.97 : 1 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 0.38, ease, delay: isSel ? 0.08 : 0 }}
+                    transition={{ duration: 0.36, ease, delay: isSel ? 0.07 : 0 }}
                     style={{
                       position: "relative", zIndex: 1,
                       padding: "40px 34px",
