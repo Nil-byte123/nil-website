@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { NilLogo } from "../components/NilLogo";
 
 export const metadata: Metadata = {
-  title: "Datenschutz – NIL | nilogik.de",
+  title: "Datenschutz",
   description: "Datenschutzerklärung der NIL gemäß DSGVO.",
   robots: { index: false, follow: false },
 };

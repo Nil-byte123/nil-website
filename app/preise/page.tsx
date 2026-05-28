@@ -357,12 +357,12 @@ export default function Preise() {
         <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.2 }}
           style={{ color: "#475569", fontSize: "16px", maxWidth: "520px", margin: "0 auto 28px", lineHeight: 1.65 }}>
-          Kein verstecktes Kleingedrucktes. Monatlich kündbar. Keine Einrichtungsgebühr.
+          Kein verstecktes Kleingedrucktes. Monatlich kündbar. Einmalige Einrichtung – danach nur die monatliche Rate.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 0.35 }}
           style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", flexWrap: "wrap" }}>
-          {["✓ Monatlich kündbar", "✓ Setup inklusive", "✓ Kostenlose Erstberatung"].map(item => (
+          {["✓ Monatlich kündbar", "✓ Transparente Preise", "✓ Kostenlose Erstberatung"].map(item => (
             <span key={item} style={{
               background: "rgba(14,165,233,0.08)", border: "1px solid rgba(14,165,233,0.2)",
               color: "#0EA5E9", fontSize: "13px", fontWeight: 600,

@@ -181,29 +181,29 @@ const sl: Record<LangCode, {
 /* ─── Rotating Hero Taglines ────────────────────────────────── */
 const rotatingTaglines: Record<LangCode, string[]> = {
   de: [
-    "✂️  Dienstleister: Termine & Kundenkommunikation – vollautomatisch, rund um die Uhr.",
-    "🍽️  Gastronomie & Handel: Reservierungen, Bestellungen & Anfragen automatisch bearbeiten.",
-    "💻  Unternehmen & Teams: Smarte Automatisierung für jeden Betrieb – unabhängig der Branche.",
+    "Dienstleister: Termine & Kundenkommunikation – vollautomatisch, rund um die Uhr.",
+    "Gastronomie & Handel: Reservierungen, Bestellungen & Anfragen automatisch bearbeiten.",
+    "Unternehmen & Teams: Smarte Automatisierung für jeden Betrieb – unabhängig der Branche.",
   ],
   en: [
-    "✂️  Service businesses: Appointments & customer communication – fully automated, 24/7.",
-    "🍽️  Hospitality & retail: Handle reservations, orders & inquiries automatically.",
-    "💻  Companies & teams: Smart automation for any business – whatever the industry.",
+    "Service businesses: Appointments & customer communication – fully automated, 24/7.",
+    "Hospitality & retail: Handle reservations, orders & inquiries automatically.",
+    "Companies & teams: Smart automation for any business – whatever the industry.",
   ],
   es: [
-    "✂️  Negocios de servicios: Citas y comunicación con clientes – totalmente automatizados, 24/7.",
-    "🍽️  Hostelería y comercio: Gestiona reservas, pedidos y consultas automáticamente.",
-    "💻  Empresas y equipos: Automatización inteligente para cualquier negocio.",
+    "Negocios de servicios: Citas y comunicación con clientes – totalmente automatizados, 24/7.",
+    "Hostelería y comercio: Gestiona reservas, pedidos y consultas automáticamente.",
+    "Empresas y equipos: Automatización inteligente para cualquier negocio.",
   ],
   fr: [
-    "✂️  Prestataires de services : Rendez-vous & relation client – entièrement automatisés, 24h/24.",
-    "🍽️  Restauration & commerce : Gérez réservations, commandes et demandes automatiquement.",
-    "💻  Entreprises & équipes : Automatisation intelligente pour tout type de business.",
+    "Prestataires de services : Rendez-vous & relation client – entièrement automatisés, 24h/24.",
+    "Restauration & commerce : Gérez réservations, commandes et demandes automatiquement.",
+    "Entreprises & équipes : Automatisation intelligente pour tout type de business.",
   ],
   it: [
-    "✂️  Servizi: Appuntamenti & comunicazione clienti – completamente automatizzati, 24/7.",
-    "🍽️  Ristorazione & commercio: Gestisci prenotazioni, ordini e richieste automaticamente.",
-    "💻  Aziende & team: Automazione intelligente per qualsiasi tipo di business.",
+    "Servizi: Appuntamenti & comunicazione clienti – completamente automatizzati, 24/7.",
+    "Ristorazione & commercio: Gestisci prenotazioni, ordini e richieste automaticamente.",
+    "Aziende & team: Automazione intelligente per qualsiasi tipo di business.",
   ],
 };
 
@@ -1429,11 +1429,11 @@ export default function Home() {
       {/* ── HERO ── */}
       <section ref={heroRef} style={{
         position: "relative",
-        minHeight: "100svh",
+        minHeight: isMobile ? "auto" : "100svh",
         height: isMobile ? "auto" : "100vh",
         display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
         textAlign: "center",
-        padding: isMobile ? "80px 24px 20px" : "68px 20px 0",
+        padding: isMobile ? "96px 24px 48px" : "68px 20px 0",
         boxSizing: "border-box",
         overflow: "hidden",
         background: c.heroGrad,

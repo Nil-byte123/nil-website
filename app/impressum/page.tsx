@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { NilLogo } from "../components/NilLogo";
 
 export const metadata: Metadata = {
-  title: "Impressum – NIL | nilogik.de",
+  title: "Impressum",
   description: "Impressum und rechtliche Angaben der NIL – Automatisierung mit Verstand.",
   robots: { index: false, follow: false },
 };

@@ -6,11 +6,47 @@ import { NilLogo } from "../components/NilLogo";
 
 const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
+/* ─── Value Icons ──────────────────────────────────────────── */
+const IconChip = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="9" y="9" width="14" height="14" rx="2" stroke="#0EA5E9" strokeWidth="1.5"/>
+    <rect x="12.5" y="12.5" width="7" height="7" rx="1" stroke="#0EA5E9" strokeWidth="1.5"/>
+    <path d="M12 7.5V9M16 7.5V9M20 7.5V9" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round"/>
+    <path d="M12 23V24.5M16 23V24.5M20 23V24.5" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round"/>
+    <path d="M7.5 12H9M7.5 16H9M7.5 20H9" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round"/>
+    <path d="M23 12H24.5M23 16H24.5M23 20H24.5" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+);
+
+const IconBolt = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 5L9.5 18H15.5L13 27L22.5 14H16.5L19 5Z" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const IconShield = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 4L7 8.5V15.5C7 20.5 11 25 16 27C21 25 25 20.5 25 15.5V8.5L16 4Z" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M12.5 16L14.8 18.5L19.5 13" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const IconPeople = () => (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="11.5" cy="10" r="3.5" stroke="#0EA5E9" strokeWidth="1.5"/>
+    <circle cx="20.5" cy="10" r="3.5" stroke="#0EA5E9" strokeWidth="1.5"/>
+    <path d="M5 25C5 21.13 7.91 18 11.5 18" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round"/>
+    <path d="M27 25C27 21.13 24.09 18 20.5 18" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round"/>
+    <path d="M11.5 18C13 17.4 14.2 17 16 17C17.8 17 19 17.4 20.5 18" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round"/>
+    <path d="M12 25C12 22.24 13.79 20 16 20C18.21 20 20 22.24 20 25" stroke="#0EA5E9" strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+);
+
 const values = [
-  { icon: "🧠", title: "KI mit Verstand", text: "Wir setzen KI nur dort ein, wo sie wirklich Mehrwert schafft – nicht als Spielerei, sondern als echtes Werkzeug." },
-  { icon: "⚡", title: "Geschwindigkeit", text: "Schnelle Umsetzung, direkte Kommunikation, keine langen Warteschlangen." },
-  { icon: "🔒", title: "Datenschutz", text: "DSGVO-konform von Grund auf. Ihre Daten bleiben bei Ihnen." },
-  { icon: "🤝", title: "Partnerschaft", text: "Wir denken langfristig. Keine Einmallösungen, sondern dauerhafte Zusammenarbeit." },
+  { icon: <IconChip />,   title: "KI mit Verstand", text: "Wir setzen KI nur dort ein, wo sie wirklich Mehrwert schafft – nicht als Spielerei, sondern als echtes Werkzeug." },
+  { icon: <IconBolt />,   title: "Geschwindigkeit",  text: "Schnelle Umsetzung, direkte Kommunikation, keine langen Warteschlangen." },
+  { icon: <IconShield />, title: "Datenschutz",      text: "DSGVO-konform von Grund auf. Deine Daten bleiben bei dir." },
+  { icon: <IconPeople />, title: "Partnerschaft",    text: "Wir denken langfristig. Keine Einmallösungen, sondern dauerhafte Zusammenarbeit." },
 ];
 
 const team = [
@@ -158,7 +194,7 @@ export default function UeberUns() {
                   boxShadow: "0 4px 16px rgba(15,23,42,0.04)",
                 }}
               >
-                <div style={{ fontSize: "28px", marginBottom: "12px" }}>{v.icon}</div>
+                <div style={{ marginBottom: "14px", display: "flex" }}>{v.icon}</div>
                 <h3 style={{ fontSize: "16px", fontWeight: 600, marginBottom: "8px", letterSpacing: "-0.01em" }}>
                   {v.title}
                 </h3>
@@ -190,26 +226,50 @@ export default function UeberUns() {
                 transition={{ duration: 0.8, ease, delay: i * 0.12 }}
                 style={{ textAlign: "center", maxWidth: "320px" }}
               >
-                {/* Avatar placeholder */}
+                {/* Avatar */}
                 <div style={{
-                  width: "96px", height: "96px", borderRadius: "50%",
-                  background: "linear-gradient(135deg, #0D1F3C, #08152A)",
+                  width: "120px", height: "120px", borderRadius: "50%",
+                  background: "linear-gradient(135deg, #0a1628 0%, #1a3a5c 100%)",
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  margin: "0 auto 16px",
-                  fontSize: "32px", fontWeight: 800, color: "#0EA5E9",
-                  boxShadow: "0 12px 32px rgba(8,21,42,0.2)",
+                  margin: "0 auto 20px",
+                  fontSize: "48px", fontWeight: 300, color: "#00BFFF",
+                  letterSpacing: "-2px",
+                  border: "2px solid rgba(0,191,255,0.2)",
+                  boxShadow: "0 0 28px rgba(0,191,255,0.12), 0 12px 40px rgba(8,21,42,0.25)",
                 }}>
                   {member.avatar}
                 </div>
                 <h3 style={{ fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em", marginBottom: "4px" }}>
                   {member.name}
                 </h3>
-                <p style={{ color: "#0EA5E9", fontSize: "13px", fontWeight: 500, marginBottom: "12px" }}>
+                <p style={{ color: "#0EA5E9", fontSize: "13px", fontWeight: 500, marginBottom: "14px" }}>
                   {member.role}
                 </p>
-                <p style={{ color: "#475569", fontSize: "14px", lineHeight: 1.65 }}>
+                <p style={{ color: "#475569", fontSize: "14px", lineHeight: 1.65, marginBottom: "18px" }}>
                   {member.bio}
                 </p>
+                {/* Social links */}
+                <div style={{ display: "flex", gap: "14px", justifyContent: "center" }}>
+                  <a href="https://linkedin.com/in/nil-elian-quezada" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    style={{ color: "#94A3B8", display: "flex", alignItems: "center", transition: "color 0.2s" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "#0EA5E9")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "#94A3B8")}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                      <rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                    </svg>
+                  </a>
+                  <a href="https://github.com/Nil-byte123" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    style={{ color: "#94A3B8", display: "flex", alignItems: "center", transition: "color 0.2s" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = "#0EA5E9")}
+                    onMouseLeave={e => (e.currentTarget.style.color = "#94A3B8")}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                  </a>
+                </div>
               </motion.div>
             ))}
           </div>
