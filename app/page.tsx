@@ -1164,7 +1164,7 @@ export default function Home() {
 
   /* ── Dark Mode ── */
   const [isDark, setIsDark] = useState(false);
-  const [themeOverlay, setThemeOverlay] = useState<{ x: number; y: number; color: string; id: number } | null>(null);
+  const [themeOverlay, setThemeOverlay] = useState<{ x: number; y: number; toDark: boolean; id: number } | null>(null);
 
   useEffect(() => {
     if (localStorage.getItem("nil-dark") === "true") setIsDark(true);
@@ -1176,19 +1176,24 @@ export default function Home() {
   }, [isDark]);
 
   const handleThemeToggle = (e: React.MouseEvent) => {
-    if (themeOverlay) return; // block double-clicks during animation
+    if (themeOverlay) return; // block double-clicks
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const toDark = !isDark;
+    // Enable global color transitions on all elements
+    document.documentElement.classList.add("theme-switching");
+    // Switch theme immediately — the ripple is purely decorative
+    setIsDark(toDark);
     setThemeOverlay({
       x: rect.left + rect.width / 2,
       y: rect.top + rect.height / 2,
-      color: isDark ? "#EEF2F7" : "#07101e",
+      toDark,
       id: Date.now(),
     });
-    // Switch theme once the circle fully covers the screen (560ms = after 550ms animation)
+    // Remove transition class after colors have finished transitioning
     setTimeout(() => {
-      setIsDark(prev => !prev);
+      document.documentElement.classList.remove("theme-switching");
       setThemeOverlay(null);
-    }, 560);
+    }, 750);
   };
 
   /* ── Rotating tagline ── */
@@ -2202,19 +2207,26 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* ── THEME TRANSITION OVERLAY ── */}
+      {/* ── THEME TRANSITION RIPPLE ── */}
       <AnimatePresence>
         {themeOverlay && (
           <motion.div
             key={themeOverlay.id}
-            initial={{ clipPath: `circle(0px at ${themeOverlay.x}px ${themeOverlay.y}px)` }}
-            animate={{ clipPath: `circle(250vmax at ${themeOverlay.x}px ${themeOverlay.y}px)` }}
-            exit={{ opacity: 0, transition: { duration: 0.18 } }}
-            transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+            initial={{
+              clipPath: `circle(0px at ${themeOverlay.x}px ${themeOverlay.y}px)`,
+              opacity: 1,
+            }}
+            animate={{
+              clipPath: `circle(250vmax at ${themeOverlay.x}px ${themeOverlay.y}px)`,
+              opacity: 0,
+            }}
+            transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
             style={{
               position: "fixed", inset: 0, zIndex: 9999,
-              background: themeOverlay.color,
               pointerEvents: "none",
+              background: themeOverlay.toDark
+                ? "radial-gradient(circle at center, rgba(14,165,233,0.35) 0%, rgba(14,165,233,0.12) 45%, transparent 72%)"
+                : "radial-gradient(circle at center, rgba(255,255,255,0.75) 0%, rgba(200,225,255,0.3) 45%, transparent 72%)",
             }}
           />
         )}
