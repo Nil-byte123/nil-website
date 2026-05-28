@@ -12,6 +12,18 @@ type Billing = "monthly" | "yearly";
 type CellVal = string | boolean;
 
 // ─── SVG Icons ──────────────────────────────────────────────────────
+function IconRocket({ sel }: { sel: boolean }) {
+  return (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
+      stroke={sel ? "#7DD3FC" : "#00BFFF"} strokeWidth="1.5"
+      strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4.5 16.5c-1.5 1.5-2 5-2 5s3.5-.5 5-2 2.5-2.5 2.5-2.5l-5.5-2z" />
+      <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+    </svg>
+  );
+}
 function IconSprout({ sel }: { sel: boolean }) {
   return (
     <svg width="32" height="32" viewBox="0 0 24 24" fill="none"
@@ -52,11 +64,28 @@ function IconBuilding({ sel }: { sel: boolean }) {
 // ─── Plans ──────────────────────────────────────────────────────────
 const plans = [
   {
+    name: "Starter",
+    price: 39,
+    setup: 0,
+    tag: null as string | null,
+    desc: "Perfekt zum Ausprobieren. Teste NIL 14 Tage kostenlos – ohne Kreditkarte, ohne Risiko.",
+    features: [
+      "1 KI-Assistent",
+      "bis zu 100 Anfragen/Monat",
+      "Webchat-Integration",
+      "Keine Einrichtungsgebühr",
+      "14 Tage kostenlos testen",
+      "E-Mail-Support",
+    ],
+    cta: "Kostenlos starten",
+    ctaHref: "/#kontakt",
+  },
+  {
     name: "Basic",
     price: 89,
     setup: 149,
     tag: null as string | null,
-    desc: "Perfekt für Selbstständige und kleine Betriebe, die erste Prozesse automatisieren möchten.",
+    desc: "Für Betriebe die NIL dauerhaft nutzen wollen – mehr Anfragen, mehr Kanäle, volle Kontrolle.",
     features: [
       "1 KI-Assistent",
       "bis zu 500 Anfragen/Monat",
@@ -200,14 +229,15 @@ function Cell({ v, col }: { v: CellVal; col: string }) {
 
 // ─── Main component ──────────────────────────────────────────────────
 export default function Preise() {
-  const [selected,  setSelected]  = useState("Pro");
-  const [billing,   setBilling]   = useState<Billing>("monthly");
-  const [tableOpen, setTableOpen] = useState(false);
-  const [bubbles,   setBubbles]   = useState<Bubble[]>([]);
-  const [slime,     setSlime]     = useState<Rect | null>(null);
-  const [selEpoch,  setSelEpoch]  = useState(0);
-  const [ctaHover,  setCtaHover]  = useState<string | null>(null);
-  const [isMobile,  setIsMobile]  = useState(() =>
+  const [selected,       setSelected]       = useState("Pro");
+  const [billing,        setBilling]        = useState<Billing>("monthly");
+  const [tableOpen,      setTableOpen]      = useState(false);
+  const [bubbles,        setBubbles]        = useState<Bubble[]>([]);
+  const [slime,          setSlime]          = useState<Rect | null>(null);
+  const [selEpoch,       setSelEpoch]       = useState(0);
+  const [ctaHover,       setCtaHover]       = useState<string | null>(null);
+  const [starterYearlyTip, setStarterYearlyTip] = useState(false);
+  const [isMobile,       setIsMobile]       = useState(() =>
     typeof window !== "undefined" ? window.innerWidth < 768 : false
   );
 
@@ -224,9 +254,10 @@ export default function Preise() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // On mobile: show Pro first
+  // Mobile order: Starter → Pro → Basic → Enterprise
+  // Desktop order: Starter → Basic → Pro → Enterprise
   const orderedPlans = isMobile
-    ? [plans[1], plans[0], plans[2]]
+    ? [plans[0], plans[2], plans[1], plans[3]]
     : plans;
 
   const measureCard = (name: string): Rect | null => {
@@ -418,7 +449,7 @@ export default function Preise() {
       </motion.div>
 
       {/* ── Pricing Cards ── */}
-      <div style={{ maxWidth: "1120px", margin: "0 auto", padding: "0 20px 0" }}>
+      <div style={{ maxWidth: "1300px", margin: "0 auto", padding: "0 20px 0" }}>
         <div ref={containerRef} style={{ position: "relative", isolation: "isolate" }}>
 
           {/* THE SLIME */}
@@ -452,35 +483,82 @@ export default function Preise() {
           {/* Grid */}
           <div style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "24px", alignItems: "stretch",
+            gridTemplateColumns: "repeat(auto-fit, minmax(255px, 1fr))",
+            gap: "20px", alignItems: "stretch",
             position: "relative", zIndex: 1,
           }}>
             {orderedPlans.map((plan, i) => {
               const isSel = selected === plan.name;
-              const mp    = plan.price !== null ? monthlyAmt(plan.price, billing) : null;
+              const isStarter = plan.name === "Starter";
+              const isYearlyDimmed = isStarter && billing === "yearly";
+
+              // Starter never gets yearly discount
+              const mp = plan.price !== null
+                ? (isStarter ? plan.price : monthlyAmt(plan.price, billing))
+                : null;
               const pd    = mp !== null ? perDayStr(mp) : null;
-              const sv    = billing === "yearly" && plan.price !== null ? savings(plan.price) : null;
+              const sv    = billing === "yearly" && plan.price !== null && !isStarter
+                ? savings(plan.price)
+                : null;
 
               return (
                 <motion.div key={plan.name}
                   ref={el => { cardRefs.current[plan.name] = el; }}
                   onClick={() => handleSelect(plan.name)}
+                  onMouseEnter={() => { if (isStarter && billing === "yearly") setStarterYearlyTip(true); }}
+                  onMouseLeave={() => setStarterYearlyTip(false)}
                   initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  animate={{ opacity: isYearlyDimmed ? 0.7 : 1, y: 0 }}
                   whileHover={{ y: isSel ? 0 : -4 }}
                   transition={{ duration: 0.75, ease, delay: 0.2 + i * 0.12 }}
                   style={{
                     position: "relative", borderRadius: "28px", cursor: "pointer",
                     background: isSel ? "transparent" : "#FFFFFF",
-                    border: isSel ? "1.5px solid rgba(14,165,233,0.4)" : "1px solid rgba(15,23,42,0.08)",
-                    boxShadow: isSel ? "none" : "0 8px 30px rgba(15,23,42,0.06)",
+                    border: isStarter
+                      ? `1px solid ${isSel ? "rgba(0,191,255,0.5)" : "rgba(0,191,255,0.2)"}`
+                      : isSel
+                      ? "1.5px solid rgba(14,165,233,0.4)"
+                      : "1px solid rgba(15,23,42,0.08)",
+                    boxShadow: isSel ? "none" : isStarter
+                      ? "0 8px 30px rgba(0,191,255,0.06)"
+                      : "0 8px 30px rgba(15,23,42,0.06)",
                     transition: isSel
                       ? "border 0.3s, box-shadow 0.3s"
                       : "background 0.35s, border 0.3s, box-shadow 0.3s",
                     userSelect: "none",
                   }}
                 >
+                  {/* Yearly tooltip for Starter */}
+                  <AnimatePresence>
+                    {isStarter && billing === "yearly" && starterYearlyTip && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 6, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 6, scale: 0.96 }}
+                        transition={{ duration: 0.15 }}
+                        style={{
+                          position: "absolute", bottom: "calc(100% + 12px)", left: "50%",
+                          transform: "translateX(-50%)",
+                          background: "#0F172A", color: "#CBD5E1",
+                          fontSize: "12px", lineHeight: 1.6,
+                          padding: "10px 14px", borderRadius: "10px",
+                          maxWidth: "240px", whiteSpace: "normal", textAlign: "center",
+                          zIndex: 9999, pointerEvents: "none",
+                          boxShadow: "0 10px 30px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06)",
+                          width: "max-content",
+                        }}
+                      >
+                        Der Starter-Plan ist nur monatlich buchbar. Für Jahrespläne wähle Basic oder Pro.
+                        <span style={{
+                          position: "absolute", top: "100%", left: "50%",
+                          transform: "translateX(-50%)", width: 0, height: 0,
+                          borderLeft: "5px solid transparent", borderRight: "5px solid transparent",
+                          borderTop: "5px solid #0F172A",
+                        }} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
                   <motion.div
                     key={isSel ? `${plan.name}-${selEpoch}` : `${plan.name}-idle`}
                     initial={{ opacity: isSel ? 0 : 1, y: isSel ? 12 : 0, scale: isSel ? 0.97 : 1 }}
@@ -488,7 +566,7 @@ export default function Preise() {
                     transition={{ duration: 0.36, ease, delay: isSel ? 0.07 : 0 }}
                     style={{
                       position: "relative", zIndex: 1,
-                      padding: "40px 34px",
+                      padding: "36px 30px",
                       display: "flex", flexDirection: "column",
                       height: "100%", boxSizing: "border-box",
                     }}
@@ -503,9 +581,21 @@ export default function Preise() {
                       }}>{plan.tag}</div>
                     )}
 
+                    {/* "Nur monatlich verfügbar" badge for Starter on yearly */}
+                    {isStarter && billing === "yearly" && (
+                      <div style={{
+                        position: "absolute", top: "20px", right: "20px",
+                        background: "rgba(100,116,139,0.12)",
+                        color: "#94A3B8", fontSize: "11px", fontWeight: 600,
+                        padding: "4px 10px", borderRadius: "99px", letterSpacing: "0.3px",
+                        border: "1px solid rgba(100,116,139,0.2)",
+                      }}>Nur monatlich</div>
+                    )}
+
                     {/* Icon + Name */}
                     <div style={{ marginBottom: "20px" }}>
-                      {plan.name === "Basic"      && <IconSprout   sel={isSel} />}
+                      {plan.name === "Starter"    && <IconRocket   sel={isSel} />}
+                      {plan.name === "Basic"       && <IconSprout   sel={isSel} />}
                       {plan.name === "Pro"         && <IconBolt     sel={isSel} />}
                       {plan.name === "Enterprise"  && <IconBuilding sel={isSel} />}
                       <h2 style={{
@@ -517,9 +607,9 @@ export default function Preise() {
 
                     {/* Price box */}
                     <div style={{
-                      background: isSel ? "rgba(14,165,233,0.12)" : "rgba(14,165,233,0.05)",
-                      border: `1px solid ${isSel ? "rgba(14,165,233,0.3)" : "rgba(14,165,233,0.15)"}`,
-                      borderRadius: "20px", padding: "20px 24px", margin: "0 0 20px",
+                      background: isSel ? "rgba(14,165,233,0.12)" : isStarter ? "rgba(0,191,255,0.05)" : "rgba(14,165,233,0.05)",
+                      border: `1px solid ${isSel ? "rgba(14,165,233,0.3)" : isStarter ? "rgba(0,191,255,0.15)" : "rgba(14,165,233,0.15)"}`,
+                      borderRadius: "20px", padding: "20px 24px", margin: "0 0 8px",
                       transition: "background 0.3s, border 0.3s",
                     }}>
                       {mp !== null ? (
@@ -530,8 +620,8 @@ export default function Preise() {
                             <span style={{ fontSize: "15px", fontWeight: 500, color: isSel ? "rgba(255,255,255,0.5)" : "#94A3B8", transition: "color 0.3s" }}>/Monat</span>
                           </div>
 
-                          {/* Yearly extra info */}
-                          {billing === "yearly" && sv !== null && (
+                          {/* Yearly extra info (not for Starter) */}
+                          {sv !== null && (
                             <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "8px", flexWrap: "wrap" }}>
                               <span style={{
                                 background: "rgba(34,197,94,0.15)", color: "#22C55E",
@@ -547,8 +637,9 @@ export default function Preise() {
                           {pd && (
                             <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "8px" }}>
                               <span style={{
-                                background: isSel ? "rgba(14,165,233,0.3)" : "rgba(14,165,233,0.1)",
-                                color: "#0EA5E9", fontSize: "12px", fontWeight: 700,
+                                background: isSel ? "rgba(14,165,233,0.3)" : isStarter ? "rgba(0,191,255,0.1)" : "rgba(14,165,233,0.1)",
+                                color: isStarter ? "#00BFFF" : "#0EA5E9",
+                                fontSize: "12px", fontWeight: 700,
                                 padding: "3px 10px", borderRadius: "99px", transition: "background 0.3s",
                               }}>{pd}</span>
                               <span style={{ fontSize: "12px", color: isSel ? "rgba(255,255,255,0.4)" : "#94A3B8", transition: "color 0.3s" }}>
@@ -557,7 +648,7 @@ export default function Preise() {
                             </div>
                           )}
 
-                          {/* One-time setup fee */}
+                          {/* Setup fee row */}
                           <div style={{
                             marginTop: "14px",
                             paddingTop: "12px",
@@ -567,8 +658,13 @@ export default function Preise() {
                             <span style={{ fontSize: "12px", color: isSel ? "rgba(255,255,255,0.5)" : "#64748B", transition: "color 0.3s" }}>
                               Einrichtung (einmalig)
                             </span>
-                            <span style={{ fontSize: "14px", fontWeight: 700, color: isSel ? "rgba(255,255,255,0.75)" : "#334155", transition: "color 0.3s" }}>
-                              €{plan.setup}
+                            <span style={{
+                              fontSize: "14px", fontWeight: 700, transition: "color 0.3s",
+                              color: plan.setup === 0
+                                ? "#22C55E"
+                                : isSel ? "rgba(255,255,255,0.75)" : "#334155",
+                            }}>
+                              {plan.setup === 0 ? "Kostenlos" : `€${plan.setup}`}
                             </span>
                           </div>
                         </>
@@ -598,8 +694,24 @@ export default function Preise() {
                       )}
                     </div>
 
+                    {/* "Ideal nach dem Starter-Test" hint for Basic */}
+                    {plan.name === "Basic" && (
+                      <p style={{
+                        fontSize: "11px",
+                        color: isSel ? "rgba(255,255,255,0.38)" : "#94A3B8",
+                        fontStyle: "italic",
+                        margin: "0 0 16px 2px",
+                        lineHeight: 1.4,
+                        transition: "color 0.3s",
+                      }}>
+                        Ideal nach dem Starter-Test
+                      </p>
+                    )}
+
                     <p style={{
-                      fontSize: "14px", lineHeight: 1.6, marginBottom: "24px",
+                      fontSize: "14px", lineHeight: 1.6,
+                      marginBottom: "24px",
+                      marginTop: plan.name === "Basic" ? "0" : "8px",
                       color: isSel ? "rgba(255,255,255,0.65)" : "#475569", transition: "color 0.3s",
                     }}>{plan.desc}</p>
 
@@ -614,9 +726,11 @@ export default function Preise() {
                           color: isSel ? "rgba(255,255,255,0.85)" : "#334155",
                           transition: "color 0.3s, border-color 0.3s",
                         }}>
-                          <span style={{ color: "#0EA5E9", fontSize: "15px", flexShrink: 0, fontWeight: 700 }}>✓</span>
+                          <span style={{
+                            color: isStarter ? "#00BFFF" : "#0EA5E9",
+                            fontSize: "15px", flexShrink: 0, fontWeight: 700,
+                          }}>✓</span>
                           {f}
-                          {/* Only show info tip for features with actual numbers */}
                           {/\d/.test(f) && f.includes("Anfragen") && (
                             <InfoTip tip={anfragenTip(f)} dark={isSel} />
                           )}
@@ -625,29 +739,65 @@ export default function Preise() {
                     </ul>
 
                     {/* CTA */}
-                    <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                      <Link
-                        href={plan.ctaHref}
-                        onClick={e => e.stopPropagation()}
-                        onMouseEnter={() => setCtaHover(plan.name)}
-                        onMouseLeave={() => setCtaHover(null)}
-                        style={{
-                          display: "block", textAlign: "center",
-                          background: isSel ? "linear-gradient(135deg, #0EA5E9, #0284C7)" : "#0F172A",
-                          color: "#FFFFFF", padding: "15px 24px",
-                          borderRadius: "14px", fontWeight: 700, fontSize: "15px",
-                          textDecoration: "none", letterSpacing: "0.2px",
-                          boxShadow: isSel && ctaHover === plan.name
-                            ? "0 8px 28px rgba(14,165,233,0.55), 0 0 16px rgba(0,191,255,0.4)"
-                            : isSel
-                            ? "0 8px 28px rgba(14,165,233,0.45)"
-                            : "0 6px 20px rgba(15,23,42,0.15)",
-                          transition: "background 0.2s ease, box-shadow 0.2s ease",
-                        }}
-                      >
-                        {plan.cta} →
-                      </Link>
-                    </motion.div>
+                    {isStarter ? (
+                      <div>
+                        <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                          <Link
+                            href={plan.ctaHref}
+                            onClick={e => e.stopPropagation()}
+                            onMouseEnter={() => setCtaHover(plan.name)}
+                            onMouseLeave={() => setCtaHover(null)}
+                            style={{
+                              display: "block", textAlign: "center",
+                              background: ctaHover === "Starter" ? "#00BFFF" : "transparent",
+                              color: ctaHover === "Starter" ? "#FFFFFF" : "#00BFFF",
+                              border: "1.5px solid #00BFFF",
+                              padding: "15px 24px",
+                              borderRadius: "14px", fontWeight: 700, fontSize: "15px",
+                              textDecoration: "none", letterSpacing: "0.2px",
+                              boxShadow: ctaHover === "Starter"
+                                ? "0 0 16px rgba(0,191,255,0.3), 0 6px 20px rgba(0,191,255,0.2)"
+                                : "none",
+                              transition: "background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease",
+                            }}
+                          >
+                            {plan.cta} →
+                          </Link>
+                        </motion.div>
+                        <p style={{
+                          textAlign: "center", fontSize: "11px",
+                          color: isSel ? "rgba(255,255,255,0.38)" : "#94A3B8",
+                          marginTop: "10px", marginBottom: 0, lineHeight: 1.4,
+                          transition: "color 0.3s",
+                        }}>
+                          Keine Kreditkarte nötig · Endet automatisch
+                        </p>
+                      </div>
+                    ) : (
+                      <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+                        <Link
+                          href={plan.ctaHref}
+                          onClick={e => e.stopPropagation()}
+                          onMouseEnter={() => setCtaHover(plan.name)}
+                          onMouseLeave={() => setCtaHover(null)}
+                          style={{
+                            display: "block", textAlign: "center",
+                            background: isSel ? "linear-gradient(135deg, #0EA5E9, #0284C7)" : "#0F172A",
+                            color: "#FFFFFF", padding: "15px 24px",
+                            borderRadius: "14px", fontWeight: 700, fontSize: "15px",
+                            textDecoration: "none", letterSpacing: "0.2px",
+                            boxShadow: isSel && ctaHover === plan.name
+                              ? "0 8px 28px rgba(14,165,233,0.55), 0 0 16px rgba(0,191,255,0.4)"
+                              : isSel
+                              ? "0 8px 28px rgba(14,165,233,0.45)"
+                              : "0 6px 20px rgba(15,23,42,0.15)",
+                            transition: "background 0.2s ease, box-shadow 0.2s ease",
+                          }}
+                        >
+                          {plan.cta} →
+                        </Link>
+                      </motion.div>
+                    )}
                   </motion.div>
                 </motion.div>
               );
@@ -667,6 +817,7 @@ export default function Preise() {
             { icon: "✓", text: "30 Tage Geld-zurück-Garantie" },
             { icon: "✓", text: "Keine Kreditkarte nötig" },
             { icon: "✓", text: "Monatlich kündbar" },
+            { icon: "✓", text: "Starter endet automatisch – kein Abo-Fallstrick" },
           ].map(item => (
             <span key={item.text} style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "13px", color: "#64748B" }}>
               <span style={{ color: "#0EA5E9", fontWeight: 700 }}>{item.icon}</span>
