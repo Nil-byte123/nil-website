@@ -26,6 +26,22 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "nilogik.com" }],
+        destination: "https://www.nilogik.de/:path*",
+        permanent: true, // 301 – tells Google: main domain is nilogik.de
+      },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.nilogik.com" }],
+        destination: "https://www.nilogik.de/:path*",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
