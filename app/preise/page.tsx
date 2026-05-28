@@ -54,13 +54,13 @@ const plans = [
   {
     name: "Basic",
     price: 89,
+    setup: 149,
     tag: null as string | null,
     desc: "Perfekt für Selbstständige und kleine Betriebe, die erste Prozesse automatisieren möchten.",
     features: [
       "1 KI-Assistent",
       "bis zu 500 Anfragen/Monat",
       "E-Mail-Integration",
-      "Setup & Einrichtung inklusive",
       "Deutschsprachiger Support",
       "Monatliche Performance-Übersicht",
       "E-Mail-Support",
@@ -71,6 +71,7 @@ const plans = [
   {
     name: "Pro",
     price: 199,
+    setup: 249,
     tag: "Beliebteste Wahl" as string | null,
     desc: "Für wachsende Unternehmen mit mehreren Kanälen und höherem Automatisierungsgrad.",
     features: [
@@ -87,6 +88,7 @@ const plans = [
   {
     name: "Enterprise",
     price: null as number | null,
+    setup: 399,
     tag: null as string | null,
     desc: "Maßgeschneiderte Lösungen für größere Unternehmen mit komplexen Anforderungen.",
     features: [
@@ -116,7 +118,7 @@ const compRows: { label: string; Basic: CellVal; Pro: CellVal; Enterprise: CellV
   { label: "Custom API",                Basic: false,       Pro: false,          Enterprise: true },
   { label: "Account Manager",           Basic: false,       Pro: false,          Enterprise: true },
   { label: "Support-Level",             Basic: "E-Mail",    Pro: "Priorität",    Enterprise: "24/7 SLA" },
-  { label: "Setup inklusive",           Basic: true,        Pro: true,           Enterprise: true },
+  { label: "Einrichtungsgebühr",         Basic: "€149",      Pro: "€249",         Enterprise: "€399" },
 ];
 
 const BUBBLE_COLORS = ["#0EA5E9", "#38BDF8", "#7DD3FC", "#BAE6FD", "#0284C7"];
@@ -543,6 +545,21 @@ export default function Preise() {
                               </span>
                             </div>
                           )}
+
+                          {/* One-time setup fee */}
+                          <div style={{
+                            marginTop: "14px",
+                            paddingTop: "12px",
+                            borderTop: `1px solid ${isSel ? "rgba(255,255,255,0.1)" : "rgba(15,23,42,0.08)"}`,
+                            display: "flex", alignItems: "center", justifyContent: "space-between",
+                          }}>
+                            <span style={{ fontSize: "12px", color: isSel ? "rgba(255,255,255,0.5)" : "#64748B", transition: "color 0.3s" }}>
+                              Einrichtung (einmalig)
+                            </span>
+                            <span style={{ fontSize: "14px", fontWeight: 700, color: isSel ? "rgba(255,255,255,0.75)" : "#334155", transition: "color 0.3s" }}>
+                              €{plan.setup}
+                            </span>
+                          </div>
                         </>
                       ) : (
                         /* Enterprise */
@@ -552,6 +569,19 @@ export default function Preise() {
                           </span>
                           <div style={{ marginTop: "6px", fontSize: "13px", color: isSel ? "rgba(255,255,255,0.45)" : "#94A3B8", transition: "color 0.3s" }}>
                             Preise ab €499 / Monat
+                          </div>
+                          <div style={{
+                            marginTop: "14px",
+                            paddingTop: "12px",
+                            borderTop: `1px solid ${isSel ? "rgba(255,255,255,0.1)" : "rgba(15,23,42,0.08)"}`,
+                            display: "flex", alignItems: "center", justifyContent: "space-between",
+                          }}>
+                            <span style={{ fontSize: "12px", color: isSel ? "rgba(255,255,255,0.5)" : "#64748B", transition: "color 0.3s" }}>
+                              Einrichtung (einmalig)
+                            </span>
+                            <span style={{ fontSize: "14px", fontWeight: 700, color: isSel ? "rgba(255,255,255,0.75)" : "#334155", transition: "color 0.3s" }}>
+                              €{plan.setup}
+                            </span>
                           </div>
                         </>
                       )}
