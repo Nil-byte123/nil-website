@@ -1164,6 +1164,7 @@ export default function Home() {
 
   /* ── Dark Mode ── */
   const [isDark, setIsDark] = useState(false);
+  const [themeOverlay, setThemeOverlay] = useState<{ x: number; y: number; color: string; id: number } | null>(null);
 
   useEffect(() => {
     if (localStorage.getItem("nil-dark") === "true") setIsDark(true);
@@ -1173,6 +1174,22 @@ export default function Home() {
     localStorage.setItem("nil-dark", String(isDark));
     document.documentElement.setAttribute("data-dark", String(isDark));
   }, [isDark]);
+
+  const handleThemeToggle = (e: React.MouseEvent) => {
+    if (themeOverlay) return; // block double-clicks during animation
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    setThemeOverlay({
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+      color: isDark ? "#EEF2F7" : "#07101e",
+      id: Date.now(),
+    });
+    // Switch theme once the circle fully covers the screen (560ms = after 550ms animation)
+    setTimeout(() => {
+      setIsDark(prev => !prev);
+      setThemeOverlay(null);
+    }, 560);
+  };
 
   /* ── Rotating tagline ── */
   const [taglineIndex, setTaglineIndex] = useState(0);
@@ -1279,7 +1296,7 @@ export default function Home() {
                   >{svg}</motion.a>
                 ))}
               </div>
-              <motion.button onClick={() => setIsDark(v => !v)}
+              <motion.button onClick={handleThemeToggle}
                 whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}
                 aria-label="Dark/Light Mode"
                 style={{ background: isDark ? "rgba(255,255,255,0.08)" : "rgba(15,23,42,0.05)", border: `1px solid ${isDark ? "rgba(255,255,255,0.12)" : "rgba(15,23,42,0.1)"}`, borderRadius: "50%", width: "34px", height: "34px", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: "15px", transition: "background 0.2s" }}
@@ -1289,7 +1306,7 @@ export default function Home() {
 
             {/* ── MOBILE: Dark Toggle + Hamburger ── */}
             {isMobile && <>
-              <motion.button onClick={() => setIsDark(v => !v)}
+              <motion.button onClick={handleThemeToggle}
                 whileTap={{ scale: 0.9 }}
                 aria-label="Dark/Light Mode"
                 style={{ background: "none", border: "none", fontSize: "18px", cursor: "pointer", padding: "4px", display: "flex", alignItems: "center" }}
@@ -2184,6 +2201,24 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* ── THEME TRANSITION OVERLAY ── */}
+      <AnimatePresence>
+        {themeOverlay && (
+          <motion.div
+            key={themeOverlay.id}
+            initial={{ clipPath: `circle(0px at ${themeOverlay.x}px ${themeOverlay.y}px)` }}
+            animate={{ clipPath: `circle(250vmax at ${themeOverlay.x}px ${themeOverlay.y}px)` }}
+            exit={{ opacity: 0, transition: { duration: 0.18 } }}
+            transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+            style={{
+              position: "fixed", inset: 0, zIndex: 9999,
+              background: themeOverlay.color,
+              pointerEvents: "none",
+            }}
+          />
+        )}
+      </AnimatePresence>
     </main>
   );
 }
