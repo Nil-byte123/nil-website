@@ -1012,83 +1012,134 @@ function FAQList({ items, isDark }: { items: { q: string; a: string }[]; isDark:
 
   return (
     <div style={{ borderTop: `1px solid ${divider}` }}>
-      {items.map((item, i) => (
-        <motion.div key={i}
-          initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.55, ease: [0.16,1,0.3,1], delay: i * 0.06 }}
-          style={{ borderBottom: `1px solid ${divider}` }}
-        >
-          <button
-            onClick={() => setOpen(open === i ? null : i)}
-            style={{
-              width: "100%", padding: "22px 0",
-              display: "flex", alignItems: "center", justifyContent: "space-between", gap: "20px",
-              background: "none", border: "none", cursor: "pointer",
-              textAlign: "left", fontFamily: "inherit",
-            }}
+      {items.map((item, i) => {
+        const isOpen = open === i;
+        return (
+          <motion.div key={i}
+            initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.55, ease: [0.16,1,0.3,1], delay: i * 0.06 }}
+            style={{ borderBottom: `1px solid ${divider}`, position: "relative" }}
           >
-            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-              {/* Number badge */}
-              <span style={{
-                width: "30px", height: "30px", borderRadius: "8px", flexShrink: 0,
-                background: open === i
-                  ? "linear-gradient(135deg, rgba(14,165,233,0.18) 0%, rgba(14,165,233,0.08) 100%)"
-                  : isDark ? "rgba(255,255,255,0.05)" : "rgba(15,23,42,0.05)",
-                border: open === i ? "1px solid rgba(14,165,233,0.25)" : "1px solid transparent",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                fontSize: "11px", fontWeight: 700, letterSpacing: "0.3px",
-                color: open === i ? "#0EA5E9" : text2,
-                transition: "background 0.25s, color 0.25s, border 0.25s",
-                fontFamily: "inherit",
-              }}>
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <span style={{
-                fontWeight: 600, fontSize: "15.5px", lineHeight: 1.4,
-                color: open === i ? "#0EA5E9" : text,
-                transition: "color 0.25s",
-              }}>
-                {item.q}
-              </span>
-            </div>
+            {/* Background glow sweeps in from left */}
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  key="glow"
+                  initial={{ opacity: 0, x: -24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -16, transition: { duration: 0.22 } }}
+                  transition={{ duration: 0.35, ease: [0.16,1,0.3,1] }}
+                  style={{
+                    position: "absolute", inset: 0, pointerEvents: "none",
+                    background: isDark
+                      ? "linear-gradient(90deg, rgba(14,165,233,0.08) 0%, rgba(14,165,233,0.02) 45%, transparent 75%)"
+                      : "linear-gradient(90deg, rgba(14,165,233,0.06) 0%, rgba(14,165,233,0.02) 45%, transparent 75%)",
+                  }}
+                />
+              )}
+            </AnimatePresence>
 
-            {/* Chevron */}
-            <motion.span
-              animate={{ rotate: open === i ? 180 : 0 }}
-              transition={{ duration: 0.3, ease: [0.16,1,0.3,1] }}
+            {/* Left accent bar – scales down from top */}
+            <motion.div
+              animate={{ scaleY: isOpen ? 1 : 0, opacity: isOpen ? 1 : 0 }}
+              initial={{ scaleY: 0, opacity: 0 }}
+              transition={{ duration: 0.38, ease: [0.16,1,0.3,1] }}
               style={{
-                flexShrink: 0, display: "flex",
-                color: open === i ? "#0EA5E9" : text2,
-                transition: "color 0.25s",
+                position: "absolute", left: 0, top: "12px", bottom: "12px",
+                width: "3px", borderRadius: "2px", transformOrigin: "top",
+                background: "linear-gradient(to bottom, #38BDF8, #0EA5E9, #0284C7)",
+                boxShadow: "0 0 10px rgba(14,165,233,0.55)",
+              }}
+            />
+
+            <button
+              onClick={() => setOpen(isOpen ? null : i)}
+              style={{
+                width: "100%", padding: "22px 0 22px 16px",
+                display: "flex", alignItems: "center", justifyContent: "space-between", gap: "20px",
+                background: "none", border: "none", cursor: "pointer",
+                textAlign: "left", fontFamily: "inherit", position: "relative", zIndex: 1,
               }}
             >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </motion.span>
-          </button>
+              <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                {/* Number badge – bounces on open */}
+                <motion.span
+                  animate={{
+                    scale: isOpen ? [1, 1.28, 0.92, 1] : 1,
+                    backgroundColor: isOpen ? "rgba(14,165,233,0.14)" : isDark ? "rgba(255,255,255,0.05)" : "rgba(15,23,42,0.05)",
+                  }}
+                  transition={{ duration: 0.42, ease: [0.16,1,0.3,1] }}
+                  style={{
+                    width: "30px", height: "30px", borderRadius: "8px", flexShrink: 0,
+                    border: isOpen ? "1px solid rgba(14,165,233,0.3)" : "1px solid transparent",
+                    display: "inline-flex", alignItems: "center", justifyContent: "center",
+                    fontSize: "11px", fontWeight: 700, letterSpacing: "0.3px",
+                    color: isOpen ? "#0EA5E9" : text2,
+                    transition: "color 0.25s, border 0.25s",
+                    fontFamily: "inherit",
+                  }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </motion.span>
 
-          <AnimatePresence initial={false}>
-            {open === i && (
-              <motion.div
-                key="body"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.32, ease: [0.16,1,0.3,1] }}
-                style={{ overflow: "hidden" }}
+                {/* Question text nudges right */}
+                <motion.span
+                  animate={{ x: isOpen ? 5 : 0 }}
+                  transition={{ duration: 0.32, ease: [0.16,1,0.3,1] }}
+                  style={{
+                    fontWeight: 600, fontSize: "15.5px", lineHeight: 1.4,
+                    color: isOpen ? "#0EA5E9" : text,
+                    transition: "color 0.25s", display: "block",
+                  }}
+                >
+                  {item.q}
+                </motion.span>
+              </div>
+
+              {/* Chevron with spring bounce */}
+              <motion.span
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ type: "spring", stiffness: 280, damping: 18 }}
+                style={{
+                  flexShrink: 0, display: "flex",
+                  color: isOpen ? "#0EA5E9" : text2,
+                  transition: "color 0.25s",
+                }}
               >
-                <p style={{
-                  padding: "0 0 22px 46px",
-                  color: text2, fontSize: "14.5px", lineHeight: 1.75, margin: 0,
-                }}>
-                  {item.a}
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
-      ))}
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.span>
+            </button>
+
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  key="body"
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.36, ease: [0.16,1,0.3,1] }}
+                  style={{ overflow: "hidden", position: "relative", zIndex: 1 }}
+                >
+                  {/* Answer fades in with blur dissolve */}
+                  <motion.p
+                    initial={{ y: 14, opacity: 0, filter: "blur(5px)" }}
+                    animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+                    transition={{ duration: 0.42, ease: [0.16,1,0.3,1], delay: 0.09 }}
+                    style={{
+                      padding: "0 0 24px 62px",
+                      color: text2, fontSize: "14.5px", lineHeight: 1.75, margin: 0,
+                    }}
+                  >
+                    {item.a}
+                  </motion.p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
