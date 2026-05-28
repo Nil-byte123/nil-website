@@ -7,7 +7,7 @@ import { NilLogo } from "../components/NilLogo";
 
 const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
-type Bubble = { id: number; x: number; y: number; size: number; color: string; dx: number; delay: number };
+type Bubble = { id: number; x: number; y: number; size: number; color: string; dx: number; dy: number; delay: number };
 type Rect = { x: number; y: number; w: number; h: number };
 
 const plans = [
@@ -109,17 +109,32 @@ export default function Preise() {
   const handleSelect = (planName: string) => {
     if (planName === selected) return;
 
-    // Spawn bubbles at OLD card
+    // Spawn bubbles at OLD card, drifting toward the NEW card
     const oldCard = cardRefs.current[selected];
+    const newCard = cardRefs.current[planName];
     if (oldCard) {
       const rect = oldCard.getBoundingClientRect();
+
+      // Direction vector from old card center → new card center
+      let dirX = 0, dirY = 0;
+      if (newCard) {
+        const nr = newCard.getBoundingClientRect();
+        const vx = (nr.left + nr.width / 2) - (rect.left + rect.width / 2);
+        const vy = (nr.top  + nr.height / 2) - (rect.top  + rect.height / 2);
+        const dist = Math.sqrt(vx * vx + vy * vy) || 1;
+        dirX = vx / dist;
+        dirY = vy / dist;
+      }
+
       const newBubbles: Bubble[] = Array.from({ length: 16 }, (_, i) => ({
         id: Date.now() + i,
         x: rect.left + Math.random() * rect.width,
         y: rect.top + rect.height * 0.3 + Math.random() * rect.height * 0.5,
         size: Math.random() * 22 + 6,
         color: BUBBLE_COLORS[Math.floor(Math.random() * BUBBLE_COLORS.length)],
-        dx: (Math.random() - 0.5) * 60,
+        // bias in travel direction + small random spread
+        dx: dirX * (55 + Math.random() * 45) + (Math.random() - 0.5) * 22,
+        dy: dirY * (55 + Math.random() * 45) + (Math.random() - 0.5) * 22 - 28,
         delay: Math.random() * 0.18,
       }));
       setBubbles(prev => [...prev, ...newBubbles]);
@@ -147,7 +162,7 @@ export default function Preise() {
             <motion.div
               key={b.id}
               initial={{ opacity: 0.9, scale: 1, x: b.x, y: b.y }}
-              animate={{ opacity: 0, scale: 0.15, x: b.x + b.dx, y: b.y - 90 - Math.random() * 50 }}
+              animate={{ opacity: 0, scale: 0.15, x: b.x + b.dx, y: b.y + b.dy }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.75 + Math.random() * 0.35, ease: "easeOut", delay: b.delay }}
               style={{
@@ -288,12 +303,18 @@ export default function Preise() {
                     userSelect: "none",
                   }}
                 >
-                  <div style={{
-                    position: "relative", zIndex: 1,
-                    padding: "40px 34px",
-                    display: "flex", flexDirection: "column",
-                    height: "100%", boxSizing: "border-box",
-                  }}>
+                  <motion.div
+                    key={`${plan.name}-${isSel}`}
+                    initial={{ opacity: 0, y: isSel ? 14 : -8, scale: isSel ? 0.97 : 1 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.38, ease, delay: isSel ? 0.08 : 0 }}
+                    style={{
+                      position: "relative", zIndex: 1,
+                      padding: "40px 34px",
+                      display: "flex", flexDirection: "column",
+                      height: "100%", boxSizing: "border-box",
+                    }}
+                  >
 
                     {plan.tag && (
                       <div style={{
@@ -390,7 +411,7 @@ export default function Preise() {
                         {plan.cta} →
                       </Link>
                     </motion.div>
-                  </div>
+                  </motion.div>
                 </motion.div>
               );
             })}
