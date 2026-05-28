@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { flushSync } from "react-dom";
 import Link from "next/link";
 
 const appleEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -1176,24 +1177,42 @@ export default function Home() {
   }, [isDark]);
 
   const handleThemeToggle = (e: React.MouseEvent) => {
-    if (themeOverlay) return; // block double-clicks
+    if (themeOverlay) return;
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
     const toDark = !isDark;
-    // Enable global color transitions on all elements
-    document.documentElement.classList.add("theme-switching");
-    // Switch theme immediately — the ripple is purely decorative
-    setIsDark(toDark);
-    setThemeOverlay({
-      x: rect.left + rect.width / 2,
-      y: rect.top + rect.height / 2,
-      toDark,
-      id: Date.now(),
-    });
-    // Remove transition class after colors have finished transitioning
-    setTimeout(() => {
-      document.documentElement.classList.remove("theme-switching");
-      setThemeOverlay(null);
-    }, 750);
+
+    // ── View Transitions API: real content revealed piece by piece ──
+    const vtDoc = document as Document & {
+      startViewTransition?: (cb: () => void) => { ready: Promise<void> };
+    };
+
+    if (vtDoc.startViewTransition) {
+      const endR = Math.hypot(
+        Math.max(x, window.innerWidth  - x),
+        Math.max(y, window.innerHeight - y),
+      );
+      const vt = vtDoc.startViewTransition(() => {
+        flushSync(() => setIsDark(toDark));
+      });
+      vt.ready.then(() => {
+        // Animate the NEW snapshot as an expanding circle from the button
+        document.documentElement.animate(
+          { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endR}px at ${x}px ${y}px)`] },
+          { duration: 700, easing: "cubic-bezier(0.4,0,0.2,1)", pseudoElement: "::view-transition-new(root)" },
+        );
+      });
+    } else {
+      // ── Fallback for browsers without View Transitions API ──
+      document.documentElement.classList.add("theme-switching");
+      setIsDark(toDark);
+      setThemeOverlay({ x, y, toDark, id: Date.now() });
+      setTimeout(() => {
+        document.documentElement.classList.remove("theme-switching");
+        setThemeOverlay(null);
+      }, 750);
+    }
   };
 
   /* ── Rotating tagline ── */

@@ -30,7 +30,7 @@ html {
   transition: background 0.35s ease, color 0.35s ease;
 }
 
-/* Applied via JS during theme toggle — makes every element transition smoothly */
+/* Applied via JS during theme toggle — makes every element transition smoothly (fallback) */
 html.theme-switching *,
 html.theme-switching *::before,
 html.theme-switching *::after {
@@ -40,6 +40,20 @@ html.theme-switching *::after {
     color 0.38s ease,
     border-color 0.38s ease,
     box-shadow 0.38s ease !important;
+}
+
+/* ── View Transitions API: circle reveal, no default cross-fade ── */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+/* new snapshot starts invisible; our JS animates it via clipPath */
+::view-transition-new(root) {
+  z-index: 1;
+}
+::view-transition-old(root) {
+  z-index: 0;
 }
 
 /* ─── Scrollbar (thin, themed) ─────────────────────── */
