@@ -295,27 +295,6 @@ const faqItems: Record<LangCode, { q: string; a: string }[]> = {
   ],
 };
 
-/* ─── Testimonials (statisch) ───────────────────────────────── */
-const testimonials = [
-  {
-    name: "Thomas B.", role: "Inhaber · Café Central",
-    text: "Die Tischreservierungen laufen jetzt komplett automatisch. Kein verpasster Anruf mehr, und die Gäste sind begeistert vom schnellen Feedback.",
-    stars: 5, tag: "Gastronomie",
-    avatarGrad: "linear-gradient(135deg, #D97706 0%, #92400E 100%)",
-  },
-  {
-    name: "Petra W.", role: "Physiotherapeutin · Praxis am Park",
-    text: "Die Terminverwaltung hat mich früher täglich eine Stunde gekostet. Heute läuft das vollautomatisch – ich bin begeistert, wie einfach das war.",
-    stars: 5, tag: "Gesundheit",
-    avatarGrad: "linear-gradient(135deg, #0D9488 0%, #065F46 100%)",
-  },
-  {
-    name: "Markus L.", role: "Inhaber · Studio M. Hamburg",
-    text: "Unsere Kunden buchen jetzt rund um die Uhr online. Keine Zettelwirtschaft mehr, keine verpassten Anfragen. Das Team kann sich endlich auf die Arbeit konzentrieren.",
-    stars: 5, tag: "Beauty",
-    avatarGrad: "linear-gradient(135deg, #7C3AED 0%, #2563EB 100%)",
-  },
-];
 
 /* ─── Newsletter Form ───────────────────────────────────────── */
 function NewsletterForm({ slang }: { slang: typeof sl["de"] }) {
@@ -1029,18 +1008,6 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  /* ── Testimonials slideshow ── */
-  const [tstIndex, setTstIndex] = useState(0);
-  const [tstDir, setTstDir] = useState(1);
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTstDir(1);
-      setTstIndex(i => (i + 1) % testimonials.length);
-    }, 4800);
-    return () => clearInterval(timer);
-  }, []);
-  const prevTst = () => { setTstDir(-1); setTstIndex(i => (i - 1 + testimonials.length) % testimonials.length); };
-  const nextTst = () => { setTstDir(1);  setTstIndex(i => (i + 1) % testimonials.length); };
 
   /* ── Theme color map ── */
   const c = {
@@ -1593,7 +1560,7 @@ export default function Home() {
         )}
       </section>
 
-      {/* ── SOCIAL PROOF BAR ── */}
+      {/* ── TRUST BAR ── */}
       <div style={{
         background: isDark ? "#0a1628" : "#E2ECF8",
         borderTop: `1px solid ${c.border}`,
@@ -1601,12 +1568,11 @@ export default function Home() {
         padding: "14px 24px",
       }}>
         <div style={{ maxWidth: "1050px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", flexWrap: "wrap" }}>
-          <span style={{ color: "#FBBF24", fontSize: "13px", letterSpacing: "2px" }}>★★★★★</span>
-          <span style={{ color: c.text2, fontSize: "13px", fontWeight: 600 }}>5.0</span>
+          <span style={{ color: "#22C55E", fontSize: "13px", fontWeight: 600 }}>✓ Kostenlose Erstberatung</span>
           <span style={{ color: isDark ? "rgba(255,255,255,0.15)" : "rgba(15,23,42,0.2)", fontSize: "18px", lineHeight: 1, fontWeight: 300 }}>·</span>
-          <span style={{ color: c.text2, fontSize: "13px" }}>Bereits <strong style={{ color: c.text, fontWeight: 700 }}>20+</strong> Betriebe automatisiert</span>
+          <span style={{ color: "#0EA5E9", fontSize: "13px", fontWeight: 600 }}>⚡ Live-Einrichtung in 48h</span>
           <span style={{ color: isDark ? "rgba(255,255,255,0.15)" : "rgba(15,23,42,0.2)", fontSize: "18px", lineHeight: 1, fontWeight: 300 }}>·</span>
-          <span style={{ color: "#0EA5E9", fontSize: "13px", fontWeight: 600 }}>⚡ Einrichtung in 48h</span>
+          <span style={{ color: c.text2, fontSize: "13px", fontWeight: 600 }}>🔒 30 Tage Geld-zurück-Garantie</span>
         </div>
       </div>
 
@@ -1798,192 +1764,159 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
-      <section style={{ padding: "100px 20px", background: isDark ? "#07101e" : "linear-gradient(to bottom,#E2EBF5 0%,#E8F0F8 100%)", transition: "background 0.3s ease" }}>
-        <div style={{ maxWidth: "1050px", margin: "0 auto" }}>
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
-            style={{ textAlign: "center", marginBottom: "36px" }}>
-            <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: appleEase } } }}
-              style={{ color: "#0EA5E9", fontSize: "12px", fontWeight: 600, letterSpacing: "2px", marginBottom: "12px" }}>
-              <AnimText langKey={`tst-label-${lang}`}>{s.tstLabel}</AnimText>
-            </motion.p>
-            <motion.h2 variants={{ hidden: { opacity: 0, y: 24, filter: "blur(6px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease: appleEase } } }}
-              style={{ fontSize: "clamp(26px, 4vw, 38px)", fontWeight: 700, letterSpacing: "-0.04em", color: c.text }}>
-              <AnimText langKey={`tst-hl-${lang}`}>{s.tstHl}</AnimText>
-            </motion.h2>
-          </motion.div>
-
-          {/* Slideshow */}
-          <div style={{ position: "relative", overflow: "hidden" }}>
-            <AnimatePresence mode="wait" custom={tstDir}>
-              <motion.div
-                key={tstIndex}
-                custom={tstDir}
-                variants={{
-                  enter:  (d: number) => ({ x: d * 120, opacity: 0, filter: "blur(6px)" }),
-                  center: { x: 0, opacity: 1, filter: "blur(0px)" },
-                  exit:   (d: number) => ({ x: d * -120, opacity: 0, filter: "blur(4px)" }),
-                }}
-                initial="enter" animate="center" exit="exit"
-                transition={{ duration: 0.52, ease: appleEase }}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: isMobile ? "1fr" : "repeat(2, 1fr)",
-                  gap: "24px",
-                }}
-              >
-                {[tstIndex, (tstIndex + 1) % testimonials.length].map((idx, pos) => {
-                  const item = testimonials[idx];
-                  if (isMobile && pos === 1) return null;
-                  return (
-                    <div key={idx} style={{
-                      background: c.card,
-                      border: `1px solid ${c.border}`,
-                      borderRadius: "20px", padding: "28px",
-                      boxShadow: "0 4px 24px rgba(0,0,0,0.07)",
-                      transition: "background 0.3s",
-                      position: "relative",
-                    }}>
-                      {/* Industry tag */}
-                      {"tag" in item && (
-                        <div style={{
-                          position: "absolute", top: "20px", right: "20px",
-                          background: "rgba(14,165,233,0.1)",
-                          border: "1px solid rgba(14,165,233,0.2)",
-                          color: "#0EA5E9", fontSize: "11px", fontWeight: 600,
-                          padding: "3px 10px", borderRadius: "99px", letterSpacing: "0.3px",
-                        }}>{(item as typeof testimonials[0]).tag}</div>
-                      )}
-                      {/* Stars */}
-                      <div style={{ display: "flex", gap: "2px", marginBottom: "14px" }}>
-                        {Array.from({ length: item.stars }).map((_, si) => (
-                          <span key={si} style={{ color: "#FBBF24", fontSize: "14px" }}>★</span>
-                        ))}
-                      </div>
-                      {/* Quote */}
-                      <p style={{ color: c.text2, fontSize: "15px", lineHeight: 1.65, marginBottom: "20px", fontStyle: "italic" }}>
-                        &ldquo;{item.text}&rdquo;
-                      </p>
-                      {/* Person row */}
-                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                        <div style={{
-                          width: "48px", height: "48px", borderRadius: "50%", flexShrink: 0,
-                          background: "avatarGrad" in item ? (item as typeof testimonials[0]).avatarGrad : "linear-gradient(135deg, #0D1F3C, #0EA5E9)",
-                          display: "flex", alignItems: "center", justifyContent: "center",
-                          fontSize: "17px", fontWeight: 700, color: "#FFFFFF",
-                          boxShadow: "0 2px 10px rgba(0,0,0,0.18)",
-                        }}>
-                          {item.name[0]}
-                        </div>
-                        <div>
-                          <div style={{ fontWeight: 700, fontSize: "15px", color: c.text }}>{item.name}</div>
-                          <div style={{ fontSize: "12px", color: c.text2, marginTop: "2px" }}>{item.role}</div>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Controls */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", marginTop: "36px" }}>
-              <motion.button onClick={prevTst} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.93 }}
-                style={{ width: "40px", height: "40px", borderRadius: "50%", border: `1px solid ${c.border}`,
-                  background: c.card, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-                  color: c.text2, transition: "background 0.2s" }}>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </motion.button>
-
-              <div style={{ display: "flex", gap: "7px" }}>
-                {testimonials.map((_, i) => (
-                  <motion.button key={i} onClick={() => { setTstDir(i > tstIndex ? 1 : -1); setTstIndex(i); }}
-                    animate={{ scale: i === tstIndex ? 1 : 0.7, opacity: i === tstIndex ? 1 : 0.4 }}
-                    transition={{ duration: 0.25 }}
-                    style={{ width: i === tstIndex ? "22px" : "7px", height: "7px",
-                      borderRadius: "99px", border: "none", cursor: "pointer",
-                      background: i === tstIndex ? "#0EA5E9" : c.text2,
-                      padding: 0, transition: "width 0.3s ease" }}
-                  />
-                ))}
-              </div>
-
-              <motion.button onClick={nextTst} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.93 }}
-                style={{ width: "40px", height: "40px", borderRadius: "50%", border: `1px solid ${c.border}`,
-                  background: c.card, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-                  color: c.text2, transition: "background 0.2s" }}>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3L11 8L6 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-              </motion.button>
-            </div>
-
-            {/* Credibility line */}
-            <p style={{ textAlign: "center", color: c.text3, fontSize: "12px", marginTop: "20px", letterSpacing: "0.3px" }}>
-              Echte Erfahrungen unserer Kunden.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* ── KONTAKT ── */}
       <section id="kontakt" style={{ padding: "120px 20px 80px", textAlign: "center",
         background: c.contactBg, transition: "background 0.3s ease" }}>
-        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.16 } } }}
-          style={{ maxWidth: "550px", margin: "0 auto" }}>
+        <div style={{ maxWidth: "620px", margin: "0 auto" }}>
 
-          <motion.h2 variants={{ hidden: { opacity: 0, scale: 0.92, y: 24, filter: "blur(6px)" },
-            visible: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", transition: { duration: 1, ease: appleEase } } }}
-            style={{ fontSize: "clamp(28px, 4vw, 36px)", fontWeight: 700, letterSpacing: "-0.03em", marginBottom: "18px", color: c.text }}>
-            <AnimText langKey={`ch2-${lang}`}>{t.contact.headline}</AnimText>
-          </motion.h2>
+          {/* Header */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.14 } } }}
+            style={{ marginBottom: "48px" }}>
+            <motion.p variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" },
+              visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: appleEase } } }}
+              style={{ color: "#0EA5E9", fontSize: "12px", fontWeight: 600, letterSpacing: "2px", marginBottom: "12px" }}>
+              ERSTE SCHRITTE
+            </motion.p>
+            <motion.h2 variants={{ hidden: { opacity: 0, scale: 0.92, y: 24, filter: "blur(6px)" },
+              visible: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", transition: { duration: 1, ease: appleEase } } }}
+              style={{ fontSize: "clamp(28px, 4vw, 38px)", fontWeight: 700, letterSpacing: "-0.04em", marginBottom: "18px", color: c.text }}>
+              Bereit loszulegen?
+            </motion.h2>
+            <motion.p variants={{ hidden: { opacity: 0, y: 18, filter: "blur(4px)" },
+              visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.85, ease: appleEase } } }}
+              style={{ color: c.text2, fontSize: "16px", lineHeight: 1.65, maxWidth: "480px", margin: "0 auto" }}>
+              Buche ein kostenloses 20-Minuten-Gespräch. Wir schauen uns gemeinsam an, was für dein Unternehmen automatisiert werden kann.
+            </motion.p>
+          </motion.div>
 
-          <motion.p variants={{ hidden: { opacity: 0, y: 18, filter: "blur(4px)" },
-            visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.85, ease: appleEase } } }}
-            style={{ color: c.text2, fontSize: "16px", marginBottom: "38px" }}>
-            <AnimText langKey={`csub-${lang}`}>{t.contact.subtext}</AnimText>
-          </motion.p>
+          {/* PRIMARY CTA: Calendly */}
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, ease: appleEase }}
+            style={{ marginBottom: "56px" }}
+          >
+            <motion.a
+              href={(() => {
+                const raw = process.env.NEXT_PUBLIC_CALENDLY_URL ?? "";
+                if (!raw) return "mailto:info@nilogik.de";
+                return raw.startsWith("http") ? raw : `https://${raw}`;
+              })()}
+              target="_blank" rel="noopener noreferrer"
+              whileHover={{ scale: 1.04, boxShadow: "0 24px 60px rgba(14,165,233,0.38), 0 8px 24px rgba(15,23,42,0.18)" }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 350, damping: 22 }}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "10px",
+                background: "linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%)",
+                color: "#FFFFFF",
+                padding: "18px 44px", borderRadius: "9999px",
+                fontWeight: 700, fontSize: "16px",
+                textDecoration: "none",
+                boxShadow: "0 12px 36px rgba(15,23,42,0.22), inset 0 1px 0 rgba(255,255,255,0.1)",
+                letterSpacing: "0.2px",
+              }}
+            >
+              <span style={{ fontSize: "20px" }}>📅</span>
+              Kostenloses Erstgespräch buchen
+            </motion.a>
+            <p style={{ color: c.text3, fontSize: "12px", marginTop: "14px", letterSpacing: "0.3px" }}>
+              Kein Risiko · Kostenlos · Nur 20 Minuten
+            </p>
+          </motion.div>
 
-          <motion.div variants={{ hidden: { opacity: 0, scale: 0.9, y: 20 },
-            visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.9, ease: appleEase } } }}>
+          {/* Process steps */}
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.85, ease: appleEase, delay: 0.1 }}
+            style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
+              gap: "20px",
+              marginBottom: "60px",
+            }}
+          >
+            {[
+              { step: "1", emoji: "💬", title: "Gespräch", text: "Wir lernen dein Unternehmen kennen und analysieren Automatisierungspotenziale." },
+              { step: "2", emoji: "📋", title: "Konzept", text: "Du erhältst einen konkreten Plan mit klarem Zeitrahmen und transparenten Kosten." },
+              { step: "3", emoji: "🚀", title: "Live in 48h", text: "Wir richten alles ein. Du sparst sofort Zeit und kannst dich aufs Wesentliche konzentrieren." },
+            ].map((item, i) => (
+              <motion.div
+                key={item.step}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.7, ease: appleEase, delay: i * 0.1 }}
+                style={{
+                  background: c.card,
+                  border: `1px solid ${c.border}`,
+                  borderRadius: "20px", padding: "28px 22px",
+                  boxShadow: "0 4px 20px rgba(15,23,42,0.05)",
+                  transition: "background 0.3s",
+                  position: "relative",
+                }}
+              >
+                <div style={{
+                  position: "absolute", top: "-14px", left: "50%", transform: "translateX(-50%)",
+                  width: "28px", height: "28px", borderRadius: "50%",
+                  background: "linear-gradient(135deg, #0EA5E9 0%, #0D1F3C 100%)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: "12px", fontWeight: 800, color: "#FFFFFF",
+                  boxShadow: "0 4px 12px rgba(14,165,233,0.35)",
+                }}>{item.step}</div>
+                <div style={{ fontSize: "28px", marginBottom: "12px", marginTop: "8px" }}>{item.emoji}</div>
+                <div style={{ fontWeight: 700, fontSize: "15px", color: c.text, marginBottom: "8px" }}>{item.title}</div>
+                <div style={{ fontSize: "13px", color: c.text2, lineHeight: 1.6 }}>{item.text}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Secondary contact options */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.8, ease: appleEase, delay: 0.15 }}
+          >
+            <p style={{ color: c.text3, fontSize: "13px", marginBottom: "20px", letterSpacing: "0.3px" }}>
+              Oder direkt melden:
+            </p>
             <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
               {/* Telefon */}
               <motion.a href="tel:+4915129436338"
                 whileHover={{ scale: 1.03, boxShadow: "0 20px 50px rgba(0,0,0,0.07)" }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 style={{ display: "flex", flexDirection: "column", alignItems: "center",
-                  background: "#FFFFFF", border: "1px solid rgba(15,23,42,0.06)",
-                  padding: "20px 32px", borderRadius: "16px",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.02)", textDecoration: "none", minWidth: "180px" }}>
-                <AnimatePresence mode="wait">
-                  <motion.p key={`phone-label-${lang}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    style={{ color: "#64748B", fontSize: "11px", margin: "0 0 6px 0", letterSpacing: "1.2px", fontWeight: 600 }}>
-                    {t.contact.phoneLabel}
-                  </motion.p>
-                </AnimatePresence>
-                <span style={{ color: "#0EA5E9", fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em" }}>
+                  background: c.card, border: `1px solid ${c.border}`,
+                  padding: "18px 28px", borderRadius: "16px",
+                  boxShadow: "0 4px 20px rgba(15,23,42,0.04)", textDecoration: "none", minWidth: "160px",
+                  transition: "background 0.3s" }}>
+                <span style={{ color: c.text3, fontSize: "11px", marginBottom: "6px", letterSpacing: "1.2px", fontWeight: 600 }}>
+                  {t.contact.phoneLabel}
+                </span>
+                <span style={{ color: "#0EA5E9", fontSize: "17px", fontWeight: 700, letterSpacing: "-0.02em" }}>
                   0151 29436338
                 </span>
               </motion.a>
 
               {/* E-Mail */}
-              <motion.a href="mailto:info@nilogik.com"
+              <motion.a href="mailto:info@nilogik.de"
                 whileHover={{ scale: 1.03, boxShadow: "0 20px 50px rgba(0,0,0,0.07)" }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 style={{ display: "flex", flexDirection: "column", alignItems: "center",
-                  background: "#FFFFFF", border: "1px solid rgba(15,23,42,0.06)",
-                  padding: "20px 32px", borderRadius: "16px",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.02)", textDecoration: "none", minWidth: "180px" }}>
-                <AnimatePresence mode="wait">
-                  <motion.p key={`email-label-${lang}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    style={{ color: "#64748B", fontSize: "11px", margin: "0 0 6px 0", letterSpacing: "1.2px", fontWeight: 600 }}>
-                    {t.contact.emailLabel}
-                  </motion.p>
-                </AnimatePresence>
-                <span style={{ color: "#0EA5E9", fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em" }}>
-                  info@nilogik.com
+                  background: c.card, border: `1px solid ${c.border}`,
+                  padding: "18px 28px", borderRadius: "16px",
+                  boxShadow: "0 4px 20px rgba(15,23,42,0.04)", textDecoration: "none", minWidth: "160px",
+                  transition: "background 0.3s" }}>
+                <span style={{ color: c.text3, fontSize: "11px", marginBottom: "6px", letterSpacing: "1.2px", fontWeight: 600 }}>
+                  {t.contact.emailLabel}
+                </span>
+                <span style={{ color: "#0EA5E9", fontSize: "17px", fontWeight: 700, letterSpacing: "-0.02em" }}>
+                  info@nilogik.de
                 </span>
               </motion.a>
             </div>
@@ -1999,7 +1932,7 @@ export default function Home() {
           >
             <ContactForm lang={lang} />
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* ── FOOTER ── */}
