@@ -71,6 +71,76 @@ const plans = [
 
 const BUBBLE_COLORS = ["#0EA5E9", "#38BDF8", "#7DD3FC", "#BAE6FD", "#0284C7"];
 
+/** Small ℹ tooltip shown next to "Anfragen/Monat" features */
+function InfoTip({ tip, dark }: { tip: string; dark: boolean }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <span
+      style={{ position: "relative", display: "inline-block", verticalAlign: "middle" }}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onClick={e => { e.stopPropagation(); setOpen(o => !o); }}
+    >
+      {/* circle "i" badge */}
+      <span style={{
+        marginLeft: "5px",
+        display: "inline-flex", alignItems: "center", justifyContent: "center",
+        width: "15px", height: "15px",
+        background: dark ? "rgba(255,255,255,0.12)" : "rgba(14,165,233,0.12)",
+        color: dark ? "rgba(255,255,255,0.45)" : "#64748B",
+        borderRadius: "50%",
+        fontSize: "9px", fontWeight: 700, fontStyle: "italic",
+        cursor: "help", userSelect: "none", flexShrink: 0,
+      }}>i</span>
+
+      {/* floating tooltip */}
+      <AnimatePresence>
+        {open && (
+          <motion.span
+            initial={{ opacity: 0, y: 5, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 5, scale: 0.95 }}
+            transition={{ duration: 0.16 }}
+            style={{
+              position: "absolute",
+              bottom: "calc(100% + 10px)",
+              left: "50%", transform: "translateX(-50%)",
+              background: "#0F172A",
+              color: "#CBD5E1",
+              fontSize: "11.5px", lineHeight: 1.55,
+              padding: "9px 13px",
+              borderRadius: "10px",
+              whiteSpace: "nowrap",
+              zIndex: 300,
+              boxShadow: "0 10px 30px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06)",
+              pointerEvents: "none",
+              display: "block",
+            }}
+          >
+            {tip}
+            {/* arrow */}
+            <span style={{
+              position: "absolute", top: "100%", left: "50%",
+              transform: "translateX(-50%)",
+              width: 0, height: 0,
+              borderLeft: "5px solid transparent",
+              borderRight: "5px solid transparent",
+              borderTop: "5px solid #0F172A",
+            }} />
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </span>
+  );
+}
+
+function anfragenTip(feature: string): string {
+  const m = feature.match(/([\d.]+)/);
+  const num = m ? parseInt(m[1].replace(".", "")) : 0;
+  const perDay = num ? `≈ ${Math.round(num / 30)} pro Tag` : "";
+  return `1 Anfrage = 1 Kundennachricht an den KI-Assistenten${perDay ? " · " + perDay : ""}`;
+}
+
 export default function Preise() {
   const [selected, setSelected] = useState("Pro");
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
@@ -402,6 +472,9 @@ export default function Preise() {
                         }}>
                           <span style={{ color: "#0EA5E9", fontSize: "15px", flexShrink: 0, fontWeight: 700 }}>✓</span>
                           {f}
+                          {f.includes("Anfragen") && (
+                            <InfoTip tip={anfragenTip(f)} dark={isSel} />
+                          )}
                         </li>
                       ))}
                     </ul>
