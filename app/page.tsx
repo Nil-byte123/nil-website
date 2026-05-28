@@ -1539,7 +1539,12 @@ export default function Home() {
 
             {/* Calendly Termin-Button */}
             <motion.a
-              href={process.env.NEXT_PUBLIC_CALENDLY_URL ?? "#kontakt"}
+              href={(() => {
+                const raw = process.env.NEXT_PUBLIC_CALENDLY_URL ?? "";
+                if (!raw) return "#kontakt";
+                return raw.startsWith("http") ? raw : `https://${raw}`;
+              })()}
+              target="_blank" rel="noopener noreferrer"
               whileHover={{ scale: 1.05, boxShadow: "0 14px 36px rgba(14,165,233,0.32)", background: "rgba(14,165,233,0.08)" }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 350, damping: 22 }}
