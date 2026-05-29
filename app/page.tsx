@@ -645,17 +645,29 @@ const BIZ_TYPES: BizType[] = [
   { id: "dienstleistung", label: "Dienstleistung",  emoji: "💼" },
 ];
 
+interface ChatThemeObj { id: string; name: string; swatch: string; dark: string; mid: string; accent: string; }
+const CHAT_THEMES: ChatThemeObj[] = [
+  { id: "navy",   name: "Navy",    swatch: "#0F2647", dark: "#060E1E", mid: "#0D1F3C", accent: "#0EA5E9" },
+  { id: "forest", name: "Grün",    swatch: "#15803D", dark: "#052E16", mid: "#166534", accent: "#22C55E" },
+  { id: "violet", name: "Lila",    swatch: "#6D28D9", dark: "#2E1065", mid: "#5B21B6", accent: "#A78BFA" },
+  { id: "rose",   name: "Rot",     swatch: "#9F1239", dark: "#500724", mid: "#881337", accent: "#FB7185" },
+  { id: "amber",  name: "Orange",  swatch: "#9A3412", dark: "#431407", mid: "#7C2D12", accent: "#FB923C" },
+  { id: "teal",   name: "Türkis",  swatch: "#0E7490", dark: "#083344", mid: "#155E75", accent: "#22D3EE" },
+];
+
 function DemoChat({ t }: { t: typeof translations["de"] }) {
   const [configured, setConfigured] = useState(false);
   const [bizName, setBizName]       = useState("");
   const [bizType, setBizType]       = useState("");
   const [bizServices, setBizServices] = useState("");
+  const [themeId, setThemeId]       = useState("navy");
   const [messages, setMessages]     = useState<ChatMessage[]>([]);
   const [input, setInput]           = useState("");
   const [loading, setLoading]       = useState(false);
   const messagesContainerRef        = useRef<HTMLDivElement>(null);
 
   const selectedType = BIZ_TYPES.find(b => b.id === bizType);
+  const theme        = CHAT_THEMES.find(th => th.id === themeId) ?? CHAT_THEMES[0];
   const canStart     = bizName.trim().length > 0 && bizType.length > 0;
 
   const startDemo = () => {
@@ -666,6 +678,12 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
       content: `Hallo! Ich bin der digitale Assistent von ${bizName.trim()}. Wie kann ich dir heute helfen? ${emoji}`,
     }]);
     setConfigured(true);
+  };
+
+  const goBack = () => {
+    setConfigured(false);
+    setMessages([]);
+    setInput("");
   };
 
   /* auto-scroll to bottom on new message */
@@ -758,10 +776,34 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
     >
       {/* ── Header ── */}
       <div style={{
-        background: "linear-gradient(135deg, #060E1E 0%, #0D1F3C 100%)",
+        background: `linear-gradient(135deg, ${theme.dark} 0%, ${theme.mid} 100%)`,
         padding: "18px 22px",
-        display: "flex", alignItems: "center", gap: "14px",
+        display: "flex", alignItems: "center", gap: "12px",
+        transition: "background 0.4s ease",
       }}>
+        {/* Back button – only in chat mode */}
+        {configured && (
+          <motion.button
+            onClick={goBack}
+            title="Zurück zur Konfiguration"
+            initial={{ opacity: 0, x: -8 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.22 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            style={{
+              width: "30px", height: "30px", borderRadius: "50%", flexShrink: 0,
+              background: "rgba(255,255,255,0.12)", border: "1px solid rgba(255,255,255,0.2)",
+              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+              transition: "background 0.18s",
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M9 2L4 7l5 5" stroke="rgba(255,255,255,0.85)" strokeWidth="2"
+                strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </motion.button>
+        )}
         <FinalBrandingLogoWhite width={64} height={24} />
         <div style={{ flex: 1 }}>
           <div style={{ color: "rgba(255,255,255,0.92)", fontSize: "13px", fontWeight: 600, letterSpacing: "0.2px" }}>
@@ -774,7 +816,7 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
               style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#22C55E",
                 boxShadow: "0 0 6px rgba(34,197,94,0.7)" }}
             />
-            <span style={{ color: "#64748B", fontSize: "11px", letterSpacing: "0.3px" }}>Online</span>
+            <span style={{ color: "rgba(255,255,255,0.38)", fontSize: "11px", letterSpacing: "0.3px" }}>Online</span>
           </div>
         </div>
         <span style={{ fontSize: "22px", opacity: 0.65 }}>
@@ -832,16 +874,47 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
                     style={{
                       padding: "9px 4px", borderRadius: "10px", fontSize: "11px", fontWeight: 700,
                       cursor: "pointer", transition: "all 0.18s", fontFamily: "inherit",
-                      border: bizType === bt.id ? "1.5px solid #0EA5E9" : "1.5px solid rgba(15,23,42,0.1)",
-                      background: bizType === bt.id ? "linear-gradient(135deg, #0D1F3C, #08152A)" : "#FFFFFF",
+                      border: bizType === bt.id ? `1.5px solid ${theme.accent}` : "1.5px solid rgba(15,23,42,0.1)",
+                      background: bizType === bt.id ? `linear-gradient(135deg, ${theme.mid}, ${theme.dark})` : "#FFFFFF",
                       color: bizType === bt.id ? "#FFFFFF" : "#475569",
                       display: "flex", flexDirection: "column", alignItems: "center", gap: "4px",
-                      boxShadow: bizType === bt.id ? "0 4px 12px rgba(8,21,42,0.22)" : "0 1px 3px rgba(0,0,0,0.06)",
+                      boxShadow: bizType === bt.id ? `0 4px 12px ${theme.dark}44` : "0 1px 3px rgba(0,0,0,0.06)",
                     }}
                   >
                     <span style={{ fontSize: "20px", lineHeight: 1 }}>{bt.emoji}</span>
                     <span style={{ lineHeight: 1.2 }}>{bt.label}</span>
                   </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Chat-Farbe */}
+            <div>
+              <label style={{ display: "block", fontSize: "11px", fontWeight: 700, color: "#64748B",
+                letterSpacing: "1px", textTransform: "uppercase", marginBottom: "9px" }}>
+                Chat-Farbe
+              </label>
+              <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                {CHAT_THEMES.map(th => (
+                  <motion.button
+                    key={th.id}
+                    onClick={() => setThemeId(th.id)}
+                    title={th.name}
+                    whileHover={{ scale: 1.15 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                    style={{
+                      width: "30px", height: "30px", borderRadius: "50%", flexShrink: 0,
+                      background: th.swatch, cursor: "pointer",
+                      border: themeId === th.id ? `3px solid ${th.accent}` : "3px solid transparent",
+                      outline: themeId === th.id ? `2px solid ${th.accent}` : "2px solid transparent",
+                      outlineOffset: "2px",
+                      boxShadow: themeId === th.id
+                        ? `0 0 0 2px white, 0 4px 12px rgba(0,0,0,0.18)`
+                        : "0 2px 6px rgba(0,0,0,0.15)",
+                      transition: "box-shadow 0.18s, outline 0.18s",
+                    }}
+                  />
                 ))}
               </div>
             </div>
@@ -883,10 +956,10 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
               style={{
                 width: "100%", padding: "14px", borderRadius: "14px", fontSize: "15px", fontWeight: 700,
                 border: "none", cursor: canStart ? "pointer" : "not-allowed", fontFamily: "inherit",
-                background: canStart ? "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)" : "rgba(15,23,42,0.08)",
+                background: canStart ? `linear-gradient(135deg, ${theme.accent} 0%, ${theme.mid} 100%)` : "rgba(15,23,42,0.08)",
                 color: canStart ? "#FFFFFF" : "#94A3B8",
                 transition: "background 0.22s, color 0.22s",
-                boxShadow: canStart ? "0 6px 20px rgba(14,165,233,0.35)" : "none",
+                boxShadow: canStart ? `0 6px 20px ${theme.accent}55` : "none",
                 letterSpacing: "-0.01em",
               }}
             >
@@ -924,7 +997,7 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
                     {msg.role === "bot" && (
                       <div style={{
                         width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
-                        background: "linear-gradient(135deg, #060E1E, #0D1F3C)",
+                        background: `linear-gradient(135deg, ${theme.dark}, ${theme.mid})`,
                         display: "flex", alignItems: "center", justifyContent: "center",
                         marginRight: "8px", marginTop: "2px", fontSize: "12px",
                       }}>{selectedType?.emoji ?? "🤖"}</div>
@@ -932,7 +1005,7 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
                     <div style={{
                       maxWidth: "75%", padding: "11px 15px",
                       borderRadius: msg.role === "user" ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
-                      background: msg.role === "user" ? "linear-gradient(135deg, #0D1F3C 0%, #08152A 100%)" : "#FFFFFF",
+                      background: msg.role === "user" ? `linear-gradient(135deg, ${theme.mid} 0%, ${theme.dark} 100%)` : "#FFFFFF",
                       border: msg.role === "bot" ? "1px solid rgba(15,23,42,0.07)" : "none",
                       boxShadow: msg.role === "user" ? "0 4px 14px rgba(8,21,42,0.28)" : "0 2px 8px rgba(0,0,0,0.06)",
                       color: msg.role === "user" ? "#FFFFFF" : "#0F172A",
@@ -953,7 +1026,7 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
                   >
                     <div style={{
                       width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
-                      background: "linear-gradient(135deg, #060E1E, #0D1F3C)",
+                      background: `linear-gradient(135deg, ${theme.dark}, ${theme.mid})`,
                       display: "flex", alignItems: "center", justifyContent: "center",
                       marginRight: "8px", fontSize: "12px",
                     }}>{selectedType?.emoji ?? "🤖"}</div>
@@ -1004,11 +1077,11 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 style={{
                   width: "44px", height: "44px", borderRadius: "50%", flexShrink: 0,
-                  background: input.trim() && !loading ? "linear-gradient(135deg, #0EA5E9, #0284C7)" : "#E2E8F0",
+                  background: input.trim() && !loading ? `linear-gradient(135deg, ${theme.accent}, ${theme.mid})` : "#E2E8F0",
                   border: "none", cursor: input.trim() && !loading ? "pointer" : "default",
                   display: "flex", alignItems: "center", justifyContent: "center",
                   transition: "background 0.22s",
-                  boxShadow: input.trim() && !loading ? "0 4px 14px rgba(14,165,233,0.4)" : "none",
+                  boxShadow: input.trim() && !loading ? `0 4px 14px ${theme.accent}66` : "none",
                 }}
               >
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
