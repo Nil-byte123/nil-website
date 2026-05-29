@@ -1,27 +1,46 @@
 <svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
-  <rect width="500" height="500" rx="80" fill="#08152A"/>
+  <rect width="500" height="500" rx="72" fill="#08152A"/>
 
-  <!-- Outer glow -->
-  <rect width="500" height="500" rx="80" fill="url(#bgGlow)" opacity="0.4"/>
+  <!-- Subtle center glow behind the I -->
+  <ellipse cx="250" cy="250" rx="60" ry="110" fill="#0EA5E9" opacity="0.08"/>
 
-  <!-- N -->
-  <path d="M95 155V345 M95 155L210 345 M210 155V345" stroke="#E8F4FD" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Logo centered: 380x127 inside 500x500 -->
+  <svg x="60" y="187" width="380" height="127" viewBox="0 0 300 100" overflow="visible">
 
-  <!-- I glow layers -->
-  <line x1="250" y1="155" x2="250" y2="345" stroke="#38BDF8" stroke-width="90" stroke-linecap="round" opacity="0.06"/>
-  <line x1="250" y1="155" x2="250" y2="345" stroke="#0EA5E9" stroke-width="52" stroke-linecap="round" opacity="0.18"/>
-  <line x1="250" y1="155" x2="250" y2="345" stroke="#0EA5E9" stroke-width="28" stroke-linecap="round" opacity="0.45"/>
-  <line x1="250" y1="155" x2="250" y2="345" stroke="#BAE6FD" stroke-width="13" stroke-linecap="round" opacity="0.85"/>
-  <line x1="250" y1="158" x2="250" y2="342" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+    <defs>
+      <filter id="glow1" x="-100%" y="-100%" width="300%" height="300%">
+        <feGaussianBlur stdDeviation="7" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="glow2" x="-100%" y="-100%" width="300%" height="300%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
 
-  <!-- L -->
-  <path d="M290 155V345 M290 345H405" stroke="#E8F4FD" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- N -->
+    <path d="M16 14V86 M16 14L84 86 M84 14V86"
+      stroke="rgba(255,255,255,0.92)" stroke-width="9"
+      stroke-linecap="round" stroke-linejoin="round"/>
 
-  <defs>
-    <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#0EA5E9"/>
-      <stop offset="100%" stop-color="#08152A"/>
-    </radialGradient>
-  </defs>
+    <!-- I – glow layers -->
+    <line x1="150" y1="14" x2="150" y2="86" stroke="#38BDF8" stroke-width="40"
+      stroke-linecap="round" opacity="0.12"/>
+    <line x1="150" y1="14" x2="150" y2="86" stroke="#0EA5E9" stroke-width="22"
+      stroke-linecap="round" opacity="0.38" filter="url(#glow1)"/>
+    <line x1="150" y1="14" x2="150" y2="86" stroke="#0EA5E9" stroke-width="11"
+      stroke-linecap="round" opacity="0.68" filter="url(#glow2)"/>
+    <line x1="150" y1="14" x2="150" y2="86" stroke="#BAE6FD" stroke-width="5.5"
+      stroke-linecap="round" opacity="0.9"/>
+    <!-- I – bright white core -->
+    <line x1="150" y1="16" x2="150" y2="84" stroke="#FFFFFF" stroke-width="2"
+      stroke-linecap="round"/>
+
+    <!-- L -->
+    <path d="M216 14V86 M216 86H284"
+      stroke="rgba(255,255,255,0.92)" stroke-width="9"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+  </svg>
 </svg>
