@@ -1842,7 +1842,7 @@ export default function Home() {
               whiteSpace: "nowrap", flexShrink: 0,
             }}
           >
-            Jetzt bewerben →
+            Jetzt Platz sichern →
           </motion.a>
         </div>
       </motion.div>
@@ -1873,7 +1873,7 @@ export default function Home() {
                 value: "45–90",
                 unit: "Min/Tag",
                 label: "Zeitersparnis",
-                detail: "Typische Entlastung durch automatische Beantwortung von Kundenanfragen",
+                detail: "Weniger Verwaltung, mehr Zeit für dein eigentliches Handwerk",
                 color: "#0EA5E9",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -1884,8 +1884,8 @@ export default function Home() {
               {
                 value: "< 48",
                 unit: "Stunden",
-                label: "Bis zum Go-Live",
-                detail: "Von der Beauftragung bis dein Assistent live und einsatzbereit ist",
+                label: "Bis du startklar bist",
+                detail: "Von unserem ersten Gespräch bis dein Assistent läuft",
                 color: "#38BDF8",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
