@@ -2047,6 +2047,169 @@ export default function Home() {
         </div>
       </motion.div>
 
+      {/* ── WIE ES FUNKTIONIERT ── */}
+      <section style={{
+        padding: "96px 24px 88px",
+        background: isDark
+          ? "linear-gradient(to bottom, #07101e 0%, #07101e 100%)"
+          : "linear-gradient(to bottom, #F8FAFC 0%, #F1F5F9 100%)",
+        transition: "background 0.3s ease",
+      }}>
+        <div style={{ maxWidth: "960px", margin: "0 auto" }}>
+
+          {/* Header */}
+          <motion.div
+            initial="hidden" whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
+            style={{ textAlign: "center", marginBottom: "68px" }}
+          >
+            <motion.p
+              variants={{ hidden: { opacity: 0, y: 14, filter: "blur(5px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.6, ease: appleEase } } }}
+              style={{ color: "#0EA5E9", fontSize: "12px", fontWeight: 700, letterSpacing: "2px", marginBottom: "14px" }}
+            >
+              WIE ES FUNKTIONIERT
+            </motion.p>
+            <motion.h2
+              variants={{ hidden: { opacity: 0, y: 22, filter: "blur(6px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.8, ease: appleEase } } }}
+              style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 800, letterSpacing: "-0.04em",
+                color: c.text, margin: "0 0 16px" }}
+            >
+              In 3 Schritten live.
+            </motion.h2>
+            <motion.p
+              variants={{ hidden: { opacity: 0, y: 16, filter: "blur(4px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: appleEase } } }}
+              style={{ color: c.text2, fontSize: "16px", lineHeight: 1.65, maxWidth: "480px", margin: "0 auto" }}
+            >
+              Von unserem ersten Gespräch bis dein Assistent läuft – meistens in unter 48 Stunden.
+            </motion.p>
+          </motion.div>
+
+          {/* Steps */}
+          <motion.div
+            initial="hidden" whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.18 } } }}
+            style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(268px, 1fr))", gap: "22px" }}
+          >
+            {([
+              {
+                num: "01",
+                color: "#0EA5E9",
+                sub: "15 Min · kostenlos",
+                title: "Kurzes Gespräch",
+                desc: "Wir schauen gemeinsam, welche Anfragen dich täglich Zeit kosten. Kein Vortrag – nur ein ehrliches Gespräch.",
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
+                ),
+              },
+              {
+                num: "02",
+                color: "#8B5CF6",
+                sub: "Wir kümmern uns · du musst nichts tun",
+                title: "Wir richten alles ein",
+                desc: "Dein Assistent wird auf deinen Betrieb angepasst und eingerichtet. In der Regel fertig in unter 48 Stunden.",
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                  </svg>
+                ),
+              },
+              {
+                num: "03",
+                color: "#22C55E",
+                sub: "24 / 7 · rund um die Uhr",
+                title: "Ab sofort automatisch",
+                desc: "Dein Assistent beantwortet Kundenanfragen rund um die Uhr. Jede Konversation siehst du live mit.",
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                  </svg>
+                ),
+              },
+            ] as { num: string; color: string; sub: string; title: string; desc: string; icon: React.ReactNode }[]).map((step, i) => (
+              <motion.div
+                key={i}
+                variants={{ hidden: { opacity: 0, y: 36, filter: "blur(6px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.75, ease: appleEase } } }}
+                whileHover={{ y: -4, boxShadow: isDark ? "0 20px 48px rgba(0,0,0,0.35)" : "0 20px 48px rgba(15,23,42,0.1)" }}
+                transition={{ type: "spring", stiffness: 280, damping: 22 }}
+                style={{
+                  position: "relative", overflow: "hidden",
+                  borderRadius: "22px", padding: "32px 28px 28px",
+                  background: isDark ? "rgba(255,255,255,0.04)" : "#FFFFFF",
+                  border: isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(15,23,42,0.07)",
+                  boxShadow: isDark ? "none" : "0 4px 24px rgba(15,23,42,0.05)",
+                  borderTop: `3px solid ${step.color}`,
+                  cursor: "default",
+                }}
+              >
+                {/* Step number watermark */}
+                <div style={{
+                  position: "absolute", top: "-8px", right: "20px",
+                  fontSize: "88px", fontWeight: 900, lineHeight: 1, letterSpacing: "-4px",
+                  userSelect: "none", pointerEvents: "none",
+                  color: isDark ? "rgba(255,255,255,0.03)" : "rgba(15,23,42,0.045)",
+                }}>{step.num}</div>
+
+                {/* Icon */}
+                <div style={{
+                  width: "48px", height: "48px", borderRadius: "14px",
+                  background: `${step.color}18`, border: `1px solid ${step.color}30`,
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  marginBottom: "20px",
+                }}>
+                  {step.icon}
+                </div>
+
+                {/* Sub-label */}
+                <p style={{ color: step.color, fontSize: "11px", fontWeight: 700,
+                  letterSpacing: "0.8px", textTransform: "uppercase", margin: "0 0 8px" }}>
+                  {step.sub}
+                </p>
+
+                {/* Title */}
+                <h3 style={{ color: c.text, fontSize: "19px", fontWeight: 800,
+                  margin: "0 0 12px", letterSpacing: "-0.03em" }}>
+                  {step.title}
+                </h3>
+
+                {/* Description */}
+                <p style={{ color: c.text2, fontSize: "14px", lineHeight: 1.68, margin: 0 }}>
+                  {step.desc}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Bottom CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6, ease: appleEase, delay: 0.3 }}
+            style={{ textAlign: "center", marginTop: "52px" }}
+          >
+            <motion.a
+              href="#kontakt"
+              whileHover={{ scale: 1.04, y: -2, boxShadow: "0 16px 36px rgba(14,165,233,0.38)" }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 350, damping: 22 }}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "8px",
+                background: "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
+                color: "#FFFFFF", padding: "14px 34px", borderRadius: "9999px",
+                fontWeight: 700, fontSize: "15px", textDecoration: "none",
+                boxShadow: "0 8px 24px rgba(14,165,233,0.28)",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Kostenloses Gespräch buchen →
+            </motion.a>
+          </motion.div>
+
+        </div>
+      </section>
+
       {/* ── STATS BLOCK ── */}
       <section style={{
         padding: "72px 24px 64px",
