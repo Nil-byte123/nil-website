@@ -1850,7 +1850,9 @@ export default function Home() {
       {/* ── STATS BLOCK ── */}
       <section style={{
         padding: "72px 24px 64px",
-        background: isDark ? "#07101e" : "#EEF2F7",
+        background: isDark
+          ? "linear-gradient(to bottom, #07101e 0%, #0A1628 100%)"
+          : "linear-gradient(to bottom, #E8F2FF 0%, #EEF2F7 100%)",
         transition: "background 0.3s ease",
       }}>
         <div style={{ maxWidth: "900px", margin: "0 auto" }}>
@@ -1872,8 +1874,9 @@ export default function Home() {
                 unit: "Min/Tag",
                 label: "Zeitersparnis",
                 detail: "Typische Entlastung durch automatische Beantwortung von Kundenanfragen",
+                color: "#0EA5E9",
                 icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
                   </svg>
                 ),
@@ -1883,8 +1886,9 @@ export default function Home() {
                 unit: "Stunden",
                 label: "Bis zum Go-Live",
                 detail: "Von der Beauftragung bis dein Assistent live und einsatzbereit ist",
+                color: "#38BDF8",
                 icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
                   </svg>
                 ),
@@ -1894,8 +1898,9 @@ export default function Home() {
                 unit: "Tage",
                 label: "Geld-zurück-Garantie",
                 detail: "Kein Risiko. Wenn du nicht zufrieden bist, bekommst du jeden Cent zurück",
+                color: "#22C55E",
                 icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                   </svg>
                 ),
@@ -1906,32 +1911,63 @@ export default function Home() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.7, ease: appleEase, delay: i * 0.1 }}
                 style={{
-                  background: c.card,
-                  border: `1px solid ${c.border}`,
-                  borderRadius: "20px", padding: "28px 26px",
-                  boxShadow: "0 4px 20px rgba(15,23,42,0.05)",
+                  background: isDark ? "rgba(255,255,255,0.04)" : "#FFFFFF",
+                  border: isDark
+                    ? `1px solid rgba(255,255,255,0.10)`
+                    : `1px solid rgba(15,23,42,0.08)`,
+                  borderTop: isDark
+                    ? `2px solid ${stat.color}55`
+                    : `3px solid ${stat.color}`,
+                  borderRadius: "16px", padding: "28px 26px",
+                  boxShadow: isDark
+                    ? `0 0 0 0 transparent, 0 8px 32px rgba(0,0,0,0.25)`
+                    : "0 4px 24px rgba(15,23,42,0.07)",
                   transition: "background 0.3s, border 0.3s",
                 }}
               >
-                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+                {/* Icon + Label row */}
+                <div style={{ display: "flex", alignItems: "center", gap: "9px", marginBottom: "18px" }}>
                   <div style={{
-                    width: "36px", height: "36px", borderRadius: "9px",
-                    background: isDark ? "rgba(14,165,233,0.12)" : "rgba(14,165,233,0.08)",
-                    border: "1px solid rgba(14,165,233,0.2)",
+                    width: "32px", height: "32px", borderRadius: "8px",
+                    background: isDark ? "rgba(255,255,255,0.06)" : `${stat.color}14`,
+                    border: `1px solid ${stat.color}30`,
                     display: "flex", alignItems: "center", justifyContent: "center",
                     flexShrink: 0,
                   }}>{stat.icon}</div>
-                  <span style={{ fontSize: "12px", fontWeight: 600, color: "#0EA5E9", letterSpacing: "0.5px" }}>
+                  <span style={{
+                    fontSize: "11px", fontWeight: 700,
+                    color: stat.color,
+                    letterSpacing: "0.8px",
+                  }}>
                     {stat.label.toUpperCase()}
                   </span>
                 </div>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "10px" }}>
-                  <span style={{ fontSize: "44px", fontWeight: 900, letterSpacing: "-0.05em", color: c.text, lineHeight: 1 }}>
+
+                {/* Big number */}
+                <div style={{ display: "flex", alignItems: "baseline", gap: "5px", marginBottom: "12px" }}>
+                  <span style={{
+                    fontSize: "48px", fontWeight: 900, letterSpacing: "-0.05em", lineHeight: 1,
+                    color: isDark ? "#F1F5F9" : "#0F172A",
+                  }}>
                     {stat.value}
                   </span>
-                  <span style={{ fontSize: "16px", fontWeight: 600, color: "#0EA5E9" }}>{stat.unit}</span>
+                  <span style={{ fontSize: "15px", fontWeight: 700, color: stat.color }}>
+                    {stat.unit}
+                  </span>
                 </div>
-                <p style={{ fontSize: "13px", color: c.text2, lineHeight: 1.6, margin: 0 }}>{stat.detail}</p>
+
+                {/* Divider */}
+                <div style={{
+                  height: "1px",
+                  background: isDark ? "rgba(255,255,255,0.07)" : "rgba(15,23,42,0.07)",
+                  marginBottom: "12px",
+                }} />
+
+                <p style={{
+                  fontSize: "13px",
+                  color: isDark ? "rgba(255,255,255,0.55)" : "#64748B",
+                  lineHeight: 1.65, margin: 0,
+                }}>{stat.detail}</p>
               </motion.div>
             ))}
           </div>
