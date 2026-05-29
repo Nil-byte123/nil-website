@@ -2307,14 +2307,14 @@ export default function Home() {
                 </div>
 
                 {/* Big number */}
-                <div style={{ display: "flex", alignItems: "baseline", gap: "5px", marginBottom: "12px" }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "12px" }}>
                   <span style={{
-                    fontSize: "48px", fontWeight: 900, letterSpacing: "-0.05em", lineHeight: 1,
+                    fontSize: "52px", fontWeight: 200, letterSpacing: "-0.03em", lineHeight: 1,
                     color: isDark ? "#F1F5F9" : "#0F172A",
                   }}>
                     {stat.value}
                   </span>
-                  <span style={{ fontSize: "15px", fontWeight: 700, color: stat.color }}>
+                  <span style={{ fontSize: "14px", fontWeight: 500, color: stat.color, letterSpacing: "0.02em" }}>
                     {stat.unit}
                   </span>
                 </div>
