@@ -28,8 +28,8 @@ const translations = {
     demo: {
       label: "LIVE DEMO",
       headline: "Einfach ausprobieren.",
-      subtext: "Schreib unserem KI-Salon-Assistenten live – genau so sieht die Lösung für deinen Betrieb aus.",
-      greeting: "Hallo! Ich bin NIL, dein digitaler Salon-Assistent. Wie kann ich dir heute helfen? ✂️",
+      subtext: "Passe den Assistenten auf deinen Betrieb an und teste ihn direkt live – so sieht deine Lösung aus.",
+      greeting: "Hallo! Ich bin dein digitaler Assistent. Wie kann ich dir heute helfen? 🤖",
       placeholder: "Nachricht schreiben …",
     },
     contact: {
@@ -58,8 +58,8 @@ const translations = {
     demo: {
       label: "LIVE DEMO",
       headline: "Try it right now.",
-      subtext: "Chat with our AI salon assistant live – this is exactly what the solution looks like for your business.",
-      greeting: "Hallo! Ich bin NIL, dein digitaler Salon-Assistent. Wie kann ich dir heute helfen? ✂️",
+      subtext: "Customise the assistant for your business and test it live – this is exactly what your solution looks like.",
+      greeting: "Hello! I am your digital assistant. How can I help you today? 🤖",
       placeholder: "Write a message …",
     },
     contact: {
@@ -88,8 +88,8 @@ const translations = {
     demo: {
       label: "DEMO EN VIVO",
       headline: "Pruébalo ahora mismo.",
-      subtext: "Chatea con nuestro asistente de IA en vivo – así es exactamente como se ve la solución para tu negocio.",
-      greeting: "Hallo! Ich bin NIL, dein digitaler Salon-Assistent. Wie kann ich dir heute helfen? ✂️",
+      subtext: "Personaliza el asistente para tu negocio y pruébalo en directo – así es exactamente tu solución.",
+      greeting: "¡Hola! Soy tu asistente digital. ¿Cómo puedo ayudarte hoy? 🤖",
       placeholder: "Escribe un mensaje …",
     },
     contact: {
@@ -118,8 +118,8 @@ const translations = {
     demo: {
       label: "DÉMO EN DIRECT",
       headline: "Essayez-le maintenant.",
-      subtext: "Chattez avec notre assistant IA en direct – c'est exactement à quoi ressemble la solution pour votre entreprise.",
-      greeting: "Hallo! Ich bin NIL, dein digitaler Salon-Assistent. Wie kann ich dir heute helfen? ✂️",
+      subtext: "Personnalisez l'assistant pour votre entreprise et testez-le en direct – voilà à quoi ressemble votre solution.",
+      greeting: "Bonjour ! Je suis votre assistant digital. Comment puis-je vous aider ? 🤖",
       placeholder: "Écrire un message …",
     },
     contact: {
@@ -148,8 +148,8 @@ const translations = {
     demo: {
       label: "DEMO DAL VIVO",
       headline: "Provalo subito.",
-      subtext: "Chatta con il nostro assistente IA dal vivo – è esattamente così che appare la soluzione per la tua attività.",
-      greeting: "Hallo! Ich bin NIL, dein digitaler Salon-Assistent. Wie kann ich dir heute helfen? ✂️",
+      subtext: "Personalizza l'assistente per la tua attività e testalo dal vivo – è esattamente così che appare la tua soluzione.",
+      greeting: "Ciao! Sono il tuo assistente digitale. Come posso aiutarti oggi? 🤖",
       placeholder: "Scrivi un messaggio …",
     },
     contact: {
@@ -635,13 +635,38 @@ function AnimText({ children, langKey, style }: { children: React.ReactNode; lan
 /* ─── Demo Chat Widget ──────────────────────────────────────── */
 type ChatMessage = { role: "user" | "bot"; content: string };
 
+interface BizType { id: string; label: string; emoji: string; }
+const BIZ_TYPES: BizType[] = [
+  { id: "handwerk",       label: "Handwerk",        emoji: "🔧" },
+  { id: "restaurant",     label: "Restaurant",      emoji: "🍽️" },
+  { id: "friseur",        label: "Friseursalon",    emoji: "✂️" },
+  { id: "kosmetik",       label: "Kosmetikstudio",  emoji: "💄" },
+  { id: "physio",         label: "Physiotherapie",  emoji: "💪" },
+  { id: "dienstleistung", label: "Dienstleistung",  emoji: "💼" },
+];
+
 function DemoChat({ t }: { t: typeof translations["de"] }) {
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: "bot", content: t.demo.greeting },
-  ]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const [configured, setConfigured] = useState(false);
+  const [bizName, setBizName]       = useState("");
+  const [bizType, setBizType]       = useState("");
+  const [bizServices, setBizServices] = useState("");
+  const [messages, setMessages]     = useState<ChatMessage[]>([]);
+  const [input, setInput]           = useState("");
+  const [loading, setLoading]       = useState(false);
+  const messagesContainerRef        = useRef<HTMLDivElement>(null);
+
+  const selectedType = BIZ_TYPES.find(b => b.id === bizType);
+  const canStart     = bizName.trim().length > 0 && bizType.length > 0;
+
+  const startDemo = () => {
+    if (!canStart) return;
+    const emoji = selectedType?.emoji ?? "🤖";
+    setMessages([{
+      role: "bot",
+      content: `Hallo! Ich bin der digitale Assistent von ${bizName.trim()}. Wie kann ich dir heute helfen? ${emoji}`,
+    }]);
+    setConfigured(true);
+  };
 
   /* auto-scroll to bottom on new message */
   useEffect(() => {
@@ -652,6 +677,7 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
 
   /* prevent chat from blocking page scroll on desktop + mobile */
   useEffect(() => {
+    if (!configured) return;
     const el = messagesContainerRef.current;
     if (!el) return;
     let startY = 0;
@@ -661,13 +687,13 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
       const cantScroll = scrollHeight <= clientHeight;
       const atTop    = scrollTop <= 0 && e.deltaY < 0;
       const atBottom = scrollTop + clientHeight >= scrollHeight - 1 && e.deltaY > 0;
-      if (cantScroll || atTop || atBottom) return; // let page scroll
+      if (cantScroll || atTop || atBottom) return;
       e.stopPropagation();
     };
     const onTouchStart = (e: TouchEvent) => { startY = e.touches[0].clientY; };
     const onTouchMove  = (e: TouchEvent) => {
       const { scrollTop, scrollHeight, clientHeight } = el;
-      const dy = startY - e.touches[0].clientY; // + = finger moving up = scroll down
+      const dy = startY - e.touches[0].clientY;
       const cantScroll = scrollHeight <= clientHeight;
       const atTop    = scrollTop <= 0 && dy < 0;
       const atBottom = scrollTop + clientHeight >= scrollHeight - 1 && dy > 0;
@@ -675,15 +701,15 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
       e.stopPropagation();
     };
 
-    el.addEventListener("wheel",       onWheel,       { passive: true });
-    el.addEventListener("touchstart",  onTouchStart,  { passive: true });
-    el.addEventListener("touchmove",   onTouchMove,   { passive: true });
+    el.addEventListener("wheel",      onWheel,      { passive: true });
+    el.addEventListener("touchstart", onTouchStart, { passive: true });
+    el.addEventListener("touchmove",  onTouchMove,  { passive: true });
     return () => {
-      el.removeEventListener("wheel",       onWheel);
-      el.removeEventListener("touchstart",  onTouchStart);
-      el.removeEventListener("touchmove",   onTouchMove);
+      el.removeEventListener("wheel",      onWheel);
+      el.removeEventListener("touchstart", onTouchStart);
+      el.removeEventListener("touchmove",  onTouchMove);
     };
-  }, []);
+  }, [configured]);
 
   const send = async () => {
     if (!input.trim() || loading) return;
@@ -700,12 +726,16 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ message: text, history }),
+        body: JSON.stringify({
+          message: text,
+          history,
+          businessContext: { name: bizName.trim(), type: bizType, services: bizServices },
+        }),
       });
       const data = await res.json();
       setMessages(prev => [...prev, { role: "bot", content: data.response }]);
     } catch {
-      setMessages(prev => [...prev, { role: "bot", content: "Verbindungsfehler. Bitte erneut versuchen. ✂️" }]);
+      setMessages(prev => [...prev, { role: "bot", content: "Verbindungsfehler. Bitte erneut versuchen. 🤖" }]);
     } finally {
       setLoading(false);
     }
@@ -735,7 +765,7 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
         <FinalBrandingLogoWhite width={64} height={24} />
         <div style={{ flex: 1 }}>
           <div style={{ color: "rgba(255,255,255,0.92)", fontSize: "13px", fontWeight: 600, letterSpacing: "0.2px" }}>
-            Salon-Assistent
+            {configured && bizName ? bizName : "Demo-Assistent"}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: "5px", marginTop: "3px" }}>
             <motion.div
@@ -747,154 +777,251 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
             <span style={{ color: "#64748B", fontSize: "11px", letterSpacing: "0.3px" }}>Online</span>
           </div>
         </div>
-        <span style={{ fontSize: "22px", opacity: 0.65 }}>✂️</span>
+        <span style={{ fontSize: "22px", opacity: 0.65 }}>
+          {configured && selectedType ? selectedType.emoji : "🤖"}
+        </span>
       </div>
 
-      {/* ── Messages ── */}
-      <div ref={messagesContainerRef}
-        style={{
-          background: "#F1F5F9",
-          height: "330px",
-          maxHeight: "330px",
-          overflowY: "auto",
-          overscrollBehavior: "contain",
-          padding: "18px 16px 12px",
-          display: "flex", flexDirection: "column", gap: "10px",
-          scrollbarWidth: "none",
-          pointerEvents: "none",   /* let scroll events fall through to page */
-        }}>
-        <AnimatePresence initial={false}>
-          {messages.map((msg, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 12, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.32, ease: appleEase }}
-              style={{
-                display: "flex",
-                justifyContent: msg.role === "user" ? "flex-end" : "flex-start",
-              }}
-            >
-              {msg.role === "bot" && (
-                <div style={{
-                  width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
-                  background: "linear-gradient(135deg, #060E1E, #0D1F3C)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  marginRight: "8px", marginTop: "2px", fontSize: "12px",
-                }}>✂️</div>
-              )}
-              <div style={{
-                maxWidth: "75%",
-                padding: "11px 15px",
-                borderRadius: msg.role === "user"
-                  ? "18px 18px 4px 18px"
-                  : "18px 18px 18px 4px",
-                background: msg.role === "user"
-                  ? "linear-gradient(135deg, #0D1F3C 0%, #08152A 100%)"
-                  : "#FFFFFF",
-                border: msg.role === "bot" ? "1px solid rgba(15,23,42,0.07)" : "none",
-                boxShadow: msg.role === "user"
-                  ? "0 4px 14px rgba(8,21,42,0.28)"
-                  : "0 2px 8px rgba(0,0,0,0.06)",
-                color: msg.role === "user" ? "#FFFFFF" : "#0F172A",
-                fontSize: "14px", lineHeight: 1.55,
-              }}>
-                {msg.content}
-              </div>
-            </motion.div>
-          ))}
+      {/* ── Config Panel → Chat (animated swap) ── */}
+      <AnimatePresence mode="wait">
+        {!configured ? (
 
-          {/* Typing indicator */}
-          {loading && (
-            <motion.div
-              key="typing"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.25 }}
-              style={{ display: "flex", justifyContent: "flex-start", alignItems: "flex-end" }}
-            >
-              <div style={{
-                width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
-                background: "linear-gradient(135deg, #060E1E, #0D1F3C)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                marginRight: "8px", fontSize: "12px",
-              }}>✂️</div>
-              <div style={{
-                background: "#FFFFFF", border: "1px solid rgba(15,23,42,0.07)",
-                borderRadius: "18px 18px 18px 4px",
-                padding: "13px 18px",
-                display: "flex", alignItems: "center", gap: "5px",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
-              }}>
-                {[0, 1, 2].map(d => (
-                  <motion.div
-                    key={d}
-                    animate={{ y: [0, -5, 0] }}
-                    transition={{ duration: 0.6, repeat: Infinity, delay: d * 0.18, ease: "easeInOut" }}
-                    style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#94A3B8" }}
-                  />
+          /* ── KONFIGURATION ── */
+          <motion.div
+            key="config"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 0.98 }}
+            transition={{ duration: 0.26, ease: appleEase }}
+            style={{ background: "#F1F5F9", padding: "22px 18px 18px", display: "flex", flexDirection: "column", gap: "16px" }}
+          >
+            {/* Betriebsname */}
+            <div>
+              <label style={{ display: "block", fontSize: "11px", fontWeight: 700, color: "#64748B",
+                letterSpacing: "1px", textTransform: "uppercase", marginBottom: "7px" }}>
+                Betriebsname
+              </label>
+              <input
+                value={bizName}
+                onChange={e => setBizName(e.target.value)}
+                onKeyDown={e => { if (e.key === "Enter" && canStart) startDemo(); }}
+                placeholder="z.B. Salon Müller, Elektro Bauer …"
+                style={{
+                  width: "100%", boxSizing: "border-box",
+                  padding: "10px 14px", borderRadius: "12px",
+                  border: "1.5px solid rgba(15,23,42,0.12)", fontSize: "14px",
+                  background: "#FFFFFF", color: "#0F172A", outline: "none",
+                  fontFamily: "inherit", transition: "border-color 0.2s, box-shadow 0.2s",
+                }}
+                onFocus={e => { e.target.style.borderColor = "rgba(14,165,233,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(14,165,233,0.1)"; }}
+                onBlur={e => { e.target.style.borderColor = "rgba(15,23,42,0.12)"; e.target.style.boxShadow = "none"; }}
+              />
+            </div>
+
+            {/* Betriebstyp */}
+            <div>
+              <label style={{ display: "block", fontSize: "11px", fontWeight: 700, color: "#64748B",
+                letterSpacing: "1px", textTransform: "uppercase", marginBottom: "7px" }}>
+                Betriebstyp
+              </label>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "8px" }}>
+                {BIZ_TYPES.map(bt => (
+                  <button
+                    key={bt.id}
+                    onClick={() => setBizType(bt.id)}
+                    style={{
+                      padding: "9px 4px", borderRadius: "10px", fontSize: "11px", fontWeight: 700,
+                      cursor: "pointer", transition: "all 0.18s", fontFamily: "inherit",
+                      border: bizType === bt.id ? "1.5px solid #0EA5E9" : "1.5px solid rgba(15,23,42,0.1)",
+                      background: bizType === bt.id ? "linear-gradient(135deg, #0D1F3C, #08152A)" : "#FFFFFF",
+                      color: bizType === bt.id ? "#FFFFFF" : "#475569",
+                      display: "flex", flexDirection: "column", alignItems: "center", gap: "4px",
+                      boxShadow: bizType === bt.id ? "0 4px 12px rgba(8,21,42,0.22)" : "0 1px 3px rgba(0,0,0,0.06)",
+                    }}
+                  >
+                    <span style={{ fontSize: "20px", lineHeight: 1 }}>{bt.emoji}</span>
+                    <span style={{ lineHeight: 1.2 }}>{bt.label}</span>
+                  </button>
                 ))}
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+            </div>
 
-      {/* ── Input ── */}
-      <div style={{
-        background: "#FFFFFF",
-        borderTop: "1px solid rgba(15,23,42,0.07)",
-        padding: "14px 16px",
-        display: "flex", gap: "10px", alignItems: "center",
-      }}>
-        <input
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
-          placeholder={t.demo.placeholder}
-          disabled={loading}
-          style={{
-            flex: 1, border: "1.5px solid rgba(15,23,42,0.1)", borderRadius: "22px",
-            padding: "10px 18px", fontSize: "14px", outline: "none",
-            background: "#F8FAFC", color: "#0F172A",
-            transition: "border-color 0.2s, box-shadow 0.2s",
-            fontFamily: "inherit",
-          }}
-          onFocus={e => {
-            e.target.style.borderColor = "rgba(14,165,233,0.5)";
-            e.target.style.boxShadow = "0 0 0 3px rgba(14,165,233,0.1)";
-          }}
-          onBlur={e => {
-            e.target.style.borderColor = "rgba(15,23,42,0.1)";
-            e.target.style.boxShadow = "none";
-          }}
-        />
-        <motion.button
-          onClick={send}
-          disabled={!input.trim() || loading}
-          whileHover={input.trim() && !loading ? { scale: 1.08 } : {}}
-          whileTap={input.trim() && !loading ? { scale: 0.93 } : {}}
-          transition={{ type: "spring", stiffness: 400, damping: 20 }}
-          style={{
-            width: "44px", height: "44px", borderRadius: "50%", flexShrink: 0,
-            background: input.trim() && !loading
-              ? "linear-gradient(135deg, #0EA5E9, #0284C7)"
-              : "#E2E8F0",
-            border: "none",
-            cursor: input.trim() && !loading ? "pointer" : "default",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            transition: "background 0.22s",
-            boxShadow: input.trim() && !loading ? "0 4px 14px rgba(14,165,233,0.4)" : "none",
-          }}
-        >
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-            <path d="M16 9H2M9 2l7 7-7 7"
-              stroke={input.trim() && !loading ? "#FFFFFF" : "#94A3B8"}
-              strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </motion.button>
-      </div>
+            {/* Besondere Infos optional */}
+            <div>
+              <label style={{ display: "block", fontSize: "11px", fontWeight: 700, color: "#64748B",
+                letterSpacing: "1px", textTransform: "uppercase", marginBottom: "7px" }}>
+                Besondere Infos{" "}
+                <span style={{ fontWeight: 400, textTransform: "none", fontSize: "11px", color: "#94A3B8" }}>
+                  (optional)
+                </span>
+              </label>
+              <textarea
+                value={bizServices}
+                onChange={e => setBizServices(e.target.value)}
+                placeholder="z.B. Öffnungszeiten Mo–Fr 8–18 Uhr, Spezialität: Elektroanlagen …"
+                rows={2}
+                style={{
+                  width: "100%", boxSizing: "border-box",
+                  padding: "10px 14px", borderRadius: "12px",
+                  border: "1.5px solid rgba(15,23,42,0.12)", fontSize: "13px",
+                  background: "#FFFFFF", color: "#0F172A", outline: "none",
+                  fontFamily: "inherit", resize: "none", lineHeight: 1.5,
+                  transition: "border-color 0.2s, box-shadow 0.2s",
+                }}
+                onFocus={e => { e.target.style.borderColor = "rgba(14,165,233,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(14,165,233,0.1)"; }}
+                onBlur={e => { e.target.style.borderColor = "rgba(15,23,42,0.12)"; e.target.style.boxShadow = "none"; }}
+              />
+            </div>
+
+            {/* Start Button */}
+            <motion.button
+              onClick={startDemo}
+              disabled={!canStart}
+              whileHover={canStart ? { scale: 1.02, y: -1 } : {}}
+              whileTap={canStart ? { scale: 0.97 } : {}}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              style={{
+                width: "100%", padding: "14px", borderRadius: "14px", fontSize: "15px", fontWeight: 700,
+                border: "none", cursor: canStart ? "pointer" : "not-allowed", fontFamily: "inherit",
+                background: canStart ? "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)" : "rgba(15,23,42,0.08)",
+                color: canStart ? "#FFFFFF" : "#94A3B8",
+                transition: "background 0.22s, color 0.22s",
+                boxShadow: canStart ? "0 6px 20px rgba(14,165,233,0.35)" : "none",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              Demo starten →
+            </motion.button>
+          </motion.div>
+
+        ) : (
+
+          /* ── CHAT ── */
+          <motion.div
+            key="chat"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.28, ease: appleEase }}
+          >
+            {/* Messages */}
+            <div ref={messagesContainerRef}
+              style={{
+                background: "#F1F5F9", height: "330px", maxHeight: "330px",
+                overflowY: "auto", overscrollBehavior: "contain",
+                padding: "18px 16px 12px",
+                display: "flex", flexDirection: "column", gap: "10px",
+                scrollbarWidth: "none", pointerEvents: "none",
+              }}>
+              <AnimatePresence initial={false}>
+                {messages.map((msg, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 12, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 0.32, ease: appleEase }}
+                    style={{ display: "flex", justifyContent: msg.role === "user" ? "flex-end" : "flex-start" }}
+                  >
+                    {msg.role === "bot" && (
+                      <div style={{
+                        width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
+                        background: "linear-gradient(135deg, #060E1E, #0D1F3C)",
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        marginRight: "8px", marginTop: "2px", fontSize: "12px",
+                      }}>{selectedType?.emoji ?? "🤖"}</div>
+                    )}
+                    <div style={{
+                      maxWidth: "75%", padding: "11px 15px",
+                      borderRadius: msg.role === "user" ? "18px 18px 4px 18px" : "18px 18px 18px 4px",
+                      background: msg.role === "user" ? "linear-gradient(135deg, #0D1F3C 0%, #08152A 100%)" : "#FFFFFF",
+                      border: msg.role === "bot" ? "1px solid rgba(15,23,42,0.07)" : "none",
+                      boxShadow: msg.role === "user" ? "0 4px 14px rgba(8,21,42,0.28)" : "0 2px 8px rgba(0,0,0,0.06)",
+                      color: msg.role === "user" ? "#FFFFFF" : "#0F172A",
+                      fontSize: "14px", lineHeight: 1.55,
+                    }}>
+                      {msg.content}
+                    </div>
+                  </motion.div>
+                ))}
+
+                {/* Typing indicator */}
+                {loading && (
+                  <motion.div
+                    key="typing"
+                    initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9 }} transition={{ duration: 0.25 }}
+                    style={{ display: "flex", justifyContent: "flex-start", alignItems: "flex-end" }}
+                  >
+                    <div style={{
+                      width: "26px", height: "26px", borderRadius: "50%", flexShrink: 0,
+                      background: "linear-gradient(135deg, #060E1E, #0D1F3C)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                      marginRight: "8px", fontSize: "12px",
+                    }}>{selectedType?.emoji ?? "🤖"}</div>
+                    <div style={{
+                      background: "#FFFFFF", border: "1px solid rgba(15,23,42,0.07)",
+                      borderRadius: "18px 18px 18px 4px", padding: "13px 18px",
+                      display: "flex", alignItems: "center", gap: "5px",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+                    }}>
+                      {[0, 1, 2].map(d => (
+                        <motion.div key={d}
+                          animate={{ y: [0, -5, 0] }}
+                          transition={{ duration: 0.6, repeat: Infinity, delay: d * 0.18, ease: "easeInOut" }}
+                          style={{ width: "7px", height: "7px", borderRadius: "50%", background: "#94A3B8" }}
+                        />
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Input */}
+            <div style={{
+              background: "#FFFFFF", borderTop: "1px solid rgba(15,23,42,0.07)",
+              padding: "14px 16px", display: "flex", gap: "10px", alignItems: "center",
+            }}>
+              <input
+                value={input}
+                onChange={e => setInput(e.target.value)}
+                onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+                placeholder={t.demo.placeholder}
+                disabled={loading}
+                style={{
+                  flex: 1, border: "1.5px solid rgba(15,23,42,0.1)", borderRadius: "22px",
+                  padding: "10px 18px", fontSize: "14px", outline: "none",
+                  background: "#F8FAFC", color: "#0F172A",
+                  transition: "border-color 0.2s, box-shadow 0.2s", fontFamily: "inherit",
+                }}
+                onFocus={e => { e.target.style.borderColor = "rgba(14,165,233,0.5)"; e.target.style.boxShadow = "0 0 0 3px rgba(14,165,233,0.1)"; }}
+                onBlur={e => { e.target.style.borderColor = "rgba(15,23,42,0.1)"; e.target.style.boxShadow = "none"; }}
+              />
+              <motion.button
+                onClick={send}
+                disabled={!input.trim() || loading}
+                whileHover={input.trim() && !loading ? { scale: 1.08 } : {}}
+                whileTap={input.trim() && !loading ? { scale: 0.93 } : {}}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                style={{
+                  width: "44px", height: "44px", borderRadius: "50%", flexShrink: 0,
+                  background: input.trim() && !loading ? "linear-gradient(135deg, #0EA5E9, #0284C7)" : "#E2E8F0",
+                  border: "none", cursor: input.trim() && !loading ? "pointer" : "default",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  transition: "background 0.22s",
+                  boxShadow: input.trim() && !loading ? "0 4px 14px rgba(14,165,233,0.4)" : "none",
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M16 9H2M9 2l7 7-7 7"
+                    stroke={input.trim() && !loading ? "#FFFFFF" : "#94A3B8"}
+                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </motion.button>
+            </div>
+          </motion.div>
+
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
