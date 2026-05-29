@@ -1842,7 +1842,7 @@ export default function Home() {
               exit={{ opacity: 0, filter: "blur(4px)", transition: { duration: 0.18 } }}
               style={{ fontSize: isMobile ? "clamp(28px, 8vw, 38px)" : "clamp(34px, 5vw, 52px)",
                 color: c.text, marginBottom: "16px",
-                fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 1.1 }}>
+                fontWeight: 800, letterSpacing: "-0.055em", lineHeight: 1.08 }}>
               {t.hero.headline.split(" ").map((word, i) => (
                 <motion.span key={i}
                   initial={{ opacity: 0, y: 26, filter: "blur(8px)" }}
@@ -1866,9 +1866,9 @@ export default function Home() {
                 exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
                 transition={{ duration: 0.55, ease: appleEase }}
                 style={{
-                  fontSize: isMobile ? "14px" : "15.5px",
+                  fontSize: isMobile ? "14px" : "16px",
                   color: c.text2,
-                  lineHeight: 1.6,
+                  lineHeight: 1.65,
                   fontWeight: 400,
                   margin: 0,
                   textAlign: "center",
@@ -2222,7 +2222,7 @@ export default function Home() {
           <motion.p
             initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.6, ease: appleEase }}
-            style={{ textAlign: "center", color: "#0EA5E9", fontSize: "12px", fontWeight: 600, letterSpacing: "2px", marginBottom: "40px" }}
+            style={{ textAlign: "center", color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "40px" }}
           >
             ERGEBNISSE DIE ZÄHLEN
           </motion.p>
@@ -2309,12 +2309,12 @@ export default function Home() {
                 {/* Big number */}
                 <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "12px" }}>
                   <span style={{
-                    fontSize: "52px", fontWeight: 200, letterSpacing: "-0.03em", lineHeight: 1,
-                    color: isDark ? "#F1F5F9" : "#0F172A",
+                    fontSize: "50px", fontWeight: 700, letterSpacing: "-0.04em", lineHeight: 1,
+                    color: stat.color,
                   }}>
                     {stat.value}
                   </span>
-                  <span style={{ fontSize: "14px", fontWeight: 500, color: stat.color, letterSpacing: "0.02em" }}>
+                  <span style={{ fontSize: "14px", fontWeight: 600, color: stat.color, letterSpacing: "0.02em", opacity: 0.8 }}>
                     {stat.unit}
                   </span>
                 </div>
@@ -2348,12 +2348,12 @@ export default function Home() {
             style={{ textAlign: "center", marginBottom: "80px" }}>
             <motion.p variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" },
               visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: appleEase } } }}
-              style={{ color: "#0EA5E9", fontSize: "12px", fontWeight: 600, letterSpacing: "2px", marginBottom: "12px" }}>
+              style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "12px" }}>
               <AnimText langKey={`label-${lang}`}>{t.showcase.label}</AnimText>
             </motion.p>
             <motion.h2 variants={{ hidden: { opacity: 0, y: 28, filter: "blur(6px)" },
               visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease: appleEase } } }}
-              style={{ fontSize: "clamp(30px, 4vw, 40px)", fontWeight: 700, letterSpacing: "-0.04em", color: c.text }}>
+              style={{ fontSize: "clamp(30px, 4vw, 40px)", fontWeight: 800, letterSpacing: "-0.045em", color: c.text }}>
               <AnimText langKey={`sh2-${lang}`}>{t.showcase.headline}</AnimText>
             </motion.h2>
             {lang === "de" && (
@@ -2369,10 +2369,10 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 1, ease: appleEase, delay: 0.1 }}>
-              <h3 style={{ fontSize: "24px", marginBottom: "18px", fontWeight: 600, letterSpacing: "-0.02em" }}>
+              <h3 style={{ fontSize: "24px", marginBottom: "18px", fontWeight: 700, letterSpacing: "-0.03em" }}>
                 <AnimText langKey={`sh3-${lang}`}>{t.showcase.h3}</AnimText>
               </h3>
-              <p style={{ color: c.text2, fontSize: "16px", lineHeight: 1.65, marginBottom: "32px" }}>
+              <p style={{ color: c.text2, fontSize: "16px", lineHeight: 1.72, marginBottom: "32px" }}>
                 <AnimText langKey={`stext-${lang}`}>{t.showcase.text}</AnimText>
               </p>
             </motion.div>
@@ -2430,11 +2430,11 @@ export default function Home() {
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
             style={{ textAlign: "center", marginBottom: "70px" }}>
             <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: appleEase } } }}
-              style={{ color: "#0EA5E9", fontSize: "12px", fontWeight: 600, letterSpacing: "2px", marginBottom: "12px" }}>
+              style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "12px" }}>
               <AnimText langKey={`srv-label-${lang}`}>{s.srvLabel}</AnimText>
             </motion.p>
             <motion.h2 variants={{ hidden: { opacity: 0, y: 24, filter: "blur(6px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease: appleEase } } }}
-              style={{ fontSize: "clamp(26px, 4vw, 38px)", fontWeight: 700, letterSpacing: "-0.04em", color: c.text }}>
+              style={{ fontSize: "clamp(26px, 4vw, 38px)", fontWeight: 800, letterSpacing: "-0.045em", color: c.text }}>
               <AnimText langKey={`srv-hl-${lang}`}>{s.srvHl}</AnimText>
             </motion.h2>
           </motion.div>
@@ -2453,10 +2453,10 @@ export default function Home() {
                   transition: "box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease",
                 }}>
                 <div style={{ marginBottom: "18px", display: "flex", alignItems: "center", justifyContent: "flex-start" }}>{card.icon}</div>
-                <h3 style={{ fontSize: "20px", fontWeight: 700, letterSpacing: "-0.02em", color: c.text, marginBottom: "12px" }}>
+                <h3 style={{ fontSize: "20px", fontWeight: 800, letterSpacing: "-0.03em", color: c.text, marginBottom: "12px" }}>
                   {card.title}
                 </h3>
-                <p style={{ color: c.text2, fontSize: "15px", lineHeight: 1.65 }}>
+                <p style={{ color: c.text2, fontSize: "15px", lineHeight: 1.72 }}>
                   {card.text[lang] ?? card.text["de"]}
                 </p>
                 <div style={{ marginTop: "24px" }}>
@@ -2479,11 +2479,11 @@ export default function Home() {
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
             style={{ textAlign: "center", marginBottom: "64px" }}>
             <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: appleEase } } }}
-              style={{ color: "#0EA5E9", fontSize: "12px", fontWeight: 600, letterSpacing: "2px", marginBottom: "12px" }}>
+              style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "12px" }}>
               <AnimText langKey={`faq-label-${lang}`}>{s.faqLabel}</AnimText>
             </motion.p>
             <motion.h2 variants={{ hidden: { opacity: 0, y: 24, filter: "blur(6px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease: appleEase } } }}
-              style={{ fontSize: "clamp(26px, 4vw, 38px)", fontWeight: 700, letterSpacing: "-0.04em", color: c.text }}>
+              style={{ fontSize: "clamp(26px, 4vw, 38px)", fontWeight: 800, letterSpacing: "-0.045em", color: c.text }}>
               <AnimText langKey={`faq-hl-${lang}`}>{s.faqHl}</AnimText>
             </motion.h2>
           </motion.div>
@@ -2507,7 +2507,7 @@ export default function Home() {
 
             <motion.p variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" },
               visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: appleEase } } }}
-              style={{ color: "#0EA5E9", fontSize: "12px", fontWeight: 600, letterSpacing: "2px", marginBottom: "12px" }}>
+              style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "12px" }}>
               <AnimText langKey={`demo-label-${lang}`}>{t.demo.label}</AnimText>
             </motion.p>
 
@@ -2542,7 +2542,7 @@ export default function Home() {
             style={{ marginBottom: "48px" }}>
             <motion.p variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" },
               visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: appleEase } } }}
-              style={{ color: "#0EA5E9", fontSize: "12px", fontWeight: 600, letterSpacing: "2px", marginBottom: "12px" }}>
+              style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "12px" }}>
               ERSTE SCHRITTE
             </motion.p>
             <motion.h2 variants={{ hidden: { opacity: 0, scale: 0.92, y: 24, filter: "blur(6px)" },
