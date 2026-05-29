@@ -1,14 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import { rateLimit, getIP, escapeHtml, isValidEmail, sanitizeText } from "@/app/lib/rateLimit";
+import {
+  rateLimit, getIP, escapeHtml, isValidEmail,
+  sanitizeText, isValidName, keyFragment, normalizeEmailForKey, sanitizeLog,
+  sanitizeForEmailHeader,
+} from "@/app/lib/rateLimit";
 
-/* ─── Rate limit: 5 contact submissions per 10 minutes per IP ── */
-const CONTACT_LIMIT  = 5;
-const CONTACT_WINDOW = 10 * 60_000;
+/* ---- Rate limits --------------------------------------------- */
+const CONTACT_LIMIT  = 3;
+const CONTACT_WINDOW = 15 * 60_000; // 3 submissions per 15 minutes per IP
 
 export async function POST(req: NextRequest) {
   try {
-    // ── Rate limiting ──────────────────────────────────────────
+    // 1. Per-IP rate limit
     const ip = getIP(req);
     if (!rateLimit(`contact:${ip}`, CONTACT_LIMIT, CONTACT_WINDOW)) {
       return NextResponse.json(
@@ -17,10 +21,14 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ── Parse body ─────────────────────────────────────────────
+    // 2. Parse body — explicit size cap (chunked-transfer bypass fix)
     let body: unknown;
     try {
-      body = await req.json();
+      const raw = await req.text();
+      if (raw.length > 16_000) {
+        return NextResponse.json({ error: "Anfrage zu groß." }, { status: 413 });
+      }
+      body = JSON.parse(raw);
     } catch {
       return NextResponse.json({ error: "Ungültige Anfrage." }, { status: 400 });
     }
@@ -31,7 +39,7 @@ export async function POST(req: NextRequest) {
 
     const raw = body as Record<string, unknown>;
 
-    // ── Sanitize & validate inputs ─────────────────────────────
+    // 3. Sanitize & validate inputs
     const name    = sanitizeText(raw.name,    100);
     const email   = sanitizeText(raw.email,   254);
     const message = sanitizeText(raw.message, 2000);
@@ -43,6 +51,15 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // 4. Name validation — reject HTML / code injection attempts
+    if (!isValidName(name)) {
+      return NextResponse.json(
+        { error: "Bitte gib einen gültigen Namen ein." },
+        { status: 400 }
+      );
+    }
+
+    // 5. Email validation
     if (!isValidEmail(email)) {
       return NextResponse.json(
         { error: "Bitte gib eine gültige E-Mail-Adresse ein." },
@@ -50,16 +67,30 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // ── Send email ─────────────────────────────────────────────
+    // 6. Per-email rate limit (3 per hour regardless of IP)
+    //    normalizeEmailForKey() prevents plus-addressing and fullwidth bypasses
+    if (!rateLimit(`contact-email:${keyFragment(normalizeEmailForKey(email))}`, 3, 60 * 60_000)) {
+      return NextResponse.json(
+        { error: "Zu viele Anfragen. Bitte warte kurz." },
+        { status: 429 }
+      );
+    }
+
+    // 7. Send email
     const smtpPassword = process.env.SMTP_PASSWORD;
     if (!smtpPassword) {
-      console.log("Neue Kontaktanfrage:", { name, email, message });
+      // Dev mode: log only (sanitised to prevent log injection)
+      console.log("Neue Kontaktanfrage:", {
+        name:    sanitizeLog(name),
+        email:   sanitizeLog(email),
+        message: sanitizeLog(message),
+      });
       return NextResponse.json({ success: true });
     }
 
     const transporter = nodemailer.createTransport({
-      host: "smtp.strato.de",
-      port: 465,
+      host:   "smtp.strato.de",
+      port:   465,
       secure: true,
       auth: {
         user: "info@nilogik.de",
@@ -67,17 +98,17 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Escape all user input before inserting into HTML
+    // HTML-escape all user input before inserting into email body
     const safeName    = escapeHtml(name);
     const safeEmail   = escapeHtml(email);
     const safeMessage = escapeHtml(message);
 
     await transporter.sendMail({
-      from: `"NIL Website" <info@nilogik.de>`,
-      to: "info@nilogik.de",
-      replyTo: email,          // raw email is fine as replyTo – not HTML
-      subject: `Neue Anfrage von ${safeName}`,
-      text: `Name: ${name}\nE-Mail: ${email}\n\nNachricht:\n${message}`,
+      from:    '"NIL Website" <info@nilogik.de>',
+      to:      "info@nilogik.de",
+      replyTo: sanitizeForEmailHeader(email), // CRLF stripped — prevents header injection
+      subject: `Neue Anfrage von ${sanitizeForEmailHeader(safeName)}`,
+      text:    `Name: ${name}\nE-Mail: ${email}\n\nNachricht:\n${message}`,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #0F172A;">Neue Kontaktanfrage</h2>
@@ -92,7 +123,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("Contact form error:", error);
+    console.error("Contact form error:", sanitizeLog(String(error)));
     return NextResponse.json(
       { error: "Fehler beim Senden. Bitte versuche es erneut." },
       { status: 500 }

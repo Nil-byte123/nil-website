@@ -1,74 +1,82 @@
 import type { NextConfig } from "next";
 
+/**
+ * Static security headers applied to every response (including static assets).
+ * Content-Security-Policy is intentionally NOT here — it is generated
+ * dynamically per request by middleware.ts (with a per-request nonce).
+ */
 const securityHeaders = [
-  { key: "X-DNS-Prefetch-Control",  value: "on" },
-  { key: "X-Frame-Options",         value: "SAMEORIGIN" },
-  { key: "X-Content-Type-Options",  value: "nosniff" },
-  { key: "X-XSS-Protection",        value: "1; mode=block" },
-  { key: "Referrer-Policy",         value: "strict-origin-when-cross-origin" },
+  // Prevent browsers from DNS-prefetching across origins
+  { key: "X-DNS-Prefetch-Control",            value: "on" },
+  // Disallow loading by 3rd-party plugins (Flash, PDF readers, …)
+  { key: "X-Permitted-Cross-Domain-Policies", value: "none" },
+  // Prevent clickjacking
+  { key: "X-Frame-Options",                   value: "SAMEORIGIN" },
+  // Stop MIME-type sniffing
+  { key: "X-Content-Type-Options",            value: "nosniff" },
+  // Legacy XSS filter (still respected by IE / old Edge)
+  { key: "X-XSS-Protection",                  value: "1; mode=block" },
+  // Don't leak the full URL as Referer
+  { key: "Referrer-Policy",                   value: "strict-origin-when-cross-origin" },
+  // Disable every sensor / API that isn't needed
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
+    value: [
+      "camera=()",
+      "microphone=()",
+      "geolocation=()",
+      "payment=()",
+      "usb=()",
+      "interest-cohort=()",
+      "browsing-topics=()",
+      "attribution-reporting=()",
+      "identity-credentials-get=()",
+      "private-state-token-issuance=()",
+      "private-state-token-redemption=()",
+    ].join(", "),
   },
+  // Force HTTPS for 2 years, include subdomains, allow preload
   {
     key: "Strict-Transport-Security",
     value: "max-age=63072000; includeSubDomains; preload",
   },
-  {
-    // Prevent browsers from sniffing MIME types
-    key: "Cross-Origin-Opener-Policy",
-    value: "same-origin",
-  },
-  {
-    key: "Cross-Origin-Resource-Policy",
-    value: "same-origin",
-  },
-  {
-    key: "Content-Security-Policy",
-    value: [
-      "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' data: https://fonts.gstatic.com",
-      "img-src 'self' data: blob: https:",
-      "connect-src 'self' https://api.groq.com https://www.google-analytics.com https://analytics.google.com https://api.mailchimp.com https://*.mailchimp.com",
-      "frame-src 'self' https://calendly.com https://js.stripe.com",
-      "frame-ancestors 'self'",
-      "script-src-elem 'self' 'unsafe-inline' https://www.googletagmanager.com https://js.stripe.com https://assets.calendly.com",
-      "base-uri 'self'",
-      "form-action 'self'",
-      "upgrade-insecure-requests",
-    ].join("; "),
-  },
+  // Prevent cross-origin window sharing
+  { key: "Cross-Origin-Opener-Policy",   value: "same-origin" },
+  // Prevent cross-origin resource loading without explicit CORS
+  { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
 ];
 
 const nextConfig: NextConfig = {
+  poweredByHeader: false, // removes "X-Powered-By: Next.js" from every response
+
   async redirects() {
     return [
       {
-        source: "/:path*",
-        has: [{ type: "host", value: "nilogik.com" }],
+        source:      "/:path*",
+        has:         [{ type: "host", value: "nilogik.com" }],
         destination: "https://www.nilogik.de/:path*",
-        permanent: true, // 301 – tells Google: main domain is nilogik.de
+        permanent:   true,
       },
       {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.nilogik.com" }],
+        source:      "/:path*",
+        has:         [{ type: "host", value: "www.nilogik.com" }],
         destination: "https://www.nilogik.de/:path*",
-        permanent: true,
+        permanent:   true,
       },
     ];
   },
+
   async headers() {
     return [
       {
-        source: "/(.*)",
+        source:  "/(.*)",
         headers: securityHeaders,
       },
     ];
   },
+
   images: {
-    formats: ["image/avif", "image/webp"],
+    formats:     ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
   },
 };
