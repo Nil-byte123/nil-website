@@ -181,27 +181,27 @@ const sl: Record<LangCode, {
 /* ─── Rotating Hero Taglines ────────────────────────────────── */
 const rotatingTaglines: Record<LangCode, string[]> = {
   de: [
-    "Dienstleister: Termine & Kundenkommunikation – vollautomatisch, rund um die Uhr.",
+    "Dein KI-Assistent antwortet auf Kundenanfragen – auch wenn du gerade auf der Baustelle bist.",
     "Gastronomie & Handel: Reservierungen, Bestellungen & Anfragen automatisch bearbeiten.",
     "Unternehmen & Teams: Smarte Automatisierung für jeden Betrieb – unabhängig der Branche.",
   ],
   en: [
-    "Service businesses: Appointments & customer communication – fully automated, 24/7.",
+    "Your AI assistant answers customer inquiries – even when you're busy on a job.",
     "Hospitality & retail: Handle reservations, orders & inquiries automatically.",
     "Companies & teams: Smart automation for any business – whatever the industry.",
   ],
   es: [
-    "Negocios de servicios: Citas y comunicación con clientes – totalmente automatizados, 24/7.",
+    "Tu asistente de IA responde consultas de clientes – aunque estés ocupado en el trabajo.",
     "Hostelería y comercio: Gestiona reservas, pedidos y consultas automáticamente.",
     "Empresas y equipos: Automatización inteligente para cualquier negocio.",
   ],
   fr: [
-    "Prestataires de services : Rendez-vous & relation client – entièrement automatisés, 24h/24.",
+    "Votre assistant IA répond aux demandes clients – même quand vous êtes en intervention.",
     "Restauration & commerce : Gérez réservations, commandes et demandes automatiquement.",
     "Entreprises & équipes : Automatisation intelligente pour tout type de business.",
   ],
   it: [
-    "Servizi: Appuntamenti & comunicazione clienti – completamente automatizzati, 24/7.",
+    "Il tuo assistente IA risponde alle richieste dei clienti – anche quando sei impegnato sul lavoro.",
     "Ristorazione & commercio: Gestisci prenotazioni, ordini e richieste automaticamente.",
     "Aziende & team: Automazione intelligente per qualsiasi tipo di business.",
   ],
@@ -1006,7 +1006,7 @@ function ContactForm({ lang }: { lang: LangCode }) {
 
 /* ─── FAQ Accordion ─────────────────────────────────────────── */
 function FAQList({ items, isDark }: { items: { q: string; a: string }[]; isDark: boolean }) {
-  const [open, setOpen] = useState<number | null>(null);
+  const [open, setOpen] = useState<number | null>(0);
   const divider = isDark ? "rgba(255,255,255,0.07)" : "rgba(15,23,42,0.08)";
   const text    = isDark ? "#F1F5F9" : "#0F172A";
   const text2   = isDark ? "#94A3B8" : "#475569";
@@ -1790,6 +1790,154 @@ export default function Home() {
         </div>
       </div>
 
+      {/* ── PILOTPROGRAMM BANNER ── */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.7, ease: appleEase }}
+        style={{
+          background: "linear-gradient(135deg, #0A1628 0%, #0D2444 50%, #0A1E38 100%)",
+          borderTop: "1px solid rgba(14,165,233,0.2)",
+          borderBottom: "1px solid rgba(14,165,233,0.2)",
+          padding: "28px 24px",
+        }}
+      >
+        <div style={{
+          maxWidth: "900px", margin: "0 auto",
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          gap: "20px", flexWrap: "wrap",
+        }}>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: "14px" }}>
+            <div style={{
+              width: "40px", height: "40px", borderRadius: "10px", flexShrink: 0,
+              background: "rgba(14,165,233,0.15)", border: "1px solid rgba(14,165,233,0.3)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2.5s-5 3-5 9v1.5L5 16h14l-2-3V11.5C17 5.5 12 2.5 12 2.5z"/>
+                <path d="M10 16v3.5h4V16"/>
+              </svg>
+            </div>
+            <div>
+              <p style={{ color: "#FFFFFF", fontSize: "15px", fontWeight: 700, margin: "0 0 4px", letterSpacing: "-0.01em" }}>
+                Wir suchen 3 Pilotbetriebe in Bayern
+              </p>
+              <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "13px", margin: 0, lineHeight: 1.5 }}>
+                Kostenlose Einrichtung gegen ehrliches Feedback – begrenzte Plätze, jetzt bewerben.
+              </p>
+            </div>
+          </div>
+          <motion.a
+            href="#kontakt"
+            whileHover={{ scale: 1.04, boxShadow: "0 12px 32px rgba(14,165,233,0.4)" }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ type: "spring", stiffness: 350, damping: 22 }}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: "7px",
+              background: "linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
+              color: "#FFFFFF", padding: "11px 24px", borderRadius: "9999px",
+              fontWeight: 700, fontSize: "14px", textDecoration: "none",
+              boxShadow: "0 6px 20px rgba(14,165,233,0.3)",
+              whiteSpace: "nowrap", flexShrink: 0,
+            }}
+          >
+            Jetzt bewerben →
+          </motion.a>
+        </div>
+      </motion.div>
+
+      {/* ── STATS BLOCK ── */}
+      <section style={{
+        padding: "72px 24px 64px",
+        background: isDark ? "#07101e" : "#EEF2F7",
+        transition: "background 0.3s ease",
+      }}>
+        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
+          <motion.p
+            initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.6, ease: appleEase }}
+            style={{ textAlign: "center", color: "#0EA5E9", fontSize: "12px", fontWeight: 600, letterSpacing: "2px", marginBottom: "40px" }}
+          >
+            ERGEBNISSE DIE ZÄHLEN
+          </motion.p>
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gap: "20px",
+          }}>
+            {[
+              {
+                value: "45–90",
+                unit: "Min/Tag",
+                label: "Zeitersparnis",
+                detail: "Typische Entlastung durch automatische Beantwortung von Kundenanfragen",
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                ),
+              },
+              {
+                value: "< 48",
+                unit: "Stunden",
+                label: "Bis zum Go-Live",
+                detail: "Von der Beauftragung bis dein Assistent live und einsatzbereit ist",
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                  </svg>
+                ),
+              },
+              {
+                value: "30",
+                unit: "Tage",
+                label: "Geld-zurück-Garantie",
+                detail: "Kein Risiko. Wenn du nicht zufrieden bist, bekommst du jeden Cent zurück",
+                icon: (
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                ),
+              },
+            ].map((stat, i) => (
+              <motion.div key={stat.label}
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.7, ease: appleEase, delay: i * 0.1 }}
+                style={{
+                  background: c.card,
+                  border: `1px solid ${c.border}`,
+                  borderRadius: "20px", padding: "28px 26px",
+                  boxShadow: "0 4px 20px rgba(15,23,42,0.05)",
+                  transition: "background 0.3s, border 0.3s",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+                  <div style={{
+                    width: "36px", height: "36px", borderRadius: "9px",
+                    background: isDark ? "rgba(14,165,233,0.12)" : "rgba(14,165,233,0.08)",
+                    border: "1px solid rgba(14,165,233,0.2)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    flexShrink: 0,
+                  }}>{stat.icon}</div>
+                  <span style={{ fontSize: "12px", fontWeight: 600, color: "#0EA5E9", letterSpacing: "0.5px" }}>
+                    {stat.label.toUpperCase()}
+                  </span>
+                </div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "6px", marginBottom: "10px" }}>
+                  <span style={{ fontSize: "44px", fontWeight: 900, letterSpacing: "-0.05em", color: c.text, lineHeight: 1 }}>
+                    {stat.value}
+                  </span>
+                  <span style={{ fontSize: "16px", fontWeight: 600, color: "#0EA5E9" }}>{stat.unit}</span>
+                </div>
+                <p style={{ fontSize: "13px", color: c.text2, lineHeight: 1.6, margin: 0 }}>{stat.detail}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── SHOWCASE ── */}
       <section id="vorteile" style={{ padding: "120px 20px",
         background: c.sec1,
@@ -1809,6 +1957,12 @@ export default function Home() {
               style={{ fontSize: "clamp(30px, 4vw, 40px)", fontWeight: 700, letterSpacing: "-0.04em", color: c.text }}>
               <AnimText langKey={`sh2-${lang}`}>{t.showcase.headline}</AnimText>
             </motion.h2>
+            {lang === "de" && (
+              <motion.h2 variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: appleEase, delay: 0.1 } } }}
+                style={{ fontSize: "clamp(14px, 2vw, 17px)", fontWeight: 500, letterSpacing: "-0.01em", color: c.text2, marginTop: "14px" }}>
+                KI-Automatisierung für Betriebe in München, Augsburg und ganz Bayern
+              </motion.h2>
+            )}
           </motion.div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "50px", alignItems: "center" }}>

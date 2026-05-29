@@ -15,11 +15,12 @@ export const metadata: Metadata = {
     template: "%s | NIL",
   },
   description:
-    "Smarte Softwarelösungen und digitale Automatisierung für Unternehmen jeder Branche. Mehr Zeit, mehr Umsatz – automatisch. 24/7 verfügbar, ohne Personalaufwand.",
+    "KI-Assistent für Handwerk, Gastronomie und Dienstleister in Bayern. Kundenanfragen automatisch beantworten – rund um die Uhr.",
   keywords: [
-    "Automatisierung", "Softwarelösung", "Digitalisierung", "Terminbuchung",
-    "Softwareentwicklung", "Unternehmensautomatisierung", "Gastronomie Automatisierung",
-    "nilogik", "NIL", "Bayern", "digitaler Assistent",
+    "KI Assistent Bayern", "KI Automatisierung Bayern", "Automatisierung", "Softwarelösung",
+    "Digitalisierung", "Terminbuchung", "Softwareentwicklung", "Unternehmensautomatisierung",
+    "Gastronomie Automatisierung", "Handwerk Automatisierung", "nilogik", "NIL",
+    "München", "Augsburg", "digitaler Assistent",
   ],
   authors: [{ name: "NIL", url: "https://www.nilogik.de" }],
   creator: "NIL",
