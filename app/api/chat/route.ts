@@ -1,4 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+import { rateLimit, getIP, sanitizeText } from "@/app/lib/rateLimit";
+
+/* ─── Rate limit config ──────────────────────────────────────── */
+const CHAT_LIMIT    = 20;          // max requests per window
+const CHAT_WINDOW   = 60_000;      // 1 minute
+const MAX_MSG_LEN   = 600;         // max chars per user message
+const MAX_HISTORY   = 20;          // max history messages forwarded to AI
 
 /* ─── Knowledge per business type ───────────────────────────── */
 const TYPE_KNOWLEDGE: Record<string, string> = {
@@ -84,41 +91,85 @@ PFLICHTREGELN:
 7. Wenn du etwas nicht weißt: "Das beantworte ich gerne direkt – hinterlasse mir kurz deinen Namen und deine Nummer, dann meldet sich jemand vom Team! 😊"`;
 }
 
-/* ─── Fallback prompt (no business context) ─────────────────── */
 const FALLBACK_PROMPT = `Du bist ein freundlicher digitaler Assistent. Antworte kurz und hilfreich auf Deutsch. Maximal 2–3 Sätze pro Antwort.`;
 
 /* ─── POST handler ───────────────────────────────────────────── */
 export async function POST(req: NextRequest) {
   try {
-    const { message, history, businessContext } = await req.json();
-
-    if (!message || message.trim() === "") {
-      return NextResponse.json({ response: "Bitte senden Sie eine gültige Nachricht." });
+    // ── Rate limiting ──────────────────────────────────────────
+    const ip = getIP(req);
+    if (!rateLimit(`chat:${ip}`, CHAT_LIMIT, CHAT_WINDOW)) {
+      return NextResponse.json(
+        { response: "Zu viele Anfragen. Bitte warte kurz und versuche es erneut." },
+        { status: 429 }
+      );
     }
 
+    // ── Parse & validate body ──────────────────────────────────
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ response: "Ungültige Anfrage." }, { status: 400 });
+    }
+
+    if (!body || typeof body !== "object") {
+      return NextResponse.json({ response: "Ungültige Anfrage." }, { status: 400 });
+    }
+
+    const { message, history, businessContext } = body as Record<string, unknown>;
+
+    const cleanMessage = sanitizeText(message, MAX_MSG_LEN);
+    if (!cleanMessage) {
+      return NextResponse.json({ response: "Bitte senden Sie eine gültige Nachricht." }, { status: 400 });
+    }
+
+    // ── Validate & sanitize history ────────────────────────────
+    const cleanHistory = Array.isArray(history)
+      ? history
+          .slice(-MAX_HISTORY)
+          .filter((m): m is { role: string; content: string } =>
+            m && typeof m === "object" && typeof m.role === "string" && typeof m.content === "string"
+          )
+          .map(m => ({
+            role: m.role === "bot" ? "assistant" : "user",
+            content: sanitizeText(m.content, MAX_MSG_LEN),
+          }))
+          .filter(m => m.content.length > 0)
+      : [];
+
+    // ── Validate business context ──────────────────────────────
+    const ctx = businessContext && typeof businessContext === "object"
+      ? (businessContext as Record<string, unknown>)
+      : null;
+
+    const cleanCtx: BusinessContext | null =
+      ctx && typeof ctx.name === "string" && typeof ctx.type === "string"
+        ? {
+            name:     sanitizeText(ctx.name,     80),
+            type:     sanitizeText(ctx.type,     40),
+            services: sanitizeText(ctx.services, 300),
+          }
+        : null;
+
+    // ── API key check ──────────────────────────────────────────
     const apiKey = process.env.GROQ_API_KEY;
     if (!apiKey) {
-      return NextResponse.json({ response: "Es tut mir leid, ich bin gerade nicht erreichbar." });
+      return NextResponse.json({ response: "Ich bin gerade nicht erreichbar." });
     }
 
     const systemPrompt =
-      businessContext?.name && businessContext?.type
-        ? buildSystemPrompt(businessContext as BusinessContext)
+      cleanCtx?.name && cleanCtx?.type
+        ? buildSystemPrompt(cleanCtx)
         : FALLBACK_PROMPT;
 
     const messagesForAI = [
       { role: "system", content: systemPrompt },
-      ...(Array.isArray(history)
-        ? history
-            .filter((m: { role: string; content: string }) => m.content?.trim())
-            .map((m: { role: string; content: string }) => ({
-              role: m.role === "bot" ? "assistant" : m.role,
-              content: m.content,
-            }))
-        : []),
-      { role: "user", content: message },
+      ...cleanHistory,
+      { role: "user", content: cleanMessage },
     ];
 
+    // ── Call GROQ ──────────────────────────────────────────────
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -137,7 +188,7 @@ export async function POST(req: NextRequest) {
     if (!response.ok) {
       console.error("GROQ API error:", data);
       return NextResponse.json(
-        { response: "Es tut mir leid, ich bin gerade nicht erreichbar. Bitte versuche es gleich nochmal!" },
+        { response: "Ich bin gerade nicht erreichbar. Bitte versuche es gleich nochmal!" },
         { status: 200 }
       );
     }

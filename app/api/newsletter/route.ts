@@ -1,18 +1,45 @@
 import { NextResponse } from "next/server";
+import { rateLimit, getIP, isValidEmail, sanitizeText } from "@/app/lib/rateLimit";
+
+/* ─── Rate limit: 3 newsletter signups per hour per IP ───────── */
+const NL_LIMIT  = 3;
+const NL_WINDOW = 60 * 60_000;
 
 export async function POST(req: Request) {
   try {
-    const { email } = await req.json();
-
-    if (!email || !email.includes("@")) {
-      return NextResponse.json({ error: "Ungültige E-Mail" }, { status: 400 });
+    // ── Rate limiting ──────────────────────────────────────────
+    const ip = getIP(req);
+    if (!rateLimit(`newsletter:${ip}`, NL_LIMIT, NL_WINDOW)) {
+      return NextResponse.json(
+        { error: "Zu viele Anfragen. Bitte versuche es später erneut." },
+        { status: 429 }
+      );
     }
 
+    // ── Parse & validate ───────────────────────────────────────
+    let body: unknown;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ error: "Ungültige Anfrage." }, { status: 400 });
+    }
+
+    if (!body || typeof body !== "object") {
+      return NextResponse.json({ error: "Ungültige Anfrage." }, { status: 400 });
+    }
+
+    const raw   = body as Record<string, unknown>;
+    const email = sanitizeText(raw.email, 254);
+
+    if (!email || !isValidEmail(email)) {
+      return NextResponse.json({ error: "Bitte gib eine gültige E-Mail-Adresse ein." }, { status: 400 });
+    }
+
+    // ── Send to Mailchimp ──────────────────────────────────────
     const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
     const MAILCHIMP_LIST_ID = process.env.MAILCHIMP_LIST_ID;
-    const MAILCHIMP_DC = process.env.MAILCHIMP_DC ?? "us1"; // e.g. "us1", "eu1"
+    const MAILCHIMP_DC      = process.env.MAILCHIMP_DC ?? "us1";
 
-    // If Mailchimp is not configured, still return success (dev mode)
     if (!MAILCHIMP_API_KEY || !MAILCHIMP_LIST_ID) {
       console.log("[Newsletter] Mailchimp not configured – email:", email);
       return NextResponse.json({ success: true });
@@ -36,7 +63,6 @@ export async function POST(req: Request) {
 
     if (!response.ok) {
       const data = await response.json();
-      // 400 with "Member Exists" is acceptable
       if (data.title === "Member Exists") {
         return NextResponse.json({ success: true });
       }
