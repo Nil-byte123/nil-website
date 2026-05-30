@@ -2180,7 +2180,8 @@ export default function Home() {
             style={{ textAlign: "center", marginTop: "52px" }}
           >
             <motion.a
-              href="#kontakt"
+              href={(() => { const raw = process.env.NEXT_PUBLIC_CALENDLY_URL ?? ""; if (!raw) return "mailto:info@nilogik.de"; return raw.startsWith("http") ? raw : `https://${raw}`; })()}
+              target="_blank" rel="noopener noreferrer"
               whileHover={{ scale: 1.04, y: -2, boxShadow: "0 16px 36px rgba(14,165,233,0.38)" }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 350, damping: 22 }}
@@ -2450,7 +2451,9 @@ export default function Home() {
                   {card.text[lang] ?? card.text["de"]}
                 </p>
                 <div style={{ marginTop: "24px" }}>
-                  <motion.a href="#kontakt"
+                  <motion.a
+                    href={(() => { const raw = process.env.NEXT_PUBLIC_CALENDLY_URL ?? ""; if (!raw) return "mailto:info@nilogik.de"; return raw.startsWith("http") ? raw : `https://${raw}`; })()}
+                    target="_blank" rel="noopener noreferrer"
                     whileHover={{ color: "#0EA5E9" }}
                     style={{ color: "#0EA5E9", fontSize: "14px", fontWeight: 600, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}>
                     <AnimText langKey={`srv-cta-${lang}`}>{s.calendly}</AnimText> →
