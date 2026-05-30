@@ -1353,6 +1353,13 @@ export default function Home() {
   }, []);
   const isMobile = windowWidth < 860;
 
+  /* ── Kontakt Modal ── */
+  const [showCtaModal, setShowCtaModal] = useState(false);
+  useEffect(() => {
+    document.body.style.overflow = showCtaModal ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [showCtaModal]);
+
   /* ── Dark Mode ── */
   const [isDark, setIsDark] = useState(false);
   const [themeOverlay, setThemeOverlay] = useState<{ x: number; y: number; toDark: boolean; id: number } | null>(null);
@@ -1484,6 +1491,7 @@ export default function Home() {
                   { href: "#kontakt",  label: t.nav.contact  },
                 ] as { href: string; label: string }[]).map(({ href, label }, i) => (
                   <motion.a key={href} href={href}
+                    onClick={href === "#kontakt" ? (e: React.MouseEvent) => { e.preventDefault(); setShowCtaModal(true); } : undefined}
                     initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: appleEase, delay: 0.35 + i * 0.07 }}
                     whileHover={{ color: "#0EA5E9" }}
@@ -1575,7 +1583,9 @@ export default function Home() {
                   initial={{ opacity: 0, x: -14 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05, duration: 0.22 }}
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={href === "#kontakt"
+                    ? (e: React.MouseEvent) => { e.preventDefault(); setMobileMenuOpen(false); setShowCtaModal(true); }
+                    : () => setMobileMenuOpen(false)}
                   style={{ display: "block", padding: "12px 4px", fontSize: "17px", fontWeight: 500, color: c.text, textDecoration: "none", borderBottom: `1px solid ${c.border}` }}
                 >
                   {label}
@@ -1889,7 +1899,7 @@ export default function Home() {
             transition={{ duration: 0.9, ease: appleEase, delay: 0.85 }}
             style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}
           >
-            <motion.a href="#kontakt"
+            <motion.button onClick={() => setShowCtaModal(true)}
               whileHover={{ scale: 1.05, boxShadow: "0 18px 44px rgba(14,165,233,0.35), 0 6px 20px rgba(15,23,42,0.2)" }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 350, damping: 22 }}
@@ -1897,7 +1907,8 @@ export default function Home() {
                 background: "linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%)",
                 color: "#FFFFFF",
                 padding: "16px 40px", borderRadius: "9999px", fontWeight: 600, fontSize: "14px",
-                textDecoration: "none", boxShadow: "0 10px 30px rgba(15,23,42,0.18), inset 0 1px 0 rgba(255,255,255,0.08)",
+                border: "none", cursor: "pointer", fontFamily: "inherit",
+                boxShadow: "0 10px 30px rgba(15,23,42,0.18), inset 0 1px 0 rgba(255,255,255,0.08)",
                 letterSpacing: "0.2px" }}>
               <AnimatePresence mode="wait">
                 <motion.span key={`cta-${lang}`}
@@ -1906,7 +1917,7 @@ export default function Home() {
                   {t.hero.cta}
                 </motion.span>
               </AnimatePresence>
-            </motion.a>
+            </motion.button>
 
             {/* Calendly Termin-Button */}
             <motion.a
@@ -2020,6 +2031,7 @@ export default function Home() {
           </div>
           <motion.a
             href="#kontakt"
+            onClick={(e: React.MouseEvent) => { e.preventDefault(); setShowCtaModal(true); }}
             whileHover={{ scale: 1.04, boxShadow: "0 12px 32px rgba(14,165,233,0.4)" }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 350, damping: 22 }}
@@ -2524,20 +2536,71 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── KONTAKT ── */}
-      <section id="kontakt" style={{ padding: "120px 20px 80px", textAlign: "center",
-        background: c.contactBg, transition: "background 0.3s ease" }}>
-        <div style={{ maxWidth: "620px", margin: "0 auto" }}>
+      {/* ── KONTAKT MODAL ── */}
+      <div id="kontakt" />
+
+      {/* Backdrop */}
+      <AnimatePresence>
+        {showCtaModal && (
+          <motion.div
+            key="cta-backdrop"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setShowCtaModal(false)}
+            style={{
+              position: "fixed", inset: 0, zIndex: 800,
+              background: "rgba(8,21,42,0.72)",
+              backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(6px)",
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Modal sheet — slides up from bottom */}
+      <motion.section
+        initial={{ y: "100%" }}
+        animate={{ y: showCtaModal ? 0 : "100%" }}
+        transition={{ type: "spring", stiffness: 280, damping: 32 }}
+        style={{
+          position: "fixed", bottom: 0, left: 0, right: 0,
+          height: "92vh", overflowY: "auto", overscrollBehavior: "contain",
+          zIndex: 900, borderRadius: "28px 28px 0 0",
+          background: c.contactBg, textAlign: "center",
+          pointerEvents: showCtaModal ? "auto" : "none",
+          transition: "background 0.3s ease",
+        }}
+      >
+        {/* Sticky header with close button */}
+        <div style={{
+          position: "sticky", top: 0, zIndex: 10,
+          background: c.contactBg, transition: "background 0.3s ease",
+          padding: "14px 20px 10px",
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          borderBottom: `1px solid ${c.border}`,
+          borderRadius: "28px 28px 0 0",
+        }}>
+          <span style={{ fontSize: "13px", fontWeight: 700, letterSpacing: "2px", color: "#0EA5E9" }}>
+            ERSTE SCHRITTE
+          </span>
+          <motion.button
+            onClick={() => setShowCtaModal(false)}
+            whileHover={{ scale: 1.1, background: "rgba(15,23,42,0.12)" }}
+            whileTap={{ scale: 0.92 }}
+            style={{
+              width: "32px", height: "32px", borderRadius: "50%",
+              background: "rgba(15,23,42,0.07)", border: "none",
+              cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "15px", color: c.text2, fontFamily: "inherit",
+            }}
+          >✕</motion.button>
+        </div>
+
+        <div style={{ maxWidth: "620px", margin: "0 auto", padding: "60px 20px 80px" }}>
 
           {/* Header */}
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.14 } } }}
             style={{ marginBottom: "48px" }}>
-            <motion.p variants={{ hidden: { opacity: 0, y: 20, filter: "blur(5px)" },
-              visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: appleEase } } }}
-              style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "12px" }}>
-              ERSTE SCHRITTE
-            </motion.p>
             <motion.h2 variants={{ hidden: { opacity: 0, scale: 0.92, y: 24, filter: "blur(6px)" },
               visible: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)", transition: { duration: 1, ease: appleEase } } }}
               style={{ fontSize: "clamp(28px, 4vw, 38px)", fontWeight: 700, letterSpacing: "-0.04em", marginBottom: "18px", color: c.text }}>
@@ -2693,7 +2756,7 @@ export default function Home() {
             <ContactForm lang={lang} />
           </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ── FOOTER ── */}
       <footer style={{
