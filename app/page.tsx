@@ -593,9 +593,9 @@ function FinalBrandingLogoWhite({ width = 260, height = 100 }: { width?: number;
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", times: [0, 0.15, 0.3, 0.5, 0.65, 0.8, 1] }}
       >
         {/* single neon-tube line — stronger glow for dark backgrounds */}
-        <line x1="150" y1="14" x2="150" y2="86" stroke="#7DD3FC" strokeWidth="4"
+        <line x1="150" y1="14" x2="150" y2="86" stroke="#ffffff" strokeWidth="3"
           strokeLinecap="round"
-          style={{ filter: "drop-shadow(0 0 2px #e0f2fe) drop-shadow(0 0 8px #0ea5e9) drop-shadow(0 0 18px #0ea5e9) drop-shadow(0 0 34px #0284c7)" }} />
+          style={{ filter: "drop-shadow(0 0 3px #ffffff) drop-shadow(0 0 8px #0ea5e9) drop-shadow(0 0 18px #0ea5e9) drop-shadow(0 0 34px #0284c7)" }} />
       </motion.g>
       {/* L – two separate strokes */}
       <path d="M216 14V86 M216 86H284" stroke="rgba(255,255,255,0.9)" strokeWidth="9"
