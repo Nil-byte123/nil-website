@@ -45,7 +45,7 @@ const IconPeople = () => (
 const values = [
   { icon: <IconChip />,   title: "KI mit Verstand", text: "Wir setzen KI nur dort ein, wo sie wirklich Mehrwert schafft, nicht als Spielerei, sondern als echtes Werkzeug." },
   { icon: <IconBolt />,   title: "Geschwindigkeit",  text: "Schnelle Umsetzung, direkte Kommunikation, keine langen Warteschlangen." },
-  { icon: <IconShield />, title: "Datenschutz",      text: "DSGVO-konform von Grund auf. Deine Daten bleiben bei dir." },
+  { icon: <IconShield />, title: "Datenschutz",      text: "DSGVO-konform von Grund auf. Ihre Daten bleiben bei Ihnen." },
   { icon: <IconPeople />, title: "Partnerschaft",    text: "Wir denken langfristig. Keine Einmallösungen, sondern dauerhafte Zusammenarbeit." },
 ];
 
@@ -112,7 +112,7 @@ export default function UeberUns() {
           transition={{ duration: 0.8, ease, delay: 0.2 }}
           style={{ color: "#475569", fontSize: "17px", maxWidth: "600px", margin: "0 auto", lineHeight: 1.7 }}
         >
-          NIL ist ein junges Technologieunternehmen aus Bayern, das Unternehmen dabei hilft, repetitive Prozesse durch intelligente KI-Lösungen zu automatisieren, damit du dich auf das Wesentliche konzentrieren kannst.
+          NIL ist ein junges Technologieunternehmen aus Bayern, das Unternehmen dabei hilft, repetitive Prozesse durch intelligente KI-Lösungen zu automatisieren, damit Sie Sie auf das Wesentliche konzentrieren kannst.
         </motion.p>
       </section>
 
@@ -291,7 +291,7 @@ export default function UeberUns() {
           Bereit, zusammenzuarbeiten?
         </motion.h2>
         <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "16px", marginBottom: "32px" }}>
-          Lass uns gemeinsam die passende Lösung für dein Unternehmen entwickeln.
+          Lass uns gemeinsam die passende Lösung für Ihr Unternehmen entwickeln.
         </p>
         <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
           <Link href="/#kontakt" style={{

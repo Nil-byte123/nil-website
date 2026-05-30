@@ -20,21 +20,21 @@ const translations = {
       label: "PASSGENAU FÜR JEDE BRANCHE",
       headline: "24/7 erreichbar. Ohne Personalaufwand.",
       h3: "Kundenanfragen automatisch klären.",
-      text: "Ob Tischreservierung im Café, Terminbuchung beim Friseur oder automatisierter Support für Tech-Unternehmen: Unsere Assistenten arbeiten unsichtbar auf deiner Plattform und entlasten dein Team vollständig.",
+      text: "Ob Tischreservierung im Café, Terminbuchung beim Friseur oder automatisierter Support für Tech-Unternehmen: Unsere Assistenten arbeiten unsichtbar auf Ihrer Plattform und entlasten Ihr Team vollständig.",
       chat1: "Guten Abend! Ich versuche schon den ganzen Tag anzurufen, habt ihr morgen noch einen Termin frei?",
-      chat2: "Hallo! Kein Problem, ich bin rund um die Uhr für dich da. Morgen um 10:00 Uhr ist noch was frei, dein Termin ist gebucht. ✨",
+      chat2: "Hallo! Kein Problem, ich bin rund um die Uhr für Sie da. Morgen um 10:00 Uhr ist noch was frei, Ihr Termin ist gebucht. ✨",
       chatLabel: "LIVE DEMO CHAT",
     },
     demo: {
       label: "LIVE DEMO",
       headline: "Einfach ausprobieren.",
-      subtext: "Passe den Assistenten auf deinen Betrieb an und teste ihn direkt live, so sieht deine Lösung aus.",
-      greeting: "Hallo! Ich bin dein digitaler Assistent. Wie kann ich dir heute helfen? 🤖",
+      subtext: "Passe den Assistenten auf Ihren Betrieb an und teste ihn direkt live, so sieht Ihre Lösung aus.",
+      greeting: "Hallo! Ich bin Ihr digitaler Assistent. Wie kann ich Ihnen heute helfen? 🤖",
       placeholder: "Nachricht schreiben …",
     },
     contact: {
       headline: "Bereit für die Zukunft?",
-      subtext: "Lass uns gemeinsam deine Prozesse intelligent automatisieren.",
+      subtext: "Lass uns gemeinsam Ihre Prozesse intelligent automatisieren.",
       phoneLabel: "TELEFON",
       emailLabel: "E-MAIL",
     },
@@ -171,7 +171,7 @@ const sl: Record<LangCode, {
   calendly: string;
   nlHeading: string; nlPlaceholder: string; nlBtn: string; nlSuccess: string;
 }> = {
-  de: { srvLabel: "LEISTUNGEN", srvHl: "Smarte Lösungen für jede Branche.", faqLabel: "FAQ", faqHl: "Häufig gestellte Fragen.", tstLabel: "KUNDENSTIMMEN", tstHl: "Was unsere Kunden sagen.", calendly: "Termin buchen", nlHeading: "Updates & Insights", nlPlaceholder: "Deine E-Mail-Adresse", nlBtn: "Anmelden", nlSuccess: "Angemeldet! ✨" },
+  de: { srvLabel: "LEISTUNGEN", srvHl: "Smarte Lösungen für jede Branche.", faqLabel: "FAQ", faqHl: "Häufig gestellte Fragen.", tstLabel: "KUNDENSTIMMEN", tstHl: "Was unsere Kunden sagen.", calendly: "Termin buchen", nlHeading: "Updates & Insights", nlPlaceholder: "Ihre E-Mail-Adresse", nlBtn: "Anmelden", nlSuccess: "Angemeldet! ✨" },
   en: { srvLabel: "SERVICES", srvHl: "The right solution for every industry.", faqLabel: "FAQ", faqHl: "Frequently asked questions.", tstLabel: "TESTIMONIALS", tstHl: "What our clients say.", calendly: "Book a meeting", nlHeading: "Stay updated", nlPlaceholder: "Your email address", nlBtn: "Subscribe", nlSuccess: "Subscribed! ✨" },
   es: { srvLabel: "SERVICIOS", srvHl: "La solución adecuada para cada sector.", faqLabel: "FAQ", faqHl: "Preguntas frecuentes.", tstLabel: "OPINIONES", tstHl: "Lo que dicen nuestros clientes.", calendly: "Reservar cita", nlHeading: "Mantenerse informado", nlPlaceholder: "Tu correo electrónico", nlBtn: "Suscribirse", nlSuccess: "¡Suscrito! ✨" },
   fr: { srvLabel: "SERVICES", srvHl: "La bonne solution pour chaque secteur.", faqLabel: "FAQ", faqHl: "Questions fréquentes.", tstLabel: "TÉMOIGNAGES", tstHl: "Ce que disent nos clients.", calendly: "Prendre RDV", nlHeading: "Restez informé", nlPlaceholder: "Votre adresse e-mail", nlBtn: "S'inscrire", nlSuccess: "Inscrit(e) ! ✨" },
@@ -181,7 +181,7 @@ const sl: Record<LangCode, {
 /* ─── Rotating Hero Taglines ────────────────────────────────── */
 const rotatingTaglines: Record<LangCode, string[]> = {
   de: [
-    "Dein KI-Assistent antwortet auf Kundenanfragen, auch wenn du gerade auf der Baustelle bist.",
+    "Ihr KI-Assistent antwortet auf Kundenanfragen, auch wenn Sie gerade auf der Baustelle bist.",
     "Gastronomie & Handel: Reservierungen, Bestellungen & Anfragen automatisch bearbeiten.",
     "Unternehmen & Teams: Smarte Automatisierung für jeden Betrieb, unabhängig der Branche.",
   ],
@@ -218,7 +218,7 @@ const serviceCards = [
       </svg>
     ),
     title: "Dienstleister & Beauty",
-    text: { de: "Automatische Terminbuchung, Kundenkommunikation und Erinnerungen, damit du dich auf deine Arbeit konzentrierst, nicht auf Verwaltung.", en: "Automatic appointment booking, customer communication and reminders, so you focus on your craft, not admin.", es: "Reservas automáticas, comunicación con clientes y recordatorios, para que te centres en tu trabajo.", fr: "Réservations automatiques, communication client et rappels, pour vous concentrer sur votre métier.", it: "Prenotazioni automatiche, comunicazione clienti e promemoria, per concentrarti sul tuo lavoro." },
+    text: { de: "Automatische Terminbuchung, Kundenkommunikation und Erinnerungen, damit Sie sich auf Ihre Arbeit konzentrieren, nicht auf Verwaltung.", en: "Automatic appointment booking, customer communication and reminders, so you focus on your craft, not admin.", es: "Reservas automáticas, comunicación con clientes y recordatorios, para que te centres en tu trabajo.", fr: "Réservations automatiques, communication client et rappels, pour vous concentrer sur votre métier.", it: "Prenotazioni automatiche, comunicazione clienti e promemoria, per concentrarti sul tuo lavoro." },
   },
   {
     icon: (
@@ -239,7 +239,7 @@ const serviceCards = [
       </svg>
     ),
     title: "Unternehmen & Teams",
-    text: { de: "Smarte Softwarelösungen und digitale Assistenten für jede Branche, individuell auf deinen Betrieb zugeschnitten.", en: "Smart software solutions and digital assistants for any industry, tailored to your business.", es: "Soluciones de software inteligentes y asistentes digitales para cualquier sector.", fr: "Solutions logicielles intelligentes et assistants numériques pour tout secteur.", it: "Soluzioni software intelligenti e assistenti digitali per qualsiasi settore." },
+    text: { de: "Smarte Softwarelösungen und digitale Assistenten für jede Branche, individuell auf Ihren Betrieb zugeschnitten.", en: "Smart software solutions and digital assistants for any industry, tailored to your business.", es: "Soluciones de software inteligentes y asistentes digitales para cualquier sector.", fr: "Solutions logicielles intelligentes et assistants numériques pour tout secteur.", it: "Soluzioni software intelligenti e assistenti digitali per qualsiasi settore." },
   },
   {
     icon: (
@@ -248,7 +248,7 @@ const serviceCards = [
       </svg>
     ),
     title: "Gesundheit & Beratung",
-    text: { de: "Terminvergabe, Patientenkommunikation und Beratungsanfragen, zuverlässig automatisiert, damit du dich auf deine Klienten konzentrierst.", en: "Appointment scheduling, patient communication and consultation inquiries, reliably automated so you focus on your clients.", es: "Programación de citas, comunicación con pacientes y consultas, automatizados de forma fiable.", fr: "Prise de rendez-vous, communication patients et demandes de consultation, automatisés de manière fiable.", it: "Prenotazioni, comunicazione pazienti e richieste di consulenza, automatizzati in modo affidabile." },
+    text: { de: "Terminvergabe, Patientenkommunikation und Beratungsanfragen, zuverlässig automatisiert, damit Sie sich auf Ihre Klienten konzentrieren.", en: "Appointment scheduling, patient communication and consultation inquiries, reliably automated so you focus on your clients.", es: "Programación de citas, comunicación con pacientes y consultas, automatizados de forma fiable.", fr: "Prise de rendez-vous, communication patients et demandes de consultation, automatisés de manière fiable.", it: "Prenotazioni, comunicazione pazienti e richieste di consulenza, automatizzati in modo affidabile." },
   },
 ];
 
@@ -257,27 +257,27 @@ const faqItems: Record<LangCode, { q: string; a: string }[]> = {
   de: [
     {
       q: "Wie schnell ist die Einrichtung?",
-      a: "Du gibst uns die Infos zu deinem Betrieb, wir erledigen den Rest. In der Regel ist dein Assistent innerhalb von 48 Stunden live und einsatzbereit. Kein technisches Vorwissen nötig, keine lange Einarbeitungsphase. Du startest sofort, und sparst ab Tag eins Zeit.",
+      a: "Sie gibst uns die Infos zu Ihrem Betrieb, wir erledigen den Rest. In der Regel ist Ihr Assistent innerhalb von 48 Stunden live und einsatzbereit. Kein technisches Vorwissen nötig, keine lange Einarbeitungsphase. Sie startest sofort, und sparst ab Tag eins Zeit.",
     },
     {
       q: "Brauche ich IT-Kenntnisse?",
-      a: "Überhaupt nicht. Du musst keine einzige Zeile Code verstehen. Wir übernehmen die komplette technische Einrichtung, von der KI-Konfiguration bis zur Integration in deine bestehenden Tools. Du bekommst eine fertige Lösung geliefert und kannst sofort loslegen. Einfach so.",
+      a: "Überhaupt nicht. Sie musst keine einzige Zeile Code verstehen. Wir übernehmen die komplette technische Einrichtung, von der KI-Konfiguration bis zur Integration in Ihre bestehenden Tools. Sie bekommst eine fertige Lösung geliefert und kannst sofort loslegen. Einfach so.",
     },
     {
       q: "Welche Sprachen versteht der Assistent?",
-      a: "Standardmäßig kommt dein Assistent mit Deutsch und Englisch, perfekt für den Alltag. Brauchst du weitere Sprachen für internationale Kunden? Kein Problem. Spanisch, Französisch, Italienisch und mehr sind auf Anfrage möglich. Wir richten es ein.",
+      a: "Standardmäßig kommt Ihr Assistent mit Deutsch und Englisch, perfekt für den Alltag. Brauchst Sie weitere Sprachen für internationale Kunden? Kein Problem. Spanisch, Französisch, Italienisch und mehr sind auf Anfrage möglich. Wir richten es ein.",
     },
     {
       q: "Kann ich den Assistenten anpassen?",
-      a: "Ja, und das ist genau der Unterschied zu einer Standardlösung. Dein Assistent bekommt deinen Ton, deine Persönlichkeit, dein Branchenwissen. Er kennt deine Preise, deine Öffnungszeiten, deine häufigsten Kundenfragen. Kein generischer Bot, sondern ein digitaler Mitarbeiter, der wirklich zu dir passt.",
+      a: "Ja, und das ist genau der Unterschied zu einer Standardlösung. Ihr Assistent bekommt Ihren Ton, Ihre Persönlichkeit, Ihr Branchenwissen. Er kennt Ihre Preise, Ihre Öffnungszeiten, Ihre häufigsten Kundenfragen. Kein generischer Bot, sondern ein digitaler Mitarbeiter, der wirklich zu Ihnen passt.",
     },
     {
       q: "Wie sicher sind meine Daten?",
-      a: "Datenschutz ist für uns keine Nebensache. Alle Daten werden vollständig DSGVO-konform verarbeitet, kein dauerhaftes Speichern von Gesprächsinhalten, keine Weitergabe an Dritte. Deine Kundendaten bleiben deine Kundendaten. Punkt.",
+      a: "Datenschutz ist für uns keine Nebensache. Alle Daten werden vollständig DSGVO-konform verarbeitet, kein dauerhaftes Speichern von Gesprächsinhalten, keine Weitergabe an Dritte. Ihre Kundendaten bleiben Ihre Kundendaten. Punkt.",
     },
     {
       q: "Was passiert nach der Kündigung?",
-      a: "Die Nutzung endet sauber zum Ende des Abrechnungszeitraums, keine Überraschungen, keine versteckten Gebühren, keine Mindestlaufzeit. Du kannst monatlich kündigen. Und dank unserer 30 Tage Geld-zurück-Garantie gehst du ohnehin kein Risiko ein.",
+      a: "Die Nutzung endet sauber zum Ende des Abrechnungszeitraums, keine Überraschungen, keine versteckten Gebühren, keine Mindestlaufzeit. Sie kannst monatlich kündigen. Und dank unserer 30 Tage Geld-zurück-Garantie gehst Sie ohnehin kein Risiko ein.",
     },
   ],
   en: [
@@ -665,7 +665,7 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
     const emoji = selectedType?.emoji ?? "🤖";
     setMessages([{
       role: "bot",
-      content: `Hallo! Ich bin der digitale Assistent von ${bizName.trim()}. Wie kann ich dir heute helfen? ${emoji}`,
+      content: `Hallo! Ich bin der digitale Assistent von ${bizName.trim()}. Wie kann ich Ihnen heute helfen? ${emoji}`,
     }]);
     setConfigured(true);
   };
@@ -1097,7 +1097,7 @@ function ContactForm({ lang }: { lang: LangCode }) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   const labels = {
-    de: { name: "Name", email: "E-Mail", message: "Nachricht", send: "Nachricht senden", success: "Nachricht gesendet! Wir melden uns bald. ✨", error: "Fehler beim Senden. Bitte versuche es erneut.", placeholder_name: "Dein Name", placeholder_email: "deine@email.de", placeholder_msg: "Wie können wir dir helfen?" },
+    de: { name: "Name", email: "E-Mail", message: "Nachricht", send: "Nachricht senden", success: "Nachricht gesendet! Wir melden uns bald. ✨", error: "Fehler beim Senden. Bitte versuche es erneut.", placeholder_name: "Ihr Name", placeholder_email: "Ihre@email.de", placeholder_msg: "Wie können wir Ihnen helfen?" },
     en: { name: "Name", email: "Email", message: "Message", send: "Send message", success: "Message sent! We'll be in touch soon. ✨", error: "Error sending. Please try again.", placeholder_name: "Your name", placeholder_email: "your@email.com", placeholder_msg: "How can we help you?" },
     es: { name: "Nombre", email: "Correo", message: "Mensaje", send: "Enviar mensaje", success: "¡Mensaje enviado! Nos pondremos en contacto pronto. ✨", error: "Error al enviar. Por favor, inténtalo de nuevo.", placeholder_name: "Tu nombre", placeholder_email: "tu@email.com", placeholder_msg: "¿Cómo podemos ayudarte?" },
     fr: { name: "Nom", email: "E-mail", message: "Message", send: "Envoyer le message", success: "Message envoyé ! Nous vous contacterons bientôt. ✨", error: "Erreur lors de l'envoi. Veuillez réessayer.", placeholder_name: "Votre nom", placeholder_email: "votre@email.fr", placeholder_msg: "Comment pouvons-nous vous aider ?" },
@@ -1342,7 +1342,7 @@ type ConfigAnswers = Record<string, string[]>;
 const CONFIG_STEPS = [
   {
     id: "anfragen",
-    q: "Wie oft melden sich Kunden bei dir, so ungefähr pro Monat?",
+    q: "Wie oft melden sich Kunden bei Ihnen, so ungefähr pro Monat?",
     hint: "Zähle Anrufe, Nachrichten und E-Mails einfach zusammen. Schätzen reicht!",
     multi: false,
     cols: 2,
@@ -1355,8 +1355,8 @@ const CONFIG_STEPS = [
   },
   {
     id: "kanaele",
-    q: "Wo sollen Kunden deinen Assistenten finden und schreiben können?",
-    hint: "Wähle alle Orte aus, über die Kunden dich heute kontaktieren",
+    q: "Wo sollen Kunden Ihren Assistenten finden und schreiben können?",
+    hint: "Wähle alle Orte aus, über die Kunden Sie heute kontaktieren",
     multi: true,
     cols: 2,
     options: [
@@ -1368,8 +1368,8 @@ const CONFIG_STEPS = [
   },
   {
     id: "features",
-    q: "Was soll der Assistent für dich und deine Kunden erledigen?",
-    hint: "Mehrere Antworten möglich. Einfach alles anklicken was du brauchst.",
+    q: "Was soll der Assistent für Sie und Ihre Kunden erledigen?",
+    hint: "Mehrere Antworten möglich. Einfach alles anklicken was Sie brauchen.",
     multi: true,
     cols: 3,
     options: [
@@ -1383,7 +1383,7 @@ const CONFIG_STEPS = [
   },
   {
     id: "assistenten",
-    q: "Für wie viele verschiedene Aufgaben brauchst du einen Assistenten?",
+    q: "Für wie viele verschiedene Aufgaben brauchen Sie einen Assistenten?",
     hint: "Z.B. einen für Terminbuchung und einen für Kundenfragen.",
     multi: false,
     cols: 3,
@@ -1397,9 +1397,9 @@ const CONFIG_STEPS = [
 
 const PLAN_RESULTS = {
   Starter:    { emoji: "🌱", price: "ab €39 / Monat",  cta: "Kostenlos starten →",  desc: "Perfekt zum Einstieg. 14 Tage kostenlos testen, keine Kreditkarte, kein Risiko. Für kleinere Betriebe die NIL kennenlernen wollen." },
-  Basic:      { emoji: "📈", price: "ab €89 / Monat",  cta: "Basic starten →",       desc: "Genau richtig für deinen Betrieb. 500 Anfragen/Monat, E-Mail-Integration und vollständiger deutschsprachiger Support." },
-  Pro:        { emoji: "⚡", price: "ab €199 / Monat", cta: "Pro wählen →",          desc: "Du brauchst Power. Pro gibt dir 3 Assistenten, bis zu 3.000 Anfragen, WhatsApp & Instagram und erweiterte Analytics." },
-  Enterprise: { emoji: "🏢", price: "ab €499 / Monat", cta: "Angebot anfragen →",   desc: "Deine Anforderungen sind komplex, genau dafür gibt es Enterprise. Unbegrenzte Assistenten, Custom API und 24/7 SLA." },
+  Basic:      { emoji: "📈", price: "ab €89 / Monat",  cta: "Basic starten →",       desc: "Genau richtig für Ihren Betrieb. 500 Anfragen/Monat, E-Mail-Integration und vollständiger deutschsprachiger Support." },
+  Pro:        { emoji: "⚡", price: "ab €199 / Monat", cta: "Pro wählen →",          desc: "Sie brauchst Power. Pro gibt Ihnen 3 Assistenten, bis zu 3.000 Anfragen, WhatsApp & Instagram und erweiterte Analytics." },
+  Enterprise: { emoji: "🏢", price: "ab €499 / Monat", cta: "Angebot anfragen →",   desc: "Ihre Anforderungen sind komplex, genau dafür gibt es Enterprise. Unbegrenzte Assistenten, Custom API und 24/7 SLA." },
 } as const;
 
 type PlanKey = keyof typeof PLAN_RESULTS;
@@ -1412,7 +1412,7 @@ function calcRecommendation(answers: ConfigAnswers): { plan: PlanKey; reasons: s
   const reasons: string[] = [];
   let score = 0;
 
-  if      (anfragen === "gt3000") { score = Math.max(score, 3); reasons.push("Du bekommst sehr viele Nachrichten, dafür braucht es Enterprise"); }
+  if      (anfragen === "gt3000") { score = Math.max(score, 3); reasons.push("Sie bekommst sehr viele Nachrichten, dafür braucht es Enterprise"); }
   else if (anfragen === "lt3000") { score = Math.max(score, 2); reasons.push("Für bis zu 3.000 Kontakte pro Monat ist Pro genau richtig"); }
   else if (anfragen === "lt500")  { score = Math.max(score, 1); reasons.push("Für bis zu 500 Kontakte pro Monat reicht Basic vollkommen"); }
 
@@ -1482,10 +1482,10 @@ function PlanFinder({ isDark, c, onOpenModal }: { isDark: boolean; c: CColors; o
           viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7, ease: appleEase }}>
           <p style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "10px" }}>PLAN FINDER</p>
           <h2 style={{ fontSize: "clamp(22px, 3.5vw, 34px)", fontWeight: 800, letterSpacing: "-0.04em", marginBottom: "10px", color: c.text }}>
-            Welches Abo passt zu dir?
+            Welches Abo passt zu Ihnen?
           </h2>
           <p style={{ color: c.text2, fontSize: "15px", marginBottom: "32px", lineHeight: 1.6 }}>
-            Beantworte {total} einfache Fragen, kein Fachwissen nötig. Wir empfehlen dir das passende Abo.
+            Beantworte {total} einfache Fragen, kein Fachwissen nötig. Wir empfehlen Ihnen das passende Abo.
           </p>
         </motion.div>
 
@@ -2403,7 +2403,7 @@ export default function Home() {
               variants={{ hidden: { opacity: 0, y: 16, filter: "blur(4px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: appleEase } } }}
               style={{ color: c.text2, fontSize: "16px", lineHeight: 1.65, maxWidth: "480px", margin: "0 auto" }}
             >
-              Von unserem ersten Gespräch bis dein Assistent läuft, meistens in unter 48 Stunden.
+              Von unserem ersten Gespräch bis Ihr Assistent läuft, meistens in unter 48 Stunden.
             </motion.p>
           </motion.div>
 
@@ -2420,7 +2420,7 @@ export default function Home() {
                 color: "#0EA5E9",
                 sub: "15 Min · kostenlos",
                 title: "Kurzes Gespräch",
-                desc: "Wir schauen gemeinsam, welche Anfragen dich täglich Zeit kosten. Kein Vortrag, nur ein ehrliches Gespräch.",
+                desc: "Wir schauen gemeinsam, welche Anfragen Sie täglich Zeit kosten. Kein Vortrag, nur ein ehrliches Gespräch.",
                 icon: (
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -2430,9 +2430,9 @@ export default function Home() {
               {
                 num: "02",
                 color: "#8B5CF6",
-                sub: "Wir kümmern uns · du musst nichts tun",
+                sub: "Wir kümmern uns · Sie müssen nichts tun",
                 title: "Wir richten alles ein",
-                desc: "Dein Assistent wird auf deinen Betrieb angepasst und eingerichtet. In der Regel fertig in unter 48 Stunden.",
+                desc: "Ihr Assistent wird auf Ihren Betrieb angepasst und eingerichtet. In der Regel fertig in unter 48 Stunden.",
                 icon: (
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
@@ -2444,7 +2444,7 @@ export default function Home() {
                 color: "#22C55E",
                 sub: "24 / 7 · rund um die Uhr",
                 title: "Ab sofort automatisch",
-                desc: "Dein Assistent beantwortet Kundenanfragen rund um die Uhr. Jede Konversation siehst du live mit.",
+                desc: "Ihr Assistent beantwortet Kundenanfragen rund um die Uhr. Jede Konversation siehst Sie live mit.",
                 icon: (
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
@@ -2559,7 +2559,7 @@ export default function Home() {
                 value: "45–90",
                 unit: "Min/Tag",
                 label: "Zeitersparnis",
-                detail: "Weniger Verwaltung, mehr Zeit für dein eigentliches Handwerk",
+                detail: "Weniger Verwaltung, mehr Zeit für Ihr eigentliches Handwerk",
                 color: "#0EA5E9",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -2570,8 +2570,8 @@ export default function Home() {
               {
                 value: "< 48",
                 unit: "Stunden",
-                label: "Bis du startklar bist",
-                detail: "Von unserem ersten Gespräch bis dein Assistent läuft",
+                label: "Bis Sie startklar bist",
+                detail: "Von unserem ersten Gespräch bis Ihr Assistent läuft",
                 color: "#38BDF8",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -2583,7 +2583,7 @@ export default function Home() {
                 value: "30",
                 unit: "Tage",
                 label: "Geld-zurück-Garantie",
-                detail: "Kein Risiko. Wenn du nicht zufrieden bist, bekommst du jeden Cent zurück",
+                detail: "Kein Risiko. Wenn Sie nicht zufrieden bist, bekommst Sie jeden Cent zurück",
                 color: "#22C55E",
                 icon: (
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -3080,7 +3080,7 @@ export default function Home() {
             <motion.p variants={{ hidden: { opacity: 0, y: 18, filter: "blur(4px)" },
               visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.85, ease: appleEase } } }}
               style={{ color: c.text2, fontSize: "16px", lineHeight: 1.65, maxWidth: "480px", margin: "0 auto" }}>
-              Buche ein kostenloses 20-Minuten-Gespräch. Wir schauen uns gemeinsam an, was für dein Unternehmen automatisiert werden kann.
+              Buche ein kostenloses 20-Minuten-Gespräch. Wir schauen uns gemeinsam an, was für Ihr Unternehmen automatisiert werden kann.
             </motion.p>
           </motion.div>
 
@@ -3135,9 +3135,9 @@ export default function Home() {
             }}
           >
             {[
-              { step: "1", emoji: "💬", title: "Gespräch", text: "Wir lernen dein Unternehmen kennen und analysieren Automatisierungspotenziale." },
-              { step: "2", emoji: "📋", title: "Konzept", text: "Du erhältst einen konkreten Plan mit klarem Zeitrahmen und transparenten Kosten." },
-              { step: "3", emoji: "🚀", title: "Live in 48h", text: "Wir richten alles ein. Du sparst sofort Zeit und kannst dich aufs Wesentliche konzentrieren." },
+              { step: "1", emoji: "💬", title: "Gespräch", text: "Wir lernen Ihr Unternehmen kennen und analysieren Automatisierungspotenziale." },
+              { step: "2", emoji: "📋", title: "Konzept", text: "Sie erhältst einen konkreten Plan mit klarem Zeitrahmen und transparenten Kosten." },
+              { step: "3", emoji: "🚀", title: "Live in 48h", text: "Wir richten alles ein. Sie sparst sofort Zeit und kannst Sie aufs Wesentliche konzentrieren." },
             ].map((item, i) => (
               <motion.div
                 key={item.step}
@@ -3286,7 +3286,7 @@ export default function Home() {
                 {s.nlHeading.toUpperCase()}
               </p>
               <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "13px", lineHeight: 1.6, marginBottom: "16px" }}>
-                KI-Tipps, Updates & Neuigkeiten direkt in dein Postfach.
+                KI-Tipps, Updates & Neuigkeiten direkt in Ihr Postfach.
               </p>
               <NewsletterForm slang={s} />
             </div>
