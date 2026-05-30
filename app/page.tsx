@@ -568,15 +568,14 @@ function FinalBrandingLogo({ width = 260, height = 100 }: { width?: number; heig
         animate={{ opacity: [1, 0.88, 1, 0.94, 1, 0.91, 1] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", times: [0, 0.15, 0.3, 0.5, 0.65, 0.8, 1] }}
       >
-        <line x1="150" y1="14" x2="150" y2="86" stroke="#38BDF8" strokeWidth="40"
+        <line x1="150" y1="14" x2="150" y2="86" stroke="#0EA5E9" strokeWidth="40"
           strokeLinecap="round" opacity="0.07" style={{ filter: "blur(14px)" }} />
         <line x1="150" y1="14" x2="150" y2="86" stroke="#0EA5E9" strokeWidth="22"
           strokeLinecap="round" opacity="0.22" style={{ filter: "blur(7px)" }} />
         <line x1="150" y1="14" x2="150" y2="86" stroke="#0EA5E9" strokeWidth="11"
           strokeLinecap="round" opacity="0.52" style={{ filter: "blur(2.5px)" }} />
-        <line x1="150" y1="14" x2="150" y2="86" stroke="#BAE6FD" strokeWidth="5.5"
-          strokeLinecap="round" style={{ filter: "drop-shadow(0 0 4px #0EA5E9) drop-shadow(0 0 10px #38BDF8)" }} />
-        <line x1="150" y1="16" x2="150" y2="84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+        <line x1="150" y1="14" x2="150" y2="86" stroke="#7DD3FC" strokeWidth="5.5"
+          strokeLinecap="round" style={{ filter: "drop-shadow(0 0 4px #0EA5E9) drop-shadow(0 0 10px #0EA5E9)" }} />
       </motion.g>
       {/* L – two separate strokes */}
       <path d="M216 14V86 M216 86H284" stroke="#08152A" strokeWidth="9"
@@ -597,15 +596,14 @@ function FinalBrandingLogoWhite({ width = 260, height = 100 }: { width?: number;
         animate={{ opacity: [1, 0.88, 1, 0.94, 1, 0.91, 1] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", times: [0, 0.15, 0.3, 0.5, 0.65, 0.8, 1] }}
       >
-        <line x1="150" y1="14" x2="150" y2="86" stroke="#38BDF8" strokeWidth="40"
+        <line x1="150" y1="14" x2="150" y2="86" stroke="#0EA5E9" strokeWidth="40"
           strokeLinecap="round" opacity="0.15" style={{ filter: "blur(14px)" }} />
         <line x1="150" y1="14" x2="150" y2="86" stroke="#0EA5E9" strokeWidth="22"
           strokeLinecap="round" opacity="0.4" style={{ filter: "blur(7px)" }} />
         <line x1="150" y1="14" x2="150" y2="86" stroke="#0EA5E9" strokeWidth="11"
           strokeLinecap="round" opacity="0.7" style={{ filter: "blur(2.5px)" }} />
-        <line x1="150" y1="14" x2="150" y2="86" stroke="#BAE6FD" strokeWidth="5.5"
-          strokeLinecap="round" style={{ filter: "drop-shadow(0 0 6px #0EA5E9) drop-shadow(0 0 14px #38BDF8)" }} />
-        <line x1="150" y1="16" x2="150" y2="84" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+        <line x1="150" y1="14" x2="150" y2="86" stroke="#7DD3FC" strokeWidth="5.5"
+          strokeLinecap="round" style={{ filter: "drop-shadow(0 0 6px #0EA5E9) drop-shadow(0 0 14px #0EA5E9)" }} />
       </motion.g>
       {/* L – two separate strokes */}
       <path d="M216 14V86 M216 86H284" stroke="rgba(255,255,255,0.9)" strokeWidth="9"
