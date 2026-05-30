@@ -1335,6 +1335,191 @@ function FAQList({ items, isDark }: { items: { q: string; a: string }[]; isDark:
   );
 }
 
+/* ─── Plan Finder Quiz ──────────────────────────────────────── */
+type CColors = { card: string; border: string; text: string; text2: string; text3: string; [k: string]: string };
+
+const PLAN_QUESTIONS = [
+  {
+    q: "Wie viele Kundenanfragen bekommt dein Betrieb pro Monat?",
+    hint: "Eine Schätzung reicht völlig",
+    options: [
+      { label: "Weniger als 100", emoji: "🌱", score: 0 },
+      { label: "100 – 500",       emoji: "📈", score: 1 },
+      { label: "500 – 3.000",     emoji: "🚀", score: 2 },
+      { label: "Über 3.000",      emoji: "🏢", score: 3 },
+    ],
+  },
+  {
+    q: "Über welche Kanäle sollen Kunden den Assistenten erreichen?",
+    hint: "Mehrere Kanäle = mehr Reichweite",
+    options: [
+      { label: "Nur Website-Chat",          emoji: "💬", score: 0 },
+      { label: "Website + E-Mail",          emoji: "📧", score: 1 },
+      { label: "Web, WhatsApp & Instagram", emoji: "📱", score: 2 },
+      { label: "Individuell / On-Premise",  emoji: "⚙️", score: 3 },
+    ],
+  },
+  {
+    q: "Wie viele KI-Assistenten brauchst du?",
+    hint: "Z.B. je einen für Terminbuchung und Support",
+    options: [
+      { label: "1 Assistent",       emoji: "🤖", score: 0 },
+      { label: "2 – 3 Assistenten", emoji: "🤝", score: 1 },
+      { label: "Mehr als 3",        emoji: "🏭", score: 2 },
+    ],
+  },
+];
+
+const PLAN_RESULTS = {
+  Starter:    { emoji: "🌱", price: "ab €39 / Monat",   desc: "Perfekt zum Ausprobieren! Du bekommst 14 Tage kostenlos – ohne Kreditkarte. Ideal für kleinere Betriebe, die NIL kennenlernen wollen.", cta: "Kostenlos starten →" },
+  Basic:      { emoji: "📈", price: "ab €89 / Monat",   desc: "Genau richtig für deinen Betrieb. Du bekommst 500 Anfragen/Monat, E-Mail-Integration und deutschsprachigen Support.",                    cta: "Basic starten →" },
+  Pro:        { emoji: "⚡", price: "ab €199 / Monat",  desc: "Du brauchst Power. Pro bietet 3 Assistenten, bis zu 3.000 Anfragen, WhatsApp & Instagram und erweiterte Analytics.",                     cta: "Pro wählen →" },
+  Enterprise: { emoji: "🏢", price: "ab €499 / Monat",  desc: "Deine Anforderungen sind komplex – genau dafür gibt es Enterprise. Unbegrenzte Assistenten, Custom API und 24/7 SLA-Support.",           cta: "Angebot anfragen →" },
+} as const;
+
+function PlanFinder({ isDark, c, onOpenModal }: { isDark: boolean; c: CColors; onOpenModal: () => void }) {
+  const [step,   setStep]   = useState(0);
+  const [scores, setScores] = useState<number[]>([]);
+  const [result, setResult] = useState<keyof typeof PLAN_RESULTS | null>(null);
+
+  const handleAnswer = (score: number) => {
+    const next = [...scores, score];
+    setScores(next);
+    if (next.length === PLAN_QUESTIONS.length) {
+      const max = Math.max(...next);
+      const avg = next.reduce((a, b) => a + b, 0) / next.length;
+      setResult(max === 3 ? "Enterprise" : avg >= 2 ? "Pro" : avg >= 1 ? "Basic" : "Starter");
+    } else {
+      setStep(s => s + 1);
+    }
+  };
+
+  const reset = () => { setStep(0); setScores([]); setResult(null); };
+  const q   = PLAN_QUESTIONS[step];
+  const res = result ? PLAN_RESULTS[result] : null;
+
+  return (
+    <section style={{ padding: "80px 20px", background: isDark ? "#0A1628" : "#E8F0FA", transition: "background 0.3s" }}>
+      <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
+
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7, ease: appleEase }}>
+          <p style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "10px" }}>
+            PLAN FINDER
+          </p>
+          <h2 style={{ fontSize: "clamp(22px, 3.5vw, 34px)", fontWeight: 800, letterSpacing: "-0.04em", marginBottom: "10px", color: c.text }}>
+            Welcher Plan passt zu dir?
+          </h2>
+          <p style={{ color: c.text2, fontSize: "15px", marginBottom: "32px", lineHeight: 1.6 }}>
+            3 kurze Fragen – wir finden den perfekten Plan für dich.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.8, delay: 0.1, ease: appleEase }}
+          style={{ background: c.card, border: `1px solid ${c.border}`, borderRadius: "24px",
+            padding: "36px 28px", boxShadow: "0 8px 40px rgba(15,23,42,0.08)" }}
+        >
+          {!result ? (
+            <>
+              {/* Progress */}
+              <div style={{ display: "flex", gap: "8px", justifyContent: "center", marginBottom: "28px" }}>
+                {PLAN_QUESTIONS.map((_, i) => (
+                  <div key={i} style={{
+                    height: "6px", borderRadius: "3px",
+                    width: i === step ? "28px" : "8px",
+                    background: i <= step ? "#0EA5E9" : c.border,
+                    transition: "all 0.3s ease",
+                  }} />
+                ))}
+              </div>
+
+              <AnimatePresence mode="wait">
+                <motion.div key={step}
+                  initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }}
+                  transition={{ duration: 0.26, ease: appleEase }}
+                >
+                  <p style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "1px", marginBottom: "10px" }}>
+                    FRAGE {step + 1} VON {PLAN_QUESTIONS.length}
+                  </p>
+                  <h3 style={{ fontSize: "19px", fontWeight: 700, color: c.text, marginBottom: "6px", lineHeight: 1.4, letterSpacing: "-0.02em" }}>
+                    {q.q}
+                  </h3>
+                  <p style={{ fontSize: "13px", color: c.text3, marginBottom: "22px" }}>{q.hint}</p>
+
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+                    {q.options.map(opt => (
+                      <motion.button key={opt.label} onClick={() => handleAnswer(opt.score)}
+                        whileHover={{ scale: 1.03, borderColor: "#0EA5E9", background: isDark ? "rgba(14,165,233,0.08)" : "rgba(14,165,233,0.04)" }}
+                        whileTap={{ scale: 0.96 }}
+                        style={{
+                          padding: "16px 12px", borderRadius: "14px", cursor: "pointer",
+                          background: isDark ? "rgba(255,255,255,0.04)" : "#F8FAFC",
+                          border: `1.5px solid ${c.border}`,
+                          display: "flex", flexDirection: "column", alignItems: "center", gap: "8px",
+                          fontFamily: "inherit", textAlign: "center",
+                          transition: "border-color 0.2s, background 0.2s",
+                        }}
+                      >
+                        <span style={{ fontSize: "26px", lineHeight: 1 }}>{opt.emoji}</span>
+                        <span style={{ fontSize: "13px", fontWeight: 600, color: c.text, lineHeight: 1.3 }}>{opt.label}</span>
+                      </motion.button>
+                    ))}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </>
+          ) : (
+            <AnimatePresence mode="wait">
+              <motion.div key="result"
+                initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, ease: appleEase }}
+              >
+                <div style={{ fontSize: "52px", marginBottom: "14px" }}>{res!.emoji}</div>
+                <p style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "1.5px", marginBottom: "8px" }}>
+                  UNSERE EMPFEHLUNG FÜR DICH
+                </p>
+                <h3 style={{ fontSize: "34px", fontWeight: 900, letterSpacing: "-0.04em", color: c.text, marginBottom: "4px" }}>
+                  {result}
+                </h3>
+                <div style={{ fontSize: "17px", fontWeight: 700, color: "#0EA5E9", marginBottom: "16px" }}>
+                  {res!.price}
+                </div>
+                <p style={{ fontSize: "15px", color: c.text2, lineHeight: 1.65, marginBottom: "28px",
+                  maxWidth: "400px", margin: "0 auto 28px" }}>
+                  {res!.desc}
+                </p>
+                <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
+                  <motion.button onClick={onOpenModal}
+                    whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                    style={{
+                      padding: "14px 30px", borderRadius: "12px", border: "none",
+                      background: "linear-gradient(135deg, #0EA5E9, #0284C7)",
+                      color: "#fff", fontWeight: 700, fontSize: "15px",
+                      cursor: "pointer", fontFamily: "inherit",
+                      boxShadow: "0 8px 24px rgba(14,165,233,0.35)",
+                    }}
+                  >{res!.cta}</motion.button>
+                  <motion.button onClick={reset}
+                    whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                    style={{
+                      padding: "14px 22px", borderRadius: "12px",
+                      background: "transparent", border: `1.5px solid ${c.border}`,
+                      color: c.text2, fontWeight: 600, fontSize: "14px",
+                      cursor: "pointer", fontFamily: "inherit",
+                    }}
+                  >↺ Nochmal</motion.button>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          )}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Main Page ─────────────────────────────────────────────── */
 export default function Home() {
   const [lang, setLang] = useState<LangCode>("de");
@@ -2645,6 +2830,9 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* ── PLAN FINDER ── */}
+      <PlanFinder isDark={isDark} c={c} onOpenModal={() => setShowCtaModal(true)} />
 
       {/* ── DEMO ── */}
       <section id="demo" style={{
