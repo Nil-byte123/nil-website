@@ -227,39 +227,56 @@ const INJECTION_PATTERNS: RegExp[] = [
   /new\s+instructions?\s*:/i,
   /from\s+now\s+on\s+(you\s+)?(are|will|must|should)\s+/i,
 
-  // ── German instruction overrides ───────────────────────────────
+  // ── German instruction overrides — informal (du) ──────────────
   /ignoriere\s+(alle?\s+)?(vorherigen?|früheren?|bisherigen?)\s+(anweisungen?|regeln?)/i,
   /vergiss\s+(alle?\s+)?(vorherigen?|früheren?|deine)\s+(anweisungen?|regeln?)/i,
   /neue\s+anweisungen?\s*:/i,
   /ab\s+(jetzt|sofort)\s+(bist|verhältst|antwortest)\s+du/i,
   /deine\s+(neue\s+)?(aufgabe|rolle|anweisung)\s+(ist|lautet)/i,
 
-  // ── Role hijacking ─────────────────────────────────────────────
+  // ── German instruction overrides — formal (Sie) + infinitive ──
+  // "Ignorieren Sie alle vorherigen Anweisungen"
+  /ignorier(?:en?)\s+(?:Sie\s+)?(alle?\s+)?(vorherigen?|früheren?|bisherigen?)\s+(anweisungen?|regeln?)/i,
+  // "Vergessen Sie alle Ihre Anweisungen"
+  /vergess(?:en?)\s+(?:Sie\s+)?(alle?\s+)?(vorherigen?|früheren?|(?:Ihre?|deine?))\s+(anweisungen?|regeln?)/i,
+  // "Ihre neue Aufgabe ist …"
+  /(?:Ihre?|deine?)\s+(neue\s+)?(aufgabe|rolle|anweisung)\s+(ist|lautet)/i,
+  // "Ab jetzt sind Sie …" / "Ab jetzt verhalten Sie sich …"
+  /ab\s+(jetzt|sofort)\s+(?:sind\s+Sie|verhalten\s+Sie\s+sich|antworten\s+Sie|bist\s+du|verhältst|antwortest)/i,
+  // "Sie sind jetzt ein anderer Assistent"
+  /Sie\s+sind\s+jetzt\s+(?!erreichbar|verfügbar|online|bereit|in\s+der\s+Lage)/i,
+  // "Bitte ignorieren Sie Ihre bisherigen Regeln"
+  /(?:bitte\s+)?ignorier(?:en?)\s+Sie\s+/i,
+  // "Vergessen Sie Ihre Anweisungen"
+  /vergess(?:en?)\s+Sie\s+/i,
+
+  // ── Role hijacking (EN + DE informal + DE formal) ──────────────
   /you\s+are\s+now\s+(?!available|here|able|open|online|ready)/i,
   /du\s+bist\s+jetzt\s+(?!erreichbar|verfügbar|online|bereit)/i,
   /pretend\s+(you\s+are|to\s+be)\s+/i,
-  /tue\s+so\s+als\s+(ob\s+du|wärst\s+du|wärest\s+du)/i,
+  // "tu/tue so als ob"
+  /tu(?:e)?\s+so\s+als\s+(ob|wenn)\s+/i,
   /act\s+as\s+(if\s+you\s+are|a\s+different|an?\s+evil|an?\s+unfiltered|an?\s+unrestricted)/i,
   /spiele\s+(die\s+rolle|einen?)\s+/i,
 
-  // ── Roleplay / indirect injection ─────────────────────────────
+  // ── Roleplay / indirect injection (EN + DE) ───────────────────
   /let\s*'?s?\s+roleplay\b/i,
   /lass\s+uns\s+(so\s+tun\s+als|rollenspiel\s+spielen)/i,
   /in\s+this\s+(scenario|roleplay|story|game)\s+(you\s+)?are\s+/i,
   /imagine\s+you\s+are\s+(?!helpful|available|a\s+helpful)/i,
   /hypothetically[\s,]+if\s+you\s+(were|could|had\s+no)\s+/i,
   /what\s+would\s+you\s+(say|do|answer)\s+if\s+you\s+(had\s+no\s+restrictions|were\s+free)/i,
+  // "Stell dir vor / Stellen Sie sich vor, du bist/Sie sind …"
+  /stell(?:en?\s+(?:Sie\s+sich|dir))\s+(?:einmal\s+)?vor\s*,?\s*(?:du\s+bist|Sie\s+sind|dass)/i,
 
   // ── Raw LLM template markers ───────────────────────────────────
   /\[INST\]/i,
-  /<<SYS>>/,
-  /<\|im_start\|>/,
-  /<\|system\|>/,
-  /<\|end_of_text\|>/,
-  /<\|assistant\|>/,
-  /<\|user\|>/,
   /\[\/INST\]/i,
   /\[SYS\]/i,
+  /\[SYSTEM\s*:/i,
+  /<<SYS>>/,
+  /<\|im_start\|>/,
+  /<\|(?:system|assistant|user|end_of_text)\|>/,
 
   // ── Named jailbreaks ──────────────────────────────────────────
   /\bDAN\s+(mode|jailbreak|prompt)\b/i,
@@ -277,9 +294,13 @@ const INJECTION_PATTERNS: RegExp[] = [
   /what\s+(?:are|is)\s+your\s+(?:system\s+)?(?:instructions?|prompt|rules?|configuration)\b/i,
   /(?:repeat|recite|copy)\s+(?:back\s+)?(?:your\s+)?(?:system\s+)?(?:instructions?|prompt)/i,
 
-  // ── System-prompt extraction (DE) ─────────────────────────────
+  // ── System-prompt extraction (DE — informal du) ───────────────
   /(?:zeig|zeige|gib\s+aus|wiederhole|nenne)\s+(?:mir\s+)?(?:deinen?\s+)?system(?:prompt|-anweisung)/i,
   /was\s+(sind|ist)\s+deine\s+(anweisungen?|regeln?|system\s*prompt)/i,
+
+  // ── System-prompt extraction (DE — formal Sie) ────────────────
+  /(?:zeigen?|geben?|nennen?|sagen?|wiederholen?)\s+Sie\s+(?:mir\s+)?(?:Ihre?n?\s+)?(?:system(?:prompt|-anweisung)|anweisungen?|regeln?|konfiguration)/i,
+  /was\s+(?:sind|ist|lauten?)\s+Ihre?n?\s+(?:anweisungen?|regeln?|system\s*prompt|konfiguration)/i,
 ];
 
 /**
