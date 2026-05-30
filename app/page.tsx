@@ -1342,55 +1342,55 @@ type ConfigAnswers = Record<string, string[]>;
 const CONFIG_STEPS = [
   {
     id: "anfragen",
-    q: "Wie viele Kundenanfragen bekommt dein Betrieb ca. pro Monat?",
-    hint: "Eine grobe Schätzung reicht völlig",
+    q: "Wie oft melden sich Kunden bei dir – so ungefähr pro Monat?",
+    hint: "Zähle Anrufe, Nachrichten, E-Mails – alles zusammen. Schätzen reicht!",
     multi: false,
     cols: 2,
     options: [
-      { id: "lt100",  label: "Weniger als 100",  emoji: "🌱", detail: "ideal zum Testen" },
-      { id: "lt500",  label: "100 – 500",         emoji: "📈", detail: "solides Wachstum" },
-      { id: "lt3000", label: "500 – 3.000",        emoji: "🚀", detail: "aktiver Betrieb" },
-      { id: "gt3000", label: "Über 3.000",         emoji: "🏢", detail: "Enterprise-Niveau" },
+      { id: "lt100",  label: "Selten – unter 100×",    emoji: "🌱", detail: "z.B. kleiner Laden oder Salon" },
+      { id: "lt500",  label: "Regelmäßig – bis 500×",  emoji: "📈", detail: "z.B. Restaurant oder Friseursalon" },
+      { id: "lt3000", label: "Oft – bis 3.000×",       emoji: "🚀", detail: "z.B. größeres Unternehmen" },
+      { id: "gt3000", label: "Sehr viel – über 3.000×",emoji: "🏢", detail: "z.B. Kette oder Konzern" },
     ],
   },
   {
     id: "kanaele",
-    q: "Über welche Kanäle sollen Kunden den Assistenten erreichen?",
-    hint: "Mehrere Antworten möglich — bestätige unten",
+    q: "Wo sollen Kunden deinen Assistenten finden und schreiben können?",
+    hint: "Wähle alle Orte aus, über die Kunden dich heute kontaktieren",
     multi: true,
     cols: 2,
     options: [
-      { id: "web",       label: "Website-Chat", emoji: "💬", detail: "immer inklusive" },
-      { id: "email",     label: "E-Mail",        emoji: "📧", detail: "ab Basic" },
-      { id: "whatsapp",  label: "WhatsApp",      emoji: "📱", detail: "ab Pro" },
-      { id: "instagram", label: "Instagram",     emoji: "📸", detail: "ab Pro" },
+      { id: "web",       label: "Auf meiner Website",   emoji: "💬", detail: "immer dabei" },
+      { id: "email",     label: "Per E-Mail",            emoji: "📧", detail: "ab €89 / Monat" },
+      { id: "whatsapp",  label: "Über WhatsApp",         emoji: "📱", detail: "ab €199 / Monat" },
+      { id: "instagram", label: "Über Instagram",        emoji: "📸", detail: "ab €199 / Monat" },
     ],
   },
   {
     id: "features",
-    q: "Welche Funktionen brauchst du?",
-    hint: "Alles was du benötigst — Mehrfachauswahl möglich",
+    q: "Was soll der Assistent für dich und deine Kunden erledigen?",
+    hint: "Wähle alles aus was du brauchst — mehreres ist kein Problem",
     multi: true,
     cols: 3,
     options: [
-      { id: "faq",       label: "FAQ / Support",      emoji: "❓", detail: "alle Pläne" },
-      { id: "termine",   label: "Terminbuchung",      emoji: "📅", detail: "ab Basic" },
-      { id: "analytics", label: "Analytics",          emoji: "📊", detail: "ab Pro" },
-      { id: "multibot",  label: "Mehr. Assistenten",  emoji: "🤖", detail: "ab Pro" },
-      { id: "crm",       label: "CRM-Anbindung",      emoji: "🔗", detail: "ab Pro" },
-      { id: "custom",    label: "Custom / API",       emoji: "⚙️", detail: "Enterprise" },
+      { id: "faq",       label: "Häufige Fragen beantworten",          emoji: "❓", detail: "in allen Plänen" },
+      { id: "termine",   label: "Termine buchen",                      emoji: "📅", detail: "ab €89 / Monat" },
+      { id: "analytics", label: "Auswertungen & Berichte",             emoji: "📊", detail: "ab €199 / Monat" },
+      { id: "multibot",  label: "Für mehrere Bereiche gleichzeitig",   emoji: "🤖", detail: "ab €199 / Monat" },
+      { id: "crm",       label: "Mit Kundendatenbank verbinden",       emoji: "🔗", detail: "ab €199 / Monat" },
+      { id: "custom",    label: "Individuelle Sonderlösung",           emoji: "⚙️", detail: "ab €499 / Monat" },
     ],
   },
   {
     id: "assistenten",
-    q: "Wie viele KI-Assistenten brauchst du?",
-    hint: "Z.B. je einen für Terminbuchung und Support",
+    q: "Für wie viele verschiedene Aufgaben brauchst du einen Assistenten?",
+    hint: "Jede Aufgabe kann ein eigener Assistent sein — z.B. einer für Termine, einer für Fragen",
     multi: false,
     cols: 3,
     options: [
-      { id: "one",  label: "1 Assistent",       emoji: "🤖", detail: "Starter & Basic" },
-      { id: "few",  label: "2 – 3 Assistenten", emoji: "🤝", detail: "ab Pro" },
-      { id: "many", label: "Mehr als 3",         emoji: "🏭", detail: "Enterprise" },
+      { id: "one",  label: "Eine Aufgabe",          emoji: "🤖", detail: "z.B. nur Terminbuchung" },
+      { id: "few",  label: "Zwei bis drei",         emoji: "🤝", detail: "z.B. Termine + Fragen + Bestellungen" },
+      { id: "many", label: "Vier oder mehr",        emoji: "🏭", detail: "viele Bereiche gleichzeitig" },
     ],
   },
 ] as const;
@@ -1412,26 +1412,26 @@ function calcRecommendation(answers: ConfigAnswers): { plan: PlanKey; reasons: s
   const reasons: string[] = [];
   let score = 0;
 
-  if      (anfragen === "gt3000") { score = Math.max(score, 3); reasons.push("Über 3.000 Anfragen/Monat benötigt Enterprise"); }
-  else if (anfragen === "lt3000") { score = Math.max(score, 2); reasons.push("Bis zu 3.000 Anfragen/Monat → Pro empfohlen"); }
-  else if (anfragen === "lt500")  { score = Math.max(score, 1); reasons.push("Bis zu 500 Anfragen/Monat → Basic ausreichend"); }
+  if      (anfragen === "gt3000") { score = Math.max(score, 3); reasons.push("Du bekommst sehr viele Nachrichten – dafür braucht es Enterprise"); }
+  else if (anfragen === "lt3000") { score = Math.max(score, 2); reasons.push("Für bis zu 3.000 Kontakte pro Monat ist Pro genau richtig"); }
+  else if (anfragen === "lt500")  { score = Math.max(score, 1); reasons.push("Für bis zu 500 Kontakte pro Monat reicht Basic vollkommen"); }
 
   if (kanaele.includes("whatsapp") || kanaele.includes("instagram")) {
     score = Math.max(score, 2);
-    reasons.push("WhatsApp / Instagram ist ab Pro verfügbar");
+    reasons.push("WhatsApp und Instagram sind ab dem Pro-Plan verfügbar");
   } else if (kanaele.includes("email")) {
     score = Math.max(score, 1);
-    reasons.push("E-Mail-Integration ist ab Basic verfügbar");
+    reasons.push("Den Assistenten per E-Mail erreichbar machen geht ab Basic");
   }
 
-  if (features.includes("custom"))    { score = Math.max(score, 3); reasons.push("Custom API / On-Premise → Enterprise"); }
-  if (features.includes("crm"))       { score = Math.max(score, 2); reasons.push("CRM-Anbindung ist ab Pro verfügbar"); }
-  if (features.includes("analytics")) { score = Math.max(score, 2); reasons.push("Erweiterte Analytics sind ab Pro verfügbar"); }
-  if (features.includes("multibot"))  { score = Math.max(score, 2); reasons.push("Mehrere Assistenten sind ab Pro verfügbar"); }
-  if (features.includes("termine") && score < 1) { score = 1; reasons.push("Terminbuchung-Integration ist ab Basic verfügbar"); }
+  if (features.includes("custom"))    { score = Math.max(score, 3); reasons.push("Eine individuelle Sonderlösung gibt es im Enterprise-Plan"); }
+  if (features.includes("crm"))       { score = Math.max(score, 2); reasons.push("Die Verbindung zur Kundendatenbank ist ab Pro möglich"); }
+  if (features.includes("analytics")) { score = Math.max(score, 2); reasons.push("Auswertungen und Berichte sind ab dem Pro-Plan dabei"); }
+  if (features.includes("multibot"))  { score = Math.max(score, 2); reasons.push("Mehrere Assistenten gleichzeitig gibt es ab Pro"); }
+  if (features.includes("termine") && score < 1) { score = 1; reasons.push("Terminbuchung direkt über den Assistenten geht ab Basic"); }
 
-  if (assistenten === "many") { score = Math.max(score, 3); reasons.push("Mehr als 3 Assistenten → Enterprise"); }
-  else if (assistenten === "few") { score = Math.max(score, 2); reasons.push("2–3 Assistenten sind im Pro-Plan enthalten"); }
+  if (assistenten === "many") { score = Math.max(score, 3); reasons.push("Für vier oder mehr Bereiche gleichzeitig ist Enterprise nötig"); }
+  else if (assistenten === "few") { score = Math.max(score, 2); reasons.push("Zwei bis drei Assistenten für verschiedene Aufgaben gibt es ab Pro"); }
 
   const plan = (["Starter", "Basic", "Pro", "Enterprise"] as PlanKey[])[score];
   return { plan, reasons: reasons.slice(0, 4) };
@@ -1482,10 +1482,10 @@ function PlanFinder({ isDark, c, onOpenModal }: { isDark: boolean; c: CColors; o
           viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7, ease: appleEase }}>
           <p style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "10px" }}>PLAN FINDER</p>
           <h2 style={{ fontSize: "clamp(22px, 3.5vw, 34px)", fontWeight: 800, letterSpacing: "-0.04em", marginBottom: "10px", color: c.text }}>
-            Welcher Plan passt zu dir?
+            Welches Abo passt zu dir?
           </h2>
           <p style={{ color: c.text2, fontSize: "15px", marginBottom: "32px", lineHeight: 1.6 }}>
-            Beantworte {total} kurze Fragen — wir ermitteln deinen perfekten Plan.
+            Beantworte {total} einfache Fragen — kein Fachwissen nötig. Wir empfehlen dir das passende Abo.
           </p>
         </motion.div>
 
