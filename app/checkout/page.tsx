@@ -7,7 +7,7 @@ import { NilLogo } from "../components/NilLogo";
 
 const ease: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
-// Stripe publishable key – set NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY in .env.local
+// Stripe publishable key, set NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY in .env.local
 // const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
 
 const plans = [

@@ -4,7 +4,7 @@ import { NilLogo } from "../components/NilLogo";
 
 export const metadata: Metadata = {
   title: "Impressum",
-  description: "Impressum und rechtliche Angaben der NIL – Automatisierung mit Verstand.",
+  description: "Impressum und rechtliche Angaben der NIL, Automatisierung mit Verstand.",
   robots: { index: false, follow: false },
 };
 
@@ -43,7 +43,7 @@ export default function Impressum() {
           <h2 style={h2Style}>Anbieter</h2>
           <p style={pStyle}>
             <strong>Nil Elian Quezada Capa</strong><br />
-            NIL – Automatisierung mit Verstand<br />
+            NIL, Automatisierung mit Verstand<br />
             Aschauerstraße 17<br />
             82445 Schwaigen<br />
             Deutschland
@@ -61,7 +61,7 @@ export default function Impressum() {
         <section style={sectionStyle}>
           <h2 style={h2Style}>Umsatzsteuer-ID</h2>
           <p style={pStyle}>
-            {/* ⚠️ Falls vorhanden – sonst diese Sektion entfernen */}
+            {/* ⚠️ Falls vorhanden, sonst diese Sektion entfernen */}
             Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br />
             [UST-ID oder „nicht vorhanden"]
           </p>

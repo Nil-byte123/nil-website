@@ -68,7 +68,7 @@ const plans = [
     price: 39,
     setup: 0,
     tag: null as string | null,
-    desc: "Perfekt zum Ausprobieren. Teste NIL 14 Tage kostenlos – ohne Kreditkarte, ohne Risiko.",
+    desc: "Perfekt zum Ausprobieren. Teste NIL 14 Tage kostenlos, ohne Kreditkarte, ohne Risiko.",
     features: [
       "1 KI-Assistent",
       "bis zu 100 Anfragen/Monat",
@@ -85,7 +85,7 @@ const plans = [
     price: 89,
     setup: 149,
     tag: null as string | null,
-    desc: "Für Betriebe die NIL dauerhaft nutzen wollen – mehr Anfragen, mehr Kanäle, volle Kontrolle.",
+    desc: "Für Betriebe die NIL dauerhaft nutzen wollen, mehr Anfragen, mehr Kanäle, volle Kontrolle.",
     features: [
       "1 KI-Assistent",
       "bis zu 500 Anfragen/Monat",
@@ -399,7 +399,7 @@ export default function Preise() {
         <motion.p initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.2 }}
           style={{ color: "#475569", fontSize: "16px", maxWidth: "520px", margin: "0 auto 28px", lineHeight: 1.65 }}>
-          Kein verstecktes Kleingedrucktes. Monatlich kündbar. Einmalige Einrichtung – danach nur die monatliche Rate.
+          Kein verstecktes Kleingedrucktes. Monatlich kündbar. Einmalige Einrichtung, danach nur die monatliche Rate.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 0.35 }}
@@ -817,7 +817,7 @@ export default function Preise() {
             { icon: "✓", text: "30 Tage Geld-zurück-Garantie" },
             { icon: "✓", text: "Keine Kreditkarte nötig" },
             { icon: "✓", text: "Monatlich kündbar" },
-            { icon: "✓", text: "Starter endet automatisch – kein Abo-Fallstrick" },
+            { icon: "✓", text: "Starter endet automatisch, kein Abo-Fallstrick" },
           ].map(item => (
             <span key={item.text} style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "13px", color: "#64748B" }}>
               <span style={{ color: "#0EA5E9", fontWeight: 700 }}>{item.icon}</span>

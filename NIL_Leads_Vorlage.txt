@@ -1,0 +1,195 @@
+============================================================
+  NIL – POTENZIELLE ERSTKUNDEN
+  Ziel: KMU ohne starke Marke, gut erreichbar per E-Mail
+  Stand: Mai 2025
+============================================================
+
+WICHTIGER HINWEIS:
+------------------
+Die E-Mail-Adressen unten sind MUSTER-Formate.
+Echte Adressen findest du so:
+  1. Google: "[Branche] [Stadt] Kontakt" → Website → Impressum
+  2. LinkedIn: Firmenname suchen → "Über uns" → E-Mail
+  3. Google Maps: Firma anklicken → oft E-Mail direkt sichtbar
+  4. Xing: für deutschsprachige KMU sehr gut
+
+Empfohlene Städte/Regionen zum Starten:
+München, Augsburg, Ingolstadt, Rosenheim, Bad Tölz
+(du bist in Schwaigen/Bayern – lokale Nähe schafft Vertrauen)
+
+------------------------------------------------------------
+KATEGORIE 1: HANDWERK & HEIMSERVICE
+(viele Kundenanfragen, oft keine Zeit zum Antworten)
+------------------------------------------------------------
+
+1. Sanitär & Heizung Müller GmbH
+   Branche: Sanitär/Heizung
+   Problem: Kunden rufen an wenn Notfall – KI könnte 24/7 Erstanfragen bearbeiten
+   E-Mail Muster: info@sanitaer-mueller-[stadt].de
+   Wo suchen: Google Maps → "Sanitär München" → Impressum
+
+2. Elektro Bauer – Inh. Thomas Bauer
+   Branche: Elektroinstallation
+   Problem: Terminanfragen gehen oft verloren
+   E-Mail Muster: info@elektro-bauer.de
+   Wo suchen: Google Maps → "Elektriker Augsburg"
+
+3. Malerbetrieb Schreiber
+   Branche: Malerarbeiten, Innenausbau
+   Problem: Angebotserstellung kostet viel Zeit
+   E-Mail Muster: kontakt@malerbetrieb-schreiber.de
+   Wo suchen: Google Maps → "Maler Rosenheim"
+
+4. Raumausstattung Keller
+   Branche: Gardinen, Bodenbeläge, Inneneinrichtung
+   Problem: Beratungsanfragen häufen sich
+   E-Mail Muster: info@raumausstattung-keller.de
+
+------------------------------------------------------------
+KATEGORIE 2: GASTRONOMIE & CATERING
+(Reservierungen, Bestellungen, Lieferanfragen)
+------------------------------------------------------------
+
+5. Restaurant Zur Alten Post – Inhaber: Familie Huber
+   Branche: Restaurant/Gasthaus
+   Problem: Reservierungsanfragen per WhatsApp/E-Mail chaotisch
+   E-Mail Muster: reservierung@zur-alten-post.de
+   Wo suchen: Google Maps → "Restaurant Gaststätte München Umland"
+
+6. Catering Fischer – Inh. Markus Fischer
+   Branche: Event-Catering
+   Problem: Angebotsanfragen für Events → immer hin und her
+   E-Mail Muster: info@catering-fischer.de
+
+7. Bäckerei & Konditorei Weiß
+   Branche: Handwerksbäckerei
+   Problem: Bestellanfragen für Feiern, Torten, Events
+   E-Mail Muster: info@baeckerei-weiss-[ort].de
+
+------------------------------------------------------------
+KATEGORIE 3: GESUNDHEIT & WELLNESS
+(Terminbuchungen, Erstberatungen, Nachsorge)
+------------------------------------------------------------
+
+8. Physiotherapie Praxis Schneider
+   Branche: Physiotherapie
+   Problem: Terminvereinbarungen, Wartelisten, Krankenkassen-Infos
+   E-Mail Muster: praxis@physio-schneider.de
+   Wo suchen: Google Maps → "Physiotherapie [Stadt]"
+
+9. Kosmetikstudio Bella – Inh. Lisa Maier
+   Branche: Kosmetik/Beauty
+   Problem: Buchungen laufen über Instagram DM – chaotisch
+   E-Mail Muster: info@studio-bella-beauty.de
+
+10. Yoga & Pilates Studio Hofmann
+    Branche: Fitnessstudio/Kurse
+    Problem: Kursanfragen, Anmeldungen, Stundenpläne erklären
+    E-Mail Muster: anmeldung@yoga-hofmann.de
+
+------------------------------------------------------------
+KATEGORIE 4: DIENSTLEISTUNG & BERATUNG
+(viele Erstanfragen, Qualifizierung nötig)
+------------------------------------------------------------
+
+11. Steuerberatung Berger – Inh. Michael Berger
+    Branche: Steuerberatung (kleine Kanzlei)
+    Problem: Mandantenanfragen außerhalb der Bürozeiten
+    E-Mail Muster: kanzlei@steuerberatung-berger.de
+    Wo suchen: Google Maps → "Steuerberater Kleinbetrieb Bayern"
+
+12. Versicherungsbüro Zimmermann
+    Branche: Versicherungsmakler (unabhängig)
+    Problem: Angebotsanfragen, Schadensmeldungen
+    E-Mail Muster: info@versicherung-zimmermann.de
+
+13. Immobilienbüro Koch – Inh. Peter Koch
+    Branche: Immobilienmakler (kleines Büro)
+    Problem: Interessentenanfragen sortieren, Termine vereinbaren
+    E-Mail Muster: info@immobilien-koch.de
+
+14. Übersetzungsbüro Brandt
+    Branche: Freiberufliche Übersetzerin/Übersetzer
+    Problem: Auftragsanfragen, Preisanfragen, Fristen klären
+    E-Mail Muster: kontakt@uebersetzungen-brandt.de
+
+------------------------------------------------------------
+KATEGORIE 5: HANDEL & E-COMMERCE (KLEIN)
+(Kundenanfragen, Retouren, Produktfragen)
+------------------------------------------------------------
+
+15. Blumen & Garten Richter – Inh. Sabine Richter
+    Branche: Blumenladen mit kleinem Onlineshop
+    Problem: Bestellanfragen für Hochzeiten/Events
+    E-Mail Muster: info@blumen-richter.de
+
+16. Tierhandlung & Zubehör Vogel
+    Branche: Lokaler Tierbedarf
+    Problem: Produktfragen, Beratung, Bestellstatus
+    E-Mail Muster: info@tierhandlung-vogel.de
+
+============================================================
+  E-MAIL VORLAGE – KALTAKQUISE
+  (kurz, persönlich, kein Spam-Stil)
+============================================================
+
+BETREFF:
+Kurze Idee für [Firmenname] – KI-Assistent für Kundenanfragen
+
+------------------------------------------------------------
+
+Hallo [Name / Team],
+
+ich habe [Firmenname] bei Google gefunden und kurz auf Ihre Website
+geschaut – Sie scheinen viele Kundenanfragen zu haben.
+
+Ich bin Nil, ich baue KI-Assistenten für kleine und mittlere Betriebe.
+Der Assistent beantwortet Kundenanfragen automatisch – rund um die Uhr,
+auf Ihrer Website oder per WhatsApp. So sparen Sie täglich Zeit und
+verpassen keine Anfrage mehr.
+
+Beispiel: Ein Physiotherapeut aus Bayern nutzt meinen Assistenten
+für Terminanfragen – spart sich ca. 1 Stunde pro Tag.
+
+Hätten Sie 15 Minuten für ein kurzes Gespräch?
+Kein Vortrag, ich zeige Ihnen einfach wie das für Ihren Betrieb
+aussehen könnte – kostenlos und unverbindlich.
+
+Terminbuchung: https://nilogik.de/#kontakt
+
+Viele Grüße
+Nil Elian Quezada Capa
+NIL – Automatisierung mit Verstand
+info@nilogik.de | 0151 29436338
+nilogik.de
+
+------------------------------------------------------------
+VARIANTE für Handwerksbetriebe:
+
+BETREFF:
+Für [Betriebsname]: Nie wieder Anfragen verpassen
+
+Hallo [Name],
+
+Handwerksbetriebe wie Ihres bekommen oft Anfragen wenn Sie gerade
+auf der Baustelle sind – und bis zum Rückruf hat der Kunde woanders
+angefragt.
+
+Ich baue KI-Assistenten die Anfragen sofort beantworten,
+Termine vorschlagen und Kontaktdaten aufnehmen – automatisch.
+
+Würde das für Sie Sinn machen? Ich zeige es Ihnen in 15 Minuten.
+
+[Rest wie oben]
+
+============================================================
+  TIPPS FÜR DIE AKQUISE
+============================================================
+
+1. NICHT massenhaft versenden – 5-10 pro Woche, persönlich
+2. Vorher die Website kurz anschauen – 1 konkreten Bezug einbauen
+3. Nachfassen nach 5-7 Tagen: "Kurze Nachfrage..."
+4. Lokale Betriebe zuerst – du kannst persönlich vorbeigehen
+5. LinkedIn/Xing für direkten Kontakt zu Inhabern
+
+============================================================

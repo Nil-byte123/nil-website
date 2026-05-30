@@ -44,7 +44,7 @@ export default function Datenschutz() {
           <p style={pStyle}>
             Verantwortlicher im Sinne der DSGVO ist:<br /><br />
             Nil Elian Quezada Capa<br />
-            NIL – Automatisierung mit Verstand<br />
+            NIL, Automatisierung mit Verstand<br />
             Aschauerstraße 17<br />
             82445 Schwaigen<br />
             E-Mail: <a href="mailto:info@nilogik.de" style={linkStyle}>info@nilogik.de</a>

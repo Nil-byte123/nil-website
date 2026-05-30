@@ -58,7 +58,7 @@ export default function NotFound() {
             fontSize: "15px", color: "#475569", lineHeight: 1.65,
             maxWidth: "380px", margin: "0 auto 40px",
           }}>
-            Diese Seite existiert nicht oder wurde verschoben. Zurück zur Startseite – dort findest du alles.
+            Diese Seite existiert nicht oder wurde verschoben. Zurück zur Startseite, dort findest du alles.
           </p>
 
           <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>

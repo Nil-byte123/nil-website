@@ -43,7 +43,7 @@ const IconPeople = () => (
 );
 
 const values = [
-  { icon: <IconChip />,   title: "KI mit Verstand", text: "Wir setzen KI nur dort ein, wo sie wirklich Mehrwert schafft – nicht als Spielerei, sondern als echtes Werkzeug." },
+  { icon: <IconChip />,   title: "KI mit Verstand", text: "Wir setzen KI nur dort ein, wo sie wirklich Mehrwert schafft, nicht als Spielerei, sondern als echtes Werkzeug." },
   { icon: <IconBolt />,   title: "Geschwindigkeit",  text: "Schnelle Umsetzung, direkte Kommunikation, keine langen Warteschlangen." },
   { icon: <IconShield />, title: "Datenschutz",      text: "DSGVO-konform von Grund auf. Deine Daten bleiben bei dir." },
   { icon: <IconPeople />, title: "Partnerschaft",    text: "Wir denken langfristig. Keine Einmallösungen, sondern dauerhafte Zusammenarbeit." },
@@ -112,7 +112,7 @@ export default function UeberUns() {
           transition={{ duration: 0.8, ease, delay: 0.2 }}
           style={{ color: "#475569", fontSize: "17px", maxWidth: "600px", margin: "0 auto", lineHeight: 1.7 }}
         >
-          NIL ist ein junges Technologieunternehmen aus Bayern, das Unternehmen dabei hilft, repetitive Prozesse durch intelligente KI-Lösungen zu automatisieren – damit du dich auf das Wesentliche konzentrieren kannst.
+          NIL ist ein junges Technologieunternehmen aus Bayern, das Unternehmen dabei hilft, repetitive Prozesse durch intelligente KI-Lösungen zu automatisieren, damit du dich auf das Wesentliche konzentrieren kannst.
         </motion.p>
       </section>
 
@@ -130,10 +130,10 @@ export default function UeberUns() {
                 UNSERE MISSION
               </p>
               <h2 style={{ fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 700, letterSpacing: "-0.03em", marginBottom: "18px" }}>
-                KI zugänglich machen – für jeden.
+                KI zugänglich machen, für jeden.
               </h2>
               <p style={{ color: "#475569", fontSize: "16px", lineHeight: 1.7 }}>
-                Große Konzerne haben längst KI-Systeme im Einsatz. Unser Ziel: diese Technologie auch für Friseure, Restaurants und kleine Unternehmen nutzbar zu machen – ohne IT-Abteilung, ohne Millionenbudget.
+                Große Konzerne haben längst KI-Systeme im Einsatz. Unser Ziel: diese Technologie auch für Friseure, Restaurants und kleine Unternehmen nutzbar zu machen, ohne IT-Abteilung, ohne Millionenbudget.
               </p>
             </motion.div>
 

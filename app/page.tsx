@@ -21,14 +21,14 @@ const translations = {
       headline: "24/7 erreichbar. Ohne Personalaufwand.",
       h3: "Kundenanfragen automatisch klären.",
       text: "Ob Tischreservierung im Café, Terminbuchung beim Friseur oder automatisierter Support für Tech-Unternehmen: Unsere Assistenten arbeiten unsichtbar auf deiner Plattform und entlasten dein Team vollständig.",
-      chat1: "Guten Abend! Ich versuche schon den ganzen Tag anzurufen – habt ihr morgen noch einen Termin frei?",
-      chat2: "Hallo! Kein Problem, ich bin rund um die Uhr für dich da. Morgen um 10:00 Uhr ist noch was frei – dein Termin ist gebucht. ✨",
+      chat1: "Guten Abend! Ich versuche schon den ganzen Tag anzurufen, habt ihr morgen noch einen Termin frei?",
+      chat2: "Hallo! Kein Problem, ich bin rund um die Uhr für dich da. Morgen um 10:00 Uhr ist noch was frei, dein Termin ist gebucht. ✨",
       chatLabel: "LIVE DEMO CHAT",
     },
     demo: {
       label: "LIVE DEMO",
       headline: "Einfach ausprobieren.",
-      subtext: "Passe den Assistenten auf deinen Betrieb an und teste ihn direkt live – so sieht deine Lösung aus.",
+      subtext: "Passe den Assistenten auf deinen Betrieb an und teste ihn direkt live, so sieht deine Lösung aus.",
       greeting: "Hallo! Ich bin dein digitaler Assistent. Wie kann ich dir heute helfen? 🤖",
       placeholder: "Nachricht schreiben …",
     },
@@ -51,14 +51,14 @@ const translations = {
       headline: "Available 24/7. Without staffing costs.",
       h3: "Resolve customer inquiries automatically.",
       text: "Whether table reservations at a café, appointments at a hair salon or automated support for tech companies: our assistants work invisibly on your platform and fully relieve your team.",
-      chat1: "Good evening! I've been trying to call all day – do you have a slot free tomorrow?",
-      chat2: "Hi! No problem, I'm here for you 24/7. Tomorrow at 10:00 AM still works – your appointment is booked. ✨",
+      chat1: "Good evening! I've been trying to call all day, do you have a slot free tomorrow?",
+      chat2: "Hi! No problem, I'm here for you 24/7. Tomorrow at 10:00 AM still works, your appointment is booked. ✨",
       chatLabel: "LIVE DEMO CHAT",
     },
     demo: {
       label: "LIVE DEMO",
       headline: "Try it right now.",
-      subtext: "Customise the assistant for your business and test it live – this is exactly what your solution looks like.",
+      subtext: "Customise the assistant for your business and test it live, this is exactly what your solution looks like.",
       greeting: "Hello! I am your digital assistant. How can I help you today? 🤖",
       placeholder: "Write a message …",
     },
@@ -81,14 +81,14 @@ const translations = {
       headline: "Disponible 24/7. Sin costes de personal.",
       h3: "Resuelve consultas de clientes automáticamente.",
       text: "Ya sea una reserva de mesa en un café, una cita en una peluquería o soporte automatizado para empresas tecnológicas: nuestros asistentes trabajan invisiblemente en tu plataforma y liberan completamente a tu equipo.",
-      chat1: "¡Buenas tardes! He intentado llamar todo el día – ¿tenéis algún hueco mañana?",
-      chat2: "¡Hola! Sin problema, estoy disponible las 24 horas. Mañana a las 10:00 h hay un hueco libre – tu cita está reservada. ✨",
+      chat1: "¡Buenas tardes! He intentado llamar todo el día, ¿tenéis algún hueco mañana?",
+      chat2: "¡Hola! Sin problema, estoy disponible las 24 horas. Mañana a las 10:00 h hay un hueco libre, tu cita está reservada. ✨",
       chatLabel: "DEMO EN VIVO",
     },
     demo: {
       label: "DEMO EN VIVO",
       headline: "Pruébalo ahora mismo.",
-      subtext: "Personaliza el asistente para tu negocio y pruébalo en directo – así es exactamente tu solución.",
+      subtext: "Personaliza el asistente para tu negocio y pruébalo en directo, así es exactamente tu solución.",
       greeting: "¡Hola! Soy tu asistente digital. ¿Cómo puedo ayudarte hoy? 🤖",
       placeholder: "Escribe un mensaje …",
     },
@@ -111,14 +111,14 @@ const translations = {
       headline: "Disponible 24h/7j. Sans coûts de personnel.",
       h3: "Traiter automatiquement les demandes clients.",
       text: "Qu'il s'agisse d'une réservation de table dans un café, d'un rendez-vous chez le coiffeur ou d'un support automatisé pour des entreprises tech : nos assistants travaillent invisiblement sur votre plateforme.",
-      chat1: "Bonsoir ! J'essaie d'appeler depuis ce matin – avez-vous encore un créneau demain ?",
-      chat2: "Bonjour ! Pas de problème, je suis disponible 24h/24. Demain à 10h00 c'est libre – votre rendez-vous est confirmé. ✨",
+      chat1: "Bonsoir ! J'essaie d'appeler depuis ce matin, avez-vous encore un créneau demain ?",
+      chat2: "Bonjour ! Pas de problème, je suis disponible 24h/24. Demain à 10h00 c'est libre, votre rendez-vous est confirmé. ✨",
       chatLabel: "DÉMO EN DIRECT",
     },
     demo: {
       label: "DÉMO EN DIRECT",
       headline: "Essayez-le maintenant.",
-      subtext: "Personnalisez l'assistant pour votre entreprise et testez-le en direct – voilà à quoi ressemble votre solution.",
+      subtext: "Personnalisez l'assistant pour votre entreprise et testez-le en direct, voilà à quoi ressemble votre solution.",
       greeting: "Bonjour ! Je suis votre assistant digital. Comment puis-je vous aider ? 🤖",
       placeholder: "Écrire un message …",
     },
@@ -141,14 +141,14 @@ const translations = {
       headline: "Disponibile 24/7. Senza costi di personale.",
       h3: "Gestisci automaticamente le richieste dei clienti.",
       text: "Che si tratti di prenotazione tavolo in un caffè, appuntamento dal parrucchiere o supporto automatizzato per aziende tech: i nostri assistenti lavorano invisibilmente sulla tua piattaforma.",
-      chat1: "Buonasera! Ho provato a chiamare tutto il giorno – avete ancora un posto libero domani?",
-      chat2: "Ciao! Nessun problema, sono disponibile 24 ore su 24. Domani alle 10:00 c'è ancora posto – il tuo appuntamento è prenotato. ✨",
+      chat1: "Buonasera! Ho provato a chiamare tutto il giorno, avete ancora un posto libero domani?",
+      chat2: "Ciao! Nessun problema, sono disponibile 24 ore su 24. Domani alle 10:00 c'è ancora posto, il tuo appuntamento è prenotato. ✨",
       chatLabel: "DEMO DAL VIVO",
     },
     demo: {
       label: "DEMO DAL VIVO",
       headline: "Provalo subito.",
-      subtext: "Personalizza l'assistente per la tua attività e testalo dal vivo – è esattamente così che appare la tua soluzione.",
+      subtext: "Personalizza l'assistente per la tua attività e testalo dal vivo, è esattamente così che appare la tua soluzione.",
       greeting: "Ciao! Sono il tuo assistente digitale. Come posso aiutarti oggi? 🤖",
       placeholder: "Scrivi un messaggio …",
     },
@@ -181,27 +181,27 @@ const sl: Record<LangCode, {
 /* ─── Rotating Hero Taglines ────────────────────────────────── */
 const rotatingTaglines: Record<LangCode, string[]> = {
   de: [
-    "Dein KI-Assistent antwortet auf Kundenanfragen – auch wenn du gerade auf der Baustelle bist.",
+    "Dein KI-Assistent antwortet auf Kundenanfragen, auch wenn du gerade auf der Baustelle bist.",
     "Gastronomie & Handel: Reservierungen, Bestellungen & Anfragen automatisch bearbeiten.",
-    "Unternehmen & Teams: Smarte Automatisierung für jeden Betrieb – unabhängig der Branche.",
+    "Unternehmen & Teams: Smarte Automatisierung für jeden Betrieb, unabhängig der Branche.",
   ],
   en: [
-    "Your AI assistant answers customer inquiries – even when you're busy on a job.",
+    "Your AI assistant answers customer inquiries, even when you're busy on a job.",
     "Hospitality & retail: Handle reservations, orders & inquiries automatically.",
-    "Companies & teams: Smart automation for any business – whatever the industry.",
+    "Companies & teams: Smart automation for any business, whatever the industry.",
   ],
   es: [
-    "Tu asistente de IA responde consultas de clientes – aunque estés ocupado en el trabajo.",
+    "Tu asistente de IA responde consultas de clientes, aunque estés ocupado en el trabajo.",
     "Hostelería y comercio: Gestiona reservas, pedidos y consultas automáticamente.",
     "Empresas y equipos: Automatización inteligente para cualquier negocio.",
   ],
   fr: [
-    "Votre assistant IA répond aux demandes clients – même quand vous êtes en intervention.",
+    "Votre assistant IA répond aux demandes clients, même quand vous êtes en intervention.",
     "Restauration & commerce : Gérez réservations, commandes et demandes automatiquement.",
     "Entreprises & équipes : Automatisation intelligente pour tout type de business.",
   ],
   it: [
-    "Il tuo assistente IA risponde alle richieste dei clienti – anche quando sei impegnato sul lavoro.",
+    "Il tuo assistente IA risponde alle richieste dei clienti, anche quando sei impegnato sul lavoro.",
     "Ristorazione & commercio: Gestisci prenotazioni, ordini e richieste automaticamente.",
     "Aziende & team: Automazione intelligente per qualsiasi tipo di business.",
   ],
@@ -218,7 +218,7 @@ const serviceCards = [
       </svg>
     ),
     title: "Dienstleister & Beauty",
-    text: { de: "Automatische Terminbuchung, Kundenkommunikation und Erinnerungen – damit du dich auf deine Arbeit konzentrierst, nicht auf Verwaltung.", en: "Automatic appointment booking, customer communication and reminders – so you focus on your craft, not admin.", es: "Reservas automáticas, comunicación con clientes y recordatorios – para que te centres en tu trabajo.", fr: "Réservations automatiques, communication client et rappels – pour vous concentrer sur votre métier.", it: "Prenotazioni automatiche, comunicazione clienti e promemoria – per concentrarti sul tuo lavoro." },
+    text: { de: "Automatische Terminbuchung, Kundenkommunikation und Erinnerungen, damit du dich auf deine Arbeit konzentrierst, nicht auf Verwaltung.", en: "Automatic appointment booking, customer communication and reminders, so you focus on your craft, not admin.", es: "Reservas automáticas, comunicación con clientes y recordatorios, para que te centres en tu trabajo.", fr: "Réservations automatiques, communication client et rappels, pour vous concentrer sur votre métier.", it: "Prenotazioni automatiche, comunicazione clienti e promemoria, per concentrarti sul tuo lavoro." },
   },
   {
     icon: (
@@ -229,7 +229,7 @@ const serviceCards = [
       </svg>
     ),
     title: "Gastronomie & Handel",
-    text: { de: "Tischreservierungen, Bestellannahme, Anfragen und Gästekommunikation – vollautomatisch, rund um die Uhr.", en: "Table reservations, orders, inquiries and guest communication – fully automated, around the clock.", es: "Reservas, pedidos, consultas y comunicación con clientes – completamente automatizados.", fr: "Réservations, commandes, demandes et communication client – entièrement automatisés.", it: "Prenotazioni, ordini, richieste e comunicazione ospiti – completamente automatizzati." },
+    text: { de: "Tischreservierungen, Bestellannahme, Anfragen und Gästekommunikation, vollautomatisch, rund um die Uhr.", en: "Table reservations, orders, inquiries and guest communication, fully automated, around the clock.", es: "Reservas, pedidos, consultas y comunicación con clientes, completamente automatizados.", fr: "Réservations, commandes, demandes et communication client, entièrement automatisés.", it: "Prenotazioni, ordini, richieste e comunicazione ospiti, completamente automatizzati." },
   },
   {
     icon: (
@@ -239,7 +239,7 @@ const serviceCards = [
       </svg>
     ),
     title: "Unternehmen & Teams",
-    text: { de: "Smarte Softwarelösungen und digitale Assistenten für jede Branche – individuell auf deinen Betrieb zugeschnitten.", en: "Smart software solutions and digital assistants for any industry – tailored to your business.", es: "Soluciones de software inteligentes y asistentes digitales para cualquier sector.", fr: "Solutions logicielles intelligentes et assistants numériques pour tout secteur.", it: "Soluzioni software intelligenti e assistenti digitali per qualsiasi settore." },
+    text: { de: "Smarte Softwarelösungen und digitale Assistenten für jede Branche, individuell auf deinen Betrieb zugeschnitten.", en: "Smart software solutions and digital assistants for any industry, tailored to your business.", es: "Soluciones de software inteligentes y asistentes digitales para cualquier sector.", fr: "Solutions logicielles intelligentes et assistants numériques pour tout secteur.", it: "Soluzioni software intelligenti e assistenti digitali per qualsiasi settore." },
   },
   {
     icon: (
@@ -248,7 +248,7 @@ const serviceCards = [
       </svg>
     ),
     title: "Gesundheit & Beratung",
-    text: { de: "Terminvergabe, Patientenkommunikation und Beratungsanfragen – zuverlässig automatisiert, damit du dich auf deine Klienten konzentrierst.", en: "Appointment scheduling, patient communication and consultation inquiries – reliably automated so you focus on your clients.", es: "Programación de citas, comunicación con pacientes y consultas – automatizados de forma fiable.", fr: "Prise de rendez-vous, communication patients et demandes de consultation – automatisés de manière fiable.", it: "Prenotazioni, comunicazione pazienti e richieste di consulenza – automatizzati in modo affidabile." },
+    text: { de: "Terminvergabe, Patientenkommunikation und Beratungsanfragen, zuverlässig automatisiert, damit du dich auf deine Klienten konzentrierst.", en: "Appointment scheduling, patient communication and consultation inquiries, reliably automated so you focus on your clients.", es: "Programación de citas, comunicación con pacientes y consultas, automatizados de forma fiable.", fr: "Prise de rendez-vous, communication patients et demandes de consultation, automatisés de manière fiable.", it: "Prenotazioni, comunicazione pazienti e richieste di consulenza, automatizzati in modo affidabile." },
   },
 ];
 
@@ -257,131 +257,131 @@ const faqItems: Record<LangCode, { q: string; a: string }[]> = {
   de: [
     {
       q: "Wie schnell ist die Einrichtung?",
-      a: "Du gibst uns die Infos zu deinem Betrieb – wir erledigen den Rest. In der Regel ist dein Assistent innerhalb von 48 Stunden live und einsatzbereit. Kein technisches Vorwissen nötig, keine lange Einarbeitungsphase. Du startest sofort – und sparst ab Tag eins Zeit.",
+      a: "Du gibst uns die Infos zu deinem Betrieb, wir erledigen den Rest. In der Regel ist dein Assistent innerhalb von 48 Stunden live und einsatzbereit. Kein technisches Vorwissen nötig, keine lange Einarbeitungsphase. Du startest sofort, und sparst ab Tag eins Zeit.",
     },
     {
       q: "Brauche ich IT-Kenntnisse?",
-      a: "Überhaupt nicht. Du musst keine einzige Zeile Code verstehen. Wir übernehmen die komplette technische Einrichtung – von der KI-Konfiguration bis zur Integration in deine bestehenden Tools. Du bekommst eine fertige Lösung geliefert und kannst sofort loslegen. Einfach so.",
+      a: "Überhaupt nicht. Du musst keine einzige Zeile Code verstehen. Wir übernehmen die komplette technische Einrichtung, von der KI-Konfiguration bis zur Integration in deine bestehenden Tools. Du bekommst eine fertige Lösung geliefert und kannst sofort loslegen. Einfach so.",
     },
     {
       q: "Welche Sprachen versteht der Assistent?",
-      a: "Standardmäßig kommt dein Assistent mit Deutsch und Englisch – perfekt für den Alltag. Brauchst du weitere Sprachen für internationale Kunden? Kein Problem. Spanisch, Französisch, Italienisch und mehr sind auf Anfrage möglich. Wir richten es ein.",
+      a: "Standardmäßig kommt dein Assistent mit Deutsch und Englisch, perfekt für den Alltag. Brauchst du weitere Sprachen für internationale Kunden? Kein Problem. Spanisch, Französisch, Italienisch und mehr sind auf Anfrage möglich. Wir richten es ein.",
     },
     {
       q: "Kann ich den Assistenten anpassen?",
-      a: "Ja – und das ist genau der Unterschied zu einer Standardlösung. Dein Assistent bekommt deinen Ton, deine Persönlichkeit, dein Branchenwissen. Er kennt deine Preise, deine Öffnungszeiten, deine häufigsten Kundenfragen. Kein generischer Bot – sondern ein digitaler Mitarbeiter, der wirklich zu dir passt.",
+      a: "Ja, und das ist genau der Unterschied zu einer Standardlösung. Dein Assistent bekommt deinen Ton, deine Persönlichkeit, dein Branchenwissen. Er kennt deine Preise, deine Öffnungszeiten, deine häufigsten Kundenfragen. Kein generischer Bot, sondern ein digitaler Mitarbeiter, der wirklich zu dir passt.",
     },
     {
       q: "Wie sicher sind meine Daten?",
-      a: "Datenschutz ist für uns keine Nebensache. Alle Daten werden vollständig DSGVO-konform verarbeitet – kein dauerhaftes Speichern von Gesprächsinhalten, keine Weitergabe an Dritte. Deine Kundendaten bleiben deine Kundendaten. Punkt.",
+      a: "Datenschutz ist für uns keine Nebensache. Alle Daten werden vollständig DSGVO-konform verarbeitet, kein dauerhaftes Speichern von Gesprächsinhalten, keine Weitergabe an Dritte. Deine Kundendaten bleiben deine Kundendaten. Punkt.",
     },
     {
       q: "Was passiert nach der Kündigung?",
-      a: "Die Nutzung endet sauber zum Ende des Abrechnungszeitraums – keine Überraschungen, keine versteckten Gebühren, keine Mindestlaufzeit. Du kannst monatlich kündigen. Und dank unserer 30 Tage Geld-zurück-Garantie gehst du ohnehin kein Risiko ein.",
+      a: "Die Nutzung endet sauber zum Ende des Abrechnungszeitraums, keine Überraschungen, keine versteckten Gebühren, keine Mindestlaufzeit. Du kannst monatlich kündigen. Und dank unserer 30 Tage Geld-zurück-Garantie gehst du ohnehin kein Risiko ein.",
     },
   ],
   en: [
     {
       q: "How fast is the setup?",
-      a: "You give us the details about your business — we handle everything else. Your assistant is usually live within 48 hours, ready to go. No technical knowledge needed, no lengthy onboarding. You start immediately — and save time from day one.",
+      a: "You give us the details about your business, we handle everything else. Your assistant is usually live within 48 hours, ready to go. No technical knowledge needed, no lengthy onboarding. You start immediately, and save time from day one.",
     },
     {
       q: "Do I need IT knowledge?",
-      a: "Not at all. You don't need to understand a single line of code. We handle the complete technical setup — from AI configuration to integration with your existing tools. You receive a ready-to-use solution and can get started right away. Just like that.",
+      a: "Not at all. You don't need to understand a single line of code. We handle the complete technical setup, from AI configuration to integration with your existing tools. You receive a ready-to-use solution and can get started right away. Just like that.",
     },
     {
       q: "What languages does the assistant understand?",
-      a: "By default, your assistant comes with German and English — perfect for everyday use. Need more languages for international customers? No problem. Spanish, French, Italian and more are available on request. We'll set it up.",
+      a: "By default, your assistant comes with German and English, perfect for everyday use. Need more languages for international customers? No problem. Spanish, French, Italian and more are available on request. We'll set it up.",
     },
     {
       q: "Can I customize the assistant?",
-      a: "Yes — and that's exactly what sets this apart from off-the-shelf solutions. Your assistant gets your tone, your personality, your industry knowledge. It knows your prices, your opening hours, your most common customer questions. Not a generic bot — a digital team member that truly fits your business.",
+      a: "Yes, and that's exactly what sets this apart from off-the-shelf solutions. Your assistant gets your tone, your personality, your industry knowledge. It knows your prices, your opening hours, your most common customer questions. Not a generic bot, a digital team member that truly fits your business.",
     },
     {
       q: "How secure is my data?",
-      a: "Data protection is not an afterthought for us. All data is processed in full compliance with GDPR — no permanent storage of conversation content, no sharing with third parties. Your customer data stays your customer data. Period.",
+      a: "Data protection is not an afterthought for us. All data is processed in full compliance with GDPR, no permanent storage of conversation content, no sharing with third parties. Your customer data stays your customer data. Period.",
     },
     {
       q: "What happens after cancellation?",
-      a: "Usage ends cleanly at the end of the billing period — no surprises, no hidden fees, no minimum terms. You can cancel monthly. And with our 30-day money-back guarantee, you're not taking any risk anyway.",
+      a: "Usage ends cleanly at the end of the billing period, no surprises, no hidden fees, no minimum terms. You can cancel monthly. And with our 30-day money-back guarantee, you're not taking any risk anyway.",
     },
   ],
   es: [
     {
       q: "¿Qué tan rápida es la configuración?",
-      a: "Tú nos das los detalles de tu negocio — nosotros nos encargamos del resto. Tu asistente suele estar en funcionamiento en 48 horas, listo para usar. Sin conocimientos técnicos, sin largas incorporaciones. Empiezas de inmediato y ahorras tiempo desde el primer día.",
+      a: "Tú nos das los detalles de tu negocio, nosotros nos encargamos del resto. Tu asistente suele estar en funcionamiento en 48 horas, listo para usar. Sin conocimientos técnicos, sin largas incorporaciones. Empiezas de inmediato y ahorras tiempo desde el primer día.",
     },
     {
       q: "¿Necesito conocimientos de IT?",
-      a: "Para nada. No necesitas entender ni una línea de código. Nos encargamos de toda la configuración técnica — desde la configuración de la IA hasta la integración con tus herramientas existentes. Recibes una solución lista para usar. Así de simple.",
+      a: "Para nada. No necesitas entender ni una línea de código. Nos encargamos de toda la configuración técnica, desde la configuración de la IA hasta la integración con tus herramientas existentes. Recibes una solución lista para usar. Así de simple.",
     },
     {
       q: "¿Qué idiomas entiende el asistente?",
-      a: "Por defecto, tu asistente viene con alemán e inglés — perfecto para el día a día. ¿Necesitas más idiomas para clientes internacionales? Sin problema. Español, francés, italiano y más están disponibles bajo petición. Nosotros lo configuramos.",
+      a: "Por defecto, tu asistente viene con alemán e inglés, perfecto para el día a día. ¿Necesitas más idiomas para clientes internacionales? Sin problema. Español, francés, italiano y más están disponibles bajo petición. Nosotros lo configuramos.",
     },
     {
       q: "¿Puedo personalizar el asistente?",
-      a: "Sí — y eso es exactamente lo que lo diferencia de las soluciones estándar. Tu asistente recibe tu tono, tu personalidad, tu conocimiento del sector. Conoce tus precios, tus horarios, las preguntas más frecuentes de tus clientes. No un bot genérico — un empleado digital que realmente encaja con tu negocio.",
+      a: "Sí, y eso es exactamente lo que lo diferencia de las soluciones estándar. Tu asistente recibe tu tono, tu personalidad, tu conocimiento del sector. Conoce tus precios, tus horarios, las preguntas más frecuentes de tus clientes. No un bot genérico, un empleado digital que realmente encaja con tu negocio.",
     },
     {
       q: "¿Qué tan seguros están mis datos?",
-      a: "La protección de datos no es un detalle menor para nosotros. Todos los datos se procesan en total conformidad con el RGPD — sin almacenamiento permanente de conversaciones, sin compartir con terceros. Tus datos de clientes siguen siendo tuyos. Punto.",
+      a: "La protección de datos no es un detalle menor para nosotros. Todos los datos se procesan en total conformidad con el RGPD, sin almacenamiento permanente de conversaciones, sin compartir con terceros. Tus datos de clientes siguen siendo tuyos. Punto.",
     },
     {
       q: "¿Qué ocurre tras la cancelación?",
-      a: "El uso termina al final del período de facturación — sin sorpresas, sin tarifas ocultas, sin permanencia mínima. Puedes cancelar mensualmente. Y con nuestra garantía de devolución de 30 días, de todos modos no corres ningún riesgo.",
+      a: "El uso termina al final del período de facturación, sin sorpresas, sin tarifas ocultas, sin permanencia mínima. Puedes cancelar mensualmente. Y con nuestra garantía de devolución de 30 días, de todos modos no corres ningún riesgo.",
     },
   ],
   fr: [
     {
       q: "Quelle est la rapidité de mise en place ?",
-      a: "Vous nous donnez les informations sur votre activité — nous nous occupons du reste. Votre assistant est généralement opérationnel en 48 heures. Aucune compétence technique requise, aucune longue phase d'intégration. Vous démarrez immédiatement et gagnez du temps dès le premier jour.",
+      a: "Vous nous donnez les informations sur votre activité, nous nous occupons du reste. Votre assistant est généralement opérationnel en 48 heures. Aucune compétence technique requise, aucune longue phase d'intégration. Vous démarrez immédiatement et gagnez du temps dès le premier jour.",
     },
     {
       q: "Ai-je besoin de compétences IT ?",
-      a: "Pas du tout. Vous n'avez pas besoin de comprendre une seule ligne de code. Nous gérons la configuration technique complète — de la configuration de l'IA à l'intégration avec vos outils existants. Vous recevez une solution clé en main. Aussi simple que ça.",
+      a: "Pas du tout. Vous n'avez pas besoin de comprendre une seule ligne de code. Nous gérons la configuration technique complète, de la configuration de l'IA à l'intégration avec vos outils existants. Vous recevez une solution clé en main. Aussi simple que ça.",
     },
     {
       q: "Quelles langues l'assistant comprend-il ?",
-      a: "Par défaut, votre assistant maîtrise l'allemand et l'anglais — parfait pour le quotidien. Besoin d'autres langues pour vos clients internationaux ? Pas de problème. L'espagnol, le français, l'italien et d'autres sont disponibles sur demande. Nous nous en chargeons.",
+      a: "Par défaut, votre assistant maîtrise l'allemand et l'anglais, parfait pour le quotidien. Besoin d'autres langues pour vos clients internationaux ? Pas de problème. L'espagnol, le français, l'italien et d'autres sont disponibles sur demande. Nous nous en chargeons.",
     },
     {
       q: "Puis-je personnaliser l'assistant ?",
-      a: "Oui — et c'est exactement ce qui le différencie des solutions standard. Votre assistant reçoit votre ton, votre personnalité, vos connaissances sectorielles. Il connaît vos tarifs, vos horaires, les questions les plus fréquentes de vos clients. Pas un bot générique — un collaborateur digital qui vous ressemble vraiment.",
+      a: "Oui, et c'est exactement ce qui le différencie des solutions standard. Votre assistant reçoit votre ton, votre personnalité, vos connaissances sectorielles. Il connaît vos tarifs, vos horaires, les questions les plus fréquentes de vos clients. Pas un bot générique, un collaborateur digital qui vous ressemble vraiment.",
     },
     {
       q: "Mes données sont-elles sécurisées ?",
-      a: "La protection des données n'est pas un détail pour nous. Toutes les données sont traitées en conformité totale avec le RGPD — aucun stockage permanent des conversations, aucun partage avec des tiers. Vos données clients restent les vôtres. Point.",
+      a: "La protection des données n'est pas un détail pour nous. Toutes les données sont traitées en conformité totale avec le RGPD, aucun stockage permanent des conversations, aucun partage avec des tiers. Vos données clients restent les vôtres. Point.",
     },
     {
       q: "Que se passe-t-il après la résiliation ?",
-      a: "L'utilisation prend fin proprement à la fin de la période de facturation — sans surprises, sans frais cachés, sans durée minimale. Vous pouvez résilier chaque mois. Et grâce à notre garantie satisfait ou remboursé de 30 jours, vous ne prenez de toute façon aucun risque.",
+      a: "L'utilisation prend fin proprement à la fin de la période de facturation, sans surprises, sans frais cachés, sans durée minimale. Vous pouvez résilier chaque mois. Et grâce à notre garantie satisfait ou remboursé de 30 jours, vous ne prenez de toute façon aucun risque.",
     },
   ],
   it: [
     {
       q: "Quanto tempo richiede la configurazione?",
-      a: "Tu ci dai i dettagli della tua attività — noi pensiamo al resto. Il tuo assistente di solito è operativo entro 48 ore, pronto all'uso. Nessuna competenza tecnica richiesta, nessuna lunga fase di onboarding. Inizi subito e risparmi tempo dal primo giorno.",
+      a: "Tu ci dai i dettagli della tua attività, noi pensiamo al resto. Il tuo assistente di solito è operativo entro 48 ore, pronto all'uso. Nessuna competenza tecnica richiesta, nessuna lunga fase di onboarding. Inizi subito e risparmi tempo dal primo giorno.",
     },
     {
       q: "Ho bisogno di competenze IT?",
-      a: "Per niente. Non devi capire una sola riga di codice. Ci occupiamo di tutta la configurazione tecnica — dalla configurazione dell'IA all'integrazione con i tuoi strumenti esistenti. Ricevi una soluzione pronta all'uso. Semplice così.",
+      a: "Per niente. Non devi capire una sola riga di codice. Ci occupiamo di tutta la configurazione tecnica, dalla configurazione dell'IA all'integrazione con i tuoi strumenti esistenti. Ricevi una soluzione pronta all'uso. Semplice così.",
     },
     {
       q: "Quali lingue capisce l'assistente?",
-      a: "Di default, il tuo assistente conosce il tedesco e l'inglese — perfetto per il quotidiano. Hai bisogno di altre lingue per clienti internazionali? Nessun problema. Spagnolo, francese, italiano e altro sono disponibili su richiesta. Ci pensiamo noi.",
+      a: "Di default, il tuo assistente conosce il tedesco e l'inglese, perfetto per il quotidiano. Hai bisogno di altre lingue per clienti internazionali? Nessun problema. Spagnolo, francese, italiano e altro sono disponibili su richiesta. Ci pensiamo noi.",
     },
     {
       q: "Posso personalizzare l'assistente?",
-      a: "Sì — ed è proprio questo che lo distingue dalle soluzioni standard. Il tuo assistente riceve il tuo tono, la tua personalità, la tua conoscenza del settore. Conosce i tuoi prezzi, i tuoi orari, le domande più frequenti dei tuoi clienti. Non un bot generico — un collaboratore digitale che si adatta davvero a te.",
+      a: "Sì, ed è proprio questo che lo distingue dalle soluzioni standard. Il tuo assistente riceve il tuo tono, la tua personalità, la tua conoscenza del settore. Conosce i tuoi prezzi, i tuoi orari, le domande più frequenti dei tuoi clienti. Non un bot generico, un collaboratore digitale che si adatta davvero a te.",
     },
     {
       q: "I miei dati sono al sicuro?",
-      a: "La protezione dei dati non è un dettaglio per noi. Tutti i dati vengono trattati in piena conformità con il GDPR — nessuna memorizzazione permanente delle conversazioni, nessuna condivisione con terzi. I tuoi dati dei clienti rimangono tuoi. Punto.",
+      a: "La protezione dei dati non è un dettaglio per noi. Tutti i dati vengono trattati in piena conformità con il GDPR, nessuna memorizzazione permanente delle conversazioni, nessuna condivisione con terzi. I tuoi dati dei clienti rimangono tuoi. Punto.",
     },
     {
       q: "Cosa succede dopo la disdetta?",
-      a: "L'utilizzo termina correttamente alla fine del periodo di fatturazione — nessuna sorpresa, nessuna tariffa nascosta, nessun vincolo minimo. Puoi disdire mensilmente. E con la nostra garanzia soddisfatti o rimborsati di 30 giorni, non corri comunque nessun rischio.",
+      a: "L'utilizzo termina correttamente alla fine del periodo di fatturazione, nessuna sorpresa, nessuna tariffa nascosta, nessun vincolo minimo. Puoi disdire mensilmente. E con la nostra garanzia soddisfatti o rimborsati di 30 giorni, non corri comunque nessun rischio.",
     },
   ],
 };
@@ -561,19 +561,19 @@ function FinalBrandingLogo({ width = 260, height = 100 }: { width?: number; heig
   return (
     <svg width={width} height={height} viewBox="0 0 300 100"
       fill="none" xmlns="http://www.w3.org/2000/svg" style={{ overflow: "visible" }}>
-      {/* N – three separate strokes for clean letterform */}
+      {/* N, three separate strokes for clean letterform */}
       <path d="M16 14V86 M16 14L84 86 M84 14V86" stroke="#08152A" strokeWidth="9"
         strokeLinecap="round" strokeLinejoin="round" />
       <motion.g
         animate={{ opacity: [1, 0.88, 1, 0.94, 1, 0.91, 1] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", times: [0, 0.15, 0.3, 0.5, 0.65, 0.8, 1] }}
       >
-        {/* single neon-tube line — chained drop-shadow creates smooth glow without visible rings */}
+        {/* single neon-tube line, chained drop-shadow creates smooth glow without visible rings */}
         <line x1="150" y1="14" x2="150" y2="86" stroke="#ffffff" strokeWidth="3"
           strokeLinecap="round"
           style={{ filter: "drop-shadow(0 0 3px #ffffff) drop-shadow(0 0 8px #0ea5e9) drop-shadow(0 0 18px #0ea5e9) drop-shadow(0 0 32px #0284c7)" }} />
       </motion.g>
-      {/* L – two separate strokes */}
+      {/* L, two separate strokes */}
       <path d="M216 14V86 M216 86H284" stroke="#08152A" strokeWidth="9"
         strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -585,19 +585,19 @@ function FinalBrandingLogoWhite({ width = 260, height = 100 }: { width?: number;
   return (
     <svg width={width} height={height} viewBox="0 0 300 100"
       fill="none" xmlns="http://www.w3.org/2000/svg" style={{ overflow: "visible" }}>
-      {/* N – three separate strokes */}
+      {/* N, three separate strokes */}
       <path d="M16 14V86 M16 14L84 86 M84 14V86" stroke="rgba(255,255,255,0.9)" strokeWidth="9"
         strokeLinecap="round" strokeLinejoin="round" />
       <motion.g
         animate={{ opacity: [1, 0.88, 1, 0.94, 1, 0.91, 1] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", times: [0, 0.15, 0.3, 0.5, 0.65, 0.8, 1] }}
       >
-        {/* single neon-tube line — stronger glow for dark backgrounds */}
+        {/* single neon-tube line, stronger glow for dark backgrounds */}
         <line x1="150" y1="14" x2="150" y2="86" stroke="#ffffff" strokeWidth="3"
           strokeLinecap="round"
           style={{ filter: "drop-shadow(0 0 3px #ffffff) drop-shadow(0 0 8px #0ea5e9) drop-shadow(0 0 18px #0ea5e9) drop-shadow(0 0 34px #0284c7)" }} />
       </motion.g>
-      {/* L – two separate strokes */}
+      {/* L, two separate strokes */}
       <path d="M216 14V86 M216 86H284" stroke="rgba(255,255,255,0.9)" strokeWidth="9"
         strokeLinecap="round" strokeLinejoin="round" />
     </svg>
@@ -771,7 +771,7 @@ function DemoChat({ t }: { t: typeof translations["de"] }) {
         display: "flex", alignItems: "center", gap: "12px",
         transition: "background 0.4s ease",
       }}>
-        {/* Back button – only in chat mode */}
+        {/* Back button, only in chat mode */}
         {configured && (
           <motion.button
             onClick={goBack}
@@ -1230,7 +1230,7 @@ function FAQList({ items, isDark }: { items: { q: string; a: string }[]; isDark:
               )}
             </AnimatePresence>
 
-            {/* Left accent bar – scales down from top */}
+            {/* Left accent bar, scales down from top */}
             <motion.div
               animate={{ scaleY: isOpen ? 1 : 0, opacity: isOpen ? 1 : 0 }}
               initial={{ scaleY: 0, opacity: 0 }}
@@ -1253,7 +1253,7 @@ function FAQList({ items, isDark }: { items: { q: string; a: string }[]; isDark:
               }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                {/* Number badge – bounces on open */}
+                {/* Number badge, bounces on open */}
                 <motion.span
                   animate={{
                     scale: isOpen ? [1, 1.28, 0.92, 1] : 1,
@@ -1342,15 +1342,15 @@ type ConfigAnswers = Record<string, string[]>;
 const CONFIG_STEPS = [
   {
     id: "anfragen",
-    q: "Wie oft melden sich Kunden bei dir – so ungefähr pro Monat?",
-    hint: "Zähle Anrufe, Nachrichten, E-Mails – alles zusammen. Schätzen reicht!",
+    q: "Wie oft melden sich Kunden bei dir, so ungefähr pro Monat?",
+    hint: "Zähle Anrufe, Nachrichten und E-Mails einfach zusammen. Schätzen reicht!",
     multi: false,
     cols: 2,
     options: [
-      { id: "lt100",  label: "Selten – unter 100×",    emoji: "🌱", detail: "z.B. kleiner Laden oder Salon" },
-      { id: "lt500",  label: "Regelmäßig – bis 500×",  emoji: "📈", detail: "z.B. Restaurant oder Friseursalon" },
-      { id: "lt3000", label: "Oft – bis 3.000×",       emoji: "🚀", detail: "z.B. größeres Unternehmen" },
-      { id: "gt3000", label: "Sehr viel – über 3.000×",emoji: "🏢", detail: "z.B. Kette oder Konzern" },
+      { id: "lt100",  label: "Selten (unter 100)",    emoji: "🌱", detail: "z.B. kleiner Laden oder Salon" },
+      { id: "lt500",  label: "Regelmäßig (bis 500)",  emoji: "📈", detail: "z.B. Restaurant oder Friseursalon" },
+      { id: "lt3000", label: "Oft (bis 3.000)",       emoji: "🚀", detail: "z.B. größeres Unternehmen" },
+      { id: "gt3000", label: "Sehr viel (über 3.000)",emoji: "🏢", detail: "z.B. Kette oder Konzern" },
     ],
   },
   {
@@ -1369,7 +1369,7 @@ const CONFIG_STEPS = [
   {
     id: "features",
     q: "Was soll der Assistent für dich und deine Kunden erledigen?",
-    hint: "Wähle alles aus was du brauchst — mehreres ist kein Problem",
+    hint: "Mehrere Antworten möglich. Einfach alles anklicken was du brauchst.",
     multi: true,
     cols: 3,
     options: [
@@ -1384,7 +1384,7 @@ const CONFIG_STEPS = [
   {
     id: "assistenten",
     q: "Für wie viele verschiedene Aufgaben brauchst du einen Assistenten?",
-    hint: "Jede Aufgabe kann ein eigener Assistent sein — z.B. einer für Termine, einer für Fragen",
+    hint: "Z.B. einen für Terminbuchung und einen für Kundenfragen.",
     multi: false,
     cols: 3,
     options: [
@@ -1396,10 +1396,10 @@ const CONFIG_STEPS = [
 ] as const;
 
 const PLAN_RESULTS = {
-  Starter:    { emoji: "🌱", price: "ab €39 / Monat",  cta: "Kostenlos starten →",  desc: "Perfekt zum Einstieg. 14 Tage kostenlos testen – keine Kreditkarte, kein Risiko. Für kleinere Betriebe die NIL kennenlernen wollen." },
+  Starter:    { emoji: "🌱", price: "ab €39 / Monat",  cta: "Kostenlos starten →",  desc: "Perfekt zum Einstieg. 14 Tage kostenlos testen, keine Kreditkarte, kein Risiko. Für kleinere Betriebe die NIL kennenlernen wollen." },
   Basic:      { emoji: "📈", price: "ab €89 / Monat",  cta: "Basic starten →",       desc: "Genau richtig für deinen Betrieb. 500 Anfragen/Monat, E-Mail-Integration und vollständiger deutschsprachiger Support." },
   Pro:        { emoji: "⚡", price: "ab €199 / Monat", cta: "Pro wählen →",          desc: "Du brauchst Power. Pro gibt dir 3 Assistenten, bis zu 3.000 Anfragen, WhatsApp & Instagram und erweiterte Analytics." },
-  Enterprise: { emoji: "🏢", price: "ab €499 / Monat", cta: "Angebot anfragen →",   desc: "Deine Anforderungen sind komplex – genau dafür gibt es Enterprise. Unbegrenzte Assistenten, Custom API und 24/7 SLA." },
+  Enterprise: { emoji: "🏢", price: "ab €499 / Monat", cta: "Angebot anfragen →",   desc: "Deine Anforderungen sind komplex, genau dafür gibt es Enterprise. Unbegrenzte Assistenten, Custom API und 24/7 SLA." },
 } as const;
 
 type PlanKey = keyof typeof PLAN_RESULTS;
@@ -1412,7 +1412,7 @@ function calcRecommendation(answers: ConfigAnswers): { plan: PlanKey; reasons: s
   const reasons: string[] = [];
   let score = 0;
 
-  if      (anfragen === "gt3000") { score = Math.max(score, 3); reasons.push("Du bekommst sehr viele Nachrichten – dafür braucht es Enterprise"); }
+  if      (anfragen === "gt3000") { score = Math.max(score, 3); reasons.push("Du bekommst sehr viele Nachrichten, dafür braucht es Enterprise"); }
   else if (anfragen === "lt3000") { score = Math.max(score, 2); reasons.push("Für bis zu 3.000 Kontakte pro Monat ist Pro genau richtig"); }
   else if (anfragen === "lt500")  { score = Math.max(score, 1); reasons.push("Für bis zu 500 Kontakte pro Monat reicht Basic vollkommen"); }
 
@@ -1485,7 +1485,7 @@ function PlanFinder({ isDark, c, onOpenModal }: { isDark: boolean; c: CColors; o
             Welches Abo passt zu dir?
           </h2>
           <p style={{ color: c.text2, fontSize: "15px", marginBottom: "32px", lineHeight: 1.6 }}>
-            Beantworte {total} einfache Fragen — kein Fachwissen nötig. Wir empfehlen dir das passende Abo.
+            Beantworte {total} einfache Fragen, kein Fachwissen nötig. Wir empfehlen dir das passende Abo.
           </p>
         </motion.div>
 
@@ -1960,7 +1960,7 @@ export default function Home() {
         transition: "background 0.4s ease",
       }}>
 
-        {/* Laptop – AI Chat Interface Mockup */}
+        {/* Laptop, AI Chat Interface Mockup */}
         <div style={{ position: "absolute", left: "2%", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", display: isMobile ? "none" : "block" }}>
           <motion.div style={{ y: laptopY, width: "310px", opacity: 0 }}
             initial={{ opacity: 0, x: -60 }} animate={{ opacity: 0.28, x: 0 }}
@@ -2027,7 +2027,7 @@ export default function Home() {
           </motion.div>
         </div>
 
-        {/* Tablet – Analytics Dashboard + Smartphone – Booking UI */}
+        {/* Tablet, Analytics Dashboard + Smartphone, Booking UI */}
         <div style={{ position: "absolute", right: "2%", top: "50%", transform: "translateY(-50%)", pointerEvents: "none", display: isMobile ? "none" : "block" }}>
           <motion.div style={{ y: devicesY, opacity: 0 }}
             initial={{ opacity: 0, x: 60 }} animate={{ opacity: 0.28, x: 0 }}
@@ -2035,7 +2035,7 @@ export default function Home() {
             <motion.div animate={{ y: [0, 10, 0], rotate: [0.4, -0.4, 0.4] }}
               transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1.2 }}>
 
-              {/* Tablet – Dashboard */}
+              {/* Tablet, Dashboard */}
               <div style={{ width: "150px" }}>
                 <svg viewBox="0 0 160 226" fill="none" xmlns="http://www.w3.org/2000/svg">
                   {/* Body */}
@@ -2087,7 +2087,7 @@ export default function Home() {
                 </svg>
               </div>
 
-              {/* Smartphone – Booking UI */}
+              {/* Smartphone, Booking UI */}
               <div style={{ width: "90px", marginTop: "24px" }}>
                 <svg viewBox="0 0 100 210" fill="none" xmlns="http://www.w3.org/2000/svg">
                   {/* Body */}
@@ -2270,7 +2270,7 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* Scroll Indicator – modern animated arrow */}
+        {/* Scroll Indicator, modern animated arrow */}
         {!isMobile && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -2345,7 +2345,7 @@ export default function Home() {
                 Wir suchen 3 Pilotbetriebe in Bayern
               </p>
               <p style={{ color: "rgba(255,255,255,0.55)", fontSize: "13px", margin: 0, lineHeight: 1.5 }}>
-                Kostenlose Einrichtung gegen ehrliches Feedback – begrenzte Plätze, jetzt bewerben.
+                Kostenlose Einrichtung gegen ehrliches Feedback, begrenzte Plätze, jetzt bewerben.
               </p>
             </div>
           </div>
@@ -2403,7 +2403,7 @@ export default function Home() {
               variants={{ hidden: { opacity: 0, y: 16, filter: "blur(4px)" }, visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: appleEase } } }}
               style={{ color: c.text2, fontSize: "16px", lineHeight: 1.65, maxWidth: "480px", margin: "0 auto" }}
             >
-              Von unserem ersten Gespräch bis dein Assistent läuft – meistens in unter 48 Stunden.
+              Von unserem ersten Gespräch bis dein Assistent läuft, meistens in unter 48 Stunden.
             </motion.p>
           </motion.div>
 
@@ -2420,7 +2420,7 @@ export default function Home() {
                 color: "#0EA5E9",
                 sub: "15 Min · kostenlos",
                 title: "Kurzes Gespräch",
-                desc: "Wir schauen gemeinsam, welche Anfragen dich täglich Zeit kosten. Kein Vortrag – nur ein ehrliches Gespräch.",
+                desc: "Wir schauen gemeinsam, welche Anfragen dich täglich Zeit kosten. Kein Vortrag, nur ein ehrliches Gespräch.",
                 icon: (
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -3027,7 +3027,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Modal sheet — slides up from bottom */}
+      {/* Modal sheet, slides up from bottom */}
       <motion.section
         initial={{ y: "100%" }}
         animate={{ y: showCtaModal ? 0 : "100%" }}
@@ -3295,7 +3295,7 @@ export default function Home() {
           {/* Divider */}
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "24px", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "12px" }}>
             <span style={{ color: "rgba(255,255,255,0.25)", fontSize: "12px" }}>
-              © {new Date().getFullYear()} NIL – nilogik.de · Aschauerstraße 17, 82445 Schwaigen
+              © {new Date().getFullYear()} NIL · nilogik.de · Aschauerstraße 17, 82445 Schwaigen
             </span>
             <a href="mailto:info@nilogik.de" style={{ color: "rgba(255,255,255,0.4)", textDecoration: "none", fontSize: "12px", transition: "color 0.2s" }}
               onMouseEnter={e => (e.currentTarget.style.color = "#0EA5E9")}
