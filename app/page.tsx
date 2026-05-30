@@ -1335,181 +1335,315 @@ function FAQList({ items, isDark }: { items: { q: string; a: string }[]; isDark:
   );
 }
 
-/* ─── Plan Finder Quiz ──────────────────────────────────────── */
+/* ─── Plan Configurator ─────────────────────────────────────── */
 type CColors = { card: string; border: string; text: string; text2: string; text3: string; [k: string]: string };
+type ConfigAnswers = Record<string, string[]>;
 
-const PLAN_QUESTIONS = [
+const CONFIG_STEPS = [
   {
-    q: "Wie viele Kundenanfragen bekommt dein Betrieb pro Monat?",
-    hint: "Eine Schätzung reicht völlig",
+    id: "anfragen",
+    q: "Wie viele Kundenanfragen bekommt dein Betrieb ca. pro Monat?",
+    hint: "Eine grobe Schätzung reicht völlig",
+    multi: false,
+    cols: 2,
     options: [
-      { label: "Weniger als 100", emoji: "🌱", score: 0 },
-      { label: "100 – 500",       emoji: "📈", score: 1 },
-      { label: "500 – 3.000",     emoji: "🚀", score: 2 },
-      { label: "Über 3.000",      emoji: "🏢", score: 3 },
+      { id: "lt100",  label: "Weniger als 100",  emoji: "🌱", detail: "ideal zum Testen" },
+      { id: "lt500",  label: "100 – 500",         emoji: "📈", detail: "solides Wachstum" },
+      { id: "lt3000", label: "500 – 3.000",        emoji: "🚀", detail: "aktiver Betrieb" },
+      { id: "gt3000", label: "Über 3.000",         emoji: "🏢", detail: "Enterprise-Niveau" },
     ],
   },
   {
+    id: "kanaele",
     q: "Über welche Kanäle sollen Kunden den Assistenten erreichen?",
-    hint: "Mehrere Kanäle = mehr Reichweite",
+    hint: "Mehrere Antworten möglich — bestätige unten",
+    multi: true,
+    cols: 2,
     options: [
-      { label: "Nur Website-Chat",          emoji: "💬", score: 0 },
-      { label: "Website + E-Mail",          emoji: "📧", score: 1 },
-      { label: "Web, WhatsApp & Instagram", emoji: "📱", score: 2 },
-      { label: "Individuell / On-Premise",  emoji: "⚙️", score: 3 },
+      { id: "web",       label: "Website-Chat", emoji: "💬", detail: "immer inklusive" },
+      { id: "email",     label: "E-Mail",        emoji: "📧", detail: "ab Basic" },
+      { id: "whatsapp",  label: "WhatsApp",      emoji: "📱", detail: "ab Pro" },
+      { id: "instagram", label: "Instagram",     emoji: "📸", detail: "ab Pro" },
     ],
   },
   {
+    id: "features",
+    q: "Welche Funktionen brauchst du?",
+    hint: "Alles was du benötigst — Mehrfachauswahl möglich",
+    multi: true,
+    cols: 3,
+    options: [
+      { id: "faq",       label: "FAQ / Support",      emoji: "❓", detail: "alle Pläne" },
+      { id: "termine",   label: "Terminbuchung",      emoji: "📅", detail: "ab Basic" },
+      { id: "analytics", label: "Analytics",          emoji: "📊", detail: "ab Pro" },
+      { id: "multibot",  label: "Mehr. Assistenten",  emoji: "🤖", detail: "ab Pro" },
+      { id: "crm",       label: "CRM-Anbindung",      emoji: "🔗", detail: "ab Pro" },
+      { id: "custom",    label: "Custom / API",       emoji: "⚙️", detail: "Enterprise" },
+    ],
+  },
+  {
+    id: "assistenten",
     q: "Wie viele KI-Assistenten brauchst du?",
     hint: "Z.B. je einen für Terminbuchung und Support",
+    multi: false,
+    cols: 3,
     options: [
-      { label: "1 Assistent",       emoji: "🤖", score: 0 },
-      { label: "2 – 3 Assistenten", emoji: "🤝", score: 1 },
-      { label: "Mehr als 3",        emoji: "🏭", score: 2 },
+      { id: "one",  label: "1 Assistent",       emoji: "🤖", detail: "Starter & Basic" },
+      { id: "few",  label: "2 – 3 Assistenten", emoji: "🤝", detail: "ab Pro" },
+      { id: "many", label: "Mehr als 3",         emoji: "🏭", detail: "Enterprise" },
     ],
   },
-];
+] as const;
 
 const PLAN_RESULTS = {
-  Starter:    { emoji: "🌱", price: "ab €39 / Monat",   desc: "Perfekt zum Ausprobieren! Du bekommst 14 Tage kostenlos – ohne Kreditkarte. Ideal für kleinere Betriebe, die NIL kennenlernen wollen.", cta: "Kostenlos starten →" },
-  Basic:      { emoji: "📈", price: "ab €89 / Monat",   desc: "Genau richtig für deinen Betrieb. Du bekommst 500 Anfragen/Monat, E-Mail-Integration und deutschsprachigen Support.",                    cta: "Basic starten →" },
-  Pro:        { emoji: "⚡", price: "ab €199 / Monat",  desc: "Du brauchst Power. Pro bietet 3 Assistenten, bis zu 3.000 Anfragen, WhatsApp & Instagram und erweiterte Analytics.",                     cta: "Pro wählen →" },
-  Enterprise: { emoji: "🏢", price: "ab €499 / Monat",  desc: "Deine Anforderungen sind komplex – genau dafür gibt es Enterprise. Unbegrenzte Assistenten, Custom API und 24/7 SLA-Support.",           cta: "Angebot anfragen →" },
+  Starter:    { emoji: "🌱", price: "ab €39 / Monat",  cta: "Kostenlos starten →",  desc: "Perfekt zum Einstieg. 14 Tage kostenlos testen – keine Kreditkarte, kein Risiko. Für kleinere Betriebe die NIL kennenlernen wollen." },
+  Basic:      { emoji: "📈", price: "ab €89 / Monat",  cta: "Basic starten →",       desc: "Genau richtig für deinen Betrieb. 500 Anfragen/Monat, E-Mail-Integration und vollständiger deutschsprachiger Support." },
+  Pro:        { emoji: "⚡", price: "ab €199 / Monat", cta: "Pro wählen →",          desc: "Du brauchst Power. Pro gibt dir 3 Assistenten, bis zu 3.000 Anfragen, WhatsApp & Instagram und erweiterte Analytics." },
+  Enterprise: { emoji: "🏢", price: "ab €499 / Monat", cta: "Angebot anfragen →",   desc: "Deine Anforderungen sind komplex – genau dafür gibt es Enterprise. Unbegrenzte Assistenten, Custom API und 24/7 SLA." },
 } as const;
 
-function PlanFinder({ isDark, c, onOpenModal }: { isDark: boolean; c: CColors; onOpenModal: () => void }) {
-  const [step,   setStep]   = useState(0);
-  const [scores, setScores] = useState<number[]>([]);
-  const [result, setResult] = useState<keyof typeof PLAN_RESULTS | null>(null);
+type PlanKey = keyof typeof PLAN_RESULTS;
 
-  const handleAnswer = (score: number) => {
-    const next = [...scores, score];
-    setScores(next);
-    if (next.length === PLAN_QUESTIONS.length) {
-      const max = Math.max(...next);
-      const avg = next.reduce((a, b) => a + b, 0) / next.length;
-      setResult(max === 3 ? "Enterprise" : avg >= 2 ? "Pro" : avg >= 1 ? "Basic" : "Starter");
+function calcRecommendation(answers: ConfigAnswers): { plan: PlanKey; reasons: string[] } {
+  const anfragen    = answers["anfragen"]?.[0] ?? "lt100";
+  const kanaele     = answers["kanaele"]     ?? [];
+  const features    = answers["features"]    ?? [];
+  const assistenten = answers["assistenten"]?.[0] ?? "one";
+  const reasons: string[] = [];
+  let score = 0;
+
+  if      (anfragen === "gt3000") { score = Math.max(score, 3); reasons.push("Über 3.000 Anfragen/Monat benötigt Enterprise"); }
+  else if (anfragen === "lt3000") { score = Math.max(score, 2); reasons.push("Bis zu 3.000 Anfragen/Monat → Pro empfohlen"); }
+  else if (anfragen === "lt500")  { score = Math.max(score, 1); reasons.push("Bis zu 500 Anfragen/Monat → Basic ausreichend"); }
+
+  if (kanaele.includes("whatsapp") || kanaele.includes("instagram")) {
+    score = Math.max(score, 2);
+    reasons.push("WhatsApp / Instagram ist ab Pro verfügbar");
+  } else if (kanaele.includes("email")) {
+    score = Math.max(score, 1);
+    reasons.push("E-Mail-Integration ist ab Basic verfügbar");
+  }
+
+  if (features.includes("custom"))    { score = Math.max(score, 3); reasons.push("Custom API / On-Premise → Enterprise"); }
+  if (features.includes("crm"))       { score = Math.max(score, 2); reasons.push("CRM-Anbindung ist ab Pro verfügbar"); }
+  if (features.includes("analytics")) { score = Math.max(score, 2); reasons.push("Erweiterte Analytics sind ab Pro verfügbar"); }
+  if (features.includes("multibot"))  { score = Math.max(score, 2); reasons.push("Mehrere Assistenten sind ab Pro verfügbar"); }
+  if (features.includes("termine") && score < 1) { score = 1; reasons.push("Terminbuchung-Integration ist ab Basic verfügbar"); }
+
+  if (assistenten === "many") { score = Math.max(score, 3); reasons.push("Mehr als 3 Assistenten → Enterprise"); }
+  else if (assistenten === "few") { score = Math.max(score, 2); reasons.push("2–3 Assistenten sind im Pro-Plan enthalten"); }
+
+  const plan = (["Starter", "Basic", "Pro", "Enterprise"] as PlanKey[])[score];
+  return { plan, reasons: reasons.slice(0, 4) };
+}
+
+function PlanFinder({ isDark, c, onOpenModal }: { isDark: boolean; c: CColors; onOpenModal: () => void }) {
+  const [step,    setStep]    = useState(0);
+  const [answers, setAnswers] = useState<ConfigAnswers>({});
+  const [result,  setResult]  = useState<{ plan: PlanKey; reasons: string[] } | null>(null);
+
+  const q        = CONFIG_STEPS[step];
+  const selected = answers[q?.id] ?? [];
+  const total    = CONFIG_STEPS.length;
+
+  const toggleOption = (optId: string) => {
+    const cur = answers[q.id] ?? [];
+    if (q.multi) {
+      const next = cur.includes(optId) ? cur.filter(x => x !== optId) : [...cur, optId];
+      setAnswers({ ...answers, [q.id]: next });
     } else {
-      setStep(s => s + 1);
+      const newA = { ...answers, [q.id]: [optId] };
+      setAnswers(newA);
+      if (step < total - 1) {
+        setTimeout(() => setStep(s => s + 1), 180);
+      } else {
+        setResult(calcRecommendation(newA));
+      }
     }
   };
 
-  const reset = () => { setStep(0); setScores([]); setResult(null); };
-  const q   = PLAN_QUESTIONS[step];
-  const res = result ? PLAN_RESULTS[result] : null;
+  const advance = () => {
+    if (step < total - 1) {
+      setStep(s => s + 1);
+    } else {
+      setResult(calcRecommendation(answers));
+    }
+  };
+
+  const goBack  = () => { setStep(s => Math.max(0, s - 1)); };
+  const reset   = () => { setStep(0); setAnswers({}); setResult(null); };
+  const res     = result ? PLAN_RESULTS[result.plan] : null;
 
   return (
     <section style={{ padding: "80px 20px", background: isDark ? "#0A1628" : "#E8F0FA", transition: "background 0.3s" }}>
-      <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
+      <div style={{ maxWidth: "660px", margin: "0 auto", textAlign: "center" }}>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7, ease: appleEase }}>
-          <p style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "10px" }}>
-            PLAN FINDER
-          </p>
+          <p style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "10px" }}>PLAN FINDER</p>
           <h2 style={{ fontSize: "clamp(22px, 3.5vw, 34px)", fontWeight: 800, letterSpacing: "-0.04em", marginBottom: "10px", color: c.text }}>
             Welcher Plan passt zu dir?
           </h2>
           <p style={{ color: c.text2, fontSize: "15px", marginBottom: "32px", lineHeight: 1.6 }}>
-            3 kurze Fragen – wir finden den perfekten Plan für dich.
+            Beantworte {total} kurze Fragen — wir ermitteln deinen perfekten Plan.
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }} transition={{ duration: 0.8, delay: 0.1, ease: appleEase }}
           style={{ background: c.card, border: `1px solid ${c.border}`, borderRadius: "24px",
-            padding: "36px 28px", boxShadow: "0 8px 40px rgba(15,23,42,0.08)" }}
+            padding: "36px 28px", boxShadow: "0 8px 40px rgba(15,23,42,0.08)", textAlign: "left" }}
         >
           {!result ? (
             <>
-              {/* Progress */}
-              <div style={{ display: "flex", gap: "8px", justifyContent: "center", marginBottom: "28px" }}>
-                {PLAN_QUESTIONS.map((_, i) => (
-                  <div key={i} style={{
-                    height: "6px", borderRadius: "3px",
-                    width: i === step ? "28px" : "8px",
-                    background: i <= step ? "#0EA5E9" : c.border,
-                    transition: "all 0.3s ease",
-                  }} />
-                ))}
+              {/* Progress bar */}
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
+                <div style={{ flex: 1, height: "6px", background: c.border, borderRadius: "3px", overflow: "hidden" }}>
+                  <motion.div
+                    animate={{ width: `${((step + 1) / total) * 100}%` }}
+                    transition={{ duration: 0.4, ease: appleEase }}
+                    style={{ height: "100%", background: "linear-gradient(90deg, #0EA5E9, #0284C7)", borderRadius: "3px" }}
+                  />
+                </div>
+                <span style={{ fontSize: "12px", fontWeight: 600, color: c.text3, whiteSpace: "nowrap" }}>
+                  {step + 1} / {total}
+                </span>
               </div>
 
               <AnimatePresence mode="wait">
                 <motion.div key={step}
                   initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }}
-                  transition={{ duration: 0.26, ease: appleEase }}
+                  transition={{ duration: 0.25, ease: appleEase }}
                 >
-                  <p style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "1px", marginBottom: "10px" }}>
-                    FRAGE {step + 1} VON {PLAN_QUESTIONS.length}
-                  </p>
-                  <h3 style={{ fontSize: "19px", fontWeight: 700, color: c.text, marginBottom: "6px", lineHeight: 1.4, letterSpacing: "-0.02em" }}>
+                  {/* Badge: single vs multi */}
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
+                    <span style={{
+                      fontSize: "10px", fontWeight: 700, letterSpacing: "1px", padding: "3px 9px",
+                      borderRadius: "99px", background: q.multi ? "rgba(14,165,233,0.12)" : "rgba(34,197,94,0.1)",
+                      color: q.multi ? "#0EA5E9" : "#22C55E",
+                    }}>
+                      {q.multi ? "MEHRFACHAUSWAHL" : "EINZELAUSWAHL"}
+                    </span>
+                  </div>
+
+                  <h3 style={{ fontSize: "18px", fontWeight: 700, color: c.text, marginBottom: "6px", lineHeight: 1.4, letterSpacing: "-0.02em" }}>
                     {q.q}
                   </h3>
-                  <p style={{ fontSize: "13px", color: c.text3, marginBottom: "22px" }}>{q.hint}</p>
+                  <p style={{ fontSize: "13px", color: c.text3, marginBottom: "20px" }}>{q.hint}</p>
 
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
-                    {q.options.map(opt => (
-                      <motion.button key={opt.label} onClick={() => handleAnswer(opt.score)}
-                        whileHover={{ scale: 1.03, borderColor: "#0EA5E9", background: isDark ? "rgba(14,165,233,0.08)" : "rgba(14,165,233,0.04)" }}
-                        whileTap={{ scale: 0.96 }}
-                        style={{
-                          padding: "16px 12px", borderRadius: "14px", cursor: "pointer",
-                          background: isDark ? "rgba(255,255,255,0.04)" : "#F8FAFC",
-                          border: `1.5px solid ${c.border}`,
-                          display: "flex", flexDirection: "column", alignItems: "center", gap: "8px",
-                          fontFamily: "inherit", textAlign: "center",
-                          transition: "border-color 0.2s, background 0.2s",
-                        }}
-                      >
-                        <span style={{ fontSize: "26px", lineHeight: 1 }}>{opt.emoji}</span>
-                        <span style={{ fontSize: "13px", fontWeight: 600, color: c.text, lineHeight: 1.3 }}>{opt.label}</span>
+                  <div style={{ display: "grid", gridTemplateColumns: `repeat(${q.cols}, 1fr)`, gap: "10px", marginBottom: "20px" }}>
+                    {q.options.map(opt => {
+                      const isSelected = selected.includes(opt.id);
+                      return (
+                        <motion.button key={opt.id} onClick={() => toggleOption(opt.id)}
+                          whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.96 }}
+                          style={{
+                            padding: "14px 10px", borderRadius: "14px", cursor: "pointer",
+                            background: isSelected
+                              ? (isDark ? "rgba(14,165,233,0.18)" : "rgba(14,165,233,0.08)")
+                              : (isDark ? "rgba(255,255,255,0.04)" : "#F8FAFC"),
+                            border: `1.5px solid ${isSelected ? "#0EA5E9" : c.border}`,
+                            display: "flex", flexDirection: "column", alignItems: "center", gap: "6px",
+                            fontFamily: "inherit", textAlign: "center",
+                            transition: "border-color 0.18s, background 0.18s",
+                            position: "relative",
+                          }}
+                        >
+                          {isSelected && (
+                            <div style={{
+                              position: "absolute", top: "7px", right: "8px",
+                              width: "16px", height: "16px", borderRadius: "50%",
+                              background: "#0EA5E9",
+                              display: "flex", alignItems: "center", justifyContent: "center",
+                              fontSize: "9px", color: "#fff", fontWeight: 800,
+                            }}>✓</div>
+                          )}
+                          <span style={{ fontSize: "22px", lineHeight: 1 }}>{opt.emoji}</span>
+                          <span style={{ fontSize: "12px", fontWeight: 600, color: c.text, lineHeight: 1.3 }}>{opt.label}</span>
+                          <span style={{ fontSize: "10px", color: "#0EA5E9", fontWeight: 500 }}>{opt.detail}</span>
+                        </motion.button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Navigation */}
+                  <div style={{ display: "flex", gap: "10px", justifyContent: "space-between", alignItems: "center" }}>
+                    {step > 0 ? (
+                      <motion.button onClick={goBack} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                        style={{ padding: "11px 20px", borderRadius: "10px", background: "transparent",
+                          border: `1.5px solid ${c.border}`, color: c.text2, fontWeight: 600, fontSize: "14px",
+                          cursor: "pointer", fontFamily: "inherit" }}>
+                        ← Zurück
                       </motion.button>
-                    ))}
+                    ) : <div />}
+
+                    {q.multi && (
+                      <motion.button onClick={advance} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                        disabled={selected.length === 0}
+                        style={{
+                          padding: "11px 28px", borderRadius: "10px", border: "none",
+                          background: selected.length > 0 ? "linear-gradient(135deg, #0EA5E9, #0284C7)" : c.border,
+                          color: selected.length > 0 ? "#fff" : c.text3,
+                          fontWeight: 700, fontSize: "14px", cursor: selected.length > 0 ? "pointer" : "default",
+                          fontFamily: "inherit", boxShadow: selected.length > 0 ? "0 6px 18px rgba(14,165,233,0.3)" : "none",
+                          transition: "background 0.2s",
+                        }}>
+                        {step === total - 1 ? "Plan ermitteln →" : "Weiter →"}
+                      </motion.button>
+                    )}
                   </div>
                 </motion.div>
               </AnimatePresence>
             </>
           ) : (
             <AnimatePresence mode="wait">
-              <motion.div key="result"
-                initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, ease: appleEase }}
+              <motion.div key="result" initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, ease: appleEase }} style={{ textAlign: "center" }}
               >
-                <div style={{ fontSize: "52px", marginBottom: "14px" }}>{res!.emoji}</div>
-                <p style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "1.5px", marginBottom: "8px" }}>
+                <div style={{ fontSize: "52px", marginBottom: "12px" }}>{res!.emoji}</div>
+                <p style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "1.5px", marginBottom: "6px" }}>
                   UNSERE EMPFEHLUNG FÜR DICH
                 </p>
-                <h3 style={{ fontSize: "34px", fontWeight: 900, letterSpacing: "-0.04em", color: c.text, marginBottom: "4px" }}>
-                  {result}
+                <h3 style={{ fontSize: "36px", fontWeight: 900, letterSpacing: "-0.04em", color: c.text, marginBottom: "4px" }}>
+                  {result!.plan}
                 </h3>
-                <div style={{ fontSize: "17px", fontWeight: 700, color: "#0EA5E9", marginBottom: "16px" }}>
-                  {res!.price}
-                </div>
-                <p style={{ fontSize: "15px", color: c.text2, lineHeight: 1.65, marginBottom: "28px",
-                  maxWidth: "400px", margin: "0 auto 28px" }}>
+                <div style={{ fontSize: "18px", fontWeight: 700, color: "#0EA5E9", marginBottom: "16px" }}>{res!.price}</div>
+                <p style={{ fontSize: "15px", color: c.text2, lineHeight: 1.65, marginBottom: "22px", maxWidth: "420px", margin: "0 auto 22px" }}>
                   {res!.desc}
                 </p>
+
+                {/* Reasons */}
+                {result!.reasons.length > 0 && (
+                  <div style={{ background: isDark ? "rgba(14,165,233,0.08)" : "rgba(14,165,233,0.06)",
+                    border: `1px solid rgba(14,165,233,0.2)`, borderRadius: "14px",
+                    padding: "16px 18px", marginBottom: "24px", textAlign: "left" }}>
+                    <p style={{ fontSize: "11px", fontWeight: 700, color: "#0EA5E9", letterSpacing: "1px", marginBottom: "10px" }}>
+                      WARUM DIESER PLAN
+                    </p>
+                    {result!.reasons.map((r, i) => (
+                      <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "8px", marginBottom: i < result!.reasons.length - 1 ? "7px" : 0 }}>
+                        <span style={{ color: "#0EA5E9", fontWeight: 700, flexShrink: 0 }}>✓</span>
+                        <span style={{ fontSize: "13px", color: c.text2 }}>{r}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
-                  <motion.button onClick={onOpenModal}
-                    whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                    style={{
-                      padding: "14px 30px", borderRadius: "12px", border: "none",
+                  <motion.button onClick={onOpenModal} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                    style={{ padding: "14px 30px", borderRadius: "12px", border: "none",
                       background: "linear-gradient(135deg, #0EA5E9, #0284C7)",
                       color: "#fff", fontWeight: 700, fontSize: "15px",
                       cursor: "pointer", fontFamily: "inherit",
-                      boxShadow: "0 8px 24px rgba(14,165,233,0.35)",
-                    }}
-                  >{res!.cta}</motion.button>
-                  <motion.button onClick={reset}
-                    whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
-                    style={{
-                      padding: "14px 22px", borderRadius: "12px",
-                      background: "transparent", border: `1.5px solid ${c.border}`,
-                      color: c.text2, fontWeight: 600, fontSize: "14px",
-                      cursor: "pointer", fontFamily: "inherit",
-                    }}
-                  >↺ Nochmal</motion.button>
+                      boxShadow: "0 8px 24px rgba(14,165,233,0.35)" }}>
+                    {res!.cta}
+                  </motion.button>
+                  <motion.button onClick={reset} whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                    style={{ padding: "14px 22px", borderRadius: "12px", background: "transparent",
+                      border: `1.5px solid ${c.border}`, color: c.text2, fontWeight: 600, fontSize: "14px",
+                      cursor: "pointer", fontFamily: "inherit" }}>
+                    ↺ Nochmal
+                  </motion.button>
                 </div>
               </motion.div>
             </AnimatePresence>
