@@ -1355,6 +1355,7 @@ export default function Home() {
 
   /* ── Kontakt Modal ── */
   const [showCtaModal, setShowCtaModal] = useState(false);
+  const [priceBilling, setPriceBilling] = useState<"monthly" | "yearly">("monthly");
   useEffect(() => {
     document.body.style.overflow = showCtaModal ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -2494,6 +2495,154 @@ export default function Home() {
           </motion.div>
 
           <FAQList items={faqItems[lang] ?? faqItems["de"]} isDark={isDark} />
+        </div>
+      </section>
+
+      {/* ── PREISE ── */}
+      <section id="preise" style={{ padding: "100px 20px", background: isDark ? "#07101e" : "#EEF2F7", transition: "background 0.3s ease" }}>
+        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+
+          {/* Header */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12 } } }}
+            style={{ textAlign: "center", marginBottom: "44px" }}>
+            <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: appleEase } } }}
+              style={{ color: "#0EA5E9", fontSize: "11px", fontWeight: 700, letterSpacing: "2.5px", marginBottom: "12px" }}>
+              PREISE
+            </motion.p>
+            <motion.h2 variants={{ hidden: { opacity: 0, scale: 0.94, y: 24 }, visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 1, ease: appleEase } } }}
+              style={{ fontSize: "clamp(26px, 4vw, 40px)", fontWeight: 800, letterSpacing: "-0.04em", marginBottom: "14px", color: c.text }}>
+              Einfach. Fair. Transparent.
+            </motion.h2>
+            <motion.p variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: appleEase } } }}
+              style={{ color: c.text2, fontSize: "15px", maxWidth: "460px", margin: "0 auto", lineHeight: 1.65 }}>
+              Monatlich kündbar. Keine versteckten Kosten. 30 Tage Geld-zurück-Garantie.
+            </motion.p>
+          </motion.div>
+
+          {/* Billing Toggle */}
+          <div style={{ display: "flex", justifyContent: "center", marginBottom: "40px" }}>
+            <div style={{ display: "inline-flex", background: isDark ? "rgba(255,255,255,0.07)" : "#DDE3EC", borderRadius: "99px", padding: "4px", gap: "2px" }}>
+              {(["monthly", "yearly"] as const).map(b => (
+                <button key={b} onClick={() => setPriceBilling(b)} style={{
+                  padding: "10px 22px", borderRadius: "99px", border: "none",
+                  cursor: "pointer", fontWeight: 600, fontSize: "14px", fontFamily: "inherit",
+                  background: priceBilling === b ? (isDark ? "#0EA5E9" : "#0F172A") : "transparent",
+                  color: priceBilling === b ? "#FFFFFF" : c.text2,
+                  transition: "all 0.25s ease",
+                }}>
+                  {b === "monthly" ? "Monatlich" : "Jährlich"}
+                  {b === "yearly" && (
+                    <span style={{ marginLeft: "7px", background: "rgba(34,197,94,0.15)", color: "#22C55E", fontSize: "11px", fontWeight: 700, padding: "2px 7px", borderRadius: "99px" }}>
+                      −20%
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Cards */}
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: "16px", alignItems: "stretch" }}>
+            {([
+              { name: "Starter",    price: 39   as number | null, setup: 0,   tag: null,               features: ["1 KI-Assistent", "bis zu 100 Anfragen/Monat", "14 Tage kostenlos testen"] },
+              { name: "Basic",      price: 89   as number | null, setup: 149, tag: null,               features: ["1 KI-Assistent", "bis zu 500 Anfragen/Monat", "E-Mail-Integration"] },
+              { name: "Pro",        price: 199  as number | null, setup: 249, tag: "Beliebteste Wahl", features: ["3 KI-Assistenten", "bis zu 3.000 Anfragen/Monat", "WhatsApp, Web & Instagram"] },
+              { name: "Enterprise", price: null as number | null, setup: 399, tag: null,               features: ["Unbegrenzte KI-Assistenten", "Unbegrenzte Anfragen", "Custom API & Integrationen"] },
+            ]).map((plan, i) => {
+              const isPro = plan.name === "Pro";
+              const mp = plan.price !== null
+                ? (plan.name === "Starter" ? plan.price : (priceBilling === "yearly" ? Math.round(plan.price * 0.8) : plan.price))
+                : null;
+
+              return (
+                <motion.div key={plan.name}
+                  initial={{ opacity: 0, y: 36 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.75, ease: appleEase, delay: i * 0.1 }}
+                  style={{
+                    background: isPro ? "linear-gradient(145deg, #0D1F3C 0%, #08152A 100%)" : c.card,
+                    border: `1.5px solid ${isPro ? "rgba(14,165,233,0.4)" : c.border}`,
+                    borderRadius: "24px", padding: "30px 24px",
+                    display: "flex", flexDirection: "column", position: "relative",
+                    boxShadow: isPro
+                      ? "0 32px 80px rgba(8,21,42,0.35), 0 0 0 1px rgba(14,165,233,0.3)"
+                      : "0 4px 20px rgba(15,23,42,0.06)",
+                  }}
+                >
+                  {plan.tag && (
+                    <div style={{
+                      position: "absolute", top: "16px", right: "16px",
+                      background: "linear-gradient(135deg, #0EA5E9, #0284C7)",
+                      color: "#fff", fontSize: "11px", fontWeight: 700,
+                      padding: "4px 11px", borderRadius: "22px",
+                    }}>{plan.tag}</div>
+                  )}
+
+                  <div style={{ fontSize: "18px", fontWeight: 700, marginBottom: "18px", color: isPro ? "#fff" : c.text }}>
+                    {plan.name}
+                  </div>
+
+                  {/* Price */}
+                  {mp !== null ? (
+                    <div style={{ display: "flex", alignItems: "baseline", gap: "4px", marginBottom: "6px" }}>
+                      <span style={{ fontSize: "16px", fontWeight: 700, color: isPro ? "rgba(255,255,255,0.6)" : c.text2 }}>€</span>
+                      <span style={{ fontSize: "50px", fontWeight: 900, letterSpacing: "-0.04em", lineHeight: 1, color: isPro ? "#fff" : c.text }}>{mp}</span>
+                      <span style={{ fontSize: "14px", color: isPro ? "rgba(255,255,255,0.5)" : c.text3 }}>/Mo.</span>
+                    </div>
+                  ) : (
+                    <div style={{ fontSize: "28px", fontWeight: 900, color: isPro ? "#fff" : c.text, marginBottom: "6px" }}>Individuell</div>
+                  )}
+                  <div style={{ fontSize: "12px", color: isPro ? "rgba(255,255,255,0.4)" : c.text3, marginBottom: "22px" }}>
+                    {plan.setup === 0 ? "✓ Keine Einrichtungsgebühr" : `+ einmalig €${plan.setup} Einrichtung`}
+                  </div>
+
+                  {/* Features */}
+                  <ul style={{ listStyle: "none", padding: 0, margin: "0 0 26px 0", flex: 1 }}>
+                    {plan.features.map(f => (
+                      <li key={f} style={{
+                        display: "flex", alignItems: "flex-start", gap: "8px",
+                        padding: "8px 0",
+                        borderBottom: `1px solid ${isPro ? "rgba(255,255,255,0.07)" : c.border}`,
+                        fontSize: "13px", color: isPro ? "rgba(255,255,255,0.82)" : c.text,
+                      }}>
+                        <span style={{ color: "#0EA5E9", fontWeight: 700, flexShrink: 0, marginTop: "1px" }}>✓</span>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA */}
+                  <motion.button
+                    onClick={() => setShowCtaModal(true)}
+                    whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
+                    style={{
+                      width: "100%", padding: "13px 20px", borderRadius: "12px",
+                      background: isPro
+                        ? "linear-gradient(135deg, #0EA5E9, #0284C7)"
+                        : isDark ? "rgba(14,165,233,0.12)" : "#0F172A",
+                      color: isPro ? "#fff" : isDark ? "#0EA5E9" : "#fff",
+                      border: isPro ? "none" : isDark ? "1px solid rgba(14,165,233,0.3)" : "none",
+                      fontWeight: 700, fontSize: "14px", cursor: "pointer", fontFamily: "inherit",
+                      boxShadow: isPro ? "0 8px 24px rgba(14,165,233,0.4)" : "none",
+                    }}
+                  >
+                    {plan.name === "Enterprise" ? "Angebot anfragen" : plan.name === "Starter" ? "Kostenlos starten" : "Jetzt starten"} →
+                  </motion.button>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Link to full pricing page */}
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            style={{ textAlign: "center", marginTop: "32px" }}>
+            <a href="/preise" style={{ color: "#0EA5E9", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
+              Alle Details & Feature-Vergleich ansehen →
+            </a>
+          </motion.div>
         </div>
       </section>
 
