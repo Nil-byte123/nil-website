@@ -1475,7 +1475,7 @@ function PlanFinder({ isDark, c, onOpenModal}: { isDark: boolean; c: CColors; on
   const res     = result? PLAN_RESULTS[result.plan]: null;
 
   return (
-    <section style={{ padding:"80px 20px", background: isDark?"#0A1628":"#E8F0FA", transition:"background 0.3s"}}>
+    <section style={{ padding:"80px 20px", background: isDark?"#161921":"#E8F0FA", transition:"background 0.3s"}}>
       <div style={{ maxWidth:"660px", margin:"0 auto", textAlign:"center"}}>
 
         <motion.div initial={{ opacity: 0, y: 20}} whileInView={{ opacity: 1, y: 0}}
@@ -1742,10 +1742,10 @@ export default function Home() {
 
   /* ── Theme color map ── */
   const c = {
-    bg:          isDark?"#07101e":"#EEF2F7",
-    card:        isDark?"#0d1f3c":"#FFFFFF",
-    card2:       isDark?"#091520":"#F4F7FB",
-    card3:       isDark?"#0a1728":"#EAF0F8",
+    bg:          isDark?"#111318":"#EEF2F7",
+    card:        isDark?"#1c1f2a":"#FFFFFF",
+    card2:       isDark?"#161921":"#F4F7FB",
+    card3:       isDark?"#181b24":"#EAF0F8",
     text:        isDark?"#F1F5F9":"#0F172A",
     text2:       isDark?"#94A3B8":"#475569",
     text3:       isDark?"#64748B":"#64748B",
@@ -1754,14 +1754,14 @@ export default function Home() {
     nav:         isDark?"rgba(7,16,30,0.92)":"rgba(248,250,252,0.78)",
     navBorder:   isDark?"rgba(255,255,255,0.05)":"rgba(15,23,42,0.06)",
     heroGrad:    isDark
-     ?"radial-gradient(ellipse at 50% 30%, #0d2444 0%, #0a1830 60%, #07101e 100%)"
+     ?"radial-gradient(ellipse at 50% 30%, #1c1f2a 0%, #161921 60%, #111318 100%)"
      :"radial-gradient(ellipse at 50% 30%, #DCEEFF 0%, #E8F2FF 40%, #EEF2F7 100%)",
-    sec1:        isDark?"#07101e":"linear-gradient(to bottom, #EEF2F7 0%, #F0F5FB 60%, #F4F7FB 100%)",
-    sec2:        isDark?"#07101e":"#F4F7FB",
-    demoBg:      isDark?"#07101e":"linear-gradient(to bottom, #EEF2F7 0%, #E8F0F9 60%, #E2EBF5 100%)",
-    contactBg:   isDark?"#07101e":"linear-gradient(to bottom, #E2EBF5 0%, #EAF0F8 60px, #EEF2F7 100%)",
-    chatBg:      isDark?"#111f35":"#F1F5F9",
-    inputBg:     isDark?"#0a1628":"#F8FAFC",
+    sec1:        isDark?"#111318":"linear-gradient(to bottom, #EEF2F7 0%, #F0F5FB 60%, #F4F7FB 100%)",
+    sec2:        isDark?"#111318":"#F4F7FB",
+    demoBg:      isDark?"#111318":"linear-gradient(to bottom, #EEF2F7 0%, #E8F0F9 60%, #E2EBF5 100%)",
+    contactBg:   isDark?"#111318":"linear-gradient(to bottom, #E2EBF5 0%, #EAF0F8 60px, #EEF2F7 100%)",
+    chatBg:      isDark?"#1c1f2a":"#F1F5F9",
+    inputBg:     isDark?"#161921":"#F8FAFC",
     inputBorder: isDark?"rgba(255,255,255,0.1)":"rgba(15,23,42,0.1)",
 };
 
@@ -2296,78 +2296,65 @@ export default function Home() {
       </section>
 
       {/* ── TRUST BAR ── */}
-      <div style={{
-        background: isDark?"#0a1628":"#E2ECF8",
-        borderTop:`1px solid ${c.border}`,
-        borderBottom:`1px solid ${c.border}`,
-        padding:"14px 24px",
-}}>
-        <div style={{ maxWidth:"1050px", margin:"0 auto", display:"flex", alignItems:"center", justifyContent:"center", gap:"10px", flexWrap:"wrap"}}>
-          <span style={{ color:"#22C55E", fontSize:"13px", fontWeight: 600}}> Kostenlose Erstberatung</span>
-          <span style={{ color: isDark?"rgba(255,255,255,0.15)":"rgba(15,23,42,0.2)", fontSize:"18px", lineHeight: 1, fontWeight: 300}}>·</span>
-          <span style={{ color:"#0EA5E9", fontSize:"13px", fontWeight: 600}}> Live-Einrichtung in 48h</span>
-          <span style={{ color: isDark?"rgba(255,255,255,0.15)":"rgba(15,23,42,0.2)", fontSize:"18px", lineHeight: 1, fontWeight: 300}}>·</span>
-          <span style={{ color: c.text2, fontSize:"13px", fontWeight: 600}}> 30 Tage Geld-zurück-Garantie</span>
+      <div style={{ background:"#0F172A", padding:"13px 24px" }}>
+        <div style={{ maxWidth:"1050px", margin:"0 auto", display:"flex", alignItems:"center", justifyContent:"center", gap:"28px", flexWrap:"wrap" }}>
+          {[
+            "Kostenlose Erstberatung",
+            "Einrichtung in 48 Stunden",
+            "30 Tage Geld-zurück-Garantie",
+          ].map((item, i) => (
+            <span key={i} style={{ color:"rgba(255,255,255,0.88)", fontSize:"13px", fontWeight: 600, display:"flex", alignItems:"center", gap:"7px" }}>
+              <span style={{ width:"5px", height:"5px", borderRadius:"50%", background:"rgba(255,255,255,0.4)", flexShrink: 0 }} />
+              {item}
+            </span>
+          ))}
         </div>
       </div>
 
-      {/* ── PILOTPROGRAMM BANNER ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 20}}
-        whileInView={{ opacity: 1, y: 0}}
-        viewport={{ once: true, margin:"-40px"}}
-        transition={{ duration: 0.7, ease: appleEase}}
-        style={{
-          background:"linear-gradient(135deg, #0A1628 0%, #0D2444 50%, #0A1E38 100%)",
-          borderTop:"1px solid rgba(14,165,233,0.2)",
-          borderBottom:"1px solid rgba(14,165,233,0.2)",
-          padding:"28px 24px",
-}}
-      >
-        <div style={{
-          maxWidth:"900px", margin:"0 auto",
-          display:"flex", alignItems:"center", justifyContent:"space-between",
-          gap:"20px", flexWrap:"wrap",
-}}>
-          <div style={{ display:"flex", alignItems:"flex-start", gap:"14px"}}>
-            <div style={{
-              width:"40px", height:"40px", borderRadius:"10px", flexShrink: 0,
-              background:"rgba(14,165,233,0.15)", border:"1px solid rgba(14,165,233,0.3)",
-              display:"flex", alignItems:"center", justifyContent:"center",
-}}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2.5s-5 3-5 9v1.5L5 16h14l-2-3V11.5C17 5.5 12 2.5 12 2.5z"/>
-                <path d="M10 16v3.5h4V16"/>
-              </svg>
-            </div>
-            <div>
-              <p style={{ color:"#FFFFFF", fontSize:"15px", fontWeight: 700, margin:"0 0 4px", letterSpacing:"-0.01em"}}>
-                Wir suchen 3 Pilotbetriebe in Bayern
-              </p>
-              <p style={{ color:"rgba(255,255,255,0.55)", fontSize:"13px", margin: 0, lineHeight: 1.5}}>
-                Kostenlose Einrichtung gegen ehrliches Feedback, begrenzte Plätze, jetzt bewerben.
-              </p>
-            </div>
+      {/* ── PILOTPROGRAMM SEKTION ── */}
+      <section style={{ padding:"56px 24px", background: isDark?"#1c1f2a":"#F1F5F9", transition:"background 0.3s" }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin:"-40px" }}
+          transition={{ duration: 0.7, ease: appleEase }}
+          style={{
+            maxWidth:"780px", margin:"0 auto",
+            background: isDark?"rgba(255,255,255,0.04)":"#FFFFFF",
+            border:`1px solid ${c.border}`,
+            borderRadius:"20px",
+            padding:"32px 36px",
+            display:"flex", alignItems:"center", justifyContent:"space-between",
+            gap:"24px", flexWrap:"wrap",
+          }}
+        >
+          <div style={{ flex: 1, minWidth:"260px" }}>
+            <p style={{ color: c.text3, fontSize:"11px", fontWeight: 700, letterSpacing:"2px", textTransform:"uppercase", marginBottom:"8px" }}>
+              PILOTPROGRAMM · NUR 2 PLÄTZE
+            </p>
+            <h3 style={{ color: c.text, fontSize:"20px", fontWeight: 800, letterSpacing:"-0.03em", marginBottom:"8px" }}>
+              Kostenlose Einrichtung für 2 Betriebe
+            </h3>
+            <p style={{ color: c.text2, fontSize:"14px", lineHeight: 1.6, margin: 0 }}>
+              Wir richten Ihren Assistenten kostenlos ein. Im Gegenzug freuen wir uns über Ihr ehrliches Feedback. Begrenzte Plätze.
+            </p>
           </div>
-          <motion.a
-            href="#kontakt"
-            onClick={(e: React.MouseEvent) => { e.preventDefault(); setShowCtaModal(true);}}
-            whileHover={{ scale: 1.04, boxShadow:"0 12px 32px rgba(14,165,233,0.4)"}}
-            whileTap={{ scale: 0.97}}
-            transition={{ type:"spring", stiffness: 350, damping: 22}}
+          <motion.button
+            onClick={() => setShowCtaModal(true)}
+            whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+            transition={{ type:"spring", stiffness: 350, damping: 22 }}
             style={{
-              display:"inline-flex", alignItems:"center", gap:"7px",
-              background:"linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
-              color:"#FFFFFF", padding:"11px 24px", borderRadius:"9999px",
-              fontWeight: 700, fontSize:"14px", textDecoration:"none",
-              boxShadow:"0 6px 20px rgba(14,165,233,0.3)",
+              padding:"13px 28px", borderRadius:"12px", border:`1.5px solid ${c.border}`,
+              background:"transparent", color: c.text,
+              fontWeight: 700, fontSize:"14px", cursor:"pointer", fontFamily:"inherit",
               whiteSpace:"nowrap", flexShrink: 0,
-}}
+              transition:"background 0.2s",
+            }}
           >
-            Jetzt Platz sichern →
-          </motion.a>
-        </div>
-      </motion.div>
+            Platz anfragen →
+          </motion.button>
+        </motion.div>
+      </section>
 
       {/* ── WIE ES FUNKTIONIERT ── */}
       <section style={{
@@ -2417,41 +2404,82 @@ export default function Home() {
             {([
               {
                 num:"01",
-                color:"#0EA5E9",
                 sub:"15 Min · kostenlos",
                 title:"Kurzes Gespräch",
                 desc:"Wir schauen gemeinsam, welche Anfragen Sie täglich Zeit kosten. Kein Vortrag, nur ein ehrliches Gespräch.",
-                icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                  </svg>
+                preview: (
+                  <div style={{ background: isDark?"rgba(255,255,255,0.04)":"#F8FAFC", borderRadius:"12px", padding:"14px 16px", marginBottom:"22px", border:`1px solid ${c.border}` }}>
+                    <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"10px" }}>
+                      <span style={{ fontSize:"11px", fontWeight: 700, color: c.text3, letterSpacing:"1px" }}>TERMINE · MÄRZ</span>
+                      <span style={{ fontSize:"10px", color:"#0EA5E9", fontWeight: 600 }}>15 Min frei</span>
+                    </div>
+                    <div style={{ display:"grid", gridTemplateColumns:"repeat(5,1fr)", gap:"4px" }}>
+                      {["Mo","Di","Mi","Do","Fr"].map((d,i) => (
+                        <div key={i} style={{ textAlign:"center", fontSize:"9px", color: c.text3, padding:"3px 0", fontWeight: 600 }}>{d}</div>
+                      ))}
+                      {[10,11,12,13,14].map((d,i) => (
+                        <div key={i} style={{
+                          textAlign:"center", fontSize:"12px", padding:"5px 0",
+                          borderRadius:"6px", fontWeight: i===2?700:400,
+                          background: i===2?"#0EA5E9":"transparent",
+                          color: i===2?"#fff": c.text2,
+                        }}>{d}</div>
+                      ))}
+                    </div>
+                  </div>
                 ),
-},
+              },
               {
                 num:"02",
-                color:"#8B5CF6",
-                sub:"Wir kümmern uns · Sie müssen nichts tun",
+                sub:"Sie müssen nichts tun",
                 title:"Wir richten alles ein",
                 desc:"Ihr Assistent wird auf Ihren Betrieb angepasst und eingerichtet. In der Regel fertig in unter 48 Stunden.",
-                icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
-                  </svg>
+                preview: (
+                  <div style={{ background: isDark?"rgba(255,255,255,0.04)":"#F8FAFC", borderRadius:"12px", padding:"14px 16px", marginBottom:"22px", border:`1px solid ${c.border}` }}>
+                    {[
+                      { label:"Betrieb konfiguriert", done: true },
+                      { label:"Antworten eingerichtet", done: true },
+                      { label:"Live-Test läuft …", done: false },
+                    ].map((item, i) => (
+                      <div key={i} style={{ display:"flex", alignItems:"center", gap:"10px", padding:"6px 0", borderBottom: i < 2 ? `1px solid ${c.border}` : "none" }}>
+                        <div style={{
+                          width:"18px", height:"18px", borderRadius:"50%", flexShrink: 0,
+                          background: item.done?"#22C55E":"transparent",
+                          border: item.done?"none":`1.5px solid ${c.border}`,
+                          display:"flex", alignItems:"center", justifyContent:"center",
+                        }}>
+                          {item.done && <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="2,5 4,7 8,3" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"/></svg>}
+                        </div>
+                        <span style={{ fontSize:"12px", color: item.done ? c.text : c.text3, fontWeight: item.done?500:400 }}>{item.label}</span>
+                      </div>
+                    ))}
+                  </div>
                 ),
-},
+              },
               {
                 num:"03",
-                color:"#22C55E",
-                sub:"24 / 7 · rund um die Uhr",
-                title:"Ab sofort automatisch",
-                desc:"Ihr Assistent beantwortet Kundenanfragen rund um die Uhr. Jede Konversation siehst Sie live mit.",
-                icon: (
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                  </svg>
+                sub:"24/7 · rund um die Uhr",
+                title:"Kunden werden direkt bedient",
+                desc:"Ihr Assistent antwortet auf Kundenanfragen rund um die Uhr. Jede Konversation sehen Sie live mit.",
+                preview: (
+                  <div style={{ background: isDark?"rgba(255,255,255,0.04)":"#F8FAFC", borderRadius:"12px", padding:"14px 16px", marginBottom:"22px", border:`1px solid ${c.border}`, display:"flex", flexDirection:"column", gap:"8px" }}>
+                    <div style={{ display:"flex", justifyContent:"flex-start" }}>
+                      <div style={{ background: isDark?"rgba(255,255,255,0.08)":"#E2E8F0", borderRadius:"10px 10px 10px 2px", padding:"7px 11px", fontSize:"12px", color: c.text, maxWidth:"75%" }}>
+                        Haben Sie morgen noch einen Termin frei?
+                      </div>
+                    </div>
+                    <div style={{ display:"flex", justifyContent:"flex-end" }}>
+                      <div style={{ background:"#0F172A", borderRadius:"10px 10px 2px 10px", padding:"7px 11px", fontSize:"12px", color:"#fff", maxWidth:"75%" }}>
+                        Ja! Morgen um 10 Uhr ist noch frei.
+                      </div>
+                    </div>
+                    <div style={{ display:"flex", justifyContent:"flex-end" }}>
+                      <span style={{ fontSize:"10px", color: c.text3 }}>Zugestellt · 23:14 Uhr</span>
+                    </div>
+                  </div>
                 ),
-},
-            ] as { num: string; color: string; sub: string; title: string; desc: string; icon: React.ReactNode}[]).map((step, i) => (
+              },
+            ] as { num: string; sub: string; title: string; desc: string; preview: React.ReactNode}[]).map((step, i) => (
               <motion.div
                 key={i}
                 variants={{ hidden: { opacity: 0, y: 36, filter:"blur(6px)"}, visible: { opacity: 1, y: 0, filter:"blur(0px)", transition: { duration: 0.75, ease: appleEase}}}}
@@ -2459,46 +2487,33 @@ export default function Home() {
                 transition={{ type:"spring", stiffness: 280, damping: 22}}
                 style={{
                   position:"relative", overflow:"hidden",
-                  borderRadius:"22px", padding:"32px 28px 28px",
+                  borderRadius:"22px", padding:"28px 26px 26px",
                   background: isDark?"rgba(255,255,255,0.04)":"#FFFFFF",
                   border: isDark?"1px solid rgba(255,255,255,0.08)":"1px solid rgba(15,23,42,0.07)",
                   boxShadow: isDark?"none":"0 4px 24px rgba(15,23,42,0.05)",
-                  borderTop:`3px solid ${step.color}`,
                   cursor:"default",
-}}
+                }}
               >
                 {/* Step number watermark */}
-                <div style={{
-                  position:"absolute", top:"-8px", right:"20px",
-                  fontSize:"88px", fontWeight: 900, lineHeight: 1, letterSpacing:"-4px",
-                  userSelect:"none", pointerEvents:"none",
-                  color: isDark?"rgba(255,255,255,0.03)":"rgba(15,23,42,0.045)",
-}}>{step.num}</div>
-
-                {/* Icon */}
-                <div style={{
-                  width:"48px", height:"48px", borderRadius:"14px",
-                  background:`${step.color}18`, border:`1px solid ${step.color}30`,
-                  display:"flex", alignItems:"center", justifyContent:"center",
-                  marginBottom:"20px",
-}}>
-                  {step.icon}
+                <div style={{ position:"absolute", top:"-8px", right:"18px", fontSize:"80px", fontWeight: 900, lineHeight: 1, letterSpacing:"-4px", userSelect:"none", pointerEvents:"none", color: isDark?"rgba(255,255,255,0.03)":"rgba(15,23,42,0.04)" }}>
+                  {step.num}
                 </div>
 
+                {/* Visual preview */}
+                {step.preview}
+
                 {/* Sub-label */}
-                <p style={{ color: step.color, fontSize:"11px", fontWeight: 700,
-                  letterSpacing:"0.8px", textTransform:"uppercase", margin:"0 0 8px"}}>
+                <p style={{ color: c.text3, fontSize:"11px", fontWeight: 700, letterSpacing:"0.8px", textTransform:"uppercase", margin:"0 0 7px" }}>
                   {step.sub}
                 </p>
 
                 {/* Title */}
-                <h3 style={{ color: c.text, fontSize:"19px", fontWeight: 800,
-                  margin:"0 0 12px", letterSpacing:"-0.03em"}}>
+                <h3 style={{ color: c.text, fontSize:"19px", fontWeight: 800, margin:"0 0 10px", letterSpacing:"-0.03em" }}>
                   {step.title}
                 </h3>
 
                 {/* Description */}
-                <p style={{ color: c.text2, fontSize:"14px", lineHeight: 1.68, margin: 0}}>
+                <p style={{ color: c.text2, fontSize:"14px", lineHeight: 1.68, margin: 0 }}>
                   {step.desc}
                 </p>
               </motion.div>
@@ -2798,7 +2813,7 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ── */}
-      <section style={{ padding:"100px 20px", background: isDark?"#07101e":"linear-gradient(to bottom,#F4F7FB 0%,#EEF2F7 100%)", transition:"background 0.3s ease"}}>
+      <section style={{ padding:"100px 20px", background: isDark?"#111318":"linear-gradient(to bottom,#F4F7FB 0%,#EEF2F7 100%)", transition:"background 0.3s ease"}}>
         <div style={{ maxWidth:"760px", margin:"0 auto"}}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin:"-80px"}}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12}}}}
@@ -2818,7 +2833,7 @@ export default function Home() {
       </section>
 
       {/* ── PREISE ── */}
-      <section id="preise" style={{ padding:"100px 20px", background: isDark?"#07101e":"#EEF2F7", transition:"background 0.3s ease"}}>
+      <section id="preise" style={{ padding:"100px 20px", background: isDark?"#111318":"#EEF2F7", transition:"background 0.3s ease"}}>
         <div style={{ maxWidth:"1200px", margin:"0 auto"}}>
 
           {/* Header */}
