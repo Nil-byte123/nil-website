@@ -2163,11 +2163,11 @@ export default function Home() {
               style={{ fontSize: isMobile?"clamp(28px, 8vw, 38px)":"clamp(34px, 5vw, 52px)",
                 color: c.text, marginBottom:"16px",
                 fontWeight: 800, letterSpacing:"-0.055em", lineHeight: 1.08}}>
-              {t.hero.headline.split("").map((word, i) => (
+              {t.hero.headline.split(" ").map((word, i) => (
                 <motion.span key={i}
                   initial={{ opacity: 0, y: 26, filter:"blur(8px)"}}
                   animate={{ opacity: 1, y: 0, filter:"blur(0px)"}}
-                  transition={{ duration: 0.8, ease: appleEase, delay: 0.15 + i * 0.09}}
+                  transition={{ duration: 0.8, ease: appleEase, delay: 0.15 + i * 0.12}}
                   style={{ display:"inline-block", marginRight:"0.25em"}}>
                   {word}
                 </motion.span>
