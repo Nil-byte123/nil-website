@@ -181,29 +181,29 @@ const sl: Record<LangCode, {
 /* ─── Rotating Hero Taglines ────────────────────────────────── */
 const rotatingTaglines: Record<LangCode, string[]> = {
   de: [
-"Ihr digitaler Assistent antwortet auf Kundenanfragen, auch wenn Sie gerade auf der Baustelle bist.",
-"Gastronomie & Handel: Reservierungen, Bestellungen & Anfragen automatisch bearbeiten.",
-"Unternehmen & Teams: Verlässliche Software für jeden Betrieb, unabhängig der Branche.",
+    "Kunden erhalten sofort eine Antwort, auch wenn Sie gerade nicht erreichbar sind.",
+    "Tischreservierungen, Terminbuchungen, Anfragen, Ihr Betrieb läuft weiter.",
+    "Für Friseure, Restaurants, Handwerker und viele weitere Branchen.",
   ],
   en: [
-"Your digital assistant answers customer inquiries, even when you're busy on a job.",
-"Hospitality & retail: Handle reservations, orders & inquiries automatically.",
-"Companies & teams: Reliable software for any business, whatever the industry.",
+    "Customers get an instant reply, even when you're not available.",
+    "Table reservations, appointments, inquiries, your business keeps running.",
+    "For salons, restaurants, tradespeople and many more.",
   ],
   es: [
-"Tu asistente digital responde consultas de clientes, aunque estés ocupado en el trabajo.",
-"Hostelería y comercio: Gestiona reservas, pedidos y consultas automáticamente.",
-"Empresas y equipos: Automatización inteligente para cualquier negocio.",
+    "Los clientes reciben respuesta inmediata, aunque no estés disponible.",
+    "Reservas, citas, consultas, tu negocio sigue funcionando.",
+    "Para peluquerías, restaurantes, autónomos y mucho más.",
   ],
   fr: [
-"Votre assistant digital répond aux demandes clients, même quand vous êtes en intervention.",
-"Restauration & commerce: Gérez réservations, commandes et demandes automatiquement.",
-"Entreprises & équipes: Des solutions fiables pour tout type de business.",
+    "Vos clients reçoivent une réponse immédiate, même si vous n'êtes pas disponible.",
+    "Réservations, rendez-vous, demandes, votre activité continue.",
+    "Pour les coiffeurs, restaurants, artisans et bien d'autres.",
   ],
   it: [
-"Il tuo assistente digitale risponde alle richieste dei clienti, anche quando sei impegnato sul lavoro.",
-"Ristorazione & commercio: Gestisci prenotazioni, ordini e richieste automaticamente.",
-"Aziende & team: Soluzioni affidabili per qualsiasi tipo di business.",
+    "I clienti ricevono subito una risposta, anche quando non sei disponibile.",
+    "Prenotazioni, appuntamenti, richieste, la tua attività va avanti.",
+    "Per parrucchieri, ristoranti, artigiani e molti altri.",
   ],
 };
 
