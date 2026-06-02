@@ -218,89 +218,90 @@ export function isValidName(name: string): boolean {
  *  - System-prompt extraction requests (EN + DE)
  */
 const INJECTION_PATTERNS: RegExp[] = [
-  // ── English instruction overrides ──────────────────────────────
-  /ignore\s+(all\s+)?(previous|prior)\s+(instructions?|rules?|prompts?|context)/i,
-  /forget\s+(all\s+)?(previous|prior|your)\s+(instructions?|rules?|context)/i,
-  /do\s+not\s+(follow|obey|adhere\s+to)\s+(your\s+)?(instructions?|rules?)/i,
-  /disregard\s+(all\s+)?(previous|prior|your)\s+(instructions?|rules?)/i,
-  /override\s+(your\s+)?(programming|instructions?|rules?|purpose)/i,
+
+  // ══ ENGLISH — Instruction overrides ════════════════════════════
+  // Broad verb × target matrix.
+  // Verbs: ignore/forget/bypass/cancel/delete/clear/reset/erase/drop/remove/
+  //        dismiss/neutralize/nullify/suppress/deactivate/abandon/disable.
+  // Targets: instructions/rules/guidelines/directives/constraints/limitations/
+  //          context/programming/configuration/prompt/restrictions.
+  // Optional modifiers: all/previous/prior/your/the/alle/vorherigen/früheren.
+  /(?:ignore|forget|disregard|override|bypass|dismiss|cancel|delete|remove|drop|clear|reset|erase|neutralize|nullify|suppress|deactivate|abandon|disable)\s+(?:alle?\s+)?(?:(?:previous|prior|your|the|all|alle?|vorherigen?|fr[üu]heren?)\s+)?(?:instructions?|rules?|guidelines?|directives?|constraints?|limitations?|restrictions?|context|programming|configuration|prompt|system\s*prompt)/i,
+
+  // "do not follow / obey / adhere to your instructions"
+  /do\s+not\s+(?:follow|obey|adhere\s+to|respect|comply\s+with)\s+(?:your\s+)?(?:instructions?|rules?|guidelines?|constraints?|restrictions?)/i,
+
+  // "new instructions:" / "from now on you are/will/must …"
   /new\s+instructions?\s*:/i,
-  /from\s+now\s+on\s+(you\s+)?(are|will|must|should)\s+/i,
+  /from\s+now\s+on\s+(?:you\s+)?(?:are|will|must|should|have\s+to)\s+/i,
 
-  // ── German instruction overrides — informal (du) ──────────────
-  /ignoriere\s+(alle?\s+)?(vorherigen?|früheren?|bisherigen?)\s+(anweisungen?|regeln?)/i,
-  /vergiss\s+(alle?\s+)?(vorherigen?|früheren?|deine)\s+(anweisungen?|regeln?)/i,
-  /neue\s+anweisungen?\s*:/i,
-  /ab\s+(jetzt|sofort)\s+(bist|verhältst|antwortest)\s+du/i,
-  /deine\s+(neue\s+)?(aufgabe|rolle|anweisung)\s+(ist|lautet)/i,
+  // ══ GERMAN — Instruction overrides (informal du + formal Sie) ══
+  /ignorier(?:e|en|st|t)?\s+(?:Sie\s+|alle?\s+)?.{0,20}(?:anweisung(?:en)?|regeln?|einschr[äa]nkungen?|vorgaben?|richtlinien?)/i,
+  /(?:vergiss|vergessen\s+(?:Sie\s+)?)(?:alle?\s+)?.{0,20}(?:anweisung(?:en)?|regeln?|einschr[äa]nkungen?)/i,
+  // "neue Anweisung:" AND "neue Anweisungen:"
+  /neue\s+anweisung(?:en)?\s*:/i,
+  /ab\s+(?:jetzt|sofort)\s+(?:sind\s+Sie|bist\s+du|verh[äa]ltst|verhalten\s+Sie\s+sich|antwortest|antworten\s+Sie)/i,
+  /(?:Ihre?|deine?)\s+(?:neue\s+)?(?:aufgabe|rolle|anweisung)\s+(?:ist|lautet)/i,
+  /(?:bitte\s+)?ignorier(?:e|en|st|t)?\s+(?:Sie\s+)?(?:alle?\s+)?(?:Ihre?|deine?)/i,
+  /vergess(?:e|en|t)?\s+Sie\s+/i,
+  // Modal verb constructions: "Würden/Könnten Sie bitte … ignorieren/vergessen"
+  /(?:w[üu]rden|k[öo]nnten|sollten|m[üu]ssten)\s+Sie\s+(?:bitte\s+)?.{0,40}(?:ignorier|vergessen|umgehen)/i,
 
-  // ── German instruction overrides — formal (Sie) + infinitive ──
-  // "Ignorieren Sie alle vorherigen Anweisungen"
-  /ignorier(?:en?)\s+(?:Sie\s+)?(alle?\s+)?(vorherigen?|früheren?|bisherigen?)\s+(anweisungen?|regeln?)/i,
-  // "Vergessen Sie alle Ihre Anweisungen"
-  /vergess(?:en?)\s+(?:Sie\s+)?(alle?\s+)?(vorherigen?|früheren?|(?:Ihre?|deine?))\s+(anweisungen?|regeln?)/i,
-  // "Ihre neue Aufgabe ist …"
-  /(?:Ihre?|deine?)\s+(neue\s+)?(aufgabe|rolle|anweisung)\s+(ist|lautet)/i,
-  // "Ab jetzt sind Sie …" / "Ab jetzt verhalten Sie sich …"
-  /ab\s+(jetzt|sofort)\s+(?:sind\s+Sie|verhalten\s+Sie\s+sich|antworten\s+Sie|bist\s+du|verhältst|antwortest)/i,
-  // "Sie sind jetzt ein anderer Assistent"
-  /Sie\s+sind\s+jetzt\s+(?!erreichbar|verfügbar|online|bereit|in\s+der\s+Lage)/i,
-  // "Bitte ignorieren Sie Ihre bisherigen Regeln"
-  /(?:bitte\s+)?ignorier(?:en?)\s+Sie\s+/i,
-  // "Vergessen Sie Ihre Anweisungen"
-  /vergess(?:en?)\s+Sie\s+/i,
+  // ══ ENGLISH — Role hijacking & persona replacement ══════════════
+  /you\s+are\s+now\s+(?!available|here|able|open|online|ready|at\s)/i,
+  /pretend\s+(?:you\s+are|to\s+be)\s+/i,
+  /act\s+as\s+(?:if\s+you\s+(?:are|have\s+no)|a\s+different|an?\s+(?:evil|unfiltered|unrestricted|uncensored|jailbroken))/i,
+  /act\s+as\s+if\s+you\s+have\s+no\s+(?:rules|restrictions|guidelines)/i,
 
-  // ── Role hijacking (EN + DE informal + DE formal) ──────────────
-  /you\s+are\s+now\s+(?!available|here|able|open|online|ready)/i,
-  /du\s+bist\s+jetzt\s+(?!erreichbar|verfügbar|online|bereit)/i,
-  /pretend\s+(you\s+are|to\s+be)\s+/i,
-  // "tu/tue so als ob"
-  /tu(?:e)?\s+so\s+als\s+(ob|wenn)\s+/i,
-  /act\s+as\s+(if\s+you\s+are|a\s+different|an?\s+evil|an?\s+unfiltered|an?\s+unrestricted)/i,
-  /spiele\s+(die\s+rolle|einen?)\s+/i,
+  // ══ GERMAN — Role hijacking ═════════════════════════════════════
+  /du\s+bist\s+jetzt\s+(?!erreichbar|verf[üu]gbar|online|bereit)/i,
+  /Sie\s+sind\s+jetzt\s+(?!erreichbar|verf[üu]gbar|online|bereit|in\s+der\s+Lage)/i,
+  /tu(?:e)?\s+so\s+als\s+(?:ob|wenn)\s+/i,
+  /spiele\s+(?:die\s+rolle|einen?)\s+/i,
 
-  // ── Roleplay / indirect injection (EN + DE) ───────────────────
-  /let\s*'?s?\s+roleplay\b/i,
-  /lass\s+uns\s+(so\s+tun\s+als|rollenspiel\s+spielen)/i,
-  /in\s+this\s+(scenario|roleplay|story|game)\s+(you\s+)?are\s+/i,
-  /imagine\s+you\s+are\s+(?!helpful|available|a\s+helpful)/i,
-  /hypothetically[\s,]+if\s+you\s+(were|could|had\s+no)\s+/i,
-  /what\s+would\s+you\s+(say|do|answer)\s+if\s+you\s+(had\s+no\s+restrictions|were\s+free)/i,
-  // "Stell dir vor / Stellen Sie sich vor, du bist/Sie sind …"
+  // ══ ROLEPLAY / INDIRECT INJECTION (EN + DE) ═════════════════════
+  // "let's roleplay" / "lets roleplay" / "let us roleplay"
+  /let\s*(?:'s|s\b)\s+roleplay\b/i,
+  /let\s+us\s+roleplay\b/i,
+  /lass\s+uns\s+(?:so\s+tun\s+als|rollenspiel\s+spielen)/i,
+  /in\s+this\s+(?:scenario|roleplay|story|game|context)\s+(?:you\s+)?are\s+/i,
+  /imagine\s+(?:you\s+are|being)\s+(?!helpful|available|a\s+helpful)/i,
+  /hypothetically[\s,]+if\s+you\s+(?:were|could|had\s+no)\s+/i,
+  /what\s+would\s+you\s+(?:say|do|answer)\s+if\s+you\s+(?:had\s+no\s+restrictions|were\s+free)/i,
   /stell(?:en?\s+(?:Sie\s+sich|dir))\s+(?:einmal\s+)?vor\s*,?\s*(?:du\s+bist|Sie\s+sind|dass)/i,
 
-  // ── Raw LLM template markers ───────────────────────────────────
-  /\[INST\]/i,
-  /\[\/INST\]/i,
-  /\[SYS\]/i,
-  /\[SYSTEM\s*:/i,
-  /<<SYS>>/,
-  /<\|im_start\|>/,
-  /<\|(?:system|assistant|user|end_of_text)\|>/,
+  // ══ RAW LLM TEMPLATE MARKERS ════════════════════════════════════
+  /\[INST\]/i, /\[\/INST\]/i, /\[SYS\]/i, /\[SYSTEM\s*:/i, /<<SYS>>/,
+  /<\|im_start\|>/, /<\|(?:system|assistant|user|end_of_text)\|>/,
 
-  // ── Named jailbreaks ──────────────────────────────────────────
-  /\bDAN\s+(mode|jailbreak|prompt)\b/i,
-  /jailbreak\s+(mode|prompt|this)/i,
-  /developer\s+mode\s+(enabled|on|activated)/i,
-  /god\s+mode\s+(enabled|on|activated)/i,
+  // ══ NAMED JAILBREAKS ════════════════════════════════════════════
+  /\bDAN\s+(?:mode|jailbreak|prompt)\b/i,
+  /jailbreak\s+(?:mode|prompt|this|the\s+ai)/i,
+  /(?:developer|god|admin|sudo|super)\s+mode\s+(?:enabled|on|activated|unlocked)/i,
   /unrestricted\s+mode/i,
   /\bDO\s+ANYTHING\s+NOW\b/i,
 
-  // ── Fake conversation turn injection ──────────────────────────
+  // ══ FAKE CONVERSATION TURN ══════════════════════════════════════
   /\n{2,}(?:Human|Assistant|User|System|Mensch|Nutzer|Assistent)\s*:/,
 
-  // ── System-prompt extraction (EN) ─────────────────────────────
-  /(?:print|show|reveal|output|display|repeat|dump)\s+(?:your\s+)?(?:full\s+)?system\s+prompt/i,
-  /what\s+(?:are|is)\s+your\s+(?:system\s+)?(?:instructions?|prompt|rules?|configuration)\b/i,
-  /(?:repeat|recite|copy)\s+(?:back\s+)?(?:your\s+)?(?:system\s+)?(?:instructions?|prompt)/i,
+  // ══ SYSTEM-PROMPT EXTRACTION (EN) ══════════════════════════════
+  // Broad verb × target (includes leak, expose, share, tell me, give me, send me)
+  /(?:print|show|reveal|output|display|repeat|dump|leak|expose|share|echo|write\s+out)\s+(?:me\s+)?(?:your\s+|the\s+)?(?:full\s+)?(?:system\s+)?(?:prompt|instructions?|rules?|guidelines?|directives?|configuration|restrictions?)\b/i,
+  /(?:tell|give|send)\s+me\s+(?:your\s+|the\s+)?(?:full\s+)?(?:system\s+)?(?:prompt|instructions?|rules?|configuration|directives?|guidelines?)\b/i,
+  /what\s+(?:are|is)\s+your\s+(?:system\s+)?(?:instructions?|prompt|rules?|configuration|directives?)\b/i,
+  /(?:repeat|recite|copy)\s+(?:back\s+)?(?:your\s+)?(?:system\s+)?(?:instructions?|prompt|rules?)/i,
 
-  // ── System-prompt extraction (DE — informal du) ───────────────
-  /(?:zeig|zeige|gib\s+aus|wiederhole|nenne)\s+(?:mir\s+)?(?:deinen?\s+)?system(?:prompt|-anweisung)/i,
-  /was\s+(sind|ist)\s+deine\s+(anweisungen?|regeln?|system\s*prompt)/i,
+  // ══ SYSTEM-PROMPT EXTRACTION (DE — all forms) ══════════════════
+  // Covers "System-Prompt" (with hyphen), "Systemprompt", "System Prompt"
+  // DE extraction: covers both imperative (zeige, gib, nenne) AND
+  // formal Sie-infinitive (zeigen Sie, geben Sie, nennen Sie, wiederholen Sie)
+  // Imperative (gib, zeige, nenne, sage) AND formal infinitive (geben Sie, zeigen Sie, …)
+  /(?:zeig(?:en?)?|gib|geben?|wiederhole(?:n)?|nenn(?:en?)?|sag(?:en?)?)\s+(?:Sie\s+)?(?:mir\s+)?(?:(?:Ihre?n?|deinen?)\s+)?(?:system[-\s]?prompt|system(?:prompt|-anweisung)|anweisung(?:en)?|regeln?|konfiguration|vorgaben?)/i,
+  /was\s+(?:sind|ist|lautet?n?)\s+(?:Ihre?n?|deine?)\s+(?:anweisung(?:en)?|regeln?|system[-\s]?prompt|konfiguration|vorgaben?)/i,
+  /was\s+ist\s+(?:Ihr|dein)\s+system[-\s]?prompt/i,
 
-  // ── System-prompt extraction (DE — formal Sie) ────────────────
-  /(?:zeigen?|geben?|nennen?|sagen?|wiederholen?)\s+Sie\s+(?:mir\s+)?(?:Ihre?n?\s+)?(?:system(?:prompt|-anweisung)|anweisungen?|regeln?|konfiguration)/i,
-  /was\s+(?:sind|ist|lauten?)\s+Ihre?n?\s+(?:anweisungen?|regeln?|system\s*prompt|konfiguration)/i,
+  // ══ HYPOTHETICAL WORLD / WHERE attacks ══════════════════════════
+  /what\s+would\s+you\s+(?:say|do|answer|think)\s+(?:if|in\s+a\s+world\s+where)\s+you\s+(?:had\s+no\s+(?:restrictions?|rules?|guidelines?)|were\s+free)/i,
 ];
 
 /**
@@ -313,11 +314,53 @@ const INJECTION_PATTERNS: RegExp[] = [
  */
 const SOFT_HYPHEN_RE = new RegExp(String.fromCodePoint(0x00AD), "g");
 
+/**
+ * Cyrillic lookalike map — most common Latin↔Cyrillic visual confusables.
+ * Covers the characters attackers embed in "ignore all previous instructions"
+ * style payloads: а→a, е→e, о→o, р→p, с→c, н→n, х→x, у→y, і→i, ѕ→s, ї→i.
+ */
+const CYRILLIC_MAP: [RegExp, string][] = [
+  [/а/g, "a"], // а → a
+  [/е/g, "e"], // е → e
+  [/о/g, "o"], // о → o
+  [/р/g, "p"], // р → p  (Cyrillic р looks like Latin p, not r)
+  [/с/g, "c"], // с → c
+  [/н/g, "n"], // н → n
+  [/х/g, "x"], // х → x
+  [/у/g, "u"], // у → u
+  [/і/g, "i"], // і → i
+  [/ѕ/g, "s"], // ѕ → s
+  [/ї/g, "i"], // ї → i
+  [/А/g, "A"], // А → A
+  [/Е/g, "E"], // Е → E
+  [/О/g, "O"], // О → O
+  [/Р/g, "R"], // Р → R
+  [/С/g, "C"], // С → C
+  [/Н/g, "N"], // Н → N
+  [/Х/g, "X"], // Х → X
+  [/У/g, "U"], // У → U
+  [/І/g, "I"], // І → I
+];
+
+function removeCyrillicLookalikes(s: string): string {
+  let r = s;
+  for (const [pat, rep] of CYRILLIC_MAP) r = r.replace(pat, rep);
+  return r;
+}
+
 function normalizeForDetection(text: string): string {
-  return text
-    .normalize("NFKD")          // math/bold/italic/fullwidth → ASCII base
-    .replace(SOFT_HYPHEN_RE, "") // remove invisible soft hyphens
-    .replace(SANITIZE_RE, "");   // remove remaining invisible control chars
+  return removeCyrillicLookalikes(
+    text
+      .normalize("NFKD")           // math/bold/italic/fullwidth Unicode → ASCII base
+      .replace(SOFT_HYPHEN_RE, "") // remove invisible soft hyphens (U+00AD)
+      .replace(SANITIZE_RE, "")    // remove invisible control / BiDi spoofing chars
+      .normalize("NFC")            // recompose valid accents (ü→ü, ö→ö, ä→ä)
+  );
+  // Why NFKD then NFC?
+  // NFKD converts exotic Unicode (𝗶𝗴𝗻𝗼𝗿𝗲 → ignore) so homoglyph attacks fail.
+  // NFC recomposes legitimate German umlauts (u+combining-diaeresis → ü) so
+  // German injection patterns still match after normalisation.
+  // removeCyrillicLookalikes then maps visually identical Cyrillic chars to ASCII.
 }
 
 /* ---- Encoding-bypass helpers ---------------------------------- */
