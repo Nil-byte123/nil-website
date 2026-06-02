@@ -12,7 +12,7 @@ const translations = {
   de: {
     nav: { advantages:"Vorteile", services:"Services", demo:"Demo", contact:"Kontakt"},
     hero: {
-      headline:"Mehr Zeit. Mehr Umsatz. Automatisch.",
+      headline:"Immer erreichbar für Ihre Kunden.",
       subtext:"Digitale Assistenten und maßgeschneiderte Softwarelösungen. Wir machen die Abläufe für Ihren Betrieb spürbar einfacher.",
       cta:"Jetzt anfragen",
 },
@@ -42,7 +42,7 @@ const translations = {
   en: {
     nav: { advantages:"Benefits", services:"Services", demo:"Demo", contact:"Contact"},
     hero: {
-      headline:"More time. More revenue. Automated.",
+      headline:"Always there for your customers.",
       subtext:"Digital assistants and tailor-made software solutions. We make everyday processes measurably simpler for your business.",
       cta:"Get in touch",
 },
@@ -72,7 +72,7 @@ const translations = {
   es: {
     nav: { advantages:"Ventajas", services:"Servicios", demo:"Demo", contact:"Contacto"},
     hero: {
-      headline:"Más tiempo. Más ingresos. Automatizado.",
+      headline:"Siempre disponible para sus clientes.",
       subtext:"Agentes de IA inteligentes y soluciones de software a medida. Hacemos los procesos para desarrolladores, salones y gastronomía notablemente más eficientes.",
       cta:"Solicitar ahora",
 },
@@ -102,7 +102,7 @@ const translations = {
   fr: {
     nav: { advantages:"Avantages", services:"Services", demo:"Démo", contact:"Contact"},
     hero: {
-      headline:"Plus de temps. Plus de revenus. Automatisé.",
+      headline:"Toujours disponible pour vos clients.",
       subtext:"Des assistants digitaux et des logiciels sur mesure. Nous rendons les processus de votre entreprise bien plus simples.",
       cta:"Demander maintenant",
 },
@@ -132,7 +132,7 @@ const translations = {
   it: {
     nav: { advantages:"Vantaggi", services:"Servizi", demo:"Demo", contact:"Contatti"},
     hero: {
-      headline:"Più tempo. Più guadagni. Automatico.",
+      headline:"Sempre disponibile per i suoi clienti.",
       subtext:"Assistenti digitali e soluzioni software su misura. Rendiamo i processi della tua azienda notevolmente più semplici.",
       cta:"Richiedi ora",
 },
