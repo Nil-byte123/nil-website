@@ -211,7 +211,7 @@ const rotatingTaglines: Record<LangCode, string[]> = {
 const serviceCards = [
   {
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="4" width="18" height="18" rx="2"/>
         <path d="M16 2v4M8 2v4M3 10h18"/>
         <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
@@ -222,7 +222,7 @@ const serviceCards = [
 },
   {
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
         <path d="M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3z"/>
         <path d="M21 15v7"/>
@@ -233,7 +233,7 @@ const serviceCards = [
 },
   {
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <rect x="4" y="2" width="16" height="20" rx="1"/>
         <path d="M9 22V12h6v10M8 6h.01M16 6h.01M8 10h.01M16 10h.01"/>
       </svg>
@@ -243,7 +243,7 @@ const serviceCards = [
 },
   {
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
       </svg>
     ),
@@ -1211,36 +1211,33 @@ function FAQList({ items, isDark}: { items: { q: string; a: string}[]; isDark: b
             viewport={{ once: true}} transition={{ duration: 0.55, ease: [0.16,1,0.3,1], delay: i * 0.06}}
             style={{ borderBottom:`1px solid ${divider}`, position:"relative"}}
           >
-            {/* Background glow sweeps in from left */}
+            {/* Subtle background on open */}
             <AnimatePresence>
               {isOpen && (
                 <motion.div
-                  key="glow"
-                  initial={{ opacity: 0, x: -24}}
-                  animate={{ opacity: 1, x: 0}}
-                  exit={{ opacity: 0, x: -16, transition: { duration: 0.22}}}
-                  transition={{ duration: 0.35, ease: [0.16,1,0.3,1]}}
+                  key="bg"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
                   style={{
                     position:"absolute", inset: 0, pointerEvents:"none",
-                    background: isDark
-                     ?"linear-gradient(90deg, rgba(14,165,233,0.08) 0%, rgba(14,165,233,0.02) 45%, transparent 75%)"
-                     :"linear-gradient(90deg, rgba(14,165,233,0.06) 0%, rgba(14,165,233,0.02) 45%, transparent 75%)",
-}}
+                    background: isDark ? "rgba(255,255,255,0.02)" : "rgba(15,23,42,0.02)",
+                  }}
                 />
               )}
             </AnimatePresence>
 
-            {/* Left accent bar, scales down from top */}
+            {/* Simple left border */}
             <motion.div
-              animate={{ scaleY: isOpen? 1: 0, opacity: isOpen? 1: 0}}
-              initial={{ scaleY: 0, opacity: 0}}
-              transition={{ duration: 0.38, ease: [0.16,1,0.3,1]}}
+              animate={{ scaleY: isOpen ? 1 : 0, opacity: isOpen ? 1 : 0 }}
+              initial={{ scaleY: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.16,1,0.3,1] }}
               style={{
                 position:"absolute", left: 0, top:"12px", bottom:"12px",
-                width:"3px", borderRadius:"2px", transformOrigin:"top",
-                background:"linear-gradient(to bottom, #38BDF8, #0EA5E9, #0284C7)",
-                boxShadow:"0 0 10px rgba(14,165,233,0.55)",
-}}
+                width:"2px", borderRadius:"2px", transformOrigin:"top",
+                background: isDark ? "rgba(255,255,255,0.3)" : "#0F172A",
+              }}
             />
 
             <button
@@ -1255,20 +1252,16 @@ function FAQList({ items, isDark}: { items: { q: string; a: string}[]; isDark: b
               <div style={{ display:"flex", alignItems:"center", gap:"16px"}}>
                 {/* Number badge, bounces on open */}
                 <motion.span
-                  animate={{
-                    scale: isOpen? [1, 1.28, 0.92, 1]: 1,
-                    backgroundColor: isOpen?"rgba(14,165,233,0.14)": isDark?"rgba(255,255,255,0.05)":"rgba(15,23,42,0.05)",
-}}
-                  transition={{ duration: 0.42, ease: [0.16,1,0.3,1]}}
+                  animate={{ scale: isOpen ? [1, 1.15, 0.95, 1] : 1 }}
+                  transition={{ duration: 0.35, ease: [0.16,1,0.3,1] }}
                   style={{
-                    width:"30px", height:"30px", borderRadius:"8px", flexShrink: 0,
-                    border: isOpen?"1px solid rgba(14,165,233,0.3)":"1px solid transparent",
+                    width:"28px", height:"28px", borderRadius:"6px", flexShrink: 0,
+                    background: isDark ? "rgba(255,255,255,0.06)" : "rgba(15,23,42,0.05)",
                     display:"inline-flex", alignItems:"center", justifyContent:"center",
                     fontSize:"11px", fontWeight: 700, letterSpacing:"0.3px",
-                    color: isOpen?"#0EA5E9": text2,
-                    transition:"color 0.25s, border 0.25s",
+                    color: text2,
                     fontFamily:"inherit",
-}}
+                  }}
                 >
                   {String(i + 1).padStart(2,"0")}
                 </motion.span>
@@ -2560,7 +2553,7 @@ export default function Home() {
           <motion.p
             initial={{ opacity: 0, y: 14}} whileInView={{ opacity: 1, y: 0}}
             viewport={{ once: true}} transition={{ duration: 0.6, ease: appleEase}}
-            style={{ textAlign:"center", color:"#0EA5E9", fontSize:"11px", fontWeight: 700, letterSpacing:"2.5px", marginBottom:"40px"}}
+            style={{ textAlign:"center", color: c.text3, fontSize:"11px", fontWeight: 700, letterSpacing:"2.5px", marginBottom:"40px" }}
           >
             ERGEBNISSE DIE ZÄHLEN
           </motion.p>
@@ -2575,100 +2568,50 @@ export default function Home() {
                 unit:"Min/Tag",
                 label:"Zeitersparnis",
                 detail:"Weniger Verwaltung, mehr Zeit für Ihr eigentliches Handwerk",
-                color:"#0EA5E9",
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0EA5E9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-                  </svg>
-                ),
-},
+              },
               {
                 value:"< 48",
                 unit:"Stunden",
-                label:"Bis Sie startklar bist",
+                label:"Bis Sie startklar sind",
                 detail:"Von unserem ersten Gespräch bis Ihr Assistent läuft",
-                color:"#38BDF8",
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                  </svg>
-                ),
-},
+              },
               {
                 value:"30",
                 unit:"Tage",
                 label:"Geld-zurück-Garantie",
-                detail:"Kein Risiko. Wenn Sie nicht zufrieden bist, bekommst Sie jeden Cent zurück",
-                color:"#22C55E",
-                icon: (
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22C55E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                  </svg>
-                ),
-},
+                detail:"Kein Risiko. Wenn Sie nicht zufrieden sind, bekommen Sie jeden Cent zurück",
+              },
             ].map((stat, i) => (
               <motion.div key={stat.label}
-                initial={{ opacity: 0, y: 24}} whileInView={{ opacity: 1, y: 0}}
-                viewport={{ once: true, margin:"-40px"}}
-                transition={{ duration: 0.7, ease: appleEase, delay: i * 0.1}}
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin:"-40px" }}
+                transition={{ duration: 0.7, ease: appleEase, delay: i * 0.1 }}
                 style={{
-                  background: isDark?"rgba(255,255,255,0.04)":"#FFFFFF",
-                  border: isDark
-                   ?`1px solid rgba(255,255,255,0.10)`
-                   :`1px solid rgba(15,23,42,0.08)`,
-                  borderTop: isDark
-                   ?`2px solid ${stat.color}55`
-                   :`3px solid ${stat.color}`,
+                  background: isDark ? "rgba(255,255,255,0.04)" : "#FFFFFF",
+                  border: `1px solid ${c.border}`,
                   borderRadius:"16px", padding:"28px 26px",
-                  boxShadow: isDark
-                   ?`0 0 0 0 transparent, 0 8px 32px rgba(0,0,0,0.25)`
-                   :"0 4px 24px rgba(15,23,42,0.07)",
-                  transition:"background 0.3s, border 0.3s",
-}}
+                  boxShadow: isDark ? "none" : "0 4px 24px rgba(15,23,42,0.06)",
+                  transition:"background 0.3s",
+                }}
               >
-                {/* Icon + Label row */}
-                <div style={{ display:"flex", alignItems:"center", gap:"9px", marginBottom:"18px"}}>
-                  <div style={{
-                    width:"32px", height:"32px", borderRadius:"8px",
-                    background: isDark?"rgba(255,255,255,0.06)":`${stat.color}14`,
-                    border:`1px solid ${stat.color}30`,
-                    display:"flex", alignItems:"center", justifyContent:"center",
-                    flexShrink: 0,
-}}>{stat.icon}</div>
-                  <span style={{
-                    fontSize:"11px", fontWeight: 700,
-                    color: stat.color,
-                    letterSpacing:"0.8px",
-}}>
-                    {stat.label.toUpperCase()}
-                  </span>
-                </div>
+                <p style={{ fontSize:"11px", fontWeight: 700, color: c.text3, letterSpacing:"1.5px", textTransform:"uppercase", margin:"0 0 16px" }}>
+                  {stat.label}
+                </p>
 
-                {/* Big number */}
-                <div style={{ display:"flex", alignItems:"baseline", gap:"6px", marginBottom:"12px"}}>
-                  <span style={{
-                    fontSize:"50px", fontWeight: 700, letterSpacing:"-0.04em", lineHeight: 1,
-                    color: stat.color,
-}}>
+                <div style={{ display:"flex", alignItems:"baseline", gap:"6px", marginBottom:"14px" }}>
+                  <span style={{ fontSize:"52px", fontWeight: 800, letterSpacing:"-0.04em", lineHeight: 1, color: c.text }}>
                     {stat.value}
                   </span>
-                  <span style={{ fontSize:"14px", fontWeight: 600, color: stat.color, letterSpacing:"0.02em", opacity: 0.8}}>
+                  <span style={{ fontSize:"15px", fontWeight: 600, color: c.text2 }}>
                     {stat.unit}
                   </span>
                 </div>
 
-                {/* Divider */}
-                <div style={{
-                  height:"1px",
-                  background: isDark?"rgba(255,255,255,0.07)":"rgba(15,23,42,0.07)",
-                  marginBottom:"12px",
-}} />
+                <div style={{ height:"1px", background: c.border, marginBottom:"12px" }} />
 
-                <p style={{
-                  fontSize:"13px",
-                  color: isDark?"rgba(255,255,255,0.55)":"#64748B",
-                  lineHeight: 1.65, margin: 0,
-}}>{stat.detail}</p>
+                <p style={{ fontSize:"13px", color: c.text2, lineHeight: 1.65, margin: 0 }}>
+                  {stat.detail}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -2783,14 +2726,15 @@ export default function Home() {
                 initial={{ opacity: 0, y: 32, scale: 0.97}} whileInView={{ opacity: 1, y: 0, scale: 1}}
                 viewport={{ once: true, margin:"-60px"}}
                 transition={{ duration: 0.8, ease: appleEase, delay: i * 0.12}}
-                whileHover={{ y: -6, boxShadow:"0 24px 60px rgba(14,165,233,0.12)"}}
+                whileHover={{ y: -4, boxShadow: isDark ? "0 20px 48px rgba(0,0,0,0.3)" : "0 20px 48px rgba(15,23,42,0.09)" }}
                 style={{
                   background: c.card, border:`1px solid ${c.border}`,
                   borderRadius:"24px", padding:"36px 30px",
                   boxShadow:"0 4px 20px rgba(15,23,42,0.05)",
                   transition:"box-shadow 0.3s ease, transform 0.3s ease, background 0.3s ease",
-}}>
-                <div style={{ marginBottom:"18px", display:"flex", alignItems:"center", justifyContent:"flex-start"}}>{card.icon}</div>
+                  color: c.text2,
+                }}>
+                <div style={{ marginBottom:"18px", display:"flex", alignItems:"center", justifyContent:"flex-start", color: c.text2 }}>{card.icon}</div>
                 <h3 style={{ fontSize:"20px", fontWeight: 800, letterSpacing:"-0.03em", color: c.text, marginBottom:"12px"}}>
                   {card.title}
                 </h3>
