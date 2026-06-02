@@ -1468,7 +1468,7 @@ function PlanFinder({ isDark, c, onOpenModal}: { isDark: boolean; c: CColors; on
   const res     = result? PLAN_RESULTS[result.plan]: null;
 
   return (
-    <section style={{ padding:"80px 20px", background: isDark?"#17181f":"#E8F0FA", transition:"background 0.3s"}}>
+    <section style={{ padding:"80px 20px", background: isDark?"#13141a":"#E8F0FA", transition:"background 0.3s"}}>
       <div style={{ maxWidth:"660px", margin:"0 auto", textAlign:"center"}}>
 
         <motion.div initial={{ opacity: 0, y: 20}} whileInView={{ opacity: 1, y: 0}}
@@ -1735,9 +1735,9 @@ export default function Home() {
   /* ── Theme color map ── */
   const c = {
     bg:          isDark?"#13141a":"#EEF2F7",
-    card:        isDark?"#1e1f28":"#FFFFFF",
-    card2:       isDark?"#17181f":"#F4F7FB",
-    card3:       isDark?"#1a1b22":"#EAF0F8",
+    card:        isDark?"#13141a":"#FFFFFF",
+    card2:       isDark?"#13141a":"#F4F7FB",
+    card3:       isDark?"#13141a":"#EAF0F8",
     text:        isDark?"#F1F5F9":"#0F172A",
     text2:       isDark?"#94A3B8":"#475569",
     text3:       isDark?"#64748B":"#64748B",
@@ -1746,14 +1746,14 @@ export default function Home() {
     nav:         isDark?"rgba(7,16,30,0.92)":"rgba(248,250,252,0.78)",
     navBorder:   isDark?"rgba(255,255,255,0.05)":"rgba(15,23,42,0.06)",
     heroGrad:    isDark
-     ?"radial-gradient(ellipse at 50% 30%, #1e1f28 0%, #17181f 60%, #13141a 100%)"
+     ?"radial-gradient(ellipse at 50% 30%, #13141a 0%, #13141a 60%, #13141a 100%)"
      :"radial-gradient(ellipse at 50% 30%, #DCEEFF 0%, #E8F2FF 40%, #EEF2F7 100%)",
     sec1:        isDark?"#13141a":"linear-gradient(to bottom, #EEF2F7 0%, #F0F5FB 60%, #F4F7FB 100%)",
     sec2:        isDark?"#13141a":"#F4F7FB",
     demoBg:      isDark?"#13141a":"linear-gradient(to bottom, #EEF2F7 0%, #E8F0F9 60%, #E2EBF5 100%)",
     contactBg:   isDark?"#13141a":"linear-gradient(to bottom, #E2EBF5 0%, #EAF0F8 60px, #EEF2F7 100%)",
-    chatBg:      isDark?"#1e1f28":"#F1F5F9",
-    inputBg:     isDark?"#17181f":"#F8FAFC",
+    chatBg:      isDark?"#13141a":"#F1F5F9",
+    inputBg:     isDark?"#13141a":"#F8FAFC",
     inputBorder: isDark?"rgba(255,255,255,0.1)":"rgba(15,23,42,0.1)",
 };
 
@@ -2303,7 +2303,7 @@ export default function Home() {
       </div>
 
       {/* ── PILOTPROGRAMM SEKTION ── */}
-      <section style={{ padding:"56px 24px", background: isDark?"#1e1f28":"#F1F5F9", transition:"background 0.3s" }}>
+      <section style={{ padding:"56px 24px", background: isDark?"#13141a":"#F1F5F9", transition:"background 0.3s" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
