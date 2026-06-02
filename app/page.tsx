@@ -1468,7 +1468,7 @@ function PlanFinder({ isDark, c, onOpenModal}: { isDark: boolean; c: CColors; on
   const res     = result? PLAN_RESULTS[result.plan]: null;
 
   return (
-    <section style={{ padding:"80px 20px", background: isDark?"#161921":"#E8F0FA", transition:"background 0.3s"}}>
+    <section style={{ padding:"80px 20px", background: isDark?"#17181f":"#E8F0FA", transition:"background 0.3s"}}>
       <div style={{ maxWidth:"660px", margin:"0 auto", textAlign:"center"}}>
 
         <motion.div initial={{ opacity: 0, y: 20}} whileInView={{ opacity: 1, y: 0}}
@@ -1735,10 +1735,10 @@ export default function Home() {
 
   /* ── Theme color map ── */
   const c = {
-    bg:          isDark?"#111318":"#EEF2F7",
-    card:        isDark?"#1c1f2a":"#FFFFFF",
-    card2:       isDark?"#161921":"#F4F7FB",
-    card3:       isDark?"#181b24":"#EAF0F8",
+    bg:          isDark?"#13141a":"#EEF2F7",
+    card:        isDark?"#1e1f28":"#FFFFFF",
+    card2:       isDark?"#17181f":"#F4F7FB",
+    card3:       isDark?"#1a1b22":"#EAF0F8",
     text:        isDark?"#F1F5F9":"#0F172A",
     text2:       isDark?"#94A3B8":"#475569",
     text3:       isDark?"#64748B":"#64748B",
@@ -1747,14 +1747,14 @@ export default function Home() {
     nav:         isDark?"rgba(7,16,30,0.92)":"rgba(248,250,252,0.78)",
     navBorder:   isDark?"rgba(255,255,255,0.05)":"rgba(15,23,42,0.06)",
     heroGrad:    isDark
-     ?"radial-gradient(ellipse at 50% 30%, #1c1f2a 0%, #161921 60%, #111318 100%)"
+     ?"radial-gradient(ellipse at 50% 30%, #1e1f28 0%, #17181f 60%, #13141a 100%)"
      :"radial-gradient(ellipse at 50% 30%, #DCEEFF 0%, #E8F2FF 40%, #EEF2F7 100%)",
-    sec1:        isDark?"#111318":"linear-gradient(to bottom, #EEF2F7 0%, #F0F5FB 60%, #F4F7FB 100%)",
-    sec2:        isDark?"#111318":"#F4F7FB",
-    demoBg:      isDark?"#111318":"linear-gradient(to bottom, #EEF2F7 0%, #E8F0F9 60%, #E2EBF5 100%)",
-    contactBg:   isDark?"#111318":"linear-gradient(to bottom, #E2EBF5 0%, #EAF0F8 60px, #EEF2F7 100%)",
-    chatBg:      isDark?"#1c1f2a":"#F1F5F9",
-    inputBg:     isDark?"#161921":"#F8FAFC",
+    sec1:        isDark?"#13141a":"linear-gradient(to bottom, #EEF2F7 0%, #F0F5FB 60%, #F4F7FB 100%)",
+    sec2:        isDark?"#13141a":"#F4F7FB",
+    demoBg:      isDark?"#13141a":"linear-gradient(to bottom, #EEF2F7 0%, #E8F0F9 60%, #E2EBF5 100%)",
+    contactBg:   isDark?"#13141a":"linear-gradient(to bottom, #E2EBF5 0%, #EAF0F8 60px, #EEF2F7 100%)",
+    chatBg:      isDark?"#1e1f28":"#F1F5F9",
+    inputBg:     isDark?"#17181f":"#F8FAFC",
     inputBorder: isDark?"rgba(255,255,255,0.1)":"rgba(15,23,42,0.1)",
 };
 
@@ -2217,7 +2217,7 @@ export default function Home() {
               whileTap={{ scale: 0.97}}
               transition={{ type:"spring", stiffness: 350, damping: 22}}
               style={{ display:"inline-block",
-                background:"linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%)",
+                background:"#0F172A",
                 color:"#FFFFFF",
                 padding:"16px 40px", borderRadius:"9999px", fontWeight: 600, fontSize:"14px",
                 border:"none", cursor:"pointer", fontFamily:"inherit",
@@ -2305,7 +2305,7 @@ export default function Home() {
       </div>
 
       {/* ── PILOTPROGRAMM SEKTION ── */}
-      <section style={{ padding:"56px 24px", background: isDark?"#1c1f2a":"#F1F5F9", transition:"background 0.3s" }}>
+      <section style={{ padding:"56px 24px", background: isDark?"#1e1f28":"#F1F5F9", transition:"background 0.3s" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -2353,7 +2353,7 @@ export default function Home() {
       <section style={{
         padding:"96px 24px 88px",
         background: isDark
-         ?"linear-gradient(to bottom, #07101e 0%, #07101e 100%)"
+         ?"#13141a"
          :"linear-gradient(to bottom, #F8FAFC 0%, #F1F5F9 100%)",
         transition:"background 0.3s ease",
 }}>
@@ -2545,7 +2545,7 @@ export default function Home() {
       <section style={{
         padding:"72px 24px 64px",
         background: isDark
-         ?"linear-gradient(to bottom, #07101e 0%, #0A1628 100%)"
+         ?"#13141a"
          :"linear-gradient(to bottom, #E8F2FF 0%, #EEF2F7 100%)",
         transition:"background 0.3s ease",
 }}>
@@ -2757,7 +2757,7 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ── */}
-      <section style={{ padding:"100px 20px", background: isDark?"#111318":"linear-gradient(to bottom,#F4F7FB 0%,#EEF2F7 100%)", transition:"background 0.3s ease"}}>
+      <section style={{ padding:"100px 20px", background: isDark?"#13141a":"linear-gradient(to bottom,#F4F7FB 0%,#EEF2F7 100%)", transition:"background 0.3s ease"}}>
         <div style={{ maxWidth:"760px", margin:"0 auto"}}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin:"-80px"}}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12}}}}
@@ -2777,7 +2777,7 @@ export default function Home() {
       </section>
 
       {/* ── PREISE ── */}
-      <section id="preise" style={{ padding:"100px 20px", background: isDark?"#111318":"#EEF2F7", transition:"background 0.3s ease"}}>
+      <section id="preise" style={{ padding:"100px 20px", background: isDark?"#13141a":"#EEF2F7", transition:"background 0.3s ease"}}>
         <div style={{ maxWidth:"1200px", margin:"0 auto"}}>
 
           {/* Header */}
@@ -3063,7 +3063,7 @@ export default function Home() {
               transition={{ type:"spring", stiffness: 350, damping: 22}}
               style={{
                 display:"inline-flex", alignItems:"center", gap:"10px",
-                background:"linear-gradient(135deg, #0F172A 0%, #1E3A5F 100%)",
+                background:"#0F172A",
                 color:"#FFFFFF",
                 padding:"18px 44px", borderRadius:"9999px",
                 fontWeight: 700, fontSize:"16px",
@@ -3116,7 +3116,7 @@ export default function Home() {
                 <div style={{
                   position:"absolute", top:"-14px", left:"50%", transform:"translateX(-50%)",
                   width:"28px", height:"28px", borderRadius:"50%",
-                  background:"linear-gradient(135deg, #0EA5E9 0%, #0D1F3C 100%)",
+                  background:"linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%)",
                   display:"flex", alignItems:"center", justifyContent:"center",
                   fontSize:"12px", fontWeight: 800, color:"#FFFFFF",
                   boxShadow:"0 4px 12px rgba(14,165,233,0.35)",
