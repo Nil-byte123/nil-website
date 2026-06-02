@@ -921,7 +921,7 @@ function DemoChat({ t}: { t: typeof translations["de"]}) {
               <textarea
                 value={bizServices}
                 onChange={e => setBizServices(e.target.value)}
-                placeholder="z.B. Öffnungszeiten Mo. bis Fr. 8 bis 18 Uhr, Spezialität: Elektroanlagen …"
+                placeholder="z.B. Öffnungszeiten Mo–Fr 8–18 Uhr, Spezialität: Elektroanlagen …"
                 rows={2}
                 style={{
                   width:"100%", boxSizing:"border-box",
@@ -2556,7 +2556,7 @@ export default function Home() {
 }}>
             {[
               {
-                value:"45 bis 90",
+                value:"45–90",
                 unit:"Min/Tag",
                 label:"Zeitersparnis",
                 detail:"Weniger Verwaltung, mehr Zeit für Ihr eigentliches Handwerk",
