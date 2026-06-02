@@ -223,7 +223,7 @@ function InfoTip({ tip, dark}: { tip: string; dark: boolean}) {
 // ─── Cell renderer for comparison table ─────────────────────────────
 function Cell({ v, col}: { v: CellVal; col: string}) {
   if (v === true)  return <span style={{ color:"#0EA5E9", fontWeight: 700}}></span>;
-  if (v === false) return <span style={{ color:"#94A3B8"}}>—</span>;
+  if (v === false) return <span style={{ color:"#94A3B8"}}>x</span>;
   return <span style={{ color: col ==="Pro"?"#38BDF8":"#334155", fontSize:"13px", fontWeight: 500}}>{v as string}</span>;
 }
 
