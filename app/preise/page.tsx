@@ -70,7 +70,7 @@ const plans = [
     tag: null as string | null,
     desc:"Perfekt zum Ausprobieren. Teste NIL 14 Tage kostenlos, ohne Kreditkarte, ohne Risiko.",
     features: [
-"1 KI-Assistent",
+"1 digitaler Assistent",
 "bis zu 100 Anfragen/Monat",
 "Webchat-Integration",
 "Keine Einrichtungsgebühr",
@@ -87,7 +87,7 @@ const plans = [
     tag: null as string | null,
     desc:"Für Betriebe die NIL dauerhaft nutzen wollen, mehr Anfragen, mehr Kanäle, volle Kontrolle.",
     features: [
-"1 KI-Assistent",
+"1 digitaler Assistent",
 "bis zu 500 Anfragen/Monat",
 "E-Mail-Integration",
 "Deutschsprachiger Support",
@@ -102,9 +102,9 @@ const plans = [
     price: 199,
     setup: 249,
     tag:"Beliebteste Wahl" as string | null,
-    desc:"Für wachsende Unternehmen mit mehreren Kanälen und höherem Automatisierungsgrad.",
+    desc:"Für wachsende Unternehmen mit mehreren Kanälen und mehr Einsatzmöglichkeiten.",
     features: [
-"3 KI-Assistenten",
+"3 digitale Assistenten",
 "bis zu 3.000 Anfragen/Monat",
 "Multi-Kanal (Web, WhatsApp, Instagram)",
 "Terminbuchung & CRM-Anbindung",
@@ -121,7 +121,7 @@ const plans = [
     tag: null as string | null,
     desc:"Maßgeschneiderte Lösungen für größere Unternehmen mit komplexen Anforderungen.",
     features: [
-"Unbegrenzte KI-Assistenten",
+"Unbegrenzte Assistenten",
 "Unbegrenzte Anfragen",
 "On-Premise oder Cloud",
 "Custom Integrationen & API",
@@ -135,7 +135,7 @@ const plans = [
 
 // ─── Comparison table data ───────────────────────────────────────────
 const compRows: { label: string; Basic: CellVal; Pro: CellVal; Enterprise: CellVal}[] = [
-  { label:"KI-Assistenten",            Basic:"1",         Pro:"3",            Enterprise:"Unbegrenzt"},
+  { label:"Assistenten",            Basic:"1",         Pro:"3",            Enterprise:"Unbegrenzt"},
   { label:"Anfragen / Monat",          Basic:"500",       Pro:"3.000",        Enterprise:"Unbegrenzt"},
   { label:"E-Mail-Integration",        Basic: true,        Pro: true,           Enterprise: true},
   { label:"WhatsApp & Instagram",      Basic: false,       Pro: true,           Enterprise: true},
@@ -158,7 +158,7 @@ function anfragenTip(f: string) {
   const n = m? parseInt(m[0].replace(".","")): 0;
   return n
    ?`1 Anfrage = 1 Kundennachricht · ≈ ${Math.round(n / 30)} pro Tag`
-   :"1 Anfrage = 1 Kundennachricht an den KI-Assistenten";
+   :"1 Anfrage = 1 Kundennachricht an Ihren Assistenten";
 }
 function monthlyAmt(price: number, billing: Billing) {
   return billing ==="yearly"? Math.round(price * 0.8): price;

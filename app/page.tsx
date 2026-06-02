@@ -13,7 +13,7 @@ const translations = {
     nav: { advantages:"Vorteile", services:"Services", demo:"Demo", contact:"Kontakt"},
     hero: {
       headline:"Mehr Zeit. Mehr Umsatz. Automatisch.",
-      subtext:"Intelligente KI-Agenten und maßgeschneiderte Softwarelösungen. Wir machen die Abläufe für Entwickler, Salons und Gastronomie spürbar effizienter.",
+      subtext:"Digitale Assistenten und maßgeschneiderte Softwarelösungen. Wir machen die Abläufe für Ihren Betrieb spürbar einfacher.",
       cta:"Jetzt anfragen",
 },
     showcase: {
@@ -34,7 +34,7 @@ const translations = {
 },
     contact: {
       headline:"Bereit für die Zukunft?",
-      subtext:"Lass uns gemeinsam Ihre Prozesse intelligent automatisieren.",
+      subtext:"Lass uns gemeinsam Ihre Abläufe einfacher machen.",
       phoneLabel:"TELEFON",
       emailLabel:"E-MAIL",
 },
@@ -43,7 +43,7 @@ const translations = {
     nav: { advantages:"Benefits", services:"Services", demo:"Demo", contact:"Contact"},
     hero: {
       headline:"More time. More revenue. Automated.",
-      subtext:"Smart AI agents and tailor-made software solutions. We make workflows for developers, salons and hospitality measurably more efficient.",
+      subtext:"Digital assistants and tailor-made software solutions. We make everyday processes measurably simpler for your business.",
       cta:"Get in touch",
 },
     showcase: {
@@ -64,7 +64,7 @@ const translations = {
 },
     contact: {
       headline:"Ready for the future?",
-      subtext:"Let's intelligently automate your processes together.",
+      subtext:"Let's make your everyday processes simpler together.",
       phoneLabel:"PHONE",
       emailLabel:"EMAIL",
 },
@@ -94,7 +94,7 @@ const translations = {
 },
     contact: {
       headline:"¿Listo para el futuro?",
-      subtext:"Automaticemos juntos tus procesos de forma inteligente.",
+      subtext:"Hagamos tus procesos más sencillos juntos.",
       phoneLabel:"TELÉFONO",
       emailLabel:"CORREO",
 },
@@ -103,7 +103,7 @@ const translations = {
     nav: { advantages:"Avantages", services:"Services", demo:"Démo", contact:"Contact"},
     hero: {
       headline:"Plus de temps. Plus de revenus. Automatisé.",
-      subtext:"Agents IA intelligents et solutions logicielles sur mesure. Nous rendons les processus pour développeurs, salons et restauration bien plus efficaces.",
+      subtext:"Des assistants digitaux et des logiciels sur mesure. Nous rendons les processus de votre entreprise bien plus simples.",
       cta:"Demander maintenant",
 },
     showcase: {
@@ -124,7 +124,7 @@ const translations = {
 },
     contact: {
       headline:"Prêt pour l'avenir?",
-      subtext:"Automatisons ensemble vos processus de manière intelligente.",
+      subtext:"Simplifions ensemble vos processus au quotidien.",
       phoneLabel:"TÉLÉPHONE",
       emailLabel:"E-MAIL",
 },
@@ -133,7 +133,7 @@ const translations = {
     nav: { advantages:"Vantaggi", services:"Servizi", demo:"Demo", contact:"Contatti"},
     hero: {
       headline:"Più tempo. Più guadagni. Automatico.",
-      subtext:"Agenti IA intelligenti e soluzioni software su misura. Rendiamo i processi per sviluppatori, salon e ristorazione notevolmente più efficienti.",
+      subtext:"Assistenti digitali e soluzioni software su misura. Rendiamo i processi della tua azienda notevolmente più semplici.",
       cta:"Richiedi ora",
 },
     showcase: {
@@ -154,7 +154,7 @@ const translations = {
 },
     contact: {
       headline:"Pronto per il futuro?",
-      subtext:"Automatizziamo insieme i tuoi processi in modo intelligente.",
+      subtext:"Rendiamo insieme i tuoi processi più semplici.",
       phoneLabel:"TELEFONO",
       emailLabel:"E-MAIL",
 },
@@ -171,7 +171,7 @@ const sl: Record<LangCode, {
   calendly: string;
   nlHeading: string; nlPlaceholder: string; nlBtn: string; nlSuccess: string;
 }> = {
-  de: { srvLabel:"LEISTUNGEN", srvHl:"Smarte Lösungen für jede Branche.", faqLabel:"FAQ", faqHl:"Häufig gestellte Fragen.", tstLabel:"KUNDENSTIMMEN", tstHl:"Was unsere Kunden sagen.", calendly:"Termin buchen", nlHeading:"Updates & Insights", nlPlaceholder:"Ihre E-Mail-Adresse", nlBtn:"Anmelden", nlSuccess:"Angemeldet!"},
+  de: { srvLabel:"LEISTUNGEN", srvHl:"Passende Lösungen für jede Branche.", faqLabel:"FAQ", faqHl:"Häufig gestellte Fragen.", tstLabel:"KUNDENSTIMMEN", tstHl:"Was unsere Kunden sagen.", calendly:"Termin buchen", nlHeading:"Updates & Insights", nlPlaceholder:"Ihre E-Mail-Adresse", nlBtn:"Anmelden", nlSuccess:"Angemeldet!"},
   en: { srvLabel:"SERVICES", srvHl:"The right solution for every industry.", faqLabel:"FAQ", faqHl:"Frequently asked questions.", tstLabel:"TESTIMONIALS", tstHl:"What our clients say.", calendly:"Book a meeting", nlHeading:"Stay updated", nlPlaceholder:"Your email address", nlBtn:"Subscribe", nlSuccess:"Subscribed!"},
   es: { srvLabel:"SERVICIOS", srvHl:"La solución adecuada para cada sector.", faqLabel:"FAQ", faqHl:"Preguntas frecuentes.", tstLabel:"OPINIONES", tstHl:"Lo que dicen nuestros clientes.", calendly:"Reservar cita", nlHeading:"Mantenerse informado", nlPlaceholder:"Tu correo electrónico", nlBtn:"Suscribirse", nlSuccess:"¡Suscrito!"},
   fr: { srvLabel:"SERVICES", srvHl:"La bonne solution pour chaque secteur.", faqLabel:"FAQ", faqHl:"Questions fréquentes.", tstLabel:"TÉMOIGNAGES", tstHl:"Ce que disent nos clients.", calendly:"Prendre RDV", nlHeading:"Restez informé", nlPlaceholder:"Votre adresse e-mail", nlBtn:"S'inscrire", nlSuccess:"Inscrit(e)!"},
@@ -181,29 +181,29 @@ const sl: Record<LangCode, {
 /* ─── Rotating Hero Taglines ────────────────────────────────── */
 const rotatingTaglines: Record<LangCode, string[]> = {
   de: [
-"Ihr KI-Assistent antwortet auf Kundenanfragen, auch wenn Sie gerade auf der Baustelle bist.",
+"Ihr digitaler Assistent antwortet auf Kundenanfragen, auch wenn Sie gerade auf der Baustelle bist.",
 "Gastronomie & Handel: Reservierungen, Bestellungen & Anfragen automatisch bearbeiten.",
-"Unternehmen & Teams: Smarte Automatisierung für jeden Betrieb, unabhängig der Branche.",
+"Unternehmen & Teams: Verlässliche Software für jeden Betrieb, unabhängig der Branche.",
   ],
   en: [
-"Your AI assistant answers customer inquiries, even when you're busy on a job.",
+"Your digital assistant answers customer inquiries, even when you're busy on a job.",
 "Hospitality & retail: Handle reservations, orders & inquiries automatically.",
-"Companies & teams: Smart automation for any business, whatever the industry.",
+"Companies & teams: Reliable software for any business, whatever the industry.",
   ],
   es: [
-"Tu asistente de IA responde consultas de clientes, aunque estés ocupado en el trabajo.",
+"Tu asistente digital responde consultas de clientes, aunque estés ocupado en el trabajo.",
 "Hostelería y comercio: Gestiona reservas, pedidos y consultas automáticamente.",
 "Empresas y equipos: Automatización inteligente para cualquier negocio.",
   ],
   fr: [
-"Votre assistant IA répond aux demandes clients, même quand vous êtes en intervention.",
+"Votre assistant digital répond aux demandes clients, même quand vous êtes en intervention.",
 "Restauration & commerce: Gérez réservations, commandes et demandes automatiquement.",
-"Entreprises & équipes: Automatisation intelligente pour tout type de business.",
+"Entreprises & équipes: Des solutions fiables pour tout type de business.",
   ],
   it: [
-"Il tuo assistente IA risponde alle richieste dei clienti, anche quando sei impegnato sul lavoro.",
+"Il tuo assistente digitale risponde alle richieste dei clienti, anche quando sei impegnato sul lavoro.",
 "Ristorazione & commercio: Gestisci prenotazioni, ordini e richieste automaticamente.",
-"Aziende & team: Automazione intelligente per qualsiasi tipo di business.",
+"Aziende & team: Soluzioni affidabili per qualsiasi tipo di business.",
   ],
 };
 
@@ -239,7 +239,7 @@ const serviceCards = [
       </svg>
     ),
     title:"Unternehmen & Teams",
-    text: { de:"Smarte Softwarelösungen und digitale Assistenten für jede Branche, individuell auf Ihren Betrieb zugeschnitten.", en:"Smart software solutions and digital assistants for any industry, tailored to your business.", es:"Soluciones de software inteligentes y asistentes digitales para cualquier sector.", fr:"Solutions logicielles intelligentes et assistants numériques pour tout secteur.", it:"Soluzioni software intelligenti e assistenti digitali per qualsiasi settore."},
+    text: { de:"Passende Softwarelösungen und digitale Assistenten für jede Branche, individuell auf Ihren Betrieb zugeschnitten.", en:"Tailored software solutions and digital assistants for any industry, tailored to your business.", es:"Soluciones de software a medida y asistentes digitales para cualquier sector.", fr:"Solutions logicielles adaptées et assistants numériques pour tout secteur.", it:"Soluzioni software su misura e assistenti digitali per qualsiasi settore."},
 },
   {
     icon: (
@@ -261,7 +261,7 @@ const faqItems: Record<LangCode, { q: string; a: string}[]> = {
 },
     {
       q:"Brauche ich IT-Kenntnisse?",
-      a:"Überhaupt nicht. Sie musst keine einzige Zeile Code verstehen. Wir übernehmen die komplette technische Einrichtung, von der KI-Konfiguration bis zur Integration in Ihre bestehenden Tools. Sie bekommst eine fertige Lösung geliefert und kannst sofort loslegen. Einfach so.",
+      a:"Überhaupt nicht. Sie musst keine einzige Zeile Code verstehen. Wir übernehmen die komplette technische Einrichtung, von der technischen Einrichtung bis zur Integration in Ihre bestehenden Tools. Sie bekommst eine fertige Lösung geliefert und kannst sofort loslegen. Einfach so.",
 },
     {
       q:"Welche Sprachen versteht der Assistent?",
@@ -287,7 +287,7 @@ const faqItems: Record<LangCode, { q: string; a: string}[]> = {
 },
     {
       q:"Do I need IT knowledge?",
-      a:"Not at all. You don't need to understand a single line of code. We handle the complete technical setup, from AI configuration to integration with your existing tools. You receive a ready-to-use solution and can get started right away. Just like that.",
+      a:"Not at all. You don't need to understand a single line of code. We handle the complete technical setup, from the technical setup to integration with your existing tools. You receive a ready-to-use solution and can get started right away. Just like that.",
 },
     {
       q:"What languages does the assistant understand?",
@@ -2682,7 +2682,7 @@ export default function Home() {
             {lang ==="de" && (
               <motion.h2 variants={{ hidden: { opacity: 0, y: 16}, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: appleEase, delay: 0.1}}}}
                 style={{ fontSize:"clamp(14px, 2vw, 17px)", fontWeight: 500, letterSpacing:"-0.01em", color: c.text2, marginTop:"14px"}}>
-                KI-Automatisierung für Betriebe in München, Augsburg und ganz Bayern
+                Digitale Lösungen für Betriebe in München, Augsburg und ganz Bayern
               </motion.h2>
             )}
           </motion.div>
@@ -2864,10 +2864,10 @@ export default function Home() {
           {/* Cards */}
           <div style={{ display:"grid", gridTemplateColumns: isMobile?"1fr":"repeat(4, 1fr)", gap:"16px", alignItems:"stretch"}}>
             {([
-              { name:"Starter",    price: 39   as number | null, setup: 0,   tag: null,               features: ["1 KI-Assistent","bis zu 100 Anfragen/Monat","14 Tage kostenlos testen"]},
-              { name:"Basic",      price: 89   as number | null, setup: 149, tag: null,               features: ["1 KI-Assistent","bis zu 500 Anfragen/Monat","E-Mail-Integration"]},
-              { name:"Pro",        price: 199  as number | null, setup: 249, tag:"Beliebteste Wahl", features: ["3 KI-Assistenten","bis zu 3.000 Anfragen/Monat","WhatsApp, Web & Instagram"]},
-              { name:"Enterprise", price: null as number | null, setup: 399, tag: null,               features: ["Unbegrenzte KI-Assistenten","Unbegrenzte Anfragen","Custom API & Integrationen"]},
+              { name:"Starter",    price: 39   as number | null, setup: 0,   tag: null,               features: ["1 digitaler Assistent","bis zu 100 Anfragen/Monat","14 Tage kostenlos testen"]},
+              { name:"Basic",      price: 89   as number | null, setup: 149, tag: null,               features: ["1 digitaler Assistent","bis zu 500 Anfragen/Monat","E-Mail-Integration"]},
+              { name:"Pro",        price: 199  as number | null, setup: 249, tag:"Beliebteste Wahl", features: ["3 digitale Assistenten","bis zu 3.000 Anfragen/Monat","WhatsApp, Web & Instagram"]},
+              { name:"Enterprise", price: null as number | null, setup: 399, tag: null,               features: ["Unbegrenzte Assistenten","Unbegrenzte Anfragen","Custom API & Integrationen"]},
             ]).map((plan, i) => {
               const isPro = plan.name ==="Pro";
               const mp = plan.price!== null
@@ -3080,7 +3080,7 @@ export default function Home() {
             <motion.p variants={{ hidden: { opacity: 0, y: 18, filter:"blur(4px)"},
               visible: { opacity: 1, y: 0, filter:"blur(0px)", transition: { duration: 0.85, ease: appleEase}}}}
               style={{ color: c.text2, fontSize:"16px", lineHeight: 1.65, maxWidth:"480px", margin:"0 auto"}}>
-              Buche ein kostenloses 20-Minuten-Gespräch. Wir schauen uns gemeinsam an, was für Ihr Unternehmen automatisiert werden kann.
+              Buche ein kostenloses 20-Minuten-Gespräch. Wir schauen uns gemeinsam an, wie wir Ihren Betriebsalltag einfacher machen können.
             </motion.p>
           </motion.div>
 
@@ -3135,7 +3135,7 @@ export default function Home() {
 }}
           >
             {[
-              { step:"1", emoji:"", title:"Gespräch", text:"Wir lernen Ihr Unternehmen kennen und analysieren Automatisierungspotenziale."},
+              { step:"1", emoji:"", title:"Gespräch", text:"Wir lernen Ihr Unternehmen kennen und zeigen Ihnen wo Sie täglich Zeit sparen können."},
               { step:"2", emoji:"", title:"Konzept", text:"Sie erhältst einen konkreten Plan mit klarem Zeitrahmen und transparenten Kosten."},
               { step:"3", emoji:"", title:"Live in 48h", text:"Wir richten alles ein. Sie sparst sofort Zeit und kannst Sie aufs Wesentliche konzentrieren."},
             ].map((item, i) => (
@@ -3242,7 +3242,7 @@ export default function Home() {
             <div>
               <FinalBrandingLogoWhite width={88} height={32} />
               <p style={{ color:"rgba(255,255,255,0.45)", fontSize:"13px", lineHeight: 1.65, marginTop:"14px", maxWidth:"240px"}}>
-                Smarte Softwarelösungen und digitale Automatisierung für Unternehmen jeder Branche.
+                Praktische Softwarelösungen für Ihren Betrieb.
               </p>
               {/* Social Icons */}
               <div style={{ display:"flex", gap:"14px", marginTop:"20px"}}>
@@ -3286,7 +3286,7 @@ export default function Home() {
                 {s.nlHeading.toUpperCase()}
               </p>
               <p style={{ color:"rgba(255,255,255,0.4)", fontSize:"13px", lineHeight: 1.6, marginBottom:"16px"}}>
-                KI-Tipps, Updates & Neuigkeiten direkt in Ihr Postfach.
+                Updates & Neuigkeiten direkt in Ihr Postfach.
               </p>
               <NewsletterForm slang={s} />
             </div>
