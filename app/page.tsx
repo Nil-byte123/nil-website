@@ -211,7 +211,7 @@ const rotatingTaglines: Record<LangCode, string[]> = {
 const serviceCards = [
   {
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <rect x="3" y="4" width="18" height="18" rx="2"/>
         <path d="M16 2v4M8 2v4M3 10h18"/>
         <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
@@ -222,7 +222,7 @@ const serviceCards = [
 },
   {
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
         <path d="M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3z"/>
         <path d="M21 15v7"/>
@@ -233,7 +233,7 @@ const serviceCards = [
 },
   {
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <rect x="4" y="2" width="16" height="20" rx="1"/>
         <path d="M9 22V12h6v10M8 6h.01M16 6h.01M8 10h.01M16 10h.01"/>
       </svg>
@@ -243,7 +243,7 @@ const serviceCards = [
 },
   {
     icon: (
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
       </svg>
     ),
@@ -1291,7 +1291,7 @@ function FAQList({ items, isDark}: { items: { q: string; a: string}[]; isDark: b
 }}
               >
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="inherit" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </motion.span>
             </button>
@@ -1685,44 +1685,9 @@ export default function Home() {
     document.documentElement.setAttribute("data-dark", String(isDark));
 }, [isDark]);
 
-  const handleThemeToggle = (e: React.MouseEvent) => {
-    if (themeOverlay) return;
-    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
-    const toDark =!isDark;
-
-    // ── View Transitions API: real content revealed piece by piece ──
-    const vtDoc = document as Document & {
-      startViewTransition?: (cb: () => void) => { ready: Promise<void>};
-};
-
-    if (vtDoc.startViewTransition) {
-      const endR = Math.hypot(
-        Math.max(x, window.innerWidth  - x),
-        Math.max(y, window.innerHeight - y),
-      );
-      const vt = vtDoc.startViewTransition(() => {
-        flushSync(() => setIsDark(toDark));
-});
-      vt.ready.then(() => {
-        // Animate the NEW snapshot as an expanding circle from the button
-        document.documentElement.animate(
-          { clipPath: [`circle(0px at ${x}px ${y}px)`,`circle(${endR}px at ${x}px ${y}px)`]},
-          { duration: 700, easing:"cubic-bezier(0.4,0,0.2,1)", pseudoElement:"::view-transition-new(root)"},
-        );
-});
-} else {
-      // ── Fallback for browsers without View Transitions API ──
-      document.documentElement.classList.add("theme-switching");
-      setIsDark(toDark);
-      setThemeOverlay({ x, y, toDark, id: Date.now()});
-      setTimeout(() => {
-        document.documentElement.classList.remove("theme-switching");
-        setThemeOverlay(null);
-}, 750);
-}
-};
+  const handleThemeToggle = () => {
+    setIsDark(d => !d);
+  };
 
   /* ── Rotating tagline ── */
   const [taglineIndex, setTaglineIndex] = useState(0);
@@ -1769,7 +1734,7 @@ export default function Home() {
       background: c.bg, color: c.text,
       fontFamily:"system-ui, -apple-system, BlinkMacSystemFont,'Segoe UI', Roboto, sans-serif",
       minHeight:"100vh", overflowX:"hidden", position:"relative",
-      transition:"background 0.3s ease, color 0.3s ease",
+      transition:"background 1.2s ease, color 1.2s ease",
 }}>
 
       {/* ── NAVBAR ── */}
@@ -1820,9 +1785,9 @@ export default function Home() {
               </div>
               <div style={{ display:"flex", alignItems:"center", gap:"10px"}}>
                 {[
-                  { href:"https://instagram.com", label:"Instagram", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>},
-                  { href:"https://linkedin.com/company/nilogik", label:"LinkedIn", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>},
-                  { href:"https://youtube.com/@nilogik", label:"YouTube", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0.46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>},
+                  { href:"https://instagram.com", label:"Instagram", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>},
+                  { href:"https://linkedin.com/company/nilogik", label:"LinkedIn", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>},
+                  { href:"https://youtube.com/@nilogik", label:"YouTube", svg: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0.46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>},
                 ].map(({ href, label, svg}) => (
                   <motion.a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
                     whileHover={{ scale: 1.18, color:"#0EA5E9"}}
@@ -1834,7 +1799,10 @@ export default function Home() {
                 whileHover={{ scale: 1.1}} whileTap={{ scale: 0.9}}
                 aria-label="Dark/Light Mode"
                 style={{ background: isDark?"rgba(255,255,255,0.08)":"rgba(15,23,42,0.05)", border:`1px solid ${isDark?"rgba(255,255,255,0.12)":"rgba(15,23,42,0.1)"}`, borderRadius:"50%", width:"34px", height:"34px", display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer", fontSize:"15px", transition:"background 0.2s"}}
-              >{isDark?"":""}</motion.button>
+              >{isDark
+  ? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  : <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+}</motion.button>
               <LangSwitcher lang={lang} setLang={setLang} />
             </>}
 
@@ -1844,7 +1812,10 @@ export default function Home() {
                 whileTap={{ scale: 0.9}}
                 aria-label="Dark/Light Mode"
                 style={{ background:"none", border:"none", fontSize:"18px", cursor:"pointer", padding:"4px", display:"flex", alignItems:"center"}}
-              >{isDark?"":""}</motion.button>
+              >{isDark
+  ? <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  : <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+}</motion.button>
 
               <motion.button
                 onClick={() => setMobileMenuOpen(v =>!v)}
@@ -1921,9 +1892,9 @@ export default function Home() {
             <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", flexWrap:"wrap", gap:"12px"}}>
               <div style={{ display:"flex", gap:"16px"}}>
                 {[
-                  { href:"https://instagram.com", label:"Instagram", svg: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>},
-                  { href:"https://linkedin.com/company/nilogik", label:"LinkedIn", svg: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>},
-                  { href:"https://youtube.com/@nilogik", label:"YouTube", svg: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0.46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>},
+                  { href:"https://instagram.com", label:"Instagram", svg: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>},
+                  { href:"https://linkedin.com/company/nilogik", label:"LinkedIn", svg: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>},
+                  { href:"https://youtube.com/@nilogik", label:"YouTube", svg: <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0.46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>},
                 ].map(({ href, label, svg}) => (
                   <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
                     style={{ color: c.text2, display:"flex", alignItems:"center"}}>
@@ -2776,34 +2747,30 @@ export default function Home() {
 
 {/* ── DEMO ── */}
       <section id="demo" style={{
-        padding:"120px 20px",
+        padding:"160px 20px 180px",
         background: c.demoBg,
-        transition:"background 0.3s ease",
-}}>
-        <div style={{ maxWidth:"700px", margin:"0 auto"}}>
+        transition:"background 0.8s ease",
+      }}>
+        <div style={{ maxWidth:"920px", margin:"0 auto" }}>
 
           {/* Section Header */}
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin:"-80px"}}
-            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.14}}}}
-            style={{ textAlign:"center", marginBottom:"64px"}}>
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin:"-80px" }}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.14 }}}}
+            style={{ textAlign:"center", marginBottom:"72px" }}>
 
-            <motion.p variants={{ hidden: { opacity: 0, y: 20, filter:"blur(5px)"},
-              visible: { opacity: 1, y: 0, filter:"blur(0px)", transition: { duration: 0.7, ease: appleEase}}}}
-              style={{ color:"#0EA5E9", fontSize:"11px", fontWeight: 700, letterSpacing:"2.5px", marginBottom:"12px"}}>
+            <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: appleEase }}}}
+              style={{ color: c.text3, fontSize:"11px", fontWeight: 700, letterSpacing:"2.5px", marginBottom:"14px" }}>
               <AnimText langKey={`demo-label-${lang}`}>{t.demo.label}</AnimText>
             </motion.p>
 
-            <motion.h2 variants={{ hidden: { opacity: 0, y: 28, filter:"blur(6px)"},
-              visible: { opacity: 1, y: 0, filter:"blur(0px)", transition: { duration: 0.9, ease: appleEase}}}}
-              style={{ fontSize:"clamp(28px, 4vw, 38px)", fontWeight: 700, letterSpacing:"-0.04em",
-                color: c.text, marginBottom:"18px", margin:"0 0 18px 0"}}>
+            <motion.h2 variants={{ hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: appleEase }}}}
+              style={{ fontSize:"clamp(40px, 6vw, 64px)", fontWeight: 800, letterSpacing:"-0.04em",
+                color: c.text, margin:"0 0 20px" }}>
               <AnimText langKey={`demo-h2-${lang}`}>{t.demo.headline}</AnimText>
             </motion.h2>
 
-            <motion.p variants={{ hidden: { opacity: 0, y: 16, filter:"blur(4px)"},
-              visible: { opacity: 1, y: 0, filter:"blur(0px)", transition: { duration: 0.8, ease: appleEase}}}}
-              style={{ color: c.text2, fontSize:"16px", lineHeight: 1.65,
-                maxWidth:"480px", margin:"0 auto"}}>
+            <motion.p variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: appleEase }}}}
+              style={{ color: c.text2, fontSize:"20px", lineHeight: 1.7, maxWidth:"520px", margin:"0 auto" }}>
               <AnimText langKey={`demo-sub-${lang}`}>{t.demo.subtext}</AnimText>
             </motion.p>
           </motion.div>
@@ -3053,9 +3020,9 @@ export default function Home() {
               {/* Social Icons */}
               <div style={{ display:"flex", gap:"14px", marginTop:"20px"}}>
                 {[
-                  { href:"https://instagram.com", label:"Instagram", svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>},
-                  { href:"https://linkedin.com/company/nilogik", label:"LinkedIn", svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>},
-                  { href:"https://youtube.com/@nilogik", label:"YouTube", svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0.46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>},
+                  { href:"https://instagram.com", label:"Instagram", svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>},
+                  { href:"https://linkedin.com/company/nilogik", label:"LinkedIn", svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>},
+                  { href:"https://youtube.com/@nilogik", label:"YouTube", svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="inherit" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0.46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.96-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>},
                 ].map(({ href, label, svg}) => (
                   <motion.a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
                     whileHover={{ scale: 1.2, color:"#0EA5E9"}}
