@@ -2747,30 +2747,30 @@ export default function Home() {
 
 {/* ── DEMO ── */}
       <section id="demo" style={{
-        padding:"160px 20px 180px",
+        padding:"200px 20px 240px",
         background: c.demoBg,
         transition:"background 0.8s ease",
       }}>
-        <div style={{ maxWidth:"920px", margin:"0 auto" }}>
+        <div style={{ maxWidth:"1050px", margin:"0 auto" }}>
 
           {/* Section Header */}
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin:"-80px" }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.14 }}}}
-            style={{ textAlign:"center", marginBottom:"72px" }}>
+            style={{ textAlign:"center", marginBottom:"100px" }}>
 
             <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: appleEase }}}}
-              style={{ color: c.text3, fontSize:"11px", fontWeight: 700, letterSpacing:"2.5px", marginBottom:"14px" }}>
+              style={{ color: c.text3, fontSize:"13px", fontWeight: 700, letterSpacing:"3px", marginBottom:"16px" }}>
               <AnimText langKey={`demo-label-${lang}`}>{t.demo.label}</AnimText>
             </motion.p>
 
             <motion.h2 variants={{ hidden: { opacity: 0, y: 28 }, visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: appleEase }}}}
-              style={{ fontSize:"clamp(40px, 6vw, 64px)", fontWeight: 800, letterSpacing:"-0.04em",
-                color: c.text, margin:"0 0 20px" }}>
+              style={{ fontSize:"clamp(48px, 7vw, 72px)", fontWeight: 800, letterSpacing:"-0.04em",
+                color: c.text, margin:"0 0 24px" }}>
               <AnimText langKey={`demo-h2-${lang}`}>{t.demo.headline}</AnimText>
             </motion.h2>
 
             <motion.p variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: appleEase }}}}
-              style={{ color: c.text2, fontSize:"20px", lineHeight: 1.7, maxWidth:"520px", margin:"0 auto" }}>
+              style={{ color: c.text2, fontSize:"22px", lineHeight: 1.75, maxWidth:"580px", margin:"0 auto" }}>
               <AnimText langKey={`demo-sub-${lang}`}>{t.demo.subtext}</AnimText>
             </motion.p>
           </motion.div>
