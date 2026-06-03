@@ -2754,7 +2754,7 @@ export default function Home() {
         <div style={{ maxWidth:"1050px", margin:"0 auto" }}>
 
           {/* Section Header */}
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin:"-80px" }}
+          <motion.div suppressHydrationWarning initial="hidden" whileInView="visible" viewport={{ once: true, margin:"-80px" }}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.14 }}}}
             style={{ textAlign:"center", marginBottom:"100px" }}>
 
