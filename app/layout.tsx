@@ -77,6 +77,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: STRUCTURED_DATA }}
         />
+        {/* Theme initialization script — runs BEFORE React hydration to prevent flash */}
+        <script
+          nonce={nonce}
+          dangerouslySetInnerHTML={{
+            __html: `(function() {
+              const isDark = localStorage.getItem('nil-dark') === 'true';
+              if (isDark) {
+                document.documentElement.setAttribute('data-dark', 'true');
+              }
+            })();`,
+          }}
+        />
       </head>
       <body className={geist.className}>
         {/* Pass nonce to Client Component so next/script can apply it */}
