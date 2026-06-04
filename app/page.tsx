@@ -1222,7 +1222,7 @@ function FAQList({ items, isDark}: { items: { q: string; a: string}[]; isDark: b
                   transition={{ duration: 0.2 }}
                   style={{
                     position:"absolute", inset: 0, pointerEvents:"none",
-                    background: isDark ? "rgba(255,255,255,0.02)" : "rgba(15,23,42,0.02)",
+                    background: "rgba(15,23,42,0.02)",
                   }}
                 />
               )}
@@ -1236,7 +1236,7 @@ function FAQList({ items, isDark}: { items: { q: string; a: string}[]; isDark: b
               style={{
                 position:"absolute", left: 0, top:"12px", bottom:"12px",
                 width:"2px", borderRadius:"2px", transformOrigin:"top",
-                background: isDark ? "rgba(255,255,255,0.3)" : "#0F172A",
+                background: "#0F172A",
               }}
             />
 
@@ -1256,7 +1256,7 @@ function FAQList({ items, isDark}: { items: { q: string; a: string}[]; isDark: b
                   transition={{ duration: 0.35, ease: [0.16,1,0.3,1] }}
                   style={{
                     width:"28px", height:"28px", borderRadius:"6px", flexShrink: 0,
-                    background: isDark ? "rgba(255,255,255,0.06)" : "rgba(15,23,42,0.05)",
+                    background: "rgba(15,23,42,0.05)",
                     display:"inline-flex", alignItems:"center", justifyContent:"center",
                     fontSize:"11px", fontWeight: 700, letterSpacing:"0.3px",
                     color: text2,
@@ -1607,7 +1607,7 @@ function PlanFinder({ isDark, c, onOpenModal}: { isDark: boolean; c: CColors; on
 
                 {/* Reasons */}
                 {result!.reasons.length > 0 && (
-                  <div style={{ background: isDark?"rgba(14,165,233,0.08)":"rgba(14,165,233,0.06)",
+                  <div style={{ background: "rgba(14,165,233,0.06)",
                     border:`1px solid rgba(14,165,233,0.2)`, borderRadius:"14px",
                     padding:"16px 18px", marginBottom:"24px", textAlign:"left"}}>
                     <p style={{ fontSize:"11px", fontWeight: 700, color:"#0EA5E9", letterSpacing:"1px", marginBottom:"10px"}}>
@@ -1796,7 +1796,7 @@ export default function Home() {
               <motion.button onClick={handleThemeToggle}
                 whileHover={{ scale: 1.1}} whileTap={{ scale: 0.9}}
                 aria-label="Dark/Light Mode"
-                style={{ background: isDark?"rgba(255,255,255,0.08)":"rgba(15,23,42,0.05)", border:`1px solid ${isDark?"rgba(255,255,255,0.12)":"rgba(15,23,42,0.1)"}`, borderRadius:"50%", width:"34px", height:"34px", display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer", fontSize:"15px", transition:"background 0.2s"}}
+                style={{ background: "rgba(15,23,42,0.05)", border:`1px solid ${isDark?"rgba(255,255,255,0.12)":"rgba(15,23,42,0.1)"}`, borderRadius:"50%", width:"34px", height:"34px", display:"flex", alignItems:"center", justifyContent:"center", cursor:"pointer", fontSize:"15px", transition:"background 0.2s"}}
               >{isDark
   ? <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
   : <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1819,7 +1819,7 @@ export default function Home() {
                 onClick={() => setMobileMenuOpen(v =>!v)}
                 whileTap={{ scale: 0.92}}
                 aria-label="Menü"
-                style={{ background: isDark?"rgba(255,255,255,0.08)":"rgba(15,23,42,0.06)", border:`1px solid ${c.border}`, borderRadius:"10px", width:"40px", height:"40px", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"5px", cursor:"pointer", padding:"0"}}
+                style={{ background: "rgba(15,23,42,0.06)", border:`1px solid ${c.border}`, borderRadius:"10px", width:"40px", height:"40px", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"5px", cursor:"pointer", padding:"0"}}
               >
                 {[0,1,2].map(i => (
                   <motion.span key={i}
@@ -1844,7 +1844,7 @@ export default function Home() {
             transition={{ duration: 0.28, ease: appleEase}}
             style={{
               position:"fixed", top:"68px", left: 0, right: 0, zIndex: 999,
-              background: isDark?"rgba(7,16,30,0.98)":"rgba(248,250,252,0.98)",
+              background: "rgba(248,250,252,0.98)",
               backdropFilter:"blur(24px)", WebkitBackdropFilter:"blur(24px)",
               borderBottom:`1px solid ${c.navBorder}`,
               padding:"20px 24px 28px",
@@ -2280,7 +2280,7 @@ export default function Home() {
           transition={{ duration: 0.7, ease: appleEase }}
           style={{
             maxWidth:"780px", margin:"0 auto",
-            background: isDark?"rgba(255,255,255,0.04)":"#FFFFFF",
+            background: "#FFFFFF",
             border:`1px solid ${c.border}`,
             borderRadius:"20px",
             padding:"32px 36px",
@@ -2319,9 +2319,7 @@ export default function Home() {
       {/* ── WIE ES FUNKTIONIERT ── */}
       <section style={{
         padding:"96px 24px 88px",
-        background: isDark
-         ?"#13141a"
-         :"linear-gradient(to bottom, #F8FAFC 0%, #F1F5F9 100%)",
+        background: "linear-gradient(to bottom, #F8FAFC 0%, #F1F5F9 100%)",
         transition:"background 0.3s ease",
 }}>
         <div style={{ maxWidth:"960px", margin:"0 auto"}}>
@@ -2368,7 +2366,7 @@ export default function Home() {
                 title:"Kurzes Gespräch",
                 desc:"Wir schauen gemeinsam, welche Anfragen Sie täglich Zeit kosten. Kein Vortrag, nur ein ehrliches Gespräch.",
                 preview: (
-                  <div style={{ background: isDark?"rgba(255,255,255,0.04)":"#F8FAFC", borderRadius:"12px", padding:"14px 16px", marginBottom:"22px", border:`1px solid ${c.border}` }}>
+                  <div style={{ background: "#F8FAFC", borderRadius:"12px", padding:"14px 16px", marginBottom:"22px", border:`1px solid ${c.border}` }}>
                     <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", marginBottom:"10px" }}>
                       <span style={{ fontSize:"11px", fontWeight: 700, color: c.text3, letterSpacing:"1px" }}>TERMINE · MÄRZ</span>
                       <span style={{ fontSize:"10px", color:"#0EA5E9", fontWeight: 600 }}>15 Min frei</span>
@@ -2395,7 +2393,7 @@ export default function Home() {
                 title:"Wir richten alles ein",
                 desc:"Ihr Assistent wird auf Ihren Betrieb angepasst und eingerichtet. In der Regel fertig in unter 48 Stunden.",
                 preview: (
-                  <div style={{ background: isDark?"rgba(255,255,255,0.04)":"#F8FAFC", borderRadius:"12px", padding:"14px 16px", marginBottom:"22px", border:`1px solid ${c.border}` }}>
+                  <div style={{ background: "#F8FAFC", borderRadius:"12px", padding:"14px 16px", marginBottom:"22px", border:`1px solid ${c.border}` }}>
                     {[
                       { label:"Betrieb konfiguriert", done: true },
                       { label:"Antworten eingerichtet", done: true },
@@ -2422,9 +2420,9 @@ export default function Home() {
                 title:"Kunden werden direkt bedient",
                 desc:"Ihr Assistent antwortet auf Kundenanfragen rund um die Uhr. Jede Konversation sehen Sie live mit.",
                 preview: (
-                  <div style={{ background: isDark?"rgba(255,255,255,0.04)":"#F8FAFC", borderRadius:"12px", padding:"14px 16px", marginBottom:"22px", border:`1px solid ${c.border}`, display:"flex", flexDirection:"column", gap:"8px" }}>
+                  <div style={{ background: "#F8FAFC", borderRadius:"12px", padding:"14px 16px", marginBottom:"22px", border:`1px solid ${c.border}`, display:"flex", flexDirection:"column", gap:"8px" }}>
                     <div style={{ display:"flex", justifyContent:"flex-start" }}>
-                      <div style={{ background: isDark?"rgba(255,255,255,0.08)":"#E2E8F0", borderRadius:"10px 10px 10px 2px", padding:"7px 11px", fontSize:"12px", color: c.text, maxWidth:"75%" }}>
+                      <div style={{ background: "#E2E8F0", borderRadius:"10px 10px 10px 2px", padding:"7px 11px", fontSize:"12px", color: c.text, maxWidth:"75%" }}>
                         Haben Sie morgen noch einen Termin frei?
                       </div>
                     </div>
@@ -2448,7 +2446,7 @@ export default function Home() {
                 style={{
                   position:"relative", overflow:"hidden",
                   borderRadius:"22px", padding:"28px 26px 26px",
-                  background: isDark?"rgba(255,255,255,0.04)":"#FFFFFF",
+                  background: "#FFFFFF",
                   border: isDark?"1px solid rgba(255,255,255,0.08)":"1px solid rgba(15,23,42,0.07)",
                   boxShadow: isDark?"none":"0 4px 24px rgba(15,23,42,0.05)",
                   cursor:"default",
@@ -2511,9 +2509,7 @@ export default function Home() {
       {/* ── STATS BLOCK ── */}
       <section style={{
         padding:"72px 24px 64px",
-        background: isDark
-         ?"#13141a"
-         :"linear-gradient(to bottom, #E8F2FF 0%, #EEF2F7 100%)",
+        background: "linear-gradient(to bottom, #E8F2FF 0%, #EEF2F7 100%)",
         transition:"background 0.3s ease",
 }}>
         <div style={{ maxWidth:"900px", margin:"0 auto"}}>
@@ -2554,7 +2550,7 @@ export default function Home() {
                 viewport={{ once: true, margin:"-40px" }}
                 transition={{ duration: 0.7, ease: appleEase, delay: i * 0.1 }}
                 style={{
-                  background: isDark ? "rgba(255,255,255,0.04)" : "#FFFFFF",
+                  background: "#FFFFFF",
                   border: `1px solid ${c.border}`,
                   borderRadius:"16px", padding:"28px 26px",
                   boxShadow: isDark ? "none" : "0 4px 24px rgba(15,23,42,0.06)",

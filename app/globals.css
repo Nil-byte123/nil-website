@@ -20,10 +20,11 @@ body {
 }
 
 /* ─── Dark Mode ────────────────────────────────────── */
-html[data-dark="true"] body {
+/* Disabled - using light mode only to prevent flashing */
+/* html[data-dark="true"] body {
   background: #07101e;
   color: #F1F5F9;
-}
+} */
 
 /* Smooth color transitions on theme switch */
 html {
