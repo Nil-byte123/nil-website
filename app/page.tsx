@@ -1700,26 +1700,24 @@ export default function Home() {
   /* ── Theme color map ── */
   const c = {
     bg:          "#EEF2F7",
-    card:        isDark?"#13141a":"#FFFFFF",
-    card2:       isDark?"#13141a":"#F4F7FB",
-    card3:       isDark?"#13141a":"#EAF0F8",
-    text:        isDark?"#F1F5F9":"#0F172A",
-    text2:       isDark?"#94A3B8":"#475569",
-    text3:       isDark?"#64748B":"#64748B",
-    border:      isDark?"rgba(255,255,255,0.08)":"rgba(15,23,42,0.07)",
-    border2:     isDark?"rgba(255,255,255,0.06)":"rgba(15,23,42,0.06)",
-    nav:         isDark?"rgba(7,16,30,0.92)":"rgba(248,250,252,0.78)",
-    navBorder:   isDark?"rgba(255,255,255,0.05)":"rgba(15,23,42,0.06)",
-    heroGrad:    isDark
-     ?"radial-gradient(ellipse at 50% 30%, #13141a 0%, #13141a 60%, #13141a 100%)"
-     :"radial-gradient(ellipse at 50% 30%, #DCEEFF 0%, #E8F2FF 40%, #EEF2F7 100%)",
+    card:        "#FFFFFF",
+    card2:       "#F4F7FB",
+    card3:       "#EAF0F8",
+    text:        "#0F172A",
+    text2:       "#475569",
+    text3:       "#64748B",
+    border:      "rgba(15,23,42,0.07)",
+    border2:     "rgba(15,23,42,0.06)",
+    nav:         "rgba(248,250,252,0.78)",
+    navBorder:   "rgba(15,23,42,0.06)",
+    heroGrad:    "radial-gradient(ellipse at 50% 30%, #DCEEFF 0%, #E8F2FF 40%, #EEF2F7 100%)",
     sec1:        "#EEF2F7",
     sec2:        "#EEF2F7",
     demoBg:      "#EEF2F7",
     contactBg:   "#EEF2F7",
-    chatBg:      isDark?"#13141a":"#F1F5F9",
-    inputBg:     isDark?"#13141a":"#F8FAFC",
-    inputBorder: isDark?"rgba(255,255,255,0.1)":"rgba(15,23,42,0.1)",
+    chatBg:      "#F1F5F9",
+    inputBg:     "#F8FAFC",
+    inputBorder: "rgba(15,23,42,0.1)",
 };
 
   const { scrollYProgress} = useScroll({ target: heroRef, offset: ["start start","end start"]});
