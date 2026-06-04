@@ -1699,7 +1699,7 @@ export default function Home() {
 
   /* ── Theme color map ── */
   const c = {
-    bg:          isDark?"#13141a":"#EEF2F7",
+    bg:          "#EEF2F7",
     card:        isDark?"#13141a":"#FFFFFF",
     card2:       isDark?"#13141a":"#F4F7FB",
     card3:       isDark?"#13141a":"#EAF0F8",
