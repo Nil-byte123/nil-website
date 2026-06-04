@@ -1468,7 +1468,7 @@ function PlanFinder({ isDark, c, onOpenModal}: { isDark: boolean; c: CColors; on
   const res     = result? PLAN_RESULTS[result.plan]: null;
 
   return (
-    <section style={{ padding:"80px 20px", background: isDark?"#13141a":"#E8F0FA", transition:"background 0.3s"}}>
+    <section style={{ padding:"80px 20px", background: "#EEF2F7", transition:"background 0.3s"}}>
       <div style={{ maxWidth:"660px", margin:"0 auto", textAlign:"center"}}>
 
         <motion.div initial={{ opacity: 0, y: 20}} whileInView={{ opacity: 1, y: 0}}
@@ -1713,10 +1713,10 @@ export default function Home() {
     heroGrad:    isDark
      ?"radial-gradient(ellipse at 50% 30%, #13141a 0%, #13141a 60%, #13141a 100%)"
      :"radial-gradient(ellipse at 50% 30%, #DCEEFF 0%, #E8F2FF 40%, #EEF2F7 100%)",
-    sec1:        isDark?"#13141a":"linear-gradient(to bottom, #EEF2F7 0%, #F0F5FB 60%, #F4F7FB 100%)",
-    sec2:        isDark?"#13141a":"#F4F7FB",
-    demoBg:      isDark?"#13141a":"linear-gradient(to bottom, #EEF2F7 0%, #E8F0F9 60%, #E2EBF5 100%)",
-    contactBg:   isDark?"#13141a":"linear-gradient(to bottom, #E2EBF5 0%, #EAF0F8 60px, #EEF2F7 100%)",
+    sec1:        "#EEF2F7",
+    sec2:        "#EEF2F7",
+    demoBg:      "#EEF2F7",
+    contactBg:   "#EEF2F7",
     chatBg:      isDark?"#13141a":"#F1F5F9",
     inputBg:     isDark?"#13141a":"#F8FAFC",
     inputBorder: isDark?"rgba(255,255,255,0.1)":"rgba(15,23,42,0.1)",
@@ -2274,7 +2274,7 @@ export default function Home() {
       </div>
 
       {/* ── PILOTPROGRAMM SEKTION ── */}
-      <section style={{ padding:"56px 24px", background: isDark?"#13141a":"#F1F5F9", transition:"background 0.3s" }}>
+      <section style={{ padding:"56px 24px", background: "#EEF2F7", transition:"background 0.3s" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -2726,7 +2726,7 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ── */}
-      <section style={{ padding:"100px 20px", background: isDark?"#13141a":"linear-gradient(to bottom,#F4F7FB 0%,#EEF2F7 100%)", transition:"background 0.3s ease"}}>
+      <section style={{ padding:"100px 20px", background: "#EEF2F7", transition:"background 0.3s ease"}}>
         <div style={{ maxWidth:"760px", margin:"0 auto"}}>
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin:"-80px"}}
             variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.12}}}}
@@ -2784,7 +2784,7 @@ export default function Home() {
       <motion.section
         initial={{ opacity: 0}} whileInView={{ opacity: 1}} viewport={{ once: true, margin:"-100px"}}
         transition={{ duration: 0.7, ease: appleEase}}
-        style={{ padding:"100px 20px", background: isDark?"#13141a":"linear-gradient(to bottom,#F4F7FB 0%,#EEF2F7 100%)", transition:"background 0.3s ease"}}
+        style={{ padding:"100px 20px", background: "#EEF2F7", transition:"background 0.3s ease"}}
       >
         <div style={{ maxWidth:"620px", margin:"0 auto", textAlign:"center"}}>
           {/* Header */}
