@@ -2780,6 +2780,89 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── KONTAKT SECTION ── */}
+      <motion.section
+        initial={{ opacity: 0}} whileInView={{ opacity: 1}} viewport={{ once: true, margin:"-100px"}}
+        transition={{ duration: 0.7, ease: appleEase}}
+        style={{ padding:"100px 20px", background: isDark?"#13141a":"linear-gradient(to bottom,#F4F7FB 0%,#EEF2F7 100%)", transition:"background 0.3s ease"}}
+      >
+        <div style={{ maxWidth:"620px", margin:"0 auto", textAlign:"center"}}>
+          {/* Header */}
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin:"-80px"}}
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.14}}}}
+            style={{ marginBottom:"56px"}}>
+            <motion.h2 variants={{ hidden: { opacity: 0, scale: 0.92, y: 24, filter:"blur(6px)"},
+              visible: { opacity: 1, scale: 1, y: 0, filter:"blur(0px)", transition: { duration: 1, ease: appleEase}}}}
+              style={{ fontSize:"clamp(32px, 5vw, 48px)", fontWeight: 700, letterSpacing:"-0.04em", marginBottom:"18px", color: c.text}}>
+              Bereit loszulegen?
+            </motion.h2>
+            <motion.p variants={{ hidden: { opacity: 0, y: 18, filter:"blur(4px)"},
+              visible: { opacity: 1, y: 0, filter:"blur(0px)", transition: { duration: 0.85, ease: appleEase}}}}
+              style={{ color: c.text2, fontSize:"17px", lineHeight: 1.65}}>
+              Buchen Sie ein kostenloses 20-Minuten-Gespräch. Wir schauen uns gemeinsam an, wie wir Ihren Betriebsalltag einfacher machen können.
+            </motion.p>
+          </motion.div>
+
+          {/* Secondary contact options */}
+          <motion.div
+            initial={{ opacity: 0, y: 20}}
+            whileInView={{ opacity: 1, y: 0}}
+            viewport={{ once: true, margin:"-60px"}}
+            transition={{ duration: 0.8, ease: appleEase, delay: 0.15}}
+          >
+            <p style={{ color: c.text3, fontSize:"13px", marginBottom:"20px", letterSpacing:"0.3px"}}>
+              Oder direkt melden:
+            </p>
+            <div style={{ display:"flex", gap:"16px", justifyContent:"center", flexWrap:"wrap"}}>
+              {/* Telefon */}
+              <motion.a href="tel:+4915129436338"
+                whileHover={{ scale: 1.03, boxShadow:"0 20px 50px rgba(0,0,0,0.07)"}}
+                transition={{ type:"spring", stiffness: 300, damping: 20}}
+                style={{ display:"flex", flexDirection:"column", alignItems:"center",
+                  background: c.card, border:`1px solid ${c.border}`,
+                  padding:"18px 28px", borderRadius:"16px",
+                  boxShadow:"0 4px 20px rgba(15,23,42,0.04)", textDecoration:"none", minWidth:"160px",
+                  transition:"background 0.3s"}}>
+                <span style={{ color: c.text3, fontSize:"11px", marginBottom:"6px", letterSpacing:"1.2px", fontWeight: 600}}>
+                  TELEFON
+                </span>
+                <span style={{ color:"#0EA5E9", fontSize:"17px", fontWeight: 700, letterSpacing:"-0.02em"}}>
+                  0151 29436338
+                </span>
+              </motion.a>
+
+              {/* E-Mail */}
+              <motion.a href="mailto:info@nilogik.de"
+                whileHover={{ scale: 1.03, boxShadow:"0 20px 50px rgba(0,0,0,0.07)"}}
+                transition={{ type:"spring", stiffness: 300, damping: 20}}
+                style={{ display:"flex", flexDirection:"column", alignItems:"center",
+                  background: c.card, border:`1px solid ${c.border}`,
+                  padding:"18px 28px", borderRadius:"16px",
+                  boxShadow:"0 4px 20px rgba(15,23,42,0.04)", textDecoration:"none", minWidth:"160px",
+                  transition:"background 0.3s"}}>
+                <span style={{ color: c.text3, fontSize:"11px", marginBottom:"6px", letterSpacing:"1.2px", fontWeight: 600}}>
+                  E-MAIL
+                </span>
+                <span style={{ color:"#0EA5E9", fontSize:"17px", fontWeight: 700, letterSpacing:"-0.02em"}}>
+                  info@nilogik.de
+                </span>
+              </motion.a>
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 30}}
+            whileInView={{ opacity: 1, y: 0}}
+            viewport={{ once: true, margin:"-60px"}}
+            transition={{ duration: 0.9, ease: appleEase, delay: 0.2}}
+            style={{ marginTop:"56px", maxWidth:"520px", margin:"56px auto 0"}}
+          >
+            <ContactForm lang={lang} />
+          </motion.div>
+        </div>
+      </motion.section>
+
       {/* ── KONTAKT MODAL ── */}
       <div id="kontakt" />
 
@@ -2947,66 +3030,6 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
-
-          {/* Secondary contact options */}
-          <motion.div
-            initial={{ opacity: 0, y: 20}}
-            whileInView={{ opacity: 1, y: 0}}
-            viewport={{ once: true, margin:"-60px"}}
-            transition={{ duration: 0.8, ease: appleEase, delay: 0.15}}
-          >
-            <p style={{ color: c.text3, fontSize:"13px", marginBottom:"20px", letterSpacing:"0.3px"}}>
-              Oder direkt melden:
-            </p>
-            <div style={{ display:"flex", gap:"16px", justifyContent:"center", flexWrap:"wrap"}}>
-              {/* Telefon */}
-              <motion.a href="tel:+4915129436338"
-                whileHover={{ scale: 1.03, boxShadow:"0 20px 50px rgba(0,0,0,0.07)"}}
-                transition={{ type:"spring", stiffness: 300, damping: 20}}
-                style={{ display:"flex", flexDirection:"column", alignItems:"center",
-                  background: c.card, border:`1px solid ${c.border}`,
-                  padding:"18px 28px", borderRadius:"16px",
-                  boxShadow:"0 4px 20px rgba(15,23,42,0.04)", textDecoration:"none", minWidth:"160px",
-                  transition:"background 0.3s"}}>
-                <span style={{ color: c.text3, fontSize:"11px", marginBottom:"6px", letterSpacing:"1.2px", fontWeight: 600}}>
-                  {t.contact.phoneLabel}
-                </span>
-                <span style={{ color:"#0EA5E9", fontSize:"17px", fontWeight: 700, letterSpacing:"-0.02em"}}>
-                  0151 29436338
-                </span>
-              </motion.a>
-
-              {/* E-Mail */}
-              <motion.a href="mailto:info@nilogik.de"
-                whileHover={{ scale: 1.03, boxShadow:"0 20px 50px rgba(0,0,0,0.07)"}}
-                transition={{ type:"spring", stiffness: 300, damping: 20}}
-                style={{ display:"flex", flexDirection:"column", alignItems:"center",
-                  background: c.card, border:`1px solid ${c.border}`,
-                  padding:"18px 28px", borderRadius:"16px",
-                  boxShadow:"0 4px 20px rgba(15,23,42,0.04)", textDecoration:"none", minWidth:"160px",
-                  transition:"background 0.3s"}}>
-                <span style={{ color: c.text3, fontSize:"11px", marginBottom:"6px", letterSpacing:"1.2px", fontWeight: 600}}>
-                  {t.contact.emailLabel}
-                </span>
-                <span style={{ color:"#0EA5E9", fontSize:"17px", fontWeight: 700, letterSpacing:"-0.02em"}}>
-                  info@nilogik.de
-                </span>
-              </motion.a>
-            </div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 30}}
-            whileInView={{ opacity: 1, y: 0}}
-            viewport={{ once: true, margin:"-60px"}}
-            transition={{ duration: 0.9, ease: appleEase, delay: 0.2}}
-            style={{ marginTop:"56px", maxWidth:"520px", margin:"56px auto 0"}}
-          >
-            <ContactForm lang={lang} />
-          </motion.div>
-        </div>
-      </motion.section>
 
       {/* ── FOOTER ── */}
       <footer style={{
