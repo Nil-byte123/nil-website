@@ -1730,7 +1730,7 @@ export default function Home() {
   const devicesY = useSpring(rawDevicesY, { stiffness: 80, damping: 25});
 
   return (
-    <main style={{
+    <main suppressHydrationWarning style={{
       background: c.bg, color: c.text,
       fontFamily:"system-ui, -apple-system, BlinkMacSystemFont,'Segoe UI', Roboto, sans-serif",
       minHeight:"100vh", overflowX:"hidden", position:"relative",
