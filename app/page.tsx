@@ -3030,6 +3030,8 @@ export default function Home() {
               </motion.div>
             ))}
           </motion.div>
+        </div>
+      </motion.section>
 
       {/* ── FOOTER ── */}
       <footer style={{
