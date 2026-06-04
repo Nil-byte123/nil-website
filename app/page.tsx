@@ -1673,11 +1673,14 @@ export default function Home() {
 }, [showCtaModal]);
 
   /* ── Dark Mode ── */
+  const [isMounted, setIsMounted] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const [themeOverlay, setThemeOverlay] = useState<{ x: number; y: number; toDark: boolean; id: number} | null>(null);
 
   useEffect(() => {
-    if (localStorage.getItem("nil-dark") ==="true") setIsDark(true);
+    const saved = localStorage.getItem("nil-dark") ==="true";
+    setIsDark(saved);
+    setIsMounted(true);
 }, []);
 
   useEffect(() => {
@@ -1731,12 +1734,14 @@ export default function Home() {
 
   return (
     <main suppressHydrationWarning style={{
-      background: c.bg, color: c.text,
+      background: isMounted ? c.bg : "#EEF2F7", color: isMounted ? c.text : "#0F172A",
       fontFamily:"system-ui, -apple-system, BlinkMacSystemFont,'Segoe UI', Roboto, sans-serif",
       minHeight:"100vh", overflowX:"hidden", position:"relative",
       transition:"background 1.2s ease, color 1.2s ease",
 }}>
 
+      {isMounted && (
+      <>
       {/* ── NAVBAR ── */}
       <motion.nav
         initial={{ y: -90, opacity: 0}}
@@ -3134,6 +3139,8 @@ export default function Home() {
           />
         )}
       </AnimatePresence>
+      </>
+      )}
     </main>
   );
 }
