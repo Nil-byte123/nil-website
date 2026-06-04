@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 import {
   rateLimit, getIP, isValidEmail, isTempEmail,
-  sanitizeText, fetchWithTimeout, keyFragment, normalizeEmailForKey, sanitizeLog,
+  sanitizeText, fetchWithTimeout, keyFragment, normalizeEmailForKey, sanitizeLog, escapeHtml, sanitizeForEmailHeader,
 } from "@/app/lib/rateLimit";
 
 /* ---- Rate limits --------------------------------------------- */
@@ -97,6 +98,48 @@ export async function POST(req: Request) {
       }
       console.error("[Newsletter] Mailchimp error:", sanitizeLog(JSON.stringify(data)));
       return NextResponse.json({ error: data.detail ?? "Fehler" }, { status: 500 });
+    }
+
+    // 7. Send confirmation email to subscriber
+    const smtpPassword = process.env.SMTP_PASSWORD;
+    if (smtpPassword) {
+      try {
+        const transporter = nodemailer.createTransport({
+          host:   "smtp.strato.de",
+          port:   465,
+          secure: true,
+          auth: {
+            user: "info@nilogik.de",
+            pass: smtpPassword,
+          },
+        });
+
+        const safeEmail = escapeHtml(email);
+        await transporter.sendMail({
+          from:    '"NIL Website" <info@nilogik.de>',
+          to:      sanitizeForEmailHeader(email),
+          subject: "Willkommen zu unserem Newsletter!",
+          text:    `Hallo,\n\nvielen Dank für Ihre Anmeldung zu unserem Newsletter! Sie erhalten ab sofort regelmäßig Updates und Tipps.\n\nBeste Grüße,\nNILOGIK Team`,
+          html: `
+            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #0F172A;">Willkommen zu unserem Newsletter!</h2>
+              <p>Hallo,</p>
+              <p>vielen Dank für Ihre Anmeldung zu unserem Newsletter! Sie erhalten ab sofort regelmäßig Updates und Tipps rund um Digitalisierung und KI-gestützte Lösungen für Ihr Unternehmen.</p>
+              <hr style="border: 1px solid #E2E8F0; margin: 20px 0;" />
+              <p style="font-size: 12px; color: #94A3B8;">
+                E-Mail: <a href="mailto:info@nilogik.de">${safeEmail}</a>
+              </p>
+              <p style="font-size: 12px; color: #94A3B8;">
+                Beste Grüße,<br/>
+                <strong>NILOGIK Team</strong>
+              </p>
+            </div>
+          `,
+        });
+      } catch (emailError) {
+        console.error("[Newsletter] Email send failed:", sanitizeLog(String(emailError)));
+        // Don't fail the request if email fails — subscription succeeded
+      }
     }
 
     return NextResponse.json({ success: true });
