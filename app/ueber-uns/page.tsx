@@ -7,7 +7,7 @@ import { NilLogoBox } from "../components/NilLogo";
 export const metadata: Metadata = {
   title: "Über uns",
   description:
-    "Die Geschichte hinter NIL – Streetwear aus Bayern. Schwarz, weiß, reduziert. Gegründet mit einer klaren Vision.",
+    "Die Geschichte hinter NIL – Streetwear aus Deutschland. Schwarz, weiß, reduziert. Gegründet mit einer klaren Vision.",
 };
 
 export default function UeberUns() {
@@ -38,7 +38,7 @@ export default function UeberUns() {
 
         <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
           <Block title="Der Anfang">
-            NIL ist in Bayern entstanden – aus der Idee, dass gute Klamotten
+            NIL ist in Deutschland entstanden – aus der Idee, dass gute Klamotten
             nicht laut sein müssen. Keine riesigen Grafiken, keine zehn Farben,
             kein unnötiger Schnickschnack. Nur klare Formen, gute Stoffe und
             ein Logo, das für sich steht.

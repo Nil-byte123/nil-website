@@ -177,7 +177,7 @@ export default function Home() {
           </h2>
           <p style={{ color: "var(--fg-muted)", fontSize: "16px", lineHeight: 1.8 }}>
             NIL steht für Reduktion: schwarz, weiß, harte Kanten, ehrliche
-            Basics. Gegründet in Bayern, gedacht für alle, die keine
+            Basics. Gegründet in Deutschland, gedacht für alle, die keine
             Logos-Überall-Optik brauchen, um aufzufallen.
           </p>
           <Link

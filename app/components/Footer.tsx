@@ -23,7 +23,7 @@ export function Footer() {
           <div style={{ maxWidth: "280px" }}>
             <NilLogo size={30} />
             <p style={{ color: "var(--fg-faint)", fontSize: "13px", lineHeight: 1.7, marginTop: "16px" }}>
-              Streetwear aus Bayern. Klare Formen, keine Kompromisse. Bald verfügbar.
+              Streetwear aus Deutschland. Klare Formen, keine Kompromisse. Bald verfügbar.
             </p>
           </div>
 

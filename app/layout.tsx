@@ -16,10 +16,10 @@ export const metadata: Metadata = {
     template: "%s | NIL",
   },
   description:
-    "NIL Streetwear aus Bayern: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Reduziert auf das, was zählt. Trag dich auf die Warteliste ein.",
+    "NIL Streetwear aus Deutschland: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Reduziert auf das, was zählt. Trag dich auf die Warteliste ein.",
   keywords: [
     "NIL", "Streetwear", "Klamottenmarke", "Hoodies", "T-Shirts", "Caps",
-    "Schwarz Weiß", "Minimal", "Streetwear Deutschland", "Streetwear Bayern",
+    "Schwarz Weiß", "Minimal", "Streetwear Deutschland",
     "nilogik", "Coming Soon", "Drop",
   ],
   authors:     [{ name: "NIL", url: "https://www.nilogik.de" }],
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     url:         "https://www.nilogik.de",
     siteName:    "NIL",
     title:       "NIL – Streetwear. Bald verfügbar.",
-    description: "NIL Streetwear aus Bayern: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Trag dich auf die Warteliste ein.",
+    description: "NIL Streetwear aus Deutschland: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Trag dich auf die Warteliste ein.",
     images:      [{ url: "/icon.png", width: 512, height: 512, alt: "NIL Logo" }],
   },
   twitter: {
     card:        "summary_large_image",
     title:       "NIL – Streetwear. Bald verfügbar.",
-    description: "NIL Streetwear aus Bayern: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Trag dich auf die Warteliste ein.",
+    description: "NIL Streetwear aus Deutschland: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Trag dich auf die Warteliste ein.",
     images:      ["/icon.png"],
   },
   robots:   { index: true, follow: true, googleBot: { index: true, follow: true } },

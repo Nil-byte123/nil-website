@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "NIL – Streetwear",
     short_name: "NIL",
     description:
-      "NIL Streetwear aus Bayern. Schwarz, weiß, reduziert. Bald verfügbar.",
+      "NIL Streetwear aus Deutschland. Schwarz, weiß, reduziert. Bald verfügbar.",
     start_url: "/",
     display: "standalone",
     background_color: "#0A0A0A",
