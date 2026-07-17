@@ -51,6 +51,7 @@ export function Navbar() {
             <Link
               key={l.href}
               href={l.href}
+              className="nav-link"
               style={{
                 textDecoration: "none",
                 color: "var(--fg-muted)",
@@ -65,6 +66,7 @@ export function Navbar() {
           ))}
           <Link
             href="/#warteliste"
+            className="btn-solid"
             style={{
               textDecoration: "none",
               background: "#FAFAFA",

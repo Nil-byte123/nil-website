@@ -3,6 +3,7 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { WaitlistForm } from "./components/WaitlistForm";
 import { NilLogoBox } from "./components/NilLogo";
+import { Reveal, RevealStagger } from "./components/Reveal";
 
 const MARQUEE_TEXT = "COMING SOON — NIL — STREETWEAR — ERSTER DROP — ";
 
@@ -22,8 +23,12 @@ export default function Home() {
           textAlign: "center",
           padding: "80px 24px",
           position: "relative",
+          overflow: "hidden",
         }}
       >
+        <div className="hero-glow" aria-hidden="true" />
+        <div className="scanline" aria-hidden="true" />
+
         <p
           className="fade-up"
           style={{
@@ -39,7 +44,9 @@ export default function Home() {
         </p>
 
         <div className="fade-up" style={{ animationDelay: "0.1s" }}>
-          <NilLogoBox size={100} />
+          <div className="logo-float">
+            <NilLogoBox size={100} />
+          </div>
         </div>
 
         <h1
@@ -87,38 +94,65 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Marquee ──────────────────────────────────── */}
+      {/* ─── Doppelte Marquee (gegenläufig) ───────────── */}
       <div
         aria-hidden="true"
         style={{
           borderTop: "1px solid var(--line)",
           borderBottom: "1px solid var(--line)",
-          padding: "18px 0",
           overflow: "hidden",
         }}
       >
-        <div className="marquee-track">
-          {[0, 1].map((i) => (
-            <span
-              key={i}
-              style={{
-                fontSize: "14px",
-                fontWeight: 800,
-                letterSpacing: "0.25em",
-                color: "var(--fg-faint)",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {MARQUEE_TEXT.repeat(4)}
-            </span>
-          ))}
+        <div style={{ padding: "14px 0", overflow: "hidden" }}>
+          <div className="marquee-track">
+            {[0, 1].map((i) => (
+              <span
+                key={i}
+                style={{
+                  fontSize: "14px",
+                  fontWeight: 800,
+                  letterSpacing: "0.25em",
+                  color: "var(--fg-faint)",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {MARQUEE_TEXT.repeat(4)}
+              </span>
+            ))}
+          </div>
+        </div>
+        <div
+          style={{
+            padding: "14px 0",
+            overflow: "hidden",
+            borderTop: "1px solid var(--line)",
+          }}
+        >
+          <div className="marquee-track-reverse">
+            {[0, 1].map((i) => (
+              <span
+                key={i}
+                className="outline-text"
+                style={{
+                  fontSize: "14px",
+                  letterSpacing: "0.25em",
+                  whiteSpace: "nowrap",
+                  WebkitTextStroke: "1px rgba(255,255,255,0.3)",
+                }}
+              >
+                {MARQUEE_TEXT.repeat(4)}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* ─── Teaser: Was kommt ─────────────────────────── */}
       <section style={{ maxWidth: "1200px", margin: "0 auto", padding: "100px 24px" }}>
-        <p style={overline}>Der erste Drop</p>
-        <h2 style={h2}>Was dich erwartet</h2>
+        <Reveal>
+          <p style={overline}>Der erste Drop</p>
+          <h2 style={h2}>Was dich erwartet</h2>
+        </Reveal>
 
         <div
           style={{
@@ -128,38 +162,62 @@ export default function Home() {
             marginTop: "48px",
           }}
         >
-          <TeaserCard
-            title="Hoodies"
-            text="Schwerer Stoff, klarer Schnitt, NIL Blockprint. Keine überladenen Grafiken – das Logo spricht für sich."
-          />
-          <TeaserCard
-            title="T-Shirts"
-            text="Oversized Fit, dickes Baumwoll-Jersey. Minimalistisch vorne, Statement hinten."
-          />
-          <TeaserCard
-            title="Caps & mehr"
-            text="Accessoires im gleichen Look: schwarz, weiß, kompromisslos. Details folgen beim Launch."
-          />
+          <RevealStagger>
+            <TeaserCard
+              title="Hoodies"
+              text="Schwerer Stoff, klarer Schnitt, NIL Blockprint. Keine überladenen Grafiken – das Logo spricht für sich."
+            />
+            <TeaserCard
+              title="T-Shirts"
+              text="Oversized Fit, dickes Baumwoll-Jersey. Minimalistisch vorne, Statement hinten."
+            />
+            <TeaserCard
+              title="Caps & mehr"
+              text="Accessoires im gleichen Look: schwarz, weiß, kompromisslos. Details folgen beim Launch."
+            />
+          </RevealStagger>
         </div>
 
         <div style={{ textAlign: "center", marginTop: "48px" }}>
-          <Link
-            href="/shop"
-            style={{
-              display: "inline-block",
-              textDecoration: "none",
-              border: "1px solid var(--line-strong)",
-              color: "var(--fg)",
-              padding: "14px 32px",
-              fontSize: "13px",
-              fontWeight: 700,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-            }}
-          >
-            Zur Vorschau →
-          </Link>
+          <Reveal delay={0.15}>
+            <Link
+              href="/shop"
+              className="btn-outline"
+              style={{
+                display: "inline-block",
+                textDecoration: "none",
+                border: "1px solid var(--line-strong)",
+                color: "var(--fg)",
+                padding: "14px 32px",
+                fontSize: "13px",
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+              }}
+            >
+              Zur Vorschau →
+            </Link>
+          </Reveal>
         </div>
+      </section>
+
+      {/* ─── Riesiger Outline-Schriftzug ──────────────── */}
+      <section
+        aria-hidden="true"
+        style={{
+          overflow: "hidden",
+          padding: "20px 0 40px",
+          textAlign: "center",
+        }}
+      >
+        <Reveal direction="scale">
+          <div
+            className="outline-text"
+            style={{ fontSize: "clamp(120px, 24vw, 340px)" }}
+          >
+            NIL
+          </div>
+        </Reveal>
       </section>
 
       {/* ─── Brand Statement ──────────────────────────── */}
@@ -171,32 +229,34 @@ export default function Home() {
         }}
       >
         <div style={{ maxWidth: "700px", margin: "0 auto" }}>
-          <p style={overline}>Die Marke</p>
-          <h2 style={{ ...h2, marginBottom: "24px" }}>
-            Weniger Lärm. Mehr Haltung.
-          </h2>
-          <p style={{ color: "var(--fg-muted)", fontSize: "16px", lineHeight: 1.8 }}>
-            NIL steht für Reduktion: schwarz, weiß, harte Kanten, ehrliche
-            Basics. Gegründet in Deutschland, gedacht für alle, die keine
-            Logos-Überall-Optik brauchen, um aufzufallen.
-          </p>
-          <Link
-            href="/ueber-uns"
-            style={{
-              display: "inline-block",
-              marginTop: "32px",
-              textDecoration: "none",
-              color: "var(--fg)",
-              fontSize: "13px",
-              fontWeight: 700,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              borderBottom: "1px solid var(--fg)",
-              paddingBottom: "4px",
-            }}
-          >
-            Mehr über NIL
-          </Link>
+          <Reveal>
+            <p style={overline}>Die Marke</p>
+            <h2 style={{ ...h2, marginBottom: "24px" }}>
+              Weniger Lärm. Mehr Haltung.
+            </h2>
+            <p style={{ color: "var(--fg-muted)", fontSize: "16px", lineHeight: 1.8 }}>
+              NIL steht für Reduktion: schwarz, weiß, harte Kanten, ehrliche
+              Basics. Gegründet in Deutschland, gedacht für alle, die keine
+              Logos-Überall-Optik brauchen, um aufzufallen.
+            </p>
+            <Link
+              href="/ueber-uns"
+              style={{
+                display: "inline-block",
+                marginTop: "32px",
+                textDecoration: "none",
+                color: "var(--fg)",
+                fontSize: "13px",
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                borderBottom: "1px solid var(--fg)",
+                paddingBottom: "4px",
+              }}
+            >
+              Mehr über NIL
+            </Link>
+          </Reveal>
         </div>
       </section>
 
@@ -223,6 +283,7 @@ const h2: React.CSSProperties = {
 function TeaserCard({ title, text }: { title: string; text: string }) {
   return (
     <div
+      className="card-hover"
       style={{
         border: "1px solid var(--line)",
         background: "var(--bg-soft)",

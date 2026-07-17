@@ -102,6 +102,7 @@ export default function FAQ() {
           </p>
           <Link
             href="/kontakt"
+            className="btn-outline"
             style={{
               display: "inline-block",
               textDecoration: "none",

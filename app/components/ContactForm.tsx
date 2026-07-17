@@ -120,6 +120,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "loading"}
+        className="btn-solid"
         style={{
           background: "#FAFAFA",
           color: "#0A0A0A",

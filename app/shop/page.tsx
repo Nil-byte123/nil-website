@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { NilLogo } from "../components/NilLogo";
+import { Reveal } from "../components/Reveal";
 
 export const metadata: Metadata = {
   title: "Shop – Vorschau",
@@ -60,7 +61,9 @@ export default function Shop() {
           }}
         >
           {PRODUCTS.map((p, i) => (
-            <ProductCard key={i} {...p} />
+            <Reveal key={i} delay={(i % 3) * 0.1}>
+              <ProductCard {...p} />
+            </Reveal>
           ))}
         </div>
 
@@ -81,6 +84,7 @@ export default function Shop() {
           </p>
           <Link
             href="/#warteliste"
+            className="btn-solid"
             style={{
               display: "inline-block",
               textDecoration: "none",
@@ -106,9 +110,10 @@ export default function Shop() {
 function ProductCard({ name, type, color }: { name: string; type: string; color: string }) {
   const dark = color === "Schwarz";
   return (
-    <div style={{ border: "1px solid var(--line)", background: "var(--bg-soft)" }}>
+    <div className="card-hover" style={{ border: "1px solid var(--line)", background: "var(--bg-soft)" }}>
       {/* Platzhalter-Bild: schwarze/weiße Fläche mit NIL Schriftzug */}
       <div
+        className="img-zoom"
         style={{
           aspectRatio: "1 / 1",
           background: dark ? "#000000" : "#F5F5F5",

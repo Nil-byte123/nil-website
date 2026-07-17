@@ -76,3 +76,138 @@ body {
 .fade-up {
   animation: fadeUp 0.7s ease both;
 }
+
+/* ─── Marquee rückwärts (zweite Zeile) ─────────────── */
+@keyframes marqueeReverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.marquee-track-reverse {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marqueeReverse 32s linear infinite;
+}
+
+/* ─── Hover: Buttons ───────────────────────────────── */
+.btn-solid {
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  border: 1px solid #FAFAFA !important;
+}
+.btn-solid:hover {
+  background: transparent !important;
+  color: #FAFAFA !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.12);
+}
+.btn-outline {
+  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, border-color 0.25s ease;
+}
+.btn-outline:hover {
+  background: #FAFAFA !important;
+  color: #0A0A0A !important;
+  border-color: #FAFAFA !important;
+  transform: translateY(-2px);
+}
+
+/* ─── Hover: Navigation ────────────────────────────── */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: #FAFAFA;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.nav-link:hover {
+  color: #FAFAFA !important;
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ─── Hover: Karten ────────────────────────────────── */
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+}
+
+/* ─── Produktbild-Zoom ─────────────────────────────── */
+.img-zoom {
+  overflow: hidden;
+}
+.img-zoom > * {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.img-zoom:hover > * {
+  transform: scale(1.08);
+}
+
+/* ─── Riesiger Outline-Schriftzug ──────────────────── */
+.outline-text {
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.18);
+  user-select: none;
+  transition: -webkit-text-stroke-color 0.4s ease;
+}
+.outline-text:hover {
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.5);
+}
+
+/* ─── Hero-Hintergrund: dezenter Puls ──────────────── */
+@keyframes heroGlow {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50%      { opacity: 0.9; transform: translate(-50%, -50%) scale(1.15); }
+}
+.hero-glow {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(700px, 90vw);
+  height: min(700px, 90vw);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  animation: heroGlow 7s ease-in-out infinite;
+}
+
+/* ─── Logo-Schwebe-Animation im Hero ───────────────── */
+@keyframes logoFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+.logo-float {
+  animation: logoFloat 5s ease-in-out infinite;
+}
+
+/* ─── Scanline über den Hero (Streetwear-Vibe) ─────── */
+@keyframes scan {
+  0%   { top: -10%; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 110%; opacity: 0; }
+}
+.scanline {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  pointer-events: none;
+  animation: scan 9s linear infinite;
+}

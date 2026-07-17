@@ -74,6 +74,7 @@ export default function UeberUns() {
         >
           <Link
             href="/#warteliste"
+            className="btn-solid"
             style={{
               display: "inline-block",
               textDecoration: "none",
