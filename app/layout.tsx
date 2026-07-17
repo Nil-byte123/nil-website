@@ -12,16 +12,15 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default:  "NIL – Smarte Automatisierung für jedes Unternehmen",
+    default:  "NIL – Streetwear. Bald verfügbar.",
     template: "%s | NIL",
   },
   description:
-    "KI-Assistent für Handwerk, Gastronomie und Dienstleister in Bayern. Kundenanfragen automatisch beantworten – rund um die Uhr.",
+    "NIL Streetwear aus Bayern: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Reduziert auf das, was zählt. Trag dich auf die Warteliste ein.",
   keywords: [
-    "KI Assistent Bayern", "KI Automatisierung Bayern", "Automatisierung", "Softwarelösung",
-    "Digitalisierung", "Terminbuchung", "Softwareentwicklung", "Unternehmensautomatisierung",
-    "Gastronomie Automatisierung", "Handwerk Automatisierung", "nilogik", "NIL",
-    "München", "Augsburg", "digitaler Assistent",
+    "NIL", "Streetwear", "Klamottenmarke", "Hoodies", "T-Shirts", "Caps",
+    "Schwarz Weiß", "Minimal", "Streetwear Deutschland", "Streetwear Bayern",
+    "nilogik", "Coming Soon", "Drop",
   ],
   authors:     [{ name: "NIL", url: "https://www.nilogik.de" }],
   creator:     "NIL",
@@ -32,14 +31,14 @@ export const metadata: Metadata = {
     locale:      "de_DE",
     url:         "https://www.nilogik.de",
     siteName:    "NIL",
-    title:       "NIL – Smarte Automatisierung für jedes Unternehmen",
-    description: "Smarte Softwarelösungen und digitale Automatisierung für Unternehmen jeder Branche. Mehr Zeit, mehr Umsatz – automatisch.",
+    title:       "NIL – Streetwear. Bald verfügbar.",
+    description: "NIL Streetwear aus Bayern: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Trag dich auf die Warteliste ein.",
     images:      [{ url: "/icon.png", width: 612, height: 628, alt: "NIL Logo" }],
   },
   twitter: {
     card:        "summary_large_image",
-    title:       "NIL – Smarte Automatisierung für jedes Unternehmen",
-    description: "Smarte Softwarelösungen und digitale Automatisierung für Unternehmen jeder Branche. Mehr Zeit, mehr Umsatz – automatisch.",
+    title:       "NIL – Streetwear. Bald verfügbar.",
+    description: "NIL Streetwear aus Bayern: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Trag dich auf die Warteliste ein.",
     images:      ["/icon.png"],
   },
   robots:   { index: true, follow: true, googleBot: { index: true, follow: true } },
@@ -52,7 +51,7 @@ const STRUCTURED_DATA = JSON.stringify({
   "@context": "https://schema.org",
   "@type":    "WebSite",
   "name":     "NIL",
-  "alternateName": "NIL – Smarte Automatisierung",
+  "alternateName": "NIL – Streetwear",
   "url":      "https://www.nilogik.de",
 });
 
@@ -67,7 +66,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="apple-touch-icon" href="/icon.png" />
         <meta name="apple-mobile-web-app-capable"        content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="theme-color" content="#0F172A" />
+        <meta name="theme-color" content="#0A0A0A" />
         {/*
           JSON-LD is type="application/ld+json" — browsers never execute it as JS.
           We still supply the nonce so strict CSP policies don't flag the tag.
@@ -76,18 +75,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           nonce={nonce}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: STRUCTURED_DATA }}
-        />
-        {/* Theme initialization script — runs BEFORE React hydration to prevent flash */}
-        <script
-          nonce={nonce}
-          dangerouslySetInnerHTML={{
-            __html: `(function() {
-              const isDark = localStorage.getItem('nil-dark') === 'true';
-              if (isDark) {
-                document.documentElement.setAttribute('data-dark', 'true');
-              }
-            })();`,
-          }}
         />
       </head>
       <body className={geist.className}>

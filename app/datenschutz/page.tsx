@@ -11,23 +11,23 @@ export const metadata: Metadata = {
 export default function Datenschutz() {
   return (
     <main style={{
-      background: "#F8FAFC", color: "#0F172A", minHeight: "100vh",
+      background: "var(--bg)", color: "var(--fg)", minHeight: "100vh",
       fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
     }}>
       {/* Navbar */}
       <nav style={{
-        position: "sticky", top: 0, background: "rgba(248,250,252,0.92)",
+        position: "sticky", top: 0, background: "rgba(10,10,10,0.85)",
         backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)",
-        borderBottom: "1px solid rgba(15,23,42,0.07)",
+        borderBottom: "1px solid rgba(255,255,255,0.1)",
         padding: "0 24px", height: "64px",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         zIndex: 100,
       }}>
         <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
-          <NilLogo width={90} height={32} />
+          <NilLogo size={24} />
         </Link>
         <Link href="/" style={{
-          textDecoration: "none", color: "#0EA5E9", fontSize: "14px", fontWeight: 500,
+          textDecoration: "none", color: "#FAFAFA", fontSize: "14px", fontWeight: 500,
           display: "flex", alignItems: "center", gap: "6px",
         }}>
           ← Zurück zur Startseite
@@ -37,14 +37,14 @@ export default function Datenschutz() {
       {/* Content */}
       <div style={{ maxWidth: "760px", margin: "0 auto", padding: "60px 24px 100px" }}>
         <h1 style={{ fontSize: "36px", fontWeight: 700, letterSpacing: "-0.04em", marginBottom: "8px" }}>Datenschutzerklärung</h1>
-        <p style={{ color: "#64748B", fontSize: "14px", marginBottom: "48px" }}>Stand: Mai 2025 | Gemäß DSGVO, BDSG und TMG</p>
+        <p style={{ color: "#6B6B6B", fontSize: "14px", marginBottom: "48px" }}>Stand: Mai 2025 | Gemäß DSGVO, BDSG und TMG</p>
 
         <section style={sectionStyle}>
           <h2 style={h2Style}>1. Verantwortlicher</h2>
           <p style={pStyle}>
             Verantwortlicher im Sinne der DSGVO ist:<br /><br />
             Nil Elian Quezada Capa<br />
-            NIL, Automatisierung mit Verstand<br />
+            NIL – Streetwear<br />
             Aschauerstraße 17<br />
             82445 Schwaigen<br />
             E-Mail: <a href="mailto:info@nilogik.de" style={linkStyle}>info@nilogik.de</a>
@@ -72,9 +72,9 @@ export default function Datenschutz() {
             Wenn Sie unser Kontaktformular nutzen, werden folgende Daten erhoben: Name, E-Mail-Adresse und Ihre Nachricht. Diese werden ausschließlich zur Bearbeitung Ihrer Anfrage genutzt und nicht an Dritte weitergegeben. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.
           </p>
 
-          <h3 style={{ ...h3Style, marginTop: "24px" }}>KI-Chat Demo</h3>
+          <h3 style={{ ...h3Style, marginTop: "24px" }}>Warteliste / Newsletter</h3>
           <p style={pStyle}>
-            Die über den Demo-Chat eingegebenen Nachrichten werden zur Verarbeitung an GROQ Inc. (USA) übermittelt. Es werden keine personenbezogenen Daten dauerhaft gespeichert. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung durch aktive Nutzung).
+            Wenn Sie sich auf unsere Warteliste eintragen, wird Ihre E-Mail-Adresse gespeichert, um Sie über den Start unseres Shops zu informieren. Die Verarbeitung erfolgt über den Dienstleister Mailchimp (The Rocket Science Group LLC, USA). Sie können sich jederzeit über den Abmeldelink in jeder E-Mail oder per Nachricht an info@nilogik.de austragen. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
           </p>
         </section>
 
@@ -123,8 +123,8 @@ export default function Datenschutz() {
           </p>
         </section>
 
-        <div style={{ paddingTop: "32px", borderTop: "1px solid rgba(15,23,42,0.08)" }}>
-          <Link href="/impressum" style={{ color: "#0EA5E9", fontSize: "14px", textDecoration: "none", fontWeight: 500 }}>
+        <div style={{ paddingTop: "32px", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+          <Link href="/impressum" style={{ color: "#FAFAFA", fontSize: "14px", textDecoration: "none", fontWeight: 500 }}>
             Zum Impressum →
           </Link>
         </div>
@@ -136,22 +136,22 @@ export default function Datenschutz() {
 const sectionStyle: React.CSSProperties = {
   marginBottom: "40px",
   paddingBottom: "40px",
-  borderBottom: "1px solid rgba(15,23,42,0.07)",
+  borderBottom: "1px solid rgba(255,255,255,0.1)",
 };
 
 const h2Style: React.CSSProperties = {
-  fontSize: "18px", fontWeight: 600, color: "#0F172A",
+  fontSize: "18px", fontWeight: 600, color: "#FAFAFA",
   marginBottom: "12px", letterSpacing: "-0.02em",
 };
 
 const h3Style: React.CSSProperties = {
-  fontSize: "15px", fontWeight: 600, color: "#334155", marginBottom: "8px",
+  fontSize: "15px", fontWeight: 600, color: "#D4D4D4", marginBottom: "8px",
 };
 
 const pStyle: React.CSSProperties = {
-  color: "#475569", fontSize: "15px", lineHeight: 1.75,
+  color: "#A3A3A3", fontSize: "15px", lineHeight: 1.75,
 };
 
 const linkStyle: React.CSSProperties = {
-  color: "#0EA5E9", textDecoration: "none",
+  color: "#FAFAFA", textDecoration: "none",
 };

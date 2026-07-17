@@ -2,30 +2,30 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "NIL – Automatisierung mit Verstand",
+    name: "NIL – Streetwear",
     short_name: "NIL",
     description:
-      "Intelligente KI-Agenten und maßgeschneiderte Softwarelösungen.",
+      "NIL Streetwear aus Bayern. Schwarz, weiß, reduziert. Bald verfügbar.",
     start_url: "/",
     display: "standalone",
-    background_color: "#F8FAFC",
-    theme_color: "#0F172A",
+    background_color: "#0A0A0A",
+    theme_color: "#0A0A0A",
     orientation: "portrait-primary",
-    categories: ["business", "productivity"],
+    categories: ["shopping", "lifestyle"],
     icons: [
       { src: "/icon.png", sizes: "192x192", type: "image/png", purpose: "any" },
       { src: "/icon.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
     shortcuts: [
       {
-        name: "Kontakt",
-        url: "/#kontakt",
-        description: "Direkt Kontakt aufnehmen",
+        name: "Shop",
+        url: "/shop",
+        description: "Vorschau auf den ersten Drop",
       },
       {
-        name: "Preise",
-        url: "/preise",
-        description: "Unsere Pakete ansehen",
+        name: "Warteliste",
+        url: "/#warteliste",
+        description: "Auf die Warteliste eintragen",
       },
     ],
   };

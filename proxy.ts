@@ -68,7 +68,7 @@ function json403() {
 }
 
 /* ---- Middleware ----------------------------------------------- */
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   const isProd = process.env.NODE_ENV === "production";
 

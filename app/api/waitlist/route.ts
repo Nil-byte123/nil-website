@@ -6,14 +6,14 @@ import {
 } from "@/app/lib/rateLimit";
 
 /* ---- Rate limits --------------------------------------------- */
-const NL_LIMIT  = 3;
-const NL_WINDOW = 60 * 60_000; // 3 signups per hour per IP
+const WL_LIMIT  = 3;
+const WL_WINDOW = 60 * 60_000; // 3 signups per hour per IP
 
 export async function POST(req: Request) {
   try {
     // 1. Per-IP rate limit
     const ip = getIP(req);
-    if (!rateLimit(`newsletter:${ip}`, NL_LIMIT, NL_WINDOW)) {
+    if (!rateLimit(`waitlist:${ip}`, WL_LIMIT, WL_WINDOW)) {
       return NextResponse.json(
         { error: "Zu viele Anfragen. Bitte versuche es später erneut." },
         { status: 429 }
@@ -57,7 +57,7 @@ export async function POST(req: Request) {
     // 5. Per-email rate limit (3 per day regardless of IP)
     //    Key uses normalizeEmailForKey() to prevent plus-addressing and
     //    fullwidth-Unicode bypasses (user+1@gmail.com == user@gmail.com here)
-    if (!rateLimit(`newsletter-email:${keyFragment(normalizeEmailForKey(email))}`, 3, 24 * 60 * 60_000)) {
+    if (!rateLimit(`waitlist-email:${keyFragment(normalizeEmailForKey(email))}`, 3, 24 * 60 * 60_000)) {
       return NextResponse.json(
         { error: "Zu viele Anfragen. Bitte versuche es später erneut." },
         { status: 429 }
@@ -70,7 +70,7 @@ export async function POST(req: Request) {
     const MAILCHIMP_DC      = process.env.MAILCHIMP_DC ?? "us1";
 
     if (!MAILCHIMP_API_KEY || !MAILCHIMP_LIST_ID) {
-      console.log("[Newsletter] Mailchimp not configured – email:", sanitizeLog(email));
+      console.log("[Waitlist] Mailchimp not configured – email:", sanitizeLog(email));
       return NextResponse.json({ success: true });
     }
 
@@ -85,7 +85,7 @@ export async function POST(req: Request) {
         body: JSON.stringify({
           email_address: email,
           status:        "subscribed",
-          tags:          ["nilogik.de"],
+          tags:          ["nil-waitlist"],
         }),
       },
       10_000
@@ -96,7 +96,7 @@ export async function POST(req: Request) {
       if (data.title === "Member Exists") {
         return NextResponse.json({ success: true });
       }
-      console.error("[Newsletter] Mailchimp error:", sanitizeLog(JSON.stringify(data)));
+      console.error("[Waitlist] Mailchimp error:", sanitizeLog(JSON.stringify(data)));
       return NextResponse.json({ error: data.detail ?? "Fehler" }, { status: 500 });
     }
 
@@ -116,35 +116,36 @@ export async function POST(req: Request) {
 
         const safeEmail = escapeHtml(email);
         await transporter.sendMail({
-          from:    '"NIL Website" <info@nilogik.de>',
+          from:    '"NIL" <info@nilogik.de>',
           to:      sanitizeForEmailHeader(email),
-          subject: "Willkommen zu unserem Newsletter!",
-          text:    `Hallo,\n\nvielen Dank für Ihre Anmeldung zu unserem Newsletter! Sie erhalten ab sofort regelmäßig Updates und Tipps.\n\nBeste Grüße,\nNILOGIK Team`,
+          subject: "Du bist auf der NIL Warteliste!",
+          text:    `Hey,\n\ndanke, dass du dich für NIL interessierst! Du stehst jetzt auf der Warteliste und erfährst als Erste:r, wenn der Drop live geht.\n\nStay tuned,\nNIL`,
           html: `
-            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-              <h2 style="color: #0F172A;">Willkommen zu unserem Newsletter!</h2>
-              <p>Hallo,</p>
-              <p>vielen Dank für Ihre Anmeldung zu unserem Newsletter! Sie erhalten ab sofort regelmäßig Updates und Tipps rund um Digitalisierung und KI-gestützte Lösungen für Ihr Unternehmen.</p>
-              <hr style="border: 1px solid #E2E8F0; margin: 20px 0;" />
-              <p style="font-size: 12px; color: #94A3B8;">
-                E-Mail: <a href="mailto:info@nilogik.de">${safeEmail}</a>
+            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background: #0A0A0A; color: #FAFAFA; padding: 32px;">
+              <h1 style="font-weight: 900; letter-spacing: -0.08em; font-style: italic; margin-bottom: 24px;">NIL</h1>
+              <h2 style="color: #FAFAFA;">Du bist auf der Warteliste!</h2>
+              <p style="color: #A3A3A3; line-height: 1.7;">Hey,</p>
+              <p style="color: #A3A3A3; line-height: 1.7;">danke, dass du dich für NIL interessierst! Du stehst jetzt auf der Warteliste und erfährst als Erste:r, wenn der Drop live geht.</p>
+              <hr style="border: none; border-top: 1px solid #262626; margin: 24px 0;" />
+              <p style="font-size: 12px; color: #6B6B6B;">
+                Angemeldet mit: ${safeEmail}
               </p>
-              <p style="font-size: 12px; color: #94A3B8;">
-                Beste Grüße,<br/>
-                <strong>NILOGIK Team</strong>
+              <p style="font-size: 12px; color: #6B6B6B;">
+                Stay tuned,<br/>
+                <strong style="color: #FAFAFA;">NIL</strong>
               </p>
             </div>
           `,
         });
       } catch (emailError) {
-        console.error("[Newsletter] Email send failed:", sanitizeLog(String(emailError)));
+        console.error("[Waitlist] Email send failed:", sanitizeLog(String(emailError)));
         // Don't fail the request if email fails — subscription succeeded
       }
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error("[Newsletter] Server error:", sanitizeLog(String(error)));
+    console.error("[Waitlist] Server error:", sanitizeLog(String(error)));
     return NextResponse.json({ error: "Serverfehler" }, { status: 500 });
   }
 }
