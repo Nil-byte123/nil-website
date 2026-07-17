@@ -1,67 +1,39 @@
+import Image from "next/image";
+
 /* ─── NIL Wortmarke ──────────────────────────────────────────────
-   Platzhalter im Stil des finalen Logos: weiße Blockschrift,
-   Buchstaben eng/verschmolzen, leicht schräg gestellt.
-   Wird später durch die finalen PNG/SVG-Dateien ersetzt.        */
+   Finale Logo-Dateien (liegen in /public):
+   - nil-logo-weiss.png   → weiß, transparent (für dunkle Flächen)
+   - nil-logo-schwarz.png → schwarz, transparent (für helle Flächen)
+   Seitenverhältnis: 792 × 408 (≈ 1.94 : 1)                        */
+
+const RATIO = 792 / 408;
 
 export function NilLogo({
   size = 28,
-  color = "#FAFAFA",
+  variant = "weiss",
 }: {
   size?: number;
-  color?: string;
+  variant?: "weiss" | "schwarz";
 }) {
+  const height = size;
+  const width = Math.round(size * RATIO);
   return (
-    <span
-      aria-label="NIL"
-      style={{
-        display: "inline-block",
-        fontSize: `${size}px`,
-        fontWeight: 900,
-        letterSpacing: "-0.12em",
-        lineHeight: 1,
-        color,
-        transform: "skewX(-8deg)",
-        textTransform: "uppercase",
-        userSelect: "none",
-      }}
-    >
-      NIL
-    </span>
+    <Image
+      src={variant === "weiss" ? "/nil-logo-weiss.png" : "/nil-logo-schwarz.png"}
+      alt="NIL"
+      width={width}
+      height={height}
+      priority
+      style={{ display: "block", width: `${width}px`, height: `${height}px` }}
+    />
   );
 }
 
-/* Große Hero-Variante mit Rahmen-Box wie auf dem Logo-PNG */
+/* Große Hero-Variante */
 export function NilLogoBox({
   size = 96,
 }: {
   size?: number;
 }) {
-  return (
-    <span
-      aria-label="NIL"
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "#000000",
-        border: "1px solid rgba(255,255,255,0.14)",
-        padding: `${size * 0.35}px ${size * 0.5}px`,
-      }}
-    >
-      <span
-        style={{
-          fontSize: `${size}px`,
-          fontWeight: 900,
-          letterSpacing: "-0.12em",
-          lineHeight: 1,
-          color: "#FFFFFF",
-          transform: "skewX(-8deg)",
-          textTransform: "uppercase",
-          userSelect: "none",
-        }}
-      >
-        NIL
-      </span>
-    </span>
-  );
+  return <NilLogo size={size} variant="weiss" />;
 }

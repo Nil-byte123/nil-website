@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
+import { NilLogo } from "../components/NilLogo";
 
 export const metadata: Metadata = {
   title: "Shop – Vorschau",
@@ -117,18 +118,7 @@ function ProductCard({ name, type, color }: { name: string; type: string; color:
           borderBottom: "1px solid var(--line)",
         }}
       >
-        <span
-          style={{
-            fontSize: "42px",
-            fontWeight: 900,
-            letterSpacing: "-0.12em",
-            transform: "skewX(-8deg)",
-            color: dark ? "#FFFFFF" : "#0A0A0A",
-            userSelect: "none",
-          }}
-        >
-          NIL
-        </span>
+        <NilLogo size={64} variant={dark ? "weiss" : "schwarz"} />
       </div>
       <div style={{ padding: "18px 20px" }}>
         <div

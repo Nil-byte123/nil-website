@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     siteName:    "NIL",
     title:       "NIL – Streetwear. Bald verfügbar.",
     description: "NIL Streetwear aus Bayern: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Trag dich auf die Warteliste ein.",
-    images:      [{ url: "/icon.png", width: 612, height: 628, alt: "NIL Logo" }],
+    images:      [{ url: "/icon.png", width: 512, height: 512, alt: "NIL Logo" }],
   },
   twitter: {
     card:        "summary_large_image",
