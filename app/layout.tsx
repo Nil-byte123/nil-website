@@ -34,13 +34,11 @@ export const metadata: Metadata = {
     siteName:    "NIL",
     title:       "NIL – Streetwear. Bald verfügbar.",
     description: "NIL Streetwear aus Deutschland: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Trag dich auf die Warteliste ein.",
-    images:      [{ url: "/icon.png", width: 512, height: 512, alt: "NIL Logo" }],
   },
   twitter: {
     card:        "summary_large_image",
     title:       "NIL – Streetwear. Bald verfügbar.",
     description: "NIL Streetwear aus Deutschland: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Trag dich auf die Warteliste ein.",
-    images:      ["/icon.png"],
   },
   robots:   { index: true, follow: true, googleBot: { index: true, follow: true } },
   manifest: "/manifest.webmanifest",

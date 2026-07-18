@@ -360,6 +360,42 @@ export function ProduktDetail({ produkt, sprache = "de" }: { produkt: Produkt; s
             </ul>
           </div>
 
+          {/* Größentabelle */}
+          {produkt.masse && (
+            <div style={{ marginTop: "28px", borderTop: "1px solid var(--line)", paddingTop: "24px" }}>
+              <p style={auswahlLabel}>{t.masseTitel}</p>
+              <div style={{ overflowX: "auto" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "14px" }}>
+                  <thead>
+                    <tr>
+                      <th style={masseKopf}>{t.masseGroesse}</th>
+                      {produkt.masse.spalten.map((sp) => (
+                        <th key={sp.de} style={masseKopf}>
+                          {sp[sprache]}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {produkt.masse.zeilen.map((z) => (
+                      <tr key={z.groesse}>
+                        <td style={{ ...masseZelle, fontWeight: 700 }}>{z.groesse}</td>
+                        {z.werte.map((w, i) => (
+                          <td key={i} style={masseZelle}>
+                            {w}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "10px" }}>
+                {t.masseHinweis}
+              </p>
+            </div>
+          )}
+
           {/* So läuft die Bestellung */}
           <div
             style={{
@@ -401,4 +437,21 @@ const auswahlLabel: React.CSSProperties = {
   textTransform: "uppercase",
   color: "var(--fg-muted)",
   marginBottom: "12px",
+};
+
+const masseKopf: React.CSSProperties = {
+  textAlign: "left",
+  padding: "8px 12px",
+  color: "var(--fg-faint)",
+  fontSize: "11px",
+  fontWeight: 700,
+  letterSpacing: "0.12em",
+  textTransform: "uppercase",
+  borderBottom: "1px solid var(--line-strong)",
+};
+
+const masseZelle: React.CSSProperties = {
+  padding: "8px 12px",
+  color: "var(--fg-muted)",
+  borderBottom: "1px solid var(--line)",
 };

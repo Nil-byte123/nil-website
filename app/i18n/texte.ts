@@ -19,7 +19,7 @@ const de = {
   hero: {
     badge: "Bald verfügbar",
     titel: "Streetwear. Reduziert auf das, was zählt.",
-    text: "Der erste Drop ist in Arbeit. Schwarz, weiß, kompromisslos – kein Lärm, nur das Wesentliche.",
+    text: "Der erste Drop ist in Arbeit. Schwarz, weiß, kompromisslos. Kein Lärm, nur das Wesentliche.",
     cta: "Zur Vorschau",
     marquee: "COMING SOON — NIL — STREETWEAR — ERSTER DROP — ",
   },
@@ -30,11 +30,11 @@ const de = {
     karten: [
       {
         titel: "Hoodies",
-        text: "Schwerer Stoff, klarer Schnitt, NIL Blockprint. Keine überladenen Grafiken – das Logo spricht für sich.",
+        text: "Schwerer Stoff, klarer Schnitt, NIL Blockprint. Keine überladenen Grafiken, das Logo spricht für sich.",
       },
       {
         titel: "T-Shirts",
-        text: "Oversized Fit, dickes Baumwoll-Jersey. Minimalistisch – das Logo spricht für sich.",
+        text: "Oversized Fit, dickes Baumwoll-Jersey. Minimalistisch, das Logo spricht für sich.",
       },
       {
         titel: "Caps & mehr",
@@ -52,7 +52,7 @@ const de = {
   warteliste: {
     overline: "Der erste Drop",
     titel: "Trag dich auf die Warteliste",
-    text: "Erfahre als Erste:r, wenn der erste NIL Drop live geht. Kein Spam – nur Bescheid sagen, wenn es ernst wird.",
+    text: "Erfahre als Erste:r, wenn der erste NIL Drop live geht. Kein Spam, wir sagen nur Bescheid, wenn es ernst wird.",
   },
   wartelisteForm: {
     platzhalter: "deine@email.de",
@@ -67,7 +67,7 @@ const de = {
   shop: {
     overline: "Vorschau",
     titel: "Der erste Drop",
-    introVor: "Klick auf ein Produkt für alle Details: Ansichten, Größen, Farben und wie die Bestellung später abläuft. Kaufen ist noch nicht möglich – trag dich auf die ",
+    introVor: "Klick auf ein Produkt für alle Details: Ansichten, Größen, Farben und wie die Bestellung später abläuft. Kaufen ist noch nicht möglich. Trag dich auf die ",
     introLink: "Warteliste",
     introNach: " ein, dann bekommst du Bescheid, sobald es losgeht.",
     badge: "Bald verfügbar",
@@ -85,16 +85,19 @@ const de = {
     farbNamen: { Schwarz: "Schwarz", "Weiß": "Weiß" } as Record<string, string>,
     zzglVersand: "zzgl. Versand",
     cta: "Auf die Warteliste",
-    ctaHinweis: "Kaufen geht noch nicht – der Verkauf startet mit dem ersten Drop.",
+    ctaHinweis: "Kaufen geht noch nicht. Der Verkauf startet mit dem ersten Drop.",
     warum: "Warum so reduziert?",
     details: "Details",
     bestellung: "So läuft die Bestellung später",
     bestellPunkte: [
-      "Jedes Teil wird erst nach deiner Bestellung produziert (on demand) – keine Überproduktion.",
+      "Jedes Teil wird erst nach deiner Bestellung produziert (on demand). Keine Überproduktion.",
       "Produziert bei unserem Print-Partner in Europa ({herstellung}).",
-      "Lieferung nach Deutschland: insgesamt ca. 5–8 Tage nach Bestellung (Produktion + Versand).",
-      "Der Verkauf startet mit dem ersten Drop – die Warteliste erfährt es zuerst.",
+      "Lieferung nach Deutschland: insgesamt ca. 5 bis 8 Tage nach Bestellung (Produktion + Versand).",
+      "Der Verkauf startet mit dem ersten Drop. Die Warteliste erfährt es zuerst.",
     ],
+    masseTitel: "Größentabelle (cm)",
+    masseGroesse: "Größe",
+    masseHinweis: "Liegend gemessen. Kann um 1 bis 2 cm abweichen.",
   },
   faq: {
     overline: "FAQ",
@@ -102,7 +105,7 @@ const de = {
     fragen: [
       {
         q: "Wann geht NIL an den Start?",
-        a: "Wir arbeiten gerade am ersten Drop. Ein genaues Datum gibt es noch nicht – aber die Warteliste erfährt es zuerst. Trag dich ein, dann verpasst du nichts.",
+        a: "Wir arbeiten gerade am ersten Drop. Ein genaues Datum gibt es noch nicht, aber die Warteliste erfährt es zuerst. Trag dich ein, dann verpasst du nichts.",
       },
       {
         q: "Warum kann ich noch nichts kaufen?",
@@ -110,7 +113,7 @@ const de = {
       },
       {
         q: "Was kommt im ersten Drop?",
-        a: "Hoodies, Oversized T-Shirts und Caps – alles in Schwarz und Weiß mit dem NIL Blockprint. Eine Vorschau findest du im Shop.",
+        a: "Hoodies, Oversized T-Shirts und Caps, alles in Schwarz und Weiß mit dem NIL Blockprint. Eine Vorschau findest du im Shop.",
       },
       {
         q: "Wie wird produziert?",
@@ -121,12 +124,12 @@ const de = {
         a: "Nichts. Du gibst nur deine E-Mail-Adresse an und bekommst eine Nachricht, wenn der Drop live geht. Kein Spam, versprochen.",
       },
       {
-        q: "Wohin wird später versendet – und wie lange dauert es?",
-        a: "Zum Start konzentrieren wir uns auf Deutschland. Jedes Teil wird erst nach Bestellung produziert und dann verschickt – insgesamt dauert das ca. 5–8 Tage. Weitere Länder folgen, wenn alles rund läuft.",
+        q: "Wohin wird später versendet und wie lange dauert es?",
+        a: "Zum Start konzentrieren wir uns auf Deutschland. Jedes Teil wird erst nach Bestellung produziert und dann verschickt. Insgesamt dauert das ca. 5 bis 8 Tage. Weitere Länder folgen, wenn alles rund läuft.",
       },
       {
         q: "Ich habe eine andere Frage.",
-        a: "Schreib uns einfach über das Kontaktformular oder direkt an info@nilogik.de – wir antworten so schnell wie möglich.",
+        a: "Schreib uns einfach über das Kontaktformular oder direkt an info@nilogik.de. Wir antworten so schnell wie möglich.",
       },
     ],
     frageNicht: "Frage nicht dabei?",
@@ -138,19 +141,19 @@ const de = {
     bloecke: [
       {
         titel: "Der Anfang",
-        text: "NIL ist in Deutschland entstanden – aus der Idee, dass gute Klamotten nicht laut sein müssen. Keine riesigen Grafiken, keine zehn Farben, kein unnötiger Schnickschnack. Nur klare Formen, gute Stoffe und ein Logo, das für sich steht.",
+        text: "NIL ist in Deutschland entstanden, aus der Idee, dass gute Klamotten nicht laut sein müssen. Keine riesigen Grafiken, keine zehn Farben, kein unnötiger Schnickschnack. Nur klare Formen, gute Stoffe und ein Logo, das für sich steht.",
       },
       {
         titel: "Der Name",
-        text: "NIL bedeutet „nichts“ – und genau das ist der Punkt. Wir starten bei null und lassen alles weg, was nicht nötig ist. Was übrig bleibt, ist das Wesentliche: Schwarz, Weiß und ein sauberer Schnitt.",
+        text: "NIL bedeutet „nichts“, und genau das ist der Punkt. Wir starten bei null und lassen alles weg, was nicht nötig ist. Was übrig bleibt, ist das Wesentliche: Schwarz, Weiß und ein sauberer Schnitt.",
       },
       {
         titel: "Die Vision",
-        text: "Wir bauen NIL Schritt für Schritt auf – ehrlich und ohne Abkürzungen. Der erste Drop ist in Arbeit: Hoodies, T-Shirts und Caps, produziert on demand, damit nichts auf Halde landet und nichts verschwendet wird.",
+        text: "Wir bauen NIL Schritt für Schritt auf, ehrlich und ohne Abkürzungen. Der erste Drop ist in Arbeit: Hoodies, T-Shirts und Caps, produziert on demand, damit nichts auf Halde landet und nichts verschwendet wird.",
       },
       {
         titel: "Warum Warteliste?",
-        text: "Wir wollen es richtig machen statt schnell. Bis zum Launch kannst du dich auf die Warteliste setzen – dann gehörst du zu den Ersten, die den Drop sehen, bevor er offiziell live geht.",
+        text: "Wir wollen es richtig machen statt schnell. Bis zum Launch kannst du dich auf die Warteliste setzen. Dann gehörst du zu den Ersten, die den Drop sehen, bevor er offiziell live geht.",
       },
     ],
     cta: "Auf die Warteliste",
@@ -158,7 +161,7 @@ const de = {
   kontakt: {
     overline: "Kontakt",
     titel: "Schreib uns",
-    text: "Fragen zur Marke, zum Launch oder Interesse an einer Kooperation? Schick uns eine Nachricht – wir antworten so schnell wie möglich.",
+    text: "Fragen zur Marke, zum Launch oder Interesse an einer Kooperation? Schick uns eine Nachricht, wir antworten so schnell wie möglich.",
     direkt: "Oder direkt per Mail:",
   },
   kontaktForm: {
@@ -212,7 +215,7 @@ const en: typeof de = {
   hero: {
     badge: "Coming soon",
     titel: "Streetwear. Reduced to what matters.",
-    text: "The first drop is in the works. Black, white, uncompromising – no noise, just the essentials.",
+    text: "The first drop is in the works. Black, white, uncompromising. No noise, just the essentials.",
     cta: "View preview",
     marquee: "COMING SOON — NIL — STREETWEAR — FIRST DROP — ",
   },
@@ -223,11 +226,11 @@ const en: typeof de = {
     karten: [
       {
         titel: "Hoodies",
-        text: "Heavy fabric, clean cut, NIL block print. No cluttered graphics – the logo speaks for itself.",
+        text: "Heavy fabric, clean cut, NIL block print. No cluttered graphics, the logo speaks for itself.",
       },
       {
         titel: "T-Shirts",
-        text: "Oversized fit, thick cotton jersey. Minimalist – the logo speaks for itself.",
+        text: "Oversized fit, thick cotton jersey. Minimalist, the logo speaks for itself.",
       },
       {
         titel: "Caps & more",
@@ -245,7 +248,7 @@ const en: typeof de = {
   warteliste: {
     overline: "The first drop",
     titel: "Join the waitlist",
-    text: "Be the first to know when the first NIL drop goes live. No spam – we'll only reach out when it matters.",
+    text: "Be the first to know when the first NIL drop goes live. No spam, we'll only reach out when it matters.",
   },
   wartelisteForm: {
     platzhalter: "your@email.com",
@@ -260,7 +263,7 @@ const en: typeof de = {
   shop: {
     overline: "Preview",
     titel: "The first drop",
-    introVor: "Click a product for all details: views, sizes, colors and how ordering will work. Buying isn't possible yet – join the ",
+    introVor: "Click a product for all details: views, sizes, colors and how ordering will work. Buying isn't possible yet. Join the ",
     introLink: "waitlist",
     introNach: " and we'll let you know as soon as it starts.",
     badge: "Coming soon",
@@ -278,16 +281,19 @@ const en: typeof de = {
     farbNamen: { Schwarz: "Black", "Weiß": "White" } as Record<string, string>,
     zzglVersand: "plus shipping",
     cta: "Join the waitlist",
-    ctaHinweis: "You can't buy yet – sales start with the first drop.",
+    ctaHinweis: "You can't buy yet. Sales start with the first drop.",
     warum: "Why so minimal?",
     details: "Details",
     bestellung: "How ordering will work",
     bestellPunkte: [
-      "Every piece is made only after you order it (on demand) – no overproduction.",
+      "Every piece is made only after you order it (on demand). No overproduction.",
       "Produced by our print partner in Europe ({herstellung}).",
-      "Delivery to Germany: about 5–8 days in total after ordering (production + shipping).",
-      "Sales start with the first drop – the waitlist hears about it first.",
+      "Delivery to Germany: about 5 to 8 days in total after ordering (production + shipping).",
+      "Sales start with the first drop. The waitlist hears about it first.",
     ],
+    masseTitel: "Size chart (cm)",
+    masseGroesse: "Size",
+    masseHinweis: "Measured flat. May vary by 1 to 2 cm.",
   },
   faq: {
     overline: "FAQ",
@@ -295,7 +301,7 @@ const en: typeof de = {
     fragen: [
       {
         q: "When does NIL launch?",
-        a: "We're working on the first drop. There's no exact date yet – but the waitlist hears it first. Sign up and you won't miss anything.",
+        a: "We're working on the first drop. There's no exact date yet, but the waitlist hears it first. Sign up and you won't miss anything.",
       },
       {
         q: "Why can't I buy anything yet?",
@@ -303,7 +309,7 @@ const en: typeof de = {
       },
       {
         q: "What's in the first drop?",
-        a: "Hoodies, oversized tees and caps – all in black and white with the NIL block print. You'll find a preview in the shop.",
+        a: "Hoodies, oversized tees and caps, all in black and white with the NIL block print. You'll find a preview in the shop.",
       },
       {
         q: "How is it produced?",
@@ -314,12 +320,12 @@ const en: typeof de = {
         a: "Nothing. You just leave your email and get a message when the drop goes live. No spam, promised.",
       },
       {
-        q: "Where do you ship – and how long does it take?",
-        a: "At launch we focus on Germany. Every piece is made after you order and then shipped – in total that takes about 5–8 days. More countries will follow.",
+        q: "Where do you ship and how long does it take?",
+        a: "At launch we focus on Germany. Every piece is made after you order and then shipped. In total that takes about 5 to 8 days. More countries will follow.",
       },
       {
         q: "I have another question.",
-        a: "Just write to us via the contact form or directly at info@nilogik.de – we'll reply as fast as we can.",
+        a: "Just write to us via the contact form or directly at info@nilogik.de. We'll reply as fast as we can.",
       },
     ],
     frageNicht: "Question not answered?",
@@ -331,19 +337,19 @@ const en: typeof de = {
     bloecke: [
       {
         titel: "The beginning",
-        text: "NIL was founded in Germany – built on the idea that good clothes don't have to be loud. No huge graphics, no ten colors, no unnecessary extras. Just clear shapes, good fabrics and a logo that stands on its own.",
+        text: "NIL was founded in Germany, built on the idea that good clothes don't have to be loud. No huge graphics, no ten colors, no unnecessary extras. Just clear shapes, good fabrics and a logo that stands on its own.",
       },
       {
         titel: "The name",
-        text: "NIL means “nothing” – and that's exactly the point. We start from zero and leave out everything that isn't needed. What remains is the essential: black, white and a clean cut.",
+        text: "NIL means “nothing”, and that's exactly the point. We start from zero and leave out everything that isn't needed. What remains is the essential: black, white and a clean cut.",
       },
       {
         titel: "The vision",
-        text: "We're building NIL step by step – honestly and without shortcuts. The first drop is in the works: hoodies, tees and caps, produced on demand so nothing goes to waste.",
+        text: "We're building NIL step by step, honestly and without shortcuts. The first drop is in the works: hoodies, tees and caps, produced on demand so nothing goes to waste.",
       },
       {
         titel: "Why a waitlist?",
-        text: "We want to do it right, not fast. Until launch you can join the waitlist – and be among the first to see the drop before it officially goes live.",
+        text: "We want to do it right, not fast. Until launch you can join the waitlist and be among the first to see the drop before it officially goes live.",
       },
     ],
     cta: "Join the waitlist",
@@ -351,7 +357,7 @@ const en: typeof de = {
   kontakt: {
     overline: "Contact",
     titel: "Write to us",
-    text: "Questions about the brand, the launch or interested in a collaboration? Send us a message – we'll answer as fast as possible.",
+    text: "Questions about the brand, the launch or interested in a collaboration? Send us a message and we'll answer as fast as possible.",
     direkt: "Or directly by email:",
   },
   kontaktForm: {
