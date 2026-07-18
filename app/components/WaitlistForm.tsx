@@ -59,6 +59,7 @@ export function WaitlistForm() {
         style={{
           display: "flex",
           flexWrap: "wrap",
+          justifyContent: "center",
           gap: "10px",
         }}
       >
@@ -102,7 +103,7 @@ export function WaitlistForm() {
       {status === "error" && (
         <p style={{ color: "#F87171", fontSize: "13px", marginTop: "10px" }}>{errorMsg}</p>
       )}
-      <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "12px" }}>
+      <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "12px", textAlign: "center" }}>
         Kein Spam. Nur eine Mail, wenn&apos;s losgeht.
       </p>
     </form>
