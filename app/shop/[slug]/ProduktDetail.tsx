@@ -211,6 +211,16 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
           </h1>
           <p style={{ fontSize: "20px", fontWeight: 800, marginTop: "12px" }}>
             {produkt.preis}
+            <span
+              style={{
+                fontSize: "12px",
+                fontWeight: 400,
+                color: "var(--fg-faint)",
+                marginLeft: "10px",
+              }}
+            >
+              zzgl. Versand
+            </span>
           </p>
 
           <div
@@ -362,7 +372,7 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
               {[
                 "Jedes Teil wird erst nach deiner Bestellung produziert (on demand) – keine Überproduktion.",
                 `Produziert bei unserem Print-Partner in Europa (${produkt.herstellung}).`,
-                "Produktion ca. 2–5 Werktage, danach Versand nach Deutschland.",
+                "Produktion ca. 2–5 Werktage, Versand ca. 3–5 Werktage – insgesamt etwa 1–2 Wochen bis zu dir.",
                 "Der Verkauf startet mit dem ersten Drop – die Warteliste erfährt es zuerst.",
               ].map((z) => (
                 <li

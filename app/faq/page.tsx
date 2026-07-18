@@ -30,8 +30,8 @@ const FAQS = [
     a: "Nichts. Du gibst nur deine E-Mail-Adresse an und bekommst eine Nachricht, wenn der Drop live geht. Kein Spam, versprochen.",
   },
   {
-    q: "Wohin wird später versendet?",
-    a: "Zum Start konzentrieren wir uns auf Deutschland. Weitere Länder folgen, wenn alles rund läuft.",
+    q: "Wohin wird später versendet – und wie lange dauert es?",
+    a: "Zum Start konzentrieren wir uns auf Deutschland. Da jedes Teil erst nach Bestellung produziert wird (2–5 Werktage) und dann verschickt wird (3–5 Werktage), dauert die Lieferung insgesamt etwa 1–2 Wochen. Weitere Länder folgen, wenn alles rund läuft.",
   },
   {
     q: "Ich habe eine andere Frage.",
