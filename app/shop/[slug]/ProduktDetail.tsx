@@ -16,13 +16,40 @@ export function ProduktBild({
   farbe,
   art,
   istCap,
+  slug,
 }: {
   farbe: Farbe;
   art: "front" | "detail" | "back";
   istCap: boolean;
+  slug: string;
 }) {
   const dunkel = farbe === "Schwarz";
   const logo = dunkel ? "/nil-logo-weiss.png" : "/nil-logo-schwarz.png";
+  /* Echte Printful-Mockups liegen in /public/produkte/ */
+  const foto = `/produkte/${slug}-${dunkel ? "schwarz" : "weiss"}.webp`;
+
+  /* Vorderseite = echtes Produktfoto von Printful */
+  if (art === "front") {
+    return (
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100%",
+          background: "#EDEDED",
+        }}
+      >
+        <Image
+          src={foto}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          priority
+          style={{ objectFit: "contain" }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -33,22 +60,6 @@ export function ProduktBild({
         background: dunkel ? "#000000" : "#F5F5F5",
       }}
     >
-      {art === "front" && (
-        <Image
-          src={logo}
-          alt=""
-          width={792}
-          height={408}
-          priority
-          style={{
-            position: "absolute",
-            width: istCap ? "28%" : "15%",
-            height: "auto",
-            left: istCap ? "36%" : "30%",
-            top: istCap ? "40%" : "30%",
-          }}
-        />
-      )}
       {art === "detail" && (
         <Image
           src={logo}
@@ -143,7 +154,7 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
               overflow: "hidden",
             }}
           >
-            <ProduktBild farbe={farbe} art={ansichten[ansicht].art} istCap={istCap} />
+            <ProduktBild farbe={farbe} art={ansichten[ansicht].art} istCap={istCap} slug={produkt.slug} />
           </div>
 
           <div style={{ display: "flex", gap: "10px", marginTop: "12px" }}>
@@ -165,12 +176,12 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
                   overflow: "hidden",
                 }}
               >
-                <ProduktBild farbe={farbe} art={a.art} istCap={istCap} />
+                <ProduktBild farbe={farbe} art={a.art} istCap={istCap} slug={produkt.slug} />
               </button>
             ))}
           </div>
           <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "12px" }}>
-            Vorschau-Ansichten – echte Produktfotos folgen zum Launch.
+            Produktfoto: Vorschau unseres Print-Partners. Eigene Fotos folgen zum Launch.
           </p>
         </div>
 
