@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { WaitlistForm } from "./components/WaitlistForm";
@@ -210,22 +211,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Riesiger Outline-Schriftzug ──────────────── */}
+      {/* ─── Riesiges Logo als Wasserzeichen ──────────── */}
       <section
         aria-hidden="true"
         style={{
           overflow: "hidden",
-          padding: "20px 0 40px",
+          padding: "40px 24px 60px",
           textAlign: "center",
         }}
       >
         <Reveal direction="scale">
-          <div
-            className="outline-text"
-            style={{ fontSize: "clamp(120px, 24vw, 340px)" }}
-          >
-            NIL
-          </div>
+          <Image
+            src="/nil-logo-weiss.png"
+            alt=""
+            width={792}
+            height={408}
+            style={{
+              width: "min(80vw, 760px)",
+              height: "auto",
+              opacity: 0.09,
+              display: "block",
+              margin: "0 auto",
+              userSelect: "none",
+              pointerEvents: "none",
+            }}
+          />
         </Reveal>
       </section>
 
