@@ -16,7 +16,8 @@
 - [ ] Logo: NIL-DRUCK-weiss.png / NIL-DRUCK-schwarz.png (liegen in Downloads, 300 DPI)
 - [ ] Platzierung: klein, mittig auf der Brust (Tee 8-10cm, Hoodie 9-11cm), KEIN Rückendruck
 - Entschieden: KEINE Sweatpants in Drop 1 (nur US-Versand verfügbar)
-- Drop 2 (Herbst/Winter): Crewneck + Knit Beanie + Sweatpants (falls dann EU-Provider)
+- Drop 2 (Herbst/Winter): Crewneck + Knit Beanie + Sweatpants + Sweat-Shorts
+  (vorher checken: gibt es die bis dahin mit EU-Produktion bei Printful?)
 
 ### Samples (Muster) bestellen
 - [ ] 1× Tee Schwarz mit Logo
@@ -48,12 +49,12 @@
 ## Phase 3: Verkauf aktivieren (nach Gewerbeanmeldung)
 
 - [ ] Stripe-Account (über Mama/Erziehungsberechtigte)
-- [ ] Printify-API mit Website verbinden
+- [ ] Printful-API mit Website verbinden
 - [ ] Checkout auf Website bauen + testen
-- [ ] Preise festlegen:
-  - Tee: 30-40€ (Einkauf ~15€)
-  - Hoodie: 45-55€ (Einkauf ~19€)
-  - Cap: 25-30€
+- [x] Preise festgelegt (rund = Premium-Look):
+  - Hoodie: 50€ (Einkauf ~32€) → ~17€ Gewinn
+  - Tee: 30€ (Einkauf ~17€) → ~12€ Gewinn
+  - Cap: 25€ (Einkauf ~13€) → ~11€ Gewinn
 - [ ] Versandkosten kalkulieren
 - [ ] Testbestellung machen (selbst kaufen!)
 
