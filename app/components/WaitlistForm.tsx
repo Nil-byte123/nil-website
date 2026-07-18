@@ -54,7 +54,7 @@ export function WaitlistForm() {
   }
 
   return (
-    <form onSubmit={submit} style={{ width: "100%" }}>
+    <form onSubmit={submit} style={{ width: "100%", maxWidth: "500px", margin: "0 auto" }}>
       <div
         style={{
           display: "flex",

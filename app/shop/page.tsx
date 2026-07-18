@@ -11,15 +11,13 @@ export const metadata: Metadata = {
     "Der erste NIL Drop: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Bald verfügbar – trag dich auf die Warteliste ein.",
 };
 
-/* Platzhalter-Produkte — werden nach dem Launch durch echte
-   Printify-Produkte mit Fotos und Preisen ersetzt. */
 const PRODUCTS = [
-  { name: "NIL Block Hoodie", type: "Hoodie", color: "Schwarz" },
-  { name: "NIL Block Hoodie", type: "Hoodie", color: "Weiß" },
-  { name: "NIL Oversized Tee", type: "T-Shirt", color: "Schwarz" },
-  { name: "NIL Oversized Tee", type: "T-Shirt", color: "Weiß" },
-  { name: "NIL Cap", type: "Cap", color: "Schwarz" },
-  { name: "NIL Crewneck", type: "Sweater", color: "Schwarz" },
+  { name: "Oversized Heavyweight Hoodie", type: "Hoodie", color: "Schwarz", price: "€38" },
+  { name: "Oversized Heavyweight Hoodie", type: "Hoodie", color: "Weiß", price: "€38" },
+  { name: "Unisex Organic Oversized High Neck T-Shirt", type: "T-Shirt", color: "Schwarz", price: "€20" },
+  { name: "Unisex Organic Oversized High Neck T-Shirt", type: "T-Shirt", color: "Weiß", price: "€20" },
+  { name: "Trucker Cap", type: "Cap", color: "Schwarz", price: "€18" },
+  { name: "Trucker Cap", type: "Cap", color: "Weiß", price: "€18" },
 ];
 
 export default function Shop() {
@@ -107,11 +105,10 @@ export default function Shop() {
   );
 }
 
-function ProductCard({ name, type, color }: { name: string; type: string; color: string }) {
+function ProductCard({ name, type, color, price }: { name: string; type: string; color: string; price?: string }) {
   const dark = color === "Schwarz";
   return (
     <div className="card-hover" style={{ border: "1px solid var(--line)", background: "var(--bg-soft)" }}>
-      {/* Platzhalter-Bild: schwarze/weiße Fläche mit NIL Schriftzug */}
       <div
         className="img-zoom"
         style={{
@@ -145,6 +142,11 @@ function ProductCard({ name, type, color }: { name: string; type: string; color:
         <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "4px" }}>
           {type} · {color}
         </p>
+        {price && (
+          <p style={{ fontSize: "14px", fontWeight: 700, marginTop: "8px", color: "var(--fg)" }}>
+            {price}
+          </p>
+        )}
       </div>
     </div>
   );

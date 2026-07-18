@@ -8,10 +8,13 @@ export function Reveal({
   children,
   delay = 0,
   direction = "up",
+  fill = false,
 }: {
   children: React.ReactNode;
   delay?: number;
   direction?: "up" | "left" | "right" | "scale";
+  /* fill: Hülle füllt die volle Höhe (für gleich hohe Grid-Karten) */
+  fill?: boolean;
 }) {
   const reduce = useReducedMotion();
 
@@ -32,6 +35,7 @@ export function Reveal({
       whileInView={{ opacity: 1, x: 0, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+      style={fill ? { height: "100%" } : undefined}
     >
       {children}
     </motion.div>
@@ -49,7 +53,7 @@ export function RevealStagger({
   return (
     <>
       {children.map((child, i) => (
-        <Reveal key={i} delay={i * gap}>
+        <Reveal key={i} delay={i * gap} fill>
           {child}
         </Reveal>
       ))}

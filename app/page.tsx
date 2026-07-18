@@ -75,23 +75,30 @@ export default function Home() {
             marginTop: "20px",
           }}
         >
-          Der erste NIL Drop ist in Arbeit. Trag dich ein und erfahre als
-          Erste:r, wenn es losgeht.
+          Der erste NIL Drop ist in Arbeit. Hoodies, T-Shirts und Caps –
+          reduziert auf das Wesentliche.
         </p>
 
-        <div
-          className="fade-up"
-          id="warteliste"
-          style={{
-            animationDelay: "0.4s",
-            width: "100%",
-            maxWidth: "460px",
-            marginTop: "40px",
-            scrollMarginTop: "100px",
-          }}
-        >
-          <WaitlistForm />
-        </div>
+        <Reveal delay={0.4}>
+          <Link
+            href="/shop"
+            className="btn-outline"
+            style={{
+              display: "inline-block",
+              marginTop: "40px",
+              textDecoration: "none",
+              border: "1px solid var(--line-strong)",
+              color: "var(--fg)",
+              padding: "14px 32px",
+              fontSize: "13px",
+              fontWeight: 700,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+            }}
+          >
+            Zur Vorschau
+          </Link>
+        </Reveal>
       </section>
 
       {/* ─── Doppelte Marquee (gegenläufig) ───────────── */}
@@ -158,8 +165,10 @@ export default function Home() {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gridAutoRows: "1fr",
             gap: "20px",
             marginTop: "48px",
+            alignItems: "stretch",
           }}
         >
           <RevealStagger>
@@ -260,6 +269,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─── Newsletter: Die Warteliste ───────────────── */}
+      <section
+        style={{
+          borderTop: "1px solid var(--line)",
+          borderBottom: "1px solid var(--line)",
+          background: "var(--bg-soft)",
+          padding: "80px 24px",
+        }}
+        id="warteliste"
+      >
+        <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+          <Reveal>
+            <p style={overline}>Der erste Drop</p>
+            <h2 style={{ ...h2, marginBottom: "16px" }}>
+              Trag dich auf die Warteliste
+            </h2>
+            <p style={{ color: "var(--fg-muted)", fontSize: "15px", lineHeight: 1.8, marginBottom: "40px" }}>
+              Erfahre als Erste:r, wenn der erste NIL Drop live geht. Kein Spam – nur Bescheid sagen, wenn es ernst wird.
+            </p>
+          </Reveal>
+
+          <div style={{ maxWidth: "420px", margin: "0 auto" }}>
+            <WaitlistForm />
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );
@@ -288,6 +324,10 @@ function TeaserCard({ title, text }: { title: string; text: string }) {
         border: "1px solid var(--line)",
         background: "var(--bg-soft)",
         padding: "32px 28px",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        minHeight: "220px",
       }}
     >
       <div
@@ -308,7 +348,7 @@ function TeaserCard({ title, text }: { title: string; text: string }) {
       <h3 style={{ fontSize: "20px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "12px" }}>
         {title}
       </h3>
-      <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.7 }}>{text}</p>
+      <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.7, flex: 1 }}>{text}</p>
     </div>
   );
 }
