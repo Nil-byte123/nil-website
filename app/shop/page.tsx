@@ -76,7 +76,7 @@ export default function Shop() {
                     overflow: "hidden",
                   }}
                 >
-                  <ProduktBild farbe="Schwarz" art="front" istCap={p.typ === "Cap"} slug={p.slug} />
+                  <ProduktBild farbe="Schwarz" art="front" slug={p.slug} />
                 </div>
                 <div style={{ padding: "18px 20px", flex: 1, display: "flex", flexDirection: "column" }}>
                   <div

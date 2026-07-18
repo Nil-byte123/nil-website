@@ -5,22 +5,19 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Farbe, Produkt } from "../produkte";
 
-/* ─── Produkt-Ansicht (Platzhalter, bis echte Fotos da sind) ────
-   front  = kleines Logo links auf der Brust (bzw. mittig bei Cap)
-   detail = Logo-Nahaufnahme
-   back   = Rückseite, bewusst leer                              */
+/* ─── Produkt-Ansicht ───────────────────────────────────────────
+   front  = echtes Printful-Mockup
+   detail = Logo-Nahaufnahme                                     */
 
-type Ansicht = { label: string; art: "front" | "detail" | "back" };
+type Ansicht = { label: string; art: "front" | "detail" };
 
 export function ProduktBild({
   farbe,
   art,
-  istCap,
   slug,
 }: {
   farbe: Farbe;
-  art: "front" | "detail" | "back";
-  istCap: boolean;
+  art: "front" | "detail";
   slug: string;
 }) {
   const dunkel = farbe === "Schwarz";
@@ -76,24 +73,6 @@ export function ProduktBild({
           }}
         />
       )}
-      {art === "back" && (
-        <span
-          style={{
-            position: "absolute",
-            bottom: "10%",
-            left: 0,
-            right: 0,
-            textAlign: "center",
-            fontSize: "10px",
-            fontWeight: 700,
-            letterSpacing: "0.25em",
-            textTransform: "uppercase",
-            color: dunkel ? "rgba(255,255,255,0.25)" : "rgba(0,0,0,0.25)",
-          }}
-        >
-          Rückseite – bewusst leer
-        </span>
-      )}
     </div>
   );
 }
@@ -101,17 +80,10 @@ export function ProduktBild({
 /* ─── Detailseite ───────────────────────────────────────────── */
 
 export function ProduktDetail({ produkt }: { produkt: Produkt }) {
-  const istCap = produkt.typ === "Cap";
-  const ansichten: Ansicht[] = istCap
-    ? [
-        { label: "Vorne", art: "front" },
-        { label: "Logo-Detail", art: "detail" },
-      ]
-    : [
-        { label: "Vorderseite", art: "front" },
-        { label: "Logo-Detail", art: "detail" },
-        { label: "Rückseite", art: "back" },
-      ];
+  const ansichten: Ansicht[] = [
+    { label: "Vorderseite", art: "front" },
+    { label: "Logo-Detail", art: "detail" },
+  ];
 
   const [farbe, setFarbe] = useState<Farbe>(produkt.farben[0]);
   const [groesse, setGroesse] = useState<string | null>(
@@ -154,7 +126,7 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
               overflow: "hidden",
             }}
           >
-            <ProduktBild farbe={farbe} art={ansichten[ansicht].art} istCap={istCap} slug={produkt.slug} />
+            <ProduktBild farbe={farbe} art={ansichten[ansicht].art} slug={produkt.slug} />
           </div>
 
           <div style={{ display: "flex", gap: "10px", marginTop: "12px" }}>
@@ -176,7 +148,7 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
                   overflow: "hidden",
                 }}
               >
-                <ProduktBild farbe={farbe} art={a.art} istCap={istCap} slug={produkt.slug} />
+                <ProduktBild farbe={farbe} art={a.art} slug={produkt.slug} />
               </button>
             ))}
           </div>
