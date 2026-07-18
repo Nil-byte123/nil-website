@@ -2,23 +2,15 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
-import { NilLogo } from "../components/NilLogo";
 import { Reveal } from "../components/Reveal";
+import { PRODUKTE } from "./produkte";
+import { ProduktBild } from "./[slug]/ProduktDetail";
 
 export const metadata: Metadata = {
   title: "Shop – Vorschau",
   description:
     "Der erste NIL Drop: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Bald verfügbar – trag dich auf die Warteliste ein.",
 };
-
-const PRODUCTS = [
-  { name: "Oversized Heavyweight Hoodie", type: "Hoodie", color: "Schwarz", price: "€38" },
-  { name: "Oversized Heavyweight Hoodie", type: "Hoodie", color: "Weiß", price: "€38" },
-  { name: "Unisex Organic Oversized High Neck T-Shirt", type: "T-Shirt", color: "Schwarz", price: "€20" },
-  { name: "Unisex Organic Oversized High Neck T-Shirt", type: "T-Shirt", color: "Weiß", price: "€20" },
-  { name: "Trucker Cap", type: "Cap", color: "Schwarz", price: "€18" },
-  { name: "Trucker Cap", type: "Cap", color: "Weiß", price: "€18" },
-];
 
 export default function Shop() {
   return (
@@ -42,8 +34,9 @@ export default function Shop() {
           Der erste Drop
         </h1>
         <p style={{ color: "var(--fg-muted)", fontSize: "15px", lineHeight: 1.7, marginTop: "16px", maxWidth: "560px" }}>
-          Das ist die Vorschau auf den ersten NIL Drop. Kaufen ist noch nicht
-          möglich – trag dich auf die{" "}
+          Klick auf ein Produkt für alle Details: Ansichten, Größen, Farben
+          und wie die Bestellung später abläuft. Kaufen ist noch nicht möglich
+          – trag dich auf die{" "}
           <Link href="/#warteliste" style={{ color: "var(--fg)", fontWeight: 600 }}>
             Warteliste
           </Link>{" "}
@@ -53,14 +46,61 @@ export default function Shop() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+            gridAutoRows: "1fr",
             gap: "20px",
             marginTop: "56px",
+            alignItems: "stretch",
           }}
         >
-          {PRODUCTS.map((p, i) => (
-            <Reveal key={i} delay={(i % 3) * 0.1}>
-              <ProductCard {...p} />
+          {PRODUKTE.map((p, i) => (
+            <Reveal key={p.slug} delay={i * 0.1} fill>
+              <Link
+                href={`/shop/${p.slug}`}
+                className="card-hover"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  height: "100%",
+                  textDecoration: "none",
+                  color: "inherit",
+                  border: "1px solid var(--line)",
+                  background: "var(--bg-soft)",
+                }}
+              >
+                <div
+                  className="img-zoom"
+                  style={{
+                    aspectRatio: "1 / 1",
+                    borderBottom: "1px solid var(--line)",
+                    overflow: "hidden",
+                  }}
+                >
+                  <ProduktBild farbe="Schwarz" art="front" istCap={p.typ === "Cap"} />
+                </div>
+                <div style={{ padding: "18px 20px", flex: 1, display: "flex", flexDirection: "column" }}>
+                  <div
+                    style={{
+                      alignSelf: "flex-start",
+                      fontSize: "9px",
+                      fontWeight: 700,
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                      color: "var(--fg-faint)",
+                      border: "1px solid var(--line)",
+                      padding: "3px 8px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    Bald verfügbar
+                  </div>
+                  <p style={{ fontSize: "15px", fontWeight: 700, letterSpacing: "-0.01em" }}>{p.name}</p>
+                  <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "4px", flex: 1 }}>
+                    {p.typ} · {p.farben.join(" / ")}
+                  </p>
+                  <p style={{ fontSize: "14px", fontWeight: 700, marginTop: "10px" }}>{p.preis}</p>
+                </div>
+              </Link>
             </Reveal>
           ))}
         </div>
@@ -102,52 +142,5 @@ export default function Shop() {
 
       <Footer />
     </main>
-  );
-}
-
-function ProductCard({ name, type, color, price }: { name: string; type: string; color: string; price?: string }) {
-  const dark = color === "Schwarz";
-  return (
-    <div className="card-hover" style={{ border: "1px solid var(--line)", background: "var(--bg-soft)" }}>
-      <div
-        className="img-zoom"
-        style={{
-          aspectRatio: "1 / 1",
-          background: dark ? "#000000" : "#F5F5F5",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          borderBottom: "1px solid var(--line)",
-        }}
-      >
-        <NilLogo size={64} variant={dark ? "weiss" : "schwarz"} />
-      </div>
-      <div style={{ padding: "18px 20px" }}>
-        <div
-          style={{
-            display: "inline-block",
-            fontSize: "9px",
-            fontWeight: 700,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            color: "var(--fg-faint)",
-            border: "1px solid var(--line)",
-            padding: "3px 8px",
-            marginBottom: "12px",
-          }}
-        >
-          Bald verfügbar
-        </div>
-        <p style={{ fontSize: "15px", fontWeight: 700, letterSpacing: "-0.01em" }}>{name}</p>
-        <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "4px" }}>
-          {type} · {color}
-        </p>
-        {price && (
-          <p style={{ fontSize: "14px", fontWeight: 700, marginTop: "8px", color: "var(--fg)" }}>
-            {price}
-          </p>
-        )}
-      </div>
-    </div>
   );
 }
