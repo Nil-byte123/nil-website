@@ -92,7 +92,7 @@ const de = {
     bestellPunkte: [
       "Jedes Teil wird erst nach deiner Bestellung produziert (on demand) – keine Überproduktion.",
       "Produziert bei unserem Print-Partner in Europa ({herstellung}).",
-      "Produktion ca. 2–5 Werktage, Versand ca. 3–5 Werktage – insgesamt etwa 1–2 Wochen bis zu dir.",
+      "Lieferung nach Deutschland: insgesamt ca. 5–8 Tage nach Bestellung (Produktion + Versand).",
       "Der Verkauf startet mit dem ersten Drop – die Warteliste erfährt es zuerst.",
     ],
   },
@@ -122,7 +122,7 @@ const de = {
       },
       {
         q: "Wohin wird später versendet – und wie lange dauert es?",
-        a: "Zum Start konzentrieren wir uns auf Deutschland. Da jedes Teil erst nach Bestellung produziert wird (2–5 Werktage) und dann verschickt wird (3–5 Werktage), dauert die Lieferung insgesamt etwa 1–2 Wochen. Weitere Länder folgen, wenn alles rund läuft.",
+        a: "Zum Start konzentrieren wir uns auf Deutschland. Jedes Teil wird erst nach Bestellung produziert und dann verschickt – insgesamt dauert das ca. 5–8 Tage. Weitere Länder folgen, wenn alles rund läuft.",
       },
       {
         q: "Ich habe eine andere Frage.",
@@ -285,7 +285,7 @@ const en: typeof de = {
     bestellPunkte: [
       "Every piece is made only after you order it (on demand) – no overproduction.",
       "Produced by our print partner in Europe ({herstellung}).",
-      "Production takes about 2–5 business days, shipping 3–5 business days – around 1–2 weeks in total.",
+      "Delivery to Germany: about 5–8 days in total after ordering (production + shipping).",
       "Sales start with the first drop – the waitlist hears about it first.",
     ],
   },
@@ -315,7 +315,7 @@ const en: typeof de = {
       },
       {
         q: "Where do you ship – and how long does it take?",
-        a: "At launch we focus on Germany. Since every piece is made after you order (2–5 business days) and then shipped (3–5 business days), delivery takes about 1–2 weeks in total. More countries will follow.",
+        a: "At launch we focus on Germany. Every piece is made after you order and then shipped – in total that takes about 5–8 days. More countries will follow.",
       },
       {
         q: "I have another question.",

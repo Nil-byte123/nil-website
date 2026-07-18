@@ -51,10 +51,11 @@
 - [ ] Stripe-Account (über Mama/Erziehungsberechtigte)
 - [ ] Printful-API mit Website verbinden
 - [ ] Checkout auf Website bauen + testen
-- [x] Preise festgelegt (rund = Premium-Look):
-  - Hoodie: 50€ (Einkauf ~32€) → ~17€ Gewinn
-  - Tee: 30€ (Einkauf ~17€) → ~12€ Gewinn
-  - Cap: 25€ (Einkauf ~13€) → ~11€ Gewinn
+- [x] Preise festgelegt (rund = Premium-Look), echte Printful-Einkaufspreise:
+  - Hoodie: 50€ (Einkauf 26,95–29,55€ je Größe) → ~20€ Gewinn
+  - Tee: 30€ (Einkauf 13,95–15,25€ je Größe) → ~14€ Gewinn
+  - Cap: 25€ (Einkauf 10,99€) → ~13€ Gewinn
+  - Lieferung nach Deutschland laut Printful: 5–8 Tage
 - [ ] Versandkosten kalkulieren
 - [ ] Testbestellung machen (selbst kaufen!)
 
