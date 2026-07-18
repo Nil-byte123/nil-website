@@ -44,10 +44,16 @@ export default function Home() {
           Bald verfügbar
         </p>
 
-        <div className="fade-up" style={{ animationDelay: "0.1s" }}>
-          <div className="logo-float">
-            <NilLogoBox size={100} />
-          </div>
+        <div
+          className="fade-up"
+          style={{
+            animationDelay: "0.1s",
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <NilLogoBox size={100} />
         </div>
 
         <h1
@@ -76,8 +82,8 @@ export default function Home() {
             marginTop: "20px",
           }}
         >
-          Der erste NIL Drop ist in Arbeit. Hoodies, T-Shirts und Caps –
-          reduziert auf das Wesentliche.
+          Der erste Drop ist in Arbeit. Schwarz, weiß, kompromisslos –
+          kein Lärm, nur das Wesentliche.
         </p>
 
         <Reveal delay={0.4}>
