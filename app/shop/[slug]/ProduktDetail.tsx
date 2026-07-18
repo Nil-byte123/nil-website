@@ -8,8 +8,17 @@ import { TEXTE, type Sprache } from "../../i18n/texte";
 
 /* ─── Produktfoto (echtes Printful-Mockup) ──────────────────── */
 
-export function ProduktBild({ farbe, slug }: { farbe: Farbe; slug: string }) {
-  const foto = `/produkte/${slug}-${farbe === "Schwarz" ? "schwarz" : "weiss"}.webp`;
+export function ProduktBild({
+  farbe,
+  slug,
+  src,
+}: {
+  farbe: Farbe;
+  slug: string;
+  /* Optional: eigenes Bild statt des Standard-Mockups (z.B. Seitenansicht) */
+  src?: string;
+}) {
+  const foto = src ?? `/produkte/${slug}-${farbe === "Schwarz" ? "schwarz" : "weiss"}.webp`;
   return (
     <div
       style={{
@@ -92,10 +101,24 @@ function StatementBild({
 
 export function ProduktDetail({ produkt, sprache = "de" }: { produkt: Produkt; sprache?: Sprache }) {
   const t = TEXTE[sprache].produkt;
-  /* Galerie: echtes Foto + Statement-Kacheln */
-  const ansichten: { label: string; statementIndex: number | null }[] = [
-    { label: t.fotoLabel, statementIndex: null },
-    ...produkt.statements.map((s, i) => ({ label: s.titel[sprache], statementIndex: i })),
+  /* Galerie: Mockup-Foto + Extra-Ansichten (z.B. Seite/Rückseite) + Statement-Kacheln */
+  type Ansicht =
+    | { label: string; art: "foto" }
+    | { label: string; art: "extra"; index: number }
+    | { label: string; art: "statement"; index: number };
+
+  const ansichten: Ansicht[] = [
+    { label: t.fotoLabel, art: "foto" },
+    ...(produkt.extraAnsichten ?? []).map((e, i) => ({
+      label: e.label[sprache],
+      art: "extra" as const,
+      index: i,
+    })),
+    ...produkt.statements.map((s, i) => ({
+      label: s.titel[sprache],
+      art: "statement" as const,
+      index: i,
+    })),
   ];
 
   const [farbe, setFarbe] = useState<Farbe>(produkt.farben[0]);
@@ -141,12 +164,18 @@ export function ProduktDetail({ produkt, sprache = "de" }: { produkt: Produkt; s
               overflow: "hidden",
             }}
           >
-            {aktiv.statementIndex === null ? (
-              <ProduktBild farbe={farbe} slug={produkt.slug} />
-            ) : (
+            {aktiv.art === "foto" && <ProduktBild farbe={farbe} slug={produkt.slug} />}
+            {aktiv.art === "extra" && (
+              <ProduktBild
+                farbe={farbe}
+                slug={produkt.slug}
+                src={produkt.extraAnsichten![aktiv.index].bilder[farbe]}
+              />
+            )}
+            {aktiv.art === "statement" && (
               <StatementBild
-                titel={produkt.statements[aktiv.statementIndex].titel[sprache]}
-                text={produkt.statements[aktiv.statementIndex].text[sprache]}
+                titel={produkt.statements[aktiv.index].titel[sprache]}
+                text={produkt.statements[aktiv.index].text[sprache]}
               />
             )}
           </div>
@@ -170,11 +199,17 @@ export function ProduktDetail({ produkt, sprache = "de" }: { produkt: Produkt; s
                   overflow: "hidden",
                 }}
               >
-                {a.statementIndex === null ? (
-                  <ProduktBild farbe={farbe} slug={produkt.slug} />
-                ) : (
+                {a.art === "foto" && <ProduktBild farbe={farbe} slug={produkt.slug} />}
+                {a.art === "extra" && (
+                  <ProduktBild
+                    farbe={farbe}
+                    slug={produkt.slug}
+                    src={produkt.extraAnsichten![a.index].bilder[farbe]}
+                  />
+                )}
+                {a.art === "statement" && (
                   <StatementBild
-                    titel={produkt.statements[a.statementIndex].titel[sprache]}
+                    titel={produkt.statements[a.index].titel[sprache]}
                     text=""
                     klein
                   />

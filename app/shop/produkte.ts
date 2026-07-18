@@ -27,6 +27,11 @@ export type Produkt = {
     spalten: Zweisprachig[];
     zeilen: { groesse: string; werte: string[] }[];
   };
+  /* Weitere Foto-Ansichten (z.B. Seite, Rückseite) pro Farbe */
+  extraAnsichten?: {
+    label: Zweisprachig;
+    bilder: Record<Farbe, string>;
+  }[];
 };
 
 export const PRODUKTE: Produkt[] = [
@@ -205,6 +210,22 @@ export const PRODUKTE: Produkt[] = [
       de: "Nur ein gesticktes Logo, sonst nichts. Stickerei statt Druck heißt: Qualität, die bleibt. Auch nach Jahren.",
       en: "Just one embroidered logo, nothing else. Embroidery instead of print means quality that lasts. For years.",
     },
+    extraAnsichten: [
+      {
+        label: { de: "Seite", en: "Side" },
+        bilder: {
+          Schwarz: "/produkte/cap-schwarz-seite.jpg",
+          "Weiß": "/produkte/cap-weiss-seite.jpg",
+        },
+      },
+      {
+        label: { de: "Hinten (Mesh)", en: "Back (mesh)" },
+        bilder: {
+          Schwarz: "/produkte/cap-schwarz-hinten.jpg",
+          "Weiß": "/produkte/cap-weiss-hinten.jpg",
+        },
+      },
+    ],
   },
 ];
 
