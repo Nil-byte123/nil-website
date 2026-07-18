@@ -16,6 +16,10 @@ export type Produkt = {
   herstellung: string;
   beschreibung: string;
   details: string[];
+  /* Statement-Kacheln in der Bildergalerie */
+  statements: { titel: string; text: string }[];
+  /* Erklärung, warum das Design so reduziert ist */
+  philosophie: string;
 };
 
 export const PRODUKTE: Produkt[] = [
@@ -37,6 +41,18 @@ export const PRODUKTE: Produkt[] = [
       "Rückseite ohne Print – bewusst clean",
       "Größen S bis 3XL",
     ],
+    statements: [
+      {
+        titel: "Kein Print. Kein Lärm.",
+        text: "Die Rückseite bleibt bewusst frei. Ein Logo reicht – der Rest ist Haltung.",
+      },
+      {
+        titel: "Schwer. Sauber. Oversized.",
+        text: "Dicker Stoff, klare Silhouette. Gemacht, um getragen zu werden – nicht, um zu schreien.",
+      },
+    ],
+    philosophie:
+      "Die Rückseite bleibt frei, das Logo bleibt klein. Warum? Weil alles Überflüssige ablenkt. Du kaufst keinen Werbebanner – du kaufst einen Hoodie, der ohne Effekte auskommt und genau deshalb auffällt.",
   },
   {
     slug: "t-shirt",
@@ -55,6 +71,18 @@ export const PRODUKTE: Produkt[] = [
       "Rückseite ohne Print – bewusst clean",
       "Größen S bis 2XL",
     ],
+    statements: [
+      {
+        titel: "Weniger ist das Statement.",
+        text: "Kein Druck auf dem Rücken, keine Grafik-Flut. Nur Bio-Baumwolle und ein Logo, das für sich steht.",
+      },
+      {
+        titel: "Oversized. Nicht beliebig.",
+        text: "Locker geschnitten, High Neck, dickes Jersey – Basics, die nicht langweilig sind.",
+      },
+    ],
+    philosophie:
+      "Kein Rückenprint, keine Grafik-Flut. Ein sauberes Shirt mit einem Logo, das für sich steht – reduziert, damit du im Mittelpunkt bleibst, nicht der Aufdruck.",
   },
   {
     slug: "cap",
@@ -72,6 +100,14 @@ export const PRODUKTE: Produkt[] = [
       "Verstellbarer Snapback-Verschluss",
       "One Size",
     ],
+    statements: [
+      {
+        titel: "Gestickt. Nicht gedruckt.",
+        text: "Das NIL Logo ist gestickt – Qualität, die man sieht und fühlt. Mehr braucht die Cap nicht.",
+      },
+    ],
+    philosophie:
+      "Nur ein gesticktes Logo, sonst nichts. Stickerei statt Druck heißt: Qualität, die bleibt – auch nach Jahren.",
   },
 ];
 

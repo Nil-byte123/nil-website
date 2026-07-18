@@ -5,73 +5,83 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Farbe, Produkt } from "../produkte";
 
-/* ─── Produkt-Ansicht ───────────────────────────────────────────
-   front  = echtes Printful-Mockup
-   detail = Logo-Nahaufnahme                                     */
+/* ─── Produktfoto (echtes Printful-Mockup) ──────────────────── */
 
-type Ansicht = { label: string; art: "front" | "detail" };
-
-export function ProduktBild({
-  farbe,
-  art,
-  slug,
-}: {
-  farbe: Farbe;
-  art: "front" | "detail";
-  slug: string;
-}) {
-  const dunkel = farbe === "Schwarz";
-  const logo = dunkel ? "/nil-logo-weiss.png" : "/nil-logo-schwarz.png";
-  /* Echte Printful-Mockups liegen in /public/produkte/ */
-  const foto = `/produkte/${slug}-${dunkel ? "schwarz" : "weiss"}.webp`;
-
-  /* Vorderseite = echtes Produktfoto von Printful */
-  if (art === "front") {
-    return (
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100%",
-          background: "#EDEDED",
-        }}
-      >
-        <Image
-          src={foto}
-          alt=""
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          priority
-          style={{ objectFit: "contain" }}
-        />
-      </div>
-    );
-  }
-
+export function ProduktBild({ farbe, slug }: { farbe: Farbe; slug: string }) {
+  const foto = `/produkte/${slug}-${farbe === "Schwarz" ? "schwarz" : "weiss"}.webp`;
   return (
     <div
       style={{
         position: "relative",
         width: "100%",
         height: "100%",
-        background: dunkel ? "#000000" : "#F5F5F5",
+        background: "#EDEDED",
       }}
     >
-      {art === "detail" && (
-        <Image
-          src={logo}
-          alt=""
-          width={792}
-          height={408}
-          priority
+      <Image
+        src={foto}
+        alt=""
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        priority
+        style={{ objectFit: "contain" }}
+      />
+    </div>
+  );
+}
+
+/* ─── Statement-Kachel: Verkaufs-Sätze statt leerer Fläche ──── */
+
+function StatementBild({
+  titel,
+  text,
+  klein = false,
+}: {
+  titel: string;
+  text: string;
+  klein?: boolean;
+}) {
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        background: "#0A0A0A",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        textAlign: "center",
+        padding: klein ? "8%" : "12%",
+        gap: klein ? "0" : "18px",
+        boxSizing: "border-box",
+      }}
+    >
+      <p
+        style={{
+          color: "#FAFAFA",
+          fontWeight: 900,
+          textTransform: "uppercase",
+          letterSpacing: "-0.01em",
+          lineHeight: 1.15,
+          fontSize: klein ? "9px" : "clamp(22px, 3vw, 34px)",
+          margin: 0,
+        }}
+      >
+        {titel}
+      </p>
+      {!klein && (
+        <p
           style={{
-            position: "absolute",
-            width: "46%",
-            height: "auto",
-            left: "27%",
-            top: "38%",
+            color: "var(--fg-muted)",
+            fontSize: "14px",
+            lineHeight: 1.7,
+            maxWidth: "340px",
+            margin: 0,
           }}
-        />
+        >
+          {text}
+        </p>
       )}
     </div>
   );
@@ -80,9 +90,10 @@ export function ProduktBild({
 /* ─── Detailseite ───────────────────────────────────────────── */
 
 export function ProduktDetail({ produkt }: { produkt: Produkt }) {
-  const ansichten: Ansicht[] = [
-    { label: "Vorderseite", art: "front" },
-    { label: "Logo-Detail", art: "detail" },
+  /* Galerie: echtes Foto + Statement-Kacheln */
+  const ansichten: { label: string; statementIndex: number | null }[] = [
+    { label: "Produktfoto", statementIndex: null },
+    ...produkt.statements.map((s, i) => ({ label: s.titel, statementIndex: i })),
   ];
 
   const [farbe, setFarbe] = useState<Farbe>(produkt.farben[0]);
@@ -90,6 +101,8 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
     produkt.groessen.length === 1 ? produkt.groessen[0] : null
   );
   const [ansicht, setAnsicht] = useState(0);
+
+  const aktiv = ansichten[ansicht];
 
   return (
     <section style={{ maxWidth: "1100px", margin: "0 auto", padding: "48px 24px 100px" }}>
@@ -126,13 +139,20 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
               overflow: "hidden",
             }}
           >
-            <ProduktBild farbe={farbe} art={ansichten[ansicht].art} slug={produkt.slug} />
+            {aktiv.statementIndex === null ? (
+              <ProduktBild farbe={farbe} slug={produkt.slug} />
+            ) : (
+              <StatementBild
+                titel={produkt.statements[aktiv.statementIndex].titel}
+                text={produkt.statements[aktiv.statementIndex].text}
+              />
+            )}
           </div>
 
           <div style={{ display: "flex", gap: "10px", marginTop: "12px" }}>
             {ansichten.map((a, i) => (
               <button
-                key={a.art}
+                key={a.label}
                 onClick={() => setAnsicht(i)}
                 aria-label={a.label}
                 style={{
@@ -148,7 +168,15 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
                   overflow: "hidden",
                 }}
               >
-                <ProduktBild farbe={farbe} art={a.art} slug={produkt.slug} />
+                {a.statementIndex === null ? (
+                  <ProduktBild farbe={farbe} slug={produkt.slug} />
+                ) : (
+                  <StatementBild
+                    titel={produkt.statements[a.statementIndex].titel}
+                    text=""
+                    klein
+                  />
+                )}
               </button>
             ))}
           </div>
@@ -290,6 +318,14 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
           >
             {produkt.beschreibung}
           </p>
+
+          {/* Warum so reduziert? */}
+          <div style={{ marginTop: "28px", borderTop: "1px solid var(--line)", paddingTop: "24px" }}>
+            <p style={auswahlLabel}>Warum so reduziert?</p>
+            <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.8 }}>
+              {produkt.philosophie}
+            </p>
+          </div>
 
           {/* Details */}
           <div style={{ marginTop: "28px", borderTop: "1px solid var(--line)", paddingTop: "24px" }}>
