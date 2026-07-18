@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { NilLogo } from "./NilLogo";
+import { TEXTE, type Sprache } from "../i18n/texte";
 
-export function Footer() {
+export function Footer({ sprache = "de" }: { sprache?: Sprache }) {
+  const t = TEXTE[sprache].footer;
   return (
     <footer style={{ borderTop: "1px solid var(--line)", background: "#050505" }}>
       <div
@@ -23,26 +25,26 @@ export function Footer() {
           <div style={{ maxWidth: "280px" }}>
             <NilLogo size={30} />
             <p style={{ color: "var(--fg-faint)", fontSize: "13px", lineHeight: 1.7, marginTop: "16px" }}>
-              Streetwear aus Deutschland. Klare Formen, keine Kompromisse. Bald verfügbar.
+              {t.beschreibung}
             </p>
           </div>
 
           <div style={{ display: "flex", gap: "56px", flexWrap: "wrap" }}>
             <div>
-              <p style={footHead}>Marke</p>
-              <FootLink href="/shop">Shop</FootLink>
-              <FootLink href="/ueber-uns">Über uns</FootLink>
-              <FootLink href="/faq">FAQ</FootLink>
+              <p style={footHead}>{t.marke}</p>
+              <FootLink href="/shop">{t.markeLinks.shop}</FootLink>
+              <FootLink href="/ueber-uns">{t.markeLinks.ueberUns}</FootLink>
+              <FootLink href="/faq">{t.markeLinks.faq}</FootLink>
             </div>
             <div>
-              <p style={footHead}>Kontakt</p>
-              <FootLink href="/kontakt">Kontaktformular</FootLink>
+              <p style={footHead}>{t.kontakt}</p>
+              <FootLink href="/kontakt">{t.kontaktformular}</FootLink>
               <FootLink href="mailto:info@nilogik.de">info@nilogik.de</FootLink>
             </div>
             <div>
-              <p style={footHead}>Rechtliches</p>
-              <FootLink href="/impressum">Impressum</FootLink>
-              <FootLink href="/datenschutz">Datenschutz</FootLink>
+              <p style={footHead}>{t.rechtliches}</p>
+              <FootLink href="/impressum">{t.impressum}</FootLink>
+              <FootLink href="/datenschutz">{t.datenschutz}</FootLink>
             </div>
           </div>
         </div>
@@ -59,10 +61,10 @@ export function Footer() {
           }}
         >
           <p style={{ color: "var(--fg-faint)", fontSize: "12px" }}>
-            © {new Date().getFullYear()} NIL. Alle Rechte vorbehalten.
+            © {new Date().getFullYear()} NIL. {t.rechte}
           </p>
           <p style={{ color: "var(--fg-faint)", fontSize: "12px", letterSpacing: "0.08em", textTransform: "uppercase" }}>
-            Coming Soon
+            {t.comingSoon}
           </p>
         </div>
       </div>

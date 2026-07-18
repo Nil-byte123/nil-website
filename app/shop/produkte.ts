@@ -1,9 +1,11 @@
 /* ─── Produktdaten für den ersten NIL Drop ───────────────────────
    Entspricht den bei Printful angelegten Produkten.
-   Echte Mockup-Fotos kommen später nach /public/produkte/ –
-   bis dahin rendert ProduktBild eine saubere Platzhalter-Ansicht. */
+   Alle Texte zweisprachig: { de, en } – die Sprache richtet sich
+   nach den Geräte-Einstellungen des Besuchers.                   */
 
 export type Farbe = "Schwarz" | "Weiß";
+
+export type Zweisprachig = { de: string; en: string };
 
 export type Produkt = {
   slug: string;
@@ -13,13 +15,13 @@ export type Produkt = {
   farben: Farbe[];
   groessen: string[];
   /* Wie das Teil produziert wird (Printful) */
-  herstellung: string;
-  beschreibung: string;
-  details: string[];
+  herstellung: Zweisprachig;
+  beschreibung: Zweisprachig;
+  details: Zweisprachig[];
   /* Statement-Kacheln in der Bildergalerie */
-  statements: { titel: string; text: string }[];
+  statements: { titel: Zweisprachig; text: Zweisprachig }[];
   /* Erklärung, warum das Design so reduziert ist */
-  philosophie: string;
+  philosophie: Zweisprachig;
 };
 
 export const PRODUKTE: Produkt[] = [
@@ -30,29 +32,54 @@ export const PRODUKTE: Produkt[] = [
     preis: "€49,90",
     farben: ["Schwarz", "Weiß"],
     groessen: ["S", "M", "L", "XL", "2XL", "3XL"],
-    herstellung: "DTG-Druck",
-    beschreibung:
-      "Schwerer Oversized-Hoodie mit Kapuze und Drop Shoulders. Dicker, weicher Stoff, klarer Schnitt – und das NIL Logo dezent links auf der Brust. Keine großen Prints, kein Lärm.",
+    herstellung: { de: "DTG-Druck", en: "DTG printing" },
+    beschreibung: {
+      de: "Schwerer Oversized-Hoodie mit Kapuze und Drop Shoulders. Dicker, weicher Stoff, klarer Schnitt – und das NIL Logo dezent links auf der Brust. Keine großen Prints, kein Lärm.",
+      en: "A heavy oversized hoodie with hood and drop shoulders. Thick, soft fabric, a clean cut – and the NIL logo subtle on the left chest. No big prints, no noise.",
+    },
     details: [
-      "Schwerer, dichter Stoff – fällt sauber, trägt sich warm",
-      "Oversized Fit mit Drop Shoulders",
-      "Kapuze mit Kordelzug",
-      "NIL Logo klein links auf der Brust",
-      "Rückseite ohne Print – bewusst clean",
-      "Größen S bis 3XL",
+      {
+        de: "Schwerer, dichter Stoff – fällt sauber, trägt sich warm",
+        en: "Heavy, dense fabric – drapes clean, keeps you warm",
+      },
+      {
+        de: "Oversized Fit mit Drop Shoulders",
+        en: "Oversized fit with drop shoulders",
+      },
+      { de: "Kapuze mit Kordelzug", en: "Hood with drawstring" },
+      {
+        de: "NIL Logo klein links auf der Brust",
+        en: "Small NIL logo on the left chest",
+      },
+      {
+        de: "Rückseite ohne Print – bewusst clean",
+        en: "Back left blank – deliberately clean",
+      },
+      { de: "Größen S bis 3XL", en: "Sizes S to 3XL" },
     ],
     statements: [
       {
-        titel: "Kein Print. Kein Lärm.",
-        text: "Die Rückseite bleibt bewusst frei. Ein Logo reicht – der Rest ist Haltung.",
+        titel: { de: "Kein Print. Kein Lärm.", en: "No print. No noise." },
+        text: {
+          de: "Die Rückseite bleibt bewusst frei. Ein Logo reicht – der Rest ist Haltung.",
+          en: "The back stays blank on purpose. One logo is enough – the rest is attitude.",
+        },
       },
       {
-        titel: "Schwer. Sauber. Oversized.",
-        text: "Dicker Stoff, klare Silhouette. Gemacht, um getragen zu werden – nicht, um zu schreien.",
+        titel: {
+          de: "Schwer. Sauber. Oversized.",
+          en: "Heavy. Clean. Oversized.",
+        },
+        text: {
+          de: "Dicker Stoff, klare Silhouette. Gemacht, um getragen zu werden – nicht, um zu schreien.",
+          en: "Thick fabric, a clear silhouette. Made to be worn – not to shout.",
+        },
       },
     ],
-    philosophie:
-      "Die Rückseite bleibt frei, das Logo bleibt klein. Warum? Weil alles Überflüssige ablenkt. Du kaufst keinen Werbebanner – du kaufst einen Hoodie, der ohne Effekte auskommt und genau deshalb auffällt.",
+    philosophie: {
+      de: "Die Rückseite bleibt frei, das Logo bleibt klein. Warum? Weil alles Überflüssige ablenkt. Du kaufst keinen Werbebanner – du kaufst einen Hoodie, der ohne Effekte auskommt und genau deshalb auffällt.",
+      en: "The back stays blank, the logo stays small. Why? Because everything unnecessary distracts. You're not buying a billboard – you're buying a hoodie that needs no effects and stands out exactly because of that.",
+    },
   },
   {
     slug: "t-shirt",
@@ -61,28 +88,53 @@ export const PRODUKTE: Produkt[] = [
     preis: "€27,90",
     farben: ["Schwarz", "Weiß"],
     groessen: ["S", "M", "L", "XL", "2XL"],
-    herstellung: "DTG-Druck",
-    beschreibung:
-      "Oversized T-Shirt aus Bio-Baumwolle mit High Neck. Fällt locker, liegt nicht am Körper an – und das NIL Logo sitzt klein links auf der Brust.",
+    herstellung: { de: "DTG-Druck", en: "DTG printing" },
+    beschreibung: {
+      de: "Oversized T-Shirt aus Bio-Baumwolle mit High Neck. Fällt locker, liegt nicht am Körper an – und das NIL Logo sitzt klein links auf der Brust.",
+      en: "An oversized tee made from organic cotton with a high neck. Falls loose, doesn't cling – with the NIL logo sitting small on the left chest.",
+    },
     details: [
-      "Bio-Baumwolle, dickes Jersey",
-      "Oversized Fit mit High Neck",
-      "NIL Logo klein links auf der Brust",
-      "Rückseite ohne Print – bewusst clean",
-      "Größen S bis 2XL",
+      { de: "Bio-Baumwolle, dickes Jersey", en: "Organic cotton, thick jersey" },
+      {
+        de: "Oversized Fit mit High Neck",
+        en: "Oversized fit with high neck",
+      },
+      {
+        de: "NIL Logo klein links auf der Brust",
+        en: "Small NIL logo on the left chest",
+      },
+      {
+        de: "Rückseite ohne Print – bewusst clean",
+        en: "Back left blank – deliberately clean",
+      },
+      { de: "Größen S bis 2XL", en: "Sizes S to 2XL" },
     ],
     statements: [
       {
-        titel: "Weniger ist das Statement.",
-        text: "Kein Druck auf dem Rücken, keine Grafik-Flut. Nur Bio-Baumwolle und ein Logo, das für sich steht.",
+        titel: {
+          de: "Weniger ist das Statement.",
+          en: "Less is the statement.",
+        },
+        text: {
+          de: "Kein Druck auf dem Rücken, keine Grafik-Flut. Nur Bio-Baumwolle und ein Logo, das für sich steht.",
+          en: "No back print, no graphic overload. Just organic cotton and a logo that stands on its own.",
+        },
       },
       {
-        titel: "Oversized. Nicht beliebig.",
-        text: "Locker geschnitten, High Neck, dickes Jersey – Basics, die nicht langweilig sind.",
+        titel: {
+          de: "Oversized. Nicht beliebig.",
+          en: "Oversized. Not random.",
+        },
+        text: {
+          de: "Locker geschnitten, High Neck, dickes Jersey – Basics, die nicht langweilig sind.",
+          en: "Loose cut, high neck, thick jersey – basics that aren't boring.",
+        },
       },
     ],
-    philosophie:
-      "Kein Rückenprint, keine Grafik-Flut. Ein sauberes Shirt mit einem Logo, das für sich steht – reduziert, damit du im Mittelpunkt bleibst, nicht der Aufdruck.",
+    philosophie: {
+      de: "Kein Rückenprint, keine Grafik-Flut. Ein sauberes Shirt mit einem Logo, das für sich steht – reduziert, damit du im Mittelpunkt bleibst, nicht der Aufdruck.",
+      en: "No back print, no graphic overload. A clean shirt with a logo that stands on its own – reduced, so you stay the focus, not the print.",
+    },
   },
   {
     slug: "cap",
@@ -91,23 +143,36 @@ export const PRODUKTE: Produkt[] = [
     preis: "€22,90",
     farben: ["Schwarz", "Weiß"],
     groessen: ["One Size"],
-    herstellung: "Stickerei",
-    beschreibung:
-      "Trucker Cap mit gesticktem NIL Logo vorne. Mesh-Rückseite, verstellbarer Verschluss – One Size, passt fast jedem.",
+    herstellung: { de: "Stickerei", en: "embroidery" },
+    beschreibung: {
+      de: "Trucker Cap mit gesticktem NIL Logo vorne. Mesh-Rückseite, verstellbarer Verschluss – One Size, passt fast jedem.",
+      en: "A trucker cap with an embroidered NIL logo on the front. Mesh back, adjustable closure – one size, fits almost everyone.",
+    },
     details: [
-      "NIL Logo vorne gestickt (keine Folie, kein Druck)",
-      "Mesh-Rückseite, atmungsaktiv",
-      "Verstellbarer Snapback-Verschluss",
-      "One Size",
+      {
+        de: "NIL Logo vorne gestickt (keine Folie, kein Druck)",
+        en: "NIL logo embroidered on the front (no foil, no print)",
+      },
+      { de: "Mesh-Rückseite, atmungsaktiv", en: "Breathable mesh back" },
+      {
+        de: "Verstellbarer Snapback-Verschluss",
+        en: "Adjustable snapback closure",
+      },
+      { de: "One Size", en: "One size" },
     ],
     statements: [
       {
-        titel: "Gestickt. Nicht gedruckt.",
-        text: "Das NIL Logo ist gestickt – Qualität, die man sieht und fühlt. Mehr braucht die Cap nicht.",
+        titel: { de: "Gestickt. Nicht gedruckt.", en: "Stitched. Not printed." },
+        text: {
+          de: "Das NIL Logo ist gestickt – Qualität, die man sieht und fühlt. Mehr braucht die Cap nicht.",
+          en: "The NIL logo is embroidered – quality you can see and feel. That's all this cap needs.",
+        },
       },
     ],
-    philosophie:
-      "Nur ein gesticktes Logo, sonst nichts. Stickerei statt Druck heißt: Qualität, die bleibt – auch nach Jahren.",
+    philosophie: {
+      de: "Nur ein gesticktes Logo, sonst nichts. Stickerei statt Druck heißt: Qualität, die bleibt – auch nach Jahren.",
+      en: "Just one embroidered logo, nothing else. Embroidery instead of print means quality that lasts – for years.",
+    },
   },
 ];
 

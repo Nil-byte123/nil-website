@@ -1,0 +1,393 @@
+/* ─── Zweisprachige Texte (DE/EN) ────────────────────────────────
+   Die Sprache richtet sich nach der Geräte-Einstellung des
+   Besuchers (Accept-Language-Header): Deutsch → de, sonst → en.  */
+
+export type Sprache = "de" | "en";
+
+const de = {
+  nav: {
+    links: [
+      { href: "/shop", label: "Shop" },
+      { href: "/ueber-uns", label: "Über uns" },
+      { href: "/faq", label: "FAQ" },
+      { href: "/kontakt", label: "Kontakt" },
+    ],
+    warteliste: "Warteliste",
+    menueAuf: "Menü öffnen",
+    menueZu: "Menü schließen",
+  },
+  hero: {
+    badge: "Bald verfügbar",
+    titel: "Streetwear. Reduziert auf das, was zählt.",
+    text: "Der erste Drop ist in Arbeit. Schwarz, weiß, kompromisslos – kein Lärm, nur das Wesentliche.",
+    cta: "Zur Vorschau",
+    marquee: "COMING SOON — NIL — STREETWEAR — ERSTER DROP — ",
+  },
+  teaser: {
+    overline: "Der erste Drop",
+    titel: "Was dich erwartet",
+    badge: "Bald verfügbar",
+    karten: [
+      {
+        titel: "Hoodies",
+        text: "Schwerer Stoff, klarer Schnitt, NIL Blockprint. Keine überladenen Grafiken – das Logo spricht für sich.",
+      },
+      {
+        titel: "T-Shirts",
+        text: "Oversized Fit, dickes Baumwoll-Jersey. Minimalistisch – das Logo spricht für sich.",
+      },
+      {
+        titel: "Caps & mehr",
+        text: "Accessoires im gleichen Look: schwarz, weiß, kompromisslos. Details folgen beim Launch.",
+      },
+    ],
+    cta: "Zur Vorschau →",
+  },
+  marke: {
+    overline: "Die Marke",
+    titel: "Weniger Lärm. Mehr Haltung.",
+    text: "NIL steht für Reduktion: schwarz, weiß, harte Kanten, ehrliche Basics. Gegründet in Deutschland, gedacht für alle, die keine Logos-Überall-Optik brauchen, um aufzufallen.",
+    cta: "Mehr über NIL",
+  },
+  warteliste: {
+    overline: "Der erste Drop",
+    titel: "Trag dich auf die Warteliste",
+    text: "Erfahre als Erste:r, wenn der erste NIL Drop live geht. Kein Spam – nur Bescheid sagen, wenn es ernst wird.",
+  },
+  wartelisteForm: {
+    platzhalter: "deine@email.de",
+    knopf: "Benachrichtige mich",
+    laden: "Moment…",
+    erfolgTitel: "Du bist dabei ✓",
+    erfolgText: "Wir melden uns, sobald der erste Drop live geht.",
+    hinweis: "Kein Spam. Nur eine Mail, wenn's losgeht.",
+    fehler: "Etwas ist schiefgelaufen. Versuch es nochmal.",
+    fehlerVerbindung: "Verbindungsfehler. Versuch es nochmal.",
+  },
+  shop: {
+    overline: "Vorschau",
+    titel: "Der erste Drop",
+    introVor: "Klick auf ein Produkt für alle Details: Ansichten, Größen, Farben und wie die Bestellung später abläuft. Kaufen ist noch nicht möglich – trag dich auf die ",
+    introLink: "Warteliste",
+    introNach: " ein, dann bekommst du Bescheid, sobald es losgeht.",
+    badge: "Bald verfügbar",
+    boxTitel: "Nichts verpassen",
+    boxText: "Preise, Fotos und Launch-Datum kommen zuerst an die Warteliste.",
+    boxCta: "Zur Warteliste",
+  },
+  produkt: {
+    zurueck: "← Zurück zum Shop",
+    fotoLabel: "Produktfoto",
+    fotoHinweis: "Produktfoto: Vorschau unseres Print-Partners. Eigene Fotos folgen zum Launch.",
+    badge: "Bald verfügbar",
+    farbe: "Farbe",
+    groesse: "Größe",
+    farbNamen: { Schwarz: "Schwarz", "Weiß": "Weiß" } as Record<string, string>,
+    zzglVersand: "zzgl. Versand",
+    cta: "Auf die Warteliste",
+    ctaHinweis: "Kaufen geht noch nicht – der Verkauf startet mit dem ersten Drop.",
+    warum: "Warum so reduziert?",
+    details: "Details",
+    bestellung: "So läuft die Bestellung später",
+    bestellPunkte: [
+      "Jedes Teil wird erst nach deiner Bestellung produziert (on demand) – keine Überproduktion.",
+      "Produziert bei unserem Print-Partner in Europa ({herstellung}).",
+      "Produktion ca. 2–5 Werktage, Versand ca. 3–5 Werktage – insgesamt etwa 1–2 Wochen bis zu dir.",
+      "Der Verkauf startet mit dem ersten Drop – die Warteliste erfährt es zuerst.",
+    ],
+  },
+  faq: {
+    overline: "FAQ",
+    titel: "Häufige Fragen",
+    fragen: [
+      {
+        q: "Wann geht NIL an den Start?",
+        a: "Wir arbeiten gerade am ersten Drop. Ein genaues Datum gibt es noch nicht – aber die Warteliste erfährt es zuerst. Trag dich ein, dann verpasst du nichts.",
+      },
+      {
+        q: "Warum kann ich noch nichts kaufen?",
+        a: "Wir bereiten den Launch gründlich vor: Designs, Qualität, Produktion und alles Rechtliche. Sobald alles steht, wird der Shop freigeschaltet.",
+      },
+      {
+        q: "Was kommt im ersten Drop?",
+        a: "Hoodies, Oversized T-Shirts und Caps – alles in Schwarz und Weiß mit dem NIL Blockprint. Eine Vorschau findest du im Shop.",
+      },
+      {
+        q: "Wie wird produziert?",
+        a: "On demand: Jedes Teil wird erst produziert, wenn es bestellt wird. Das heißt keine Überproduktion, keine Lagerbestände, die weggeworfen werden.",
+      },
+      {
+        q: "Was kostet die Warteliste?",
+        a: "Nichts. Du gibst nur deine E-Mail-Adresse an und bekommst eine Nachricht, wenn der Drop live geht. Kein Spam, versprochen.",
+      },
+      {
+        q: "Wohin wird später versendet – und wie lange dauert es?",
+        a: "Zum Start konzentrieren wir uns auf Deutschland. Da jedes Teil erst nach Bestellung produziert wird (2–5 Werktage) und dann verschickt wird (3–5 Werktage), dauert die Lieferung insgesamt etwa 1–2 Wochen. Weitere Länder folgen, wenn alles rund läuft.",
+      },
+      {
+        q: "Ich habe eine andere Frage.",
+        a: "Schreib uns einfach über das Kontaktformular oder direkt an info@nilogik.de – wir antworten so schnell wie möglich.",
+      },
+    ],
+    frageNicht: "Frage nicht dabei?",
+    kontaktCta: "Kontakt aufnehmen",
+  },
+  ueberUns: {
+    overline: "Über uns",
+    titel: "Die Geschichte hinter NIL",
+    bloecke: [
+      {
+        titel: "Der Anfang",
+        text: "NIL ist in Deutschland entstanden – aus der Idee, dass gute Klamotten nicht laut sein müssen. Keine riesigen Grafiken, keine zehn Farben, kein unnötiger Schnickschnack. Nur klare Formen, gute Stoffe und ein Logo, das für sich steht.",
+      },
+      {
+        titel: "Der Name",
+        text: "NIL bedeutet „nichts“ – und genau das ist der Punkt. Wir starten bei null und lassen alles weg, was nicht nötig ist. Was übrig bleibt, ist das Wesentliche: Schwarz, Weiß und ein sauberer Schnitt.",
+      },
+      {
+        titel: "Die Vision",
+        text: "Wir bauen NIL Schritt für Schritt auf – ehrlich und ohne Abkürzungen. Der erste Drop ist in Arbeit: Hoodies, T-Shirts und Caps, produziert on demand, damit nichts auf Halde landet und nichts verschwendet wird.",
+      },
+      {
+        titel: "Warum Warteliste?",
+        text: "Wir wollen es richtig machen statt schnell. Bis zum Launch kannst du dich auf die Warteliste setzen – dann gehörst du zu den Ersten, die den Drop sehen, bevor er offiziell live geht.",
+      },
+    ],
+    cta: "Auf die Warteliste",
+  },
+  kontakt: {
+    overline: "Kontakt",
+    titel: "Schreib uns",
+    text: "Fragen zur Marke, zum Launch oder Interesse an einer Kooperation? Schick uns eine Nachricht – wir antworten so schnell wie möglich.",
+    direkt: "Oder direkt per Mail:",
+  },
+  kontaktForm: {
+    nameLabel: "Name",
+    namePlatzhalter: "Dein Name",
+    emailLabel: "E-Mail",
+    emailPlatzhalter: "deine@email.de",
+    nachrichtLabel: "Nachricht",
+    nachrichtPlatzhalter: "Worum geht's?",
+    senden: "Nachricht senden",
+    laden: "Wird gesendet…",
+    erfolgTitel: "Nachricht gesendet ✓",
+    erfolgText: "Danke! Wir melden uns so schnell wie möglich bei dir.",
+    fehler: "Etwas ist schiefgelaufen. Versuch es nochmal.",
+    fehlerVerbindung: "Verbindungsfehler. Versuch es nochmal.",
+  },
+  footer: {
+    beschreibung: "Streetwear aus Deutschland. Klare Formen, keine Kompromisse. Bald verfügbar.",
+    marke: "Marke",
+    markeLinks: { shop: "Shop", ueberUns: "Über uns", faq: "FAQ" },
+    kontakt: "Kontakt",
+    kontaktformular: "Kontaktformular",
+    rechtliches: "Rechtliches",
+    impressum: "Impressum",
+    datenschutz: "Datenschutz",
+    rechte: "Alle Rechte vorbehalten.",
+    comingSoon: "Coming Soon",
+  },
+  cookie: {
+    titel: "Datenschutz",
+    textVor: "Diese Website verwendet technisch notwendige Cookies sowie Google Analytics für anonyme Reichweitenmessung. Mehr dazu in unserer ",
+    linkText: "Datenschutzerklärung",
+    textNach: ".",
+    nurNotwendige: "Nur notwendige",
+    alleAkzeptieren: "Alle akzeptieren",
+  },
+};
+
+const en: typeof de = {
+  nav: {
+    links: [
+      { href: "/shop", label: "Shop" },
+      { href: "/ueber-uns", label: "About" },
+      { href: "/faq", label: "FAQ" },
+      { href: "/kontakt", label: "Contact" },
+    ],
+    warteliste: "Waitlist",
+    menueAuf: "Open menu",
+    menueZu: "Close menu",
+  },
+  hero: {
+    badge: "Coming soon",
+    titel: "Streetwear. Reduced to what matters.",
+    text: "The first drop is in the works. Black, white, uncompromising – no noise, just the essentials.",
+    cta: "View preview",
+    marquee: "COMING SOON — NIL — STREETWEAR — FIRST DROP — ",
+  },
+  teaser: {
+    overline: "The first drop",
+    titel: "What to expect",
+    badge: "Coming soon",
+    karten: [
+      {
+        titel: "Hoodies",
+        text: "Heavy fabric, clean cut, NIL block print. No cluttered graphics – the logo speaks for itself.",
+      },
+      {
+        titel: "T-Shirts",
+        text: "Oversized fit, thick cotton jersey. Minimalist – the logo speaks for itself.",
+      },
+      {
+        titel: "Caps & more",
+        text: "Accessories with the same look: black, white, uncompromising. Details coming at launch.",
+      },
+    ],
+    cta: "View preview →",
+  },
+  marke: {
+    overline: "The brand",
+    titel: "Less noise. More attitude.",
+    text: "NIL stands for reduction: black, white, hard edges, honest basics. Founded in Germany, made for everyone who doesn't need logos everywhere to stand out.",
+    cta: "More about NIL",
+  },
+  warteliste: {
+    overline: "The first drop",
+    titel: "Join the waitlist",
+    text: "Be the first to know when the first NIL drop goes live. No spam – we'll only reach out when it matters.",
+  },
+  wartelisteForm: {
+    platzhalter: "your@email.com",
+    knopf: "Notify me",
+    laden: "One sec…",
+    erfolgTitel: "You're in ✓",
+    erfolgText: "We'll let you know as soon as the first drop goes live.",
+    hinweis: "No spam. Just one email when it's time.",
+    fehler: "Something went wrong. Please try again.",
+    fehlerVerbindung: "Connection error. Please try again.",
+  },
+  shop: {
+    overline: "Preview",
+    titel: "The first drop",
+    introVor: "Click a product for all details: views, sizes, colors and how ordering will work. Buying isn't possible yet – join the ",
+    introLink: "waitlist",
+    introNach: " and we'll let you know as soon as it starts.",
+    badge: "Coming soon",
+    boxTitel: "Don't miss out",
+    boxText: "Prices, photos and the launch date go to the waitlist first.",
+    boxCta: "Join the waitlist",
+  },
+  produkt: {
+    zurueck: "← Back to shop",
+    fotoLabel: "Product photo",
+    fotoHinweis: "Product photo: preview from our print partner. Our own photos are coming at launch.",
+    badge: "Coming soon",
+    farbe: "Color",
+    groesse: "Size",
+    farbNamen: { Schwarz: "Black", "Weiß": "White" } as Record<string, string>,
+    zzglVersand: "plus shipping",
+    cta: "Join the waitlist",
+    ctaHinweis: "You can't buy yet – sales start with the first drop.",
+    warum: "Why so minimal?",
+    details: "Details",
+    bestellung: "How ordering will work",
+    bestellPunkte: [
+      "Every piece is made only after you order it (on demand) – no overproduction.",
+      "Produced by our print partner in Europe ({herstellung}).",
+      "Production takes about 2–5 business days, shipping 3–5 business days – around 1–2 weeks in total.",
+      "Sales start with the first drop – the waitlist hears about it first.",
+    ],
+  },
+  faq: {
+    overline: "FAQ",
+    titel: "Frequently asked questions",
+    fragen: [
+      {
+        q: "When does NIL launch?",
+        a: "We're working on the first drop. There's no exact date yet – but the waitlist hears it first. Sign up and you won't miss anything.",
+      },
+      {
+        q: "Why can't I buy anything yet?",
+        a: "We're preparing the launch properly: designs, quality, production and all the legal groundwork. As soon as everything is ready, the shop goes live.",
+      },
+      {
+        q: "What's in the first drop?",
+        a: "Hoodies, oversized tees and caps – all in black and white with the NIL block print. You'll find a preview in the shop.",
+      },
+      {
+        q: "How is it produced?",
+        a: "On demand: every piece is only made once it's ordered. That means no overproduction and no stock ending up in the trash.",
+      },
+      {
+        q: "What does the waitlist cost?",
+        a: "Nothing. You just leave your email and get a message when the drop goes live. No spam, promised.",
+      },
+      {
+        q: "Where do you ship – and how long does it take?",
+        a: "At launch we focus on Germany. Since every piece is made after you order (2–5 business days) and then shipped (3–5 business days), delivery takes about 1–2 weeks in total. More countries will follow.",
+      },
+      {
+        q: "I have another question.",
+        a: "Just write to us via the contact form or directly at info@nilogik.de – we'll reply as fast as we can.",
+      },
+    ],
+    frageNicht: "Question not answered?",
+    kontaktCta: "Get in touch",
+  },
+  ueberUns: {
+    overline: "About us",
+    titel: "The story behind NIL",
+    bloecke: [
+      {
+        titel: "The beginning",
+        text: "NIL was founded in Germany – built on the idea that good clothes don't have to be loud. No huge graphics, no ten colors, no unnecessary extras. Just clear shapes, good fabrics and a logo that stands on its own.",
+      },
+      {
+        titel: "The name",
+        text: "NIL means “nothing” – and that's exactly the point. We start from zero and leave out everything that isn't needed. What remains is the essential: black, white and a clean cut.",
+      },
+      {
+        titel: "The vision",
+        text: "We're building NIL step by step – honestly and without shortcuts. The first drop is in the works: hoodies, tees and caps, produced on demand so nothing goes to waste.",
+      },
+      {
+        titel: "Why a waitlist?",
+        text: "We want to do it right, not fast. Until launch you can join the waitlist – and be among the first to see the drop before it officially goes live.",
+      },
+    ],
+    cta: "Join the waitlist",
+  },
+  kontakt: {
+    overline: "Contact",
+    titel: "Write to us",
+    text: "Questions about the brand, the launch or interested in a collaboration? Send us a message – we'll answer as fast as possible.",
+    direkt: "Or directly by email:",
+  },
+  kontaktForm: {
+    nameLabel: "Name",
+    namePlatzhalter: "Your name",
+    emailLabel: "Email",
+    emailPlatzhalter: "your@email.com",
+    nachrichtLabel: "Message",
+    nachrichtPlatzhalter: "What's it about?",
+    senden: "Send message",
+    laden: "Sending…",
+    erfolgTitel: "Message sent ✓",
+    erfolgText: "Thanks! We'll get back to you as soon as possible.",
+    fehler: "Something went wrong. Please try again.",
+    fehlerVerbindung: "Connection error. Please try again.",
+  },
+  footer: {
+    beschreibung: "Streetwear from Germany. Clear shapes, no compromises. Coming soon.",
+    marke: "Brand",
+    markeLinks: { shop: "Shop", ueberUns: "About", faq: "FAQ" },
+    kontakt: "Contact",
+    kontaktformular: "Contact form",
+    rechtliches: "Legal",
+    impressum: "Imprint",
+    datenschutz: "Privacy policy",
+    rechte: "All rights reserved.",
+    comingSoon: "Coming Soon",
+  },
+  cookie: {
+    titel: "Privacy",
+    textVor: "This website uses technically necessary cookies and Google Analytics for anonymous traffic measurement. Learn more in our ",
+    linkText: "privacy policy",
+    textNach: ".",
+    nurNotwendige: "Essential only",
+    alleAkzeptieren: "Accept all",
+  },
+};
+
+export const TEXTE: Record<Sprache, typeof de> = { de, en };

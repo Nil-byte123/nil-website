@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { TEXTE, type Sprache } from "../i18n/texte";
 
-export function WaitlistForm() {
+export function WaitlistForm({ sprache = "de" }: { sprache?: Sprache }) {
+  const t = TEXTE[sprache].wartelisteForm;
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -26,11 +28,11 @@ export function WaitlistForm() {
         setEmail("");
       } else {
         setStatus("error");
-        setErrorMsg(data.error ?? "Etwas ist schiefgelaufen. Versuch es nochmal.");
+        setErrorMsg(data.error ?? t.fehler);
       }
     } catch {
       setStatus("error");
-      setErrorMsg("Verbindungsfehler. Versuch es nochmal.");
+      setErrorMsg(t.fehlerVerbindung);
     }
   }
 
@@ -44,10 +46,10 @@ export function WaitlistForm() {
         }}
       >
         <p style={{ fontSize: "15px", fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase" }}>
-          Du bist dabei ✓
+          {t.erfolgTitel}
         </p>
         <p style={{ color: "var(--fg-muted)", fontSize: "13px", marginTop: "8px" }}>
-          Wir melden uns, sobald der erste Drop live geht.
+          {t.erfolgText}
         </p>
       </div>
     );
@@ -68,7 +70,7 @@ export function WaitlistForm() {
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="deine@email.de"
+          placeholder={t.platzhalter}
           aria-label="E-Mail-Adresse"
           style={{
             flex: "1 1 220px",
@@ -97,14 +99,14 @@ export function WaitlistForm() {
             opacity: status === "loading" ? 0.7 : 1,
           }}
         >
-          {status === "loading" ? "Moment…" : "Benachrichtige mich"}
+          {status === "loading" ? t.laden : t.knopf}
         </button>
       </div>
       {status === "error" && (
         <p style={{ color: "#F87171", fontSize: "13px", marginTop: "10px" }}>{errorMsg}</p>
       )}
       <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "12px", textAlign: "center" }}>
-        Kein Spam. Nur eine Mail, wenn&apos;s losgeht.
+        {t.hinweis}
       </p>
     </form>
   );

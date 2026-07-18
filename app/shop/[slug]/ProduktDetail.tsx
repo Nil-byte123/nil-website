@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Farbe, Produkt } from "../produkte";
+import { TEXTE, type Sprache } from "../../i18n/texte";
 
 /* ─── Produktfoto (echtes Printful-Mockup) ──────────────────── */
 
@@ -89,11 +90,12 @@ function StatementBild({
 
 /* ─── Detailseite ───────────────────────────────────────────── */
 
-export function ProduktDetail({ produkt }: { produkt: Produkt }) {
+export function ProduktDetail({ produkt, sprache = "de" }: { produkt: Produkt; sprache?: Sprache }) {
+  const t = TEXTE[sprache].produkt;
   /* Galerie: echtes Foto + Statement-Kacheln */
   const ansichten: { label: string; statementIndex: number | null }[] = [
-    { label: "Produktfoto", statementIndex: null },
-    ...produkt.statements.map((s, i) => ({ label: s.titel, statementIndex: i })),
+    { label: t.fotoLabel, statementIndex: null },
+    ...produkt.statements.map((s, i) => ({ label: s.titel[sprache], statementIndex: i })),
   ];
 
   const [farbe, setFarbe] = useState<Farbe>(produkt.farben[0]);
@@ -119,7 +121,7 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
           textTransform: "uppercase",
         }}
       >
-        ← Zurück zum Shop
+        {t.zurueck}
       </Link>
 
       <div
@@ -143,8 +145,8 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
               <ProduktBild farbe={farbe} slug={produkt.slug} />
             ) : (
               <StatementBild
-                titel={produkt.statements[aktiv.statementIndex].titel}
-                text={produkt.statements[aktiv.statementIndex].text}
+                titel={produkt.statements[aktiv.statementIndex].titel[sprache]}
+                text={produkt.statements[aktiv.statementIndex].text[sprache]}
               />
             )}
           </div>
@@ -172,7 +174,7 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
                   <ProduktBild farbe={farbe} slug={produkt.slug} />
                 ) : (
                   <StatementBild
-                    titel={produkt.statements[a.statementIndex].titel}
+                    titel={produkt.statements[a.statementIndex].titel[sprache]}
                     text=""
                     klein
                   />
@@ -181,7 +183,7 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
             ))}
           </div>
           <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "12px" }}>
-            Produktfoto: Vorschau unseres Print-Partners. Eigene Fotos folgen zum Launch.
+            {t.fotoHinweis}
           </p>
         </div>
 
@@ -219,7 +221,7 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
                 marginLeft: "10px",
               }}
             >
-              zzgl. Versand
+              {t.zzglVersand}
             </span>
           </p>
 
@@ -236,12 +238,12 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
               marginTop: "16px",
             }}
           >
-            Bald verfügbar
+            {t.badge}
           </div>
 
           {/* Farbe */}
           <div style={{ marginTop: "32px" }}>
-            <p style={auswahlLabel}>Farbe: {farbe}</p>
+            <p style={auswahlLabel}>{t.farbe}: {t.farbNamen[farbe]}</p>
             <div style={{ display: "flex", gap: "10px" }}>
               {produkt.farben.map((f) => (
                 <button
@@ -265,7 +267,7 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
 
           {/* Größe */}
           <div style={{ marginTop: "28px" }}>
-            <p style={auswahlLabel}>Größe{groesse ? `: ${groesse}` : ""}</p>
+            <p style={auswahlLabel}>{t.groesse}{groesse ? `: ${groesse}` : ""}</p>
             <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
               {produkt.groessen.map((g) => (
                 <button
@@ -310,10 +312,10 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
                 textTransform: "uppercase",
               }}
             >
-              Auf die Warteliste
+              {t.cta}
             </Link>
             <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "10px", textAlign: "center" }}>
-              Kaufen geht noch nicht – der Verkauf startet mit dem ersten Drop.
+              {t.ctaHinweis}
             </p>
           </div>
 
@@ -326,24 +328,24 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
               marginTop: "40px",
             }}
           >
-            {produkt.beschreibung}
+            {produkt.beschreibung[sprache]}
           </p>
 
           {/* Warum so reduziert? */}
           <div style={{ marginTop: "28px", borderTop: "1px solid var(--line)", paddingTop: "24px" }}>
-            <p style={auswahlLabel}>Warum so reduziert?</p>
+            <p style={auswahlLabel}>{t.warum}</p>
             <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.8 }}>
-              {produkt.philosophie}
+              {produkt.philosophie[sprache]}
             </p>
           </div>
 
           {/* Details */}
           <div style={{ marginTop: "28px", borderTop: "1px solid var(--line)", paddingTop: "24px" }}>
-            <p style={auswahlLabel}>Details</p>
+            <p style={auswahlLabel}>{t.details}</p>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {produkt.details.map((d) => (
                 <li
-                  key={d}
+                  key={d.de}
                   style={{
                     color: "var(--fg-muted)",
                     fontSize: "14px",
@@ -352,7 +354,7 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
                     borderBottom: "1px solid var(--line)",
                   }}
                 >
-                  {d}
+                  {d[sprache]}
                 </li>
               ))}
             </ul>
@@ -367,14 +369,11 @@ export function ProduktDetail({ produkt }: { produkt: Produkt }) {
               padding: "24px",
             }}
           >
-            <p style={auswahlLabel}>So läuft die Bestellung später</p>
+            <p style={auswahlLabel}>{t.bestellung}</p>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
-              {[
-                "Jedes Teil wird erst nach deiner Bestellung produziert (on demand) – keine Überproduktion.",
-                `Produziert bei unserem Print-Partner in Europa (${produkt.herstellung}).`,
-                "Produktion ca. 2–5 Werktage, Versand ca. 3–5 Werktage – insgesamt etwa 1–2 Wochen bis zu dir.",
-                "Der Verkauf startet mit dem ersten Drop – die Warteliste erfährt es zuerst.",
-              ].map((z) => (
+              {t.bestellPunkte.map((punkt) =>
+                punkt.replace("{herstellung}", produkt.herstellung[sprache])
+              ).map((z) => (
                 <li
                   key={z}
                   style={{

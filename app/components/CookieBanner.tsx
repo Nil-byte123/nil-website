@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { TEXTE, type Sprache } from "../i18n/texte";
 
-export default function CookieBanner() {
+export default function CookieBanner({ sprache = "de" }: { sprache?: Sprache }) {
+  const t = TEXTE[sprache].cookie;
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -58,7 +60,7 @@ export default function CookieBanner() {
                   marginBottom: "8px",
                 }}
               >
-                Datenschutz
+                {t.titel}
               </p>
               <p
                 style={{
@@ -68,7 +70,7 @@ export default function CookieBanner() {
                   margin: 0,
                 }}
               >
-                Diese Website verwendet technisch notwendige Cookies sowie Google Analytics für anonyme Reichweitenmessung. Mehr dazu in unserer{" "}
+                {t.textVor}
                 <Link
                   href="/datenschutz"
                   style={{
@@ -77,9 +79,9 @@ export default function CookieBanner() {
                     fontWeight: 600,
                   }}
                 >
-                  Datenschutzerklärung
+                  {t.linkText}
                 </Link>
-                .
+                {t.textNach}
               </p>
             </div>
 
@@ -110,7 +112,7 @@ export default function CookieBanner() {
                   transition: "all 0.2s ease",
                 }}
               >
-                Nur notwendige
+                {t.nurNotwendige}
               </motion.button>
               <motion.button
                 onClick={accept}
@@ -131,7 +133,7 @@ export default function CookieBanner() {
                   transition: "all 0.2s ease",
                 }}
               >
-                Alle akzeptieren
+                {t.alleAkzeptieren}
               </motion.button>
             </div>
           </div>

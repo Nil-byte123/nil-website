@@ -4,6 +4,7 @@ import { Navbar } from "../../components/Navbar";
 import { Footer } from "../../components/Footer";
 import { PRODUKTE, findeProdukt } from "../produkte";
 import { ProduktDetail } from "./ProduktDetail";
+import { ermittleSprache } from "../../i18n/sprache";
 
 export function generateStaticParams() {
   return PRODUKTE.map((p) => ({ slug: p.slug }));
@@ -17,9 +18,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const produkt = findeProdukt(slug);
   if (!produkt) return {};
+  const sprache = await ermittleSprache();
   return {
     title: `${produkt.name} – Vorschau`,
-    description: produkt.beschreibung,
+    description: produkt.beschreibung[sprache],
   };
 }
 
@@ -31,12 +33,13 @@ export default async function ProduktSeite({
   const { slug } = await params;
   const produkt = findeProdukt(slug);
   if (!produkt) notFound();
+  const sprache = await ermittleSprache();
 
   return (
     <main style={{ background: "var(--bg)", minHeight: "100vh" }}>
-      <Navbar />
-      <ProduktDetail produkt={produkt} />
-      <Footer />
+      <Navbar sprache={sprache} />
+      <ProduktDetail produkt={produkt} sprache={sprache} />
+      <Footer sprache={sprache} />
     </main>
   );
 }

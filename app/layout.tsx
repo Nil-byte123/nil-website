@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import CookieBanner from "./components/CookieBanner";
+import { ermittleSprache } from "./i18n/sprache";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -59,9 +60,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Read the per-request nonce injected by middleware.
   // Server Components receive it via the x-nonce request header.
   const nonce = (await headers()).get("x-nonce") ?? "";
+  const sprache = await ermittleSprache();
 
   return (
-    <html lang="de">
+    <html lang={sprache}>
       <head>
         <link rel="apple-touch-icon" href="/icon.png" />
         <meta name="apple-mobile-web-app-capable"        content="yes" />
@@ -81,7 +83,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {/* Pass nonce to Client Component so next/script can apply it */}
         <GoogleAnalytics nonce={nonce} />
         {children}
-        <CookieBanner />
+        <CookieBanner sprache={sprache} />
       </body>
     </html>
   );

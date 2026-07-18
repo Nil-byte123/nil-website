@@ -2,47 +2,22 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
+import { ermittleSprache } from "../i18n/sprache";
+import { TEXTE } from "../i18n/texte";
 
 export const metadata: Metadata = {
   title: "FAQ",
   description: "Häufige Fragen zu NIL: Launch, Warteliste, Produkte, Versand und mehr.",
 };
 
-const FAQS = [
-  {
-    q: "Wann geht NIL an den Start?",
-    a: "Wir arbeiten gerade am ersten Drop. Ein genaues Datum gibt es noch nicht – aber die Warteliste erfährt es zuerst. Trag dich ein, dann verpasst du nichts.",
-  },
-  {
-    q: "Warum kann ich noch nichts kaufen?",
-    a: "Wir bereiten den Launch gründlich vor: Designs, Qualität, Produktion und alles Rechtliche. Sobald alles steht, wird der Shop freigeschaltet.",
-  },
-  {
-    q: "Was kommt im ersten Drop?",
-    a: "Hoodies, Oversized T-Shirts und Caps – alles in Schwarz und Weiß mit dem NIL Blockprint. Eine Vorschau findest du im Shop.",
-  },
-  {
-    q: "Wie wird produziert?",
-    a: "On demand: Jedes Teil wird erst produziert, wenn es bestellt wird. Das heißt keine Überproduktion, keine Lagerbestände, die weggeworfen werden.",
-  },
-  {
-    q: "Was kostet die Warteliste?",
-    a: "Nichts. Du gibst nur deine E-Mail-Adresse an und bekommst eine Nachricht, wenn der Drop live geht. Kein Spam, versprochen.",
-  },
-  {
-    q: "Wohin wird später versendet – und wie lange dauert es?",
-    a: "Zum Start konzentrieren wir uns auf Deutschland. Da jedes Teil erst nach Bestellung produziert wird (2–5 Werktage) und dann verschickt wird (3–5 Werktage), dauert die Lieferung insgesamt etwa 1–2 Wochen. Weitere Länder folgen, wenn alles rund läuft.",
-  },
-  {
-    q: "Ich habe eine andere Frage.",
-    a: "Schreib uns einfach über das Kontaktformular oder direkt an info@nilogik.de – wir antworten so schnell wie möglich.",
-  },
-];
 
-export default function FAQ() {
+export default async function FAQ() {
+  const sprache = await ermittleSprache();
+  const t = TEXTE[sprache];
+  const FAQS = t.faq.fragen;
   return (
     <main style={{ background: "var(--bg)", minHeight: "100vh" }}>
-      <Navbar />
+      <Navbar sprache={sprache} />
 
       <section style={{ maxWidth: "760px", margin: "0 auto", padding: "80px 24px 100px" }}>
         <p
@@ -55,10 +30,10 @@ export default function FAQ() {
             marginBottom: "12px",
           }}
         >
-          FAQ
+          {t.faq.overline}
         </p>
         <h1 style={{ fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "48px" }}>
-          Häufige Fragen
+          {t.faq.titel}
         </h1>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -98,7 +73,7 @@ export default function FAQ() {
 
         <div style={{ marginTop: "56px", textAlign: "center" }}>
           <p style={{ color: "var(--fg-muted)", fontSize: "14px", marginBottom: "20px" }}>
-            Frage nicht dabei?
+            {t.faq.frageNicht}
           </p>
           <Link
             href="/kontakt"
@@ -115,12 +90,12 @@ export default function FAQ() {
               textTransform: "uppercase",
             }}
           >
-            Kontakt aufnehmen
+            {t.faq.kontaktCta}
           </Link>
         </div>
       </section>
 
-      <Footer />
+      <Footer sprache={sprache} />
     </main>
   );
 }

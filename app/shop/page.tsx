@@ -4,6 +4,8 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { Reveal } from "../components/Reveal";
 import { PRODUKTE } from "./produkte";
+import { ermittleSprache } from "../i18n/sprache";
+import { TEXTE } from "../i18n/texte";
 import { ProduktBild } from "./[slug]/ProduktDetail";
 
 export const metadata: Metadata = {
@@ -12,10 +14,12 @@ export const metadata: Metadata = {
     "Der erste NIL Drop: Hoodies, T-Shirts und Caps in Schwarz/Weiß. Bald verfügbar – trag dich auf die Warteliste ein.",
 };
 
-export default function Shop() {
+export default async function Shop() {
+  const sprache = await ermittleSprache();
+  const t = TEXTE[sprache];
   return (
     <main style={{ background: "var(--bg)", minHeight: "100vh" }}>
-      <Navbar />
+      <Navbar sprache={sprache} />
 
       <section style={{ maxWidth: "1200px", margin: "0 auto", padding: "80px 24px 100px" }}>
         <p
@@ -28,19 +32,17 @@ export default function Shop() {
             marginBottom: "12px",
           }}
         >
-          Vorschau
+          {t.shop.overline}
         </p>
         <h1 style={{ fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 800, letterSpacing: "-0.03em" }}>
-          Der erste Drop
+          {t.shop.titel}
         </h1>
         <p style={{ color: "var(--fg-muted)", fontSize: "15px", lineHeight: 1.7, marginTop: "16px", maxWidth: "560px" }}>
-          Klick auf ein Produkt für alle Details: Ansichten, Größen, Farben
-          und wie die Bestellung später abläuft. Kaufen ist noch nicht möglich
-          – trag dich auf die{" "}
+          {t.shop.introVor}
           <Link href="/#warteliste" style={{ color: "var(--fg)", fontWeight: 600 }}>
-            Warteliste
-          </Link>{" "}
-          ein, dann bekommst du Bescheid, sobald es losgeht.
+            {t.shop.introLink}
+          </Link>
+          {t.shop.introNach}
         </p>
 
         <div
@@ -92,11 +94,11 @@ export default function Shop() {
                       marginBottom: "12px",
                     }}
                   >
-                    Bald verfügbar
+                    {t.shop.badge}
                   </div>
                   <p style={{ fontSize: "15px", fontWeight: 700, letterSpacing: "-0.01em" }}>{p.name}</p>
                   <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "4px", flex: 1 }}>
-                    {p.typ} · {p.farben.join(" / ")}
+                    {p.typ} · {p.farben.map((f) => t.produkt.farbNamen[f]).join(" / ")}
                   </p>
                   <p style={{ fontSize: "14px", fontWeight: 700, marginTop: "10px" }}>{p.preis}</p>
                 </div>
@@ -115,10 +117,10 @@ export default function Shop() {
           }}
         >
           <h2 style={{ fontSize: "22px", fontWeight: 800, letterSpacing: "-0.02em" }}>
-            Nichts verpassen
+            {t.shop.boxTitel}
           </h2>
           <p style={{ color: "var(--fg-muted)", fontSize: "14px", marginTop: "10px", marginBottom: "24px" }}>
-            Preise, Fotos und Launch-Datum kommen zuerst an die Warteliste.
+            {t.shop.boxText}
           </p>
           <Link
             href="/#warteliste"
@@ -135,12 +137,12 @@ export default function Shop() {
               textTransform: "uppercase",
             }}
           >
-            Zur Warteliste
+            {t.shop.boxCta}
           </Link>
         </div>
       </section>
 
-      <Footer />
+      <Footer sprache={sprache} />
     </main>
   );
 }

@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { NilLogoBox } from "../components/NilLogo";
+import { ermittleSprache } from "../i18n/sprache";
+import { TEXTE } from "../i18n/texte";
 
 export const metadata: Metadata = {
   title: "Über uns",
@@ -10,10 +12,12 @@ export const metadata: Metadata = {
     "Die Geschichte hinter NIL – Streetwear aus Deutschland. Schwarz, weiß, reduziert. Gegründet mit einer klaren Vision.",
 };
 
-export default function UeberUns() {
+export default async function UeberUns() {
+  const sprache = await ermittleSprache();
+  const t = TEXTE[sprache].ueberUns;
   return (
     <main style={{ background: "var(--bg)", minHeight: "100vh" }}>
-      <Navbar />
+      <Navbar sprache={sprache} />
 
       <section style={{ maxWidth: "760px", margin: "0 auto", padding: "80px 24px 100px" }}>
         <p
@@ -26,10 +30,10 @@ export default function UeberUns() {
             marginBottom: "12px",
           }}
         >
-          Über uns
+          {t.overline}
         </p>
         <h1 style={{ fontSize: "clamp(30px, 4vw, 44px)", fontWeight: 800, letterSpacing: "-0.03em", marginBottom: "40px" }}>
-          Die Geschichte hinter NIL
+          {t.titel}
         </h1>
 
         <div style={{ textAlign: "center", margin: "48px 0" }}>
@@ -37,31 +41,11 @@ export default function UeberUns() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "32px" }}>
-          <Block title="Der Anfang">
-            NIL ist in Deutschland entstanden – aus der Idee, dass gute Klamotten
-            nicht laut sein müssen. Keine riesigen Grafiken, keine zehn Farben,
-            kein unnötiger Schnickschnack. Nur klare Formen, gute Stoffe und
-            ein Logo, das für sich steht.
-          </Block>
-
-          <Block title="Der Name">
-            NIL bedeutet „nichts&quot; – und genau das ist der Punkt. Wir starten
-            bei null und lassen alles weg, was nicht nötig ist. Was übrig
-            bleibt, ist das Wesentliche: Schwarz, Weiß und ein sauberer Schnitt.
-          </Block>
-
-          <Block title="Die Vision">
-            Wir bauen NIL Schritt für Schritt auf – ehrlich und ohne
-            Abkürzungen. Der erste Drop ist in Arbeit: Hoodies, T-Shirts und
-            Caps, produziert on demand, damit nichts auf Halde landet und
-            nichts verschwendet wird.
-          </Block>
-
-          <Block title="Warum Warteliste?">
-            Wir wollen es richtig machen statt schnell. Bis zum Launch kannst
-            du dich auf die Warteliste setzen – dann gehörst du zu den Ersten,
-            die den Drop sehen, bevor er offiziell live geht.
-          </Block>
+          {t.bloecke.map((b) => (
+            <Block key={b.titel} title={b.titel}>
+              {b.text}
+            </Block>
+          ))}
         </div>
 
         <div
@@ -87,12 +71,12 @@ export default function UeberUns() {
               textTransform: "uppercase",
             }}
           >
-            Auf die Warteliste
+            {t.cta}
           </Link>
         </div>
       </section>
 
-      <Footer />
+      <Footer sprache={sprache} />
     </main>
   );
 }

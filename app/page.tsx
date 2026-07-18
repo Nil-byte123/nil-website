@@ -5,13 +5,16 @@ import { Footer } from "./components/Footer";
 import { WaitlistForm } from "./components/WaitlistForm";
 import { NilLogoBox } from "./components/NilLogo";
 import { Reveal, RevealStagger } from "./components/Reveal";
+import { ermittleSprache } from "./i18n/sprache";
+import { TEXTE } from "./i18n/texte";
 
-const MARQUEE_TEXT = "COMING SOON — NIL — STREETWEAR — ERSTER DROP — ";
-
-export default function Home() {
+export default async function Home() {
+  const sprache = await ermittleSprache();
+  const t = TEXTE[sprache];
+  const MARQUEE_TEXT = t.hero.marquee;
   return (
     <main style={{ background: "var(--bg)", minHeight: "100vh" }}>
-      <Navbar />
+      <Navbar sprache={sprache} />
 
       {/* ─── Hero ─────────────────────────────────────── */}
       <section
@@ -51,7 +54,7 @@ export default function Home() {
             marginBottom: "32px",
           }}
         >
-          Bald verfügbar
+          {t.hero.badge}
         </p>
 
         <div
@@ -78,7 +81,7 @@ export default function Home() {
             lineHeight: 1.2,
           }}
         >
-          Streetwear. Reduziert auf das, was zählt.
+          {t.hero.titel}
         </h1>
 
         <p
@@ -92,8 +95,7 @@ export default function Home() {
             marginTop: "20px",
           }}
         >
-          Der erste Drop ist in Arbeit. Schwarz, weiß, kompromisslos –
-          kein Lärm, nur das Wesentliche.
+          {t.hero.text}
         </p>
 
         <Reveal delay={0.4}>
@@ -113,7 +115,7 @@ export default function Home() {
               textTransform: "uppercase",
             }}
           >
-            Zur Vorschau
+            {t.hero.cta}
           </Link>
         </Reveal>
       </section>
@@ -174,8 +176,8 @@ export default function Home() {
       {/* ─── Teaser: Was kommt ─────────────────────────── */}
       <section style={{ maxWidth: "1200px", margin: "0 auto", padding: "100px 24px" }}>
         <Reveal>
-          <p style={overline}>Der erste Drop</p>
-          <h2 style={h2}>Was dich erwartet</h2>
+          <p style={overline}>{t.teaser.overline}</p>
+          <h2 style={h2}>{t.teaser.titel}</h2>
         </Reveal>
 
         <div
@@ -189,18 +191,9 @@ export default function Home() {
           }}
         >
           <RevealStagger>
-            <TeaserCard
-              title="Hoodies"
-              text="Schwerer Stoff, klarer Schnitt, NIL Blockprint. Keine überladenen Grafiken – das Logo spricht für sich."
-            />
-            <TeaserCard
-              title="T-Shirts"
-              text="Oversized Fit, dickes Baumwoll-Jersey. Minimalistisch vorne, Statement hinten."
-            />
-            <TeaserCard
-              title="Caps & mehr"
-              text="Accessoires im gleichen Look: schwarz, weiß, kompromisslos. Details folgen beim Launch."
-            />
+            {t.teaser.karten.map((k) => (
+              <TeaserCard key={k.titel} title={k.titel} text={k.text} badge={t.teaser.badge} />
+            ))}
           </RevealStagger>
         </div>
 
@@ -221,7 +214,7 @@ export default function Home() {
                 textTransform: "uppercase",
               }}
             >
-              Zur Vorschau →
+              {t.teaser.cta}
             </Link>
           </Reveal>
         </div>
@@ -265,14 +258,12 @@ export default function Home() {
       >
         <div style={{ maxWidth: "700px", margin: "0 auto" }}>
           <Reveal>
-            <p style={overline}>Die Marke</p>
+            <p style={overline}>{t.marke.overline}</p>
             <h2 style={{ ...h2, marginBottom: "24px" }}>
-              Weniger Lärm. Mehr Haltung.
+              {t.marke.titel}
             </h2>
             <p style={{ color: "var(--fg-muted)", fontSize: "16px", lineHeight: 1.8 }}>
-              NIL steht für Reduktion: schwarz, weiß, harte Kanten, ehrliche
-              Basics. Gegründet in Deutschland, gedacht für alle, die keine
-              Logos-Überall-Optik brauchen, um aufzufallen.
+              {t.marke.text}
             </p>
             <Link
               href="/ueber-uns"
@@ -289,7 +280,7 @@ export default function Home() {
                 paddingBottom: "4px",
               }}
             >
-              Mehr über NIL
+              {t.marke.cta}
             </Link>
           </Reveal>
         </div>
@@ -307,22 +298,22 @@ export default function Home() {
       >
         <div style={{ maxWidth: "600px", margin: "0 auto" }}>
           <Reveal>
-            <p style={overline}>Der erste Drop</p>
+            <p style={overline}>{t.warteliste.overline}</p>
             <h2 style={{ ...h2, marginBottom: "16px" }}>
-              Trag dich auf die Warteliste
+              {t.warteliste.titel}
             </h2>
             <p style={{ color: "var(--fg-muted)", fontSize: "15px", lineHeight: 1.8, marginBottom: "40px" }}>
-              Erfahre als Erste:r, wenn der erste NIL Drop live geht. Kein Spam – nur Bescheid sagen, wenn es ernst wird.
+              {t.warteliste.text}
             </p>
           </Reveal>
 
           <div style={{ maxWidth: "420px", margin: "0 auto" }}>
-            <WaitlistForm />
+            <WaitlistForm sprache={sprache} />
           </div>
         </div>
       </section>
 
-      <Footer />
+      <Footer sprache={sprache} />
     </main>
   );
 }
@@ -342,7 +333,7 @@ const h2: React.CSSProperties = {
   letterSpacing: "-0.03em",
 };
 
-function TeaserCard({ title, text }: { title: string; text: string }) {
+function TeaserCard({ title, text, badge }: { title: string; text: string; badge: string }) {
   return (
     <div
       className="card-hover"
@@ -369,7 +360,7 @@ function TeaserCard({ title, text }: { title: string; text: string }) {
           marginBottom: "20px",
         }}
       >
-        Bald verfügbar
+        {badge}
       </div>
       <h3 style={{ fontSize: "20px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "12px" }}>
         {title}

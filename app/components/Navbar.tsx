@@ -3,16 +3,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import { NilLogo } from "./NilLogo";
+import { TEXTE, type Sprache } from "../i18n/texte";
 
-const LINKS = [
-  { href: "/shop", label: "Shop" },
-  { href: "/ueber-uns", label: "Über uns" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/kontakt", label: "Kontakt" },
-];
-
-export function Navbar() {
+export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
   const [open, setOpen] = useState(false);
+  const t = TEXTE[sprache].nav;
+  const LINKS = t.links;
 
   return (
     <nav
@@ -78,14 +74,14 @@ export function Navbar() {
               padding: "10px 18px",
             }}
           >
-            Warteliste
+            {t.warteliste}
           </Link>
         </div>
 
         {/* Mobile-Burger */}
         <button
           className="nav-burger"
-          aria-label={open ? "Menü schließen" : "Menü öffnen"}
+          aria-label={open ? t.menueZu : t.menueAuf}
           onClick={() => setOpen(!open)}
           style={{
             display: "none",
@@ -149,7 +145,7 @@ export function Navbar() {
               marginTop: "16px",
             }}
           >
-            Warteliste
+            {t.warteliste}
           </Link>
         </div>
       )}

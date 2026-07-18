@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { TEXTE, type Sprache } from "../i18n/texte";
 
 const inputStyle: React.CSSProperties = {
   width: "100%",
@@ -23,7 +24,8 @@ const labelStyle: React.CSSProperties = {
   marginBottom: "8px",
 };
 
-export function ContactForm() {
+export function ContactForm({ sprache = "de" }: { sprache?: Sprache }) {
+  const t = TEXTE[sprache].kontaktForm;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -48,11 +50,11 @@ export function ContactForm() {
         setStatus("success");
       } else {
         setStatus("error");
-        setErrorMsg(data.error ?? "Etwas ist schiefgelaufen. Versuch es nochmal.");
+        setErrorMsg(data.error ?? t.fehler);
       }
     } catch {
       setStatus("error");
-      setErrorMsg("Verbindungsfehler. Versuch es nochmal.");
+      setErrorMsg(t.fehlerVerbindung);
     }
   }
 
@@ -60,10 +62,10 @@ export function ContactForm() {
     return (
       <div style={{ border: "1px solid var(--line-strong)", padding: "32px", textAlign: "center" }}>
         <p style={{ fontSize: "16px", fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase" }}>
-          Nachricht gesendet ✓
+          {t.erfolgTitel}
         </p>
         <p style={{ color: "var(--fg-muted)", fontSize: "14px", marginTop: "10px" }}>
-          Danke! Wir melden uns so schnell wie möglich bei dir.
+          {t.erfolgText}
         </p>
       </div>
     );
@@ -72,7 +74,7 @@ export function ContactForm() {
   return (
     <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       <div>
-        <label htmlFor="name" style={labelStyle}>Name</label>
+        <label htmlFor="name" style={labelStyle}>{t.nameLabel}</label>
         <input
           id="name"
           type="text"
@@ -80,13 +82,13 @@ export function ContactForm() {
           maxLength={100}
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Dein Name"
+          placeholder={t.namePlatzhalter}
           style={inputStyle}
         />
       </div>
 
       <div>
-        <label htmlFor="email" style={labelStyle}>E-Mail</label>
+        <label htmlFor="email" style={labelStyle}>{t.emailLabel}</label>
         <input
           id="email"
           type="email"
@@ -94,13 +96,13 @@ export function ContactForm() {
           maxLength={254}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="deine@email.de"
+          placeholder={t.emailPlatzhalter}
           style={inputStyle}
         />
       </div>
 
       <div>
-        <label htmlFor="message" style={labelStyle}>Nachricht</label>
+        <label htmlFor="message" style={labelStyle}>{t.nachrichtLabel}</label>
         <textarea
           id="message"
           required
@@ -108,7 +110,7 @@ export function ContactForm() {
           rows={6}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Worum geht's?"
+          placeholder={t.nachrichtPlatzhalter}
           style={{ ...inputStyle, resize: "vertical" }}
         />
       </div>
@@ -134,7 +136,7 @@ export function ContactForm() {
           opacity: status === "loading" ? 0.7 : 1,
         }}
       >
-        {status === "loading" ? "Wird gesendet…" : "Nachricht senden"}
+        {status === "loading" ? t.laden : t.senden}
       </button>
     </form>
   );
