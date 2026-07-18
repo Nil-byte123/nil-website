@@ -27,8 +27,18 @@ export default function Home() {
           overflow: "hidden",
         }}
       >
+        <div className="hero-grid" aria-hidden="true" />
         <div className="hero-glow" aria-hidden="true" />
-        <div className="scanline" aria-hidden="true" />
+
+        {/* Kleine Marken-Formen im Hintergrund */}
+        <div aria-hidden="true" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+          <span className="deko-kreuz" style={{ top: "16%", left: "11%" }} />
+          <span className="deko-kreuz" style={{ top: "34%", right: "13%" }} />
+          <span className="deko-kreuz" style={{ bottom: "24%", left: "20%" }} />
+          <span className="deko-kreuz" style={{ bottom: "14%", right: "9%" }} />
+          <span className="deko-quadrat" style={{ top: "20%", right: "22%" }} />
+          <span className="deko-quadrat" style={{ bottom: "26%", left: "7%" }} />
+        </div>
 
         <p
           className="fade-up"
