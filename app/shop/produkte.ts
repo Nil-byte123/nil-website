@@ -49,14 +49,17 @@ export const PRODUKTE: Produkt[] = [
     },
     details: [
       {
-        de: "Schwerer, dichter Stoff, fällt sauber und trägt sich warm",
-        en: "Heavy, dense fabric that drapes clean and keeps you warm",
+        de: "Schwerer Stoff mit 339 g/m², innen angeraut und weich",
+        en: "Heavy 339 g/m² fabric, brushed soft on the inside",
       },
       {
         de: "Oversized Fit mit Drop Shoulders",
         en: "Oversized fit with drop shoulders",
       },
-      { de: "Kapuze mit Kordelzug", en: "Hood with drawstring" },
+      {
+        de: "Doppellagige Kapuze ohne Kordeln, bewusst clean",
+        en: "Double-layered hood without drawcords, deliberately clean",
+      },
       {
         de: "NIL Logo klein links auf der Brust",
         en: "Small NIL logo on the left chest",
@@ -118,7 +121,10 @@ export const PRODUKTE: Produkt[] = [
       en: "An oversized tee made from organic cotton with a high neck. Falls loose and doesn't cling. The NIL logo sits small on the left chest.",
     },
     details: [
-      { de: "Bio-Baumwolle, dickes Jersey", en: "Organic cotton, thick jersey" },
+      {
+        de: "100 % Bio-Baumwolle mit 200 g/m², gekämmt und ringgesponnen",
+        en: "100% organic combed ring-spun cotton, 200 g/m²",
+      },
       {
         de: "Oversized Fit mit High Neck",
         en: "Oversized fit with high neck",
