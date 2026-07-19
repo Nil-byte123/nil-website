@@ -110,28 +110,13 @@ body {
 }
 
 /* ─── Hover: Navigation ────────────────────────────── */
+/* Der Unterstrich ist EINE wandernde Linie (in der Navbar
+   als Element gerendert), kein ::after pro Link.        */
 .nav-link {
-  position: relative;
   transition: color 0.2s ease;
-}
-.nav-link::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 1px;
-  background: #FAFAFA;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
 }
 .nav-link:hover {
   color: #FAFAFA !important;
-}
-.nav-link:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
 }
 
 /* ─── Hover: Karten ────────────────────────────────── */

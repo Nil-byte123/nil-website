@@ -5,7 +5,11 @@ import { TEXTE, type Sprache } from "../i18n/texte";
 export function Footer({ sprache = "de" }: { sprache?: Sprache }) {
   const t = TEXTE[sprache].footer;
   return (
-    <footer style={{ borderTop: "1px solid var(--line)", background: "#050505" }}>
+    <footer
+      style={{
+        background: "linear-gradient(180deg, var(--bg) 0%, #050505 140px)",
+      }}
+    >
       <div
         style={{
           maxWidth: "1200px",

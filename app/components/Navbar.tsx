@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { NilLogo } from "./NilLogo";
 import { TEXTE, type Sprache } from "../i18n/texte";
 
@@ -9,6 +9,20 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
   const [open, setOpen] = useState(false);
   const t = TEXTE[sprache].nav;
   const LINKS = t.links;
+
+  /* EINE wandernde Unterstrich-Linie: gleitet beim Hover
+     von Link zu Link, statt pro Link neu zu erscheinen. */
+  const leisteRef = useRef<HTMLDivElement | null>(null);
+  const [linie, setLinie] = useState({ x: 0, breite: 0, an: false });
+
+  function bewegeLinie(e: React.MouseEvent<HTMLElement>) {
+    const ziel = e.currentTarget;
+    const leiste = leisteRef.current;
+    if (!leiste) return;
+    const zr = ziel.getBoundingClientRect();
+    const lr = leiste.getBoundingClientRect();
+    setLinie({ x: zr.left - lr.left, breite: zr.width, an: true });
+  }
 
   return (
     <nav
@@ -61,12 +75,41 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
         </Link>
 
         {/* Desktop-Links */}
-        <div className="nav-desktop" style={{ display: "flex", gap: "32px", alignItems: "center" }}>
+        <div
+          ref={leisteRef}
+          className="nav-desktop"
+          onMouseLeave={() => setLinie((l) => ({ ...l, an: false }))}
+          style={{
+            display: "flex",
+            gap: "32px",
+            alignItems: "center",
+            position: "relative",
+            height: "100%",
+          }}
+        >
+          {/* Die eine wandernde Linie */}
+          <span
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              bottom: "16px",
+              left: 0,
+              height: "1px",
+              width: `${linie.breite}px`,
+              transform: `translateX(${linie.x}px)`,
+              background: "var(--fg)",
+              opacity: linie.an ? 1 : 0,
+              transition:
+                "transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease",
+              pointerEvents: "none",
+            }}
+          />
           {LINKS.map((l) => (
             <Link
               key={l.href}
               href={l.href}
               className="nav-link"
+              onMouseEnter={bewegeLinie}
               style={{
                 textDecoration: "none",
                 color: "var(--fg-muted)",

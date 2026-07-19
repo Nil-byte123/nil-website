@@ -297,10 +297,9 @@ export default async function Home() {
       {/* ─── Newsletter: Die Warteliste ───────────────── */}
       <section
         style={{
-          borderTop: "1px solid var(--line)",
-          borderBottom: "1px solid var(--line)",
-          background: "var(--bg-soft)",
-          padding: "80px 24px",
+          background:
+            "linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 30%, var(--bg-soft) 70%, var(--bg) 100%)",
+          padding: "100px 24px",
         }}
         id="warteliste"
       >
