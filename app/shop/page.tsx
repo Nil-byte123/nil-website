@@ -18,7 +18,8 @@ export default async function Shop() {
   const sprache = await ermittleSprache();
   const t = TEXTE[sprache];
   return (
-    <main style={{ background: "var(--bg)", minHeight: "100vh" }}>
+    <main style={{ minHeight: "100vh", position: "relative" }}>
+      <div className="page-grid" aria-hidden="true" />
       <Navbar sprache={sprache} />
 
       <section style={{ maxWidth: "1200px", margin: "0 auto", padding: "80px 24px 100px" }}>

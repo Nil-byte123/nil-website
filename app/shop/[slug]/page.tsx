@@ -36,7 +36,8 @@ export default async function ProduktSeite({
   const sprache = await ermittleSprache();
 
   return (
-    <main style={{ background: "var(--bg)", minHeight: "100vh" }}>
+    <main style={{ minHeight: "100vh", position: "relative" }}>
+      <div className="page-grid" aria-hidden="true" />
       <Navbar sprache={sprache} />
       <ProduktDetail produkt={produkt} sprache={sprache} />
       <Footer sprache={sprache} />
