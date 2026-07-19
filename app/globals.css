@@ -210,26 +210,29 @@ body {
   opacity: 1;
 }
 
-/* ─── Hero-Hintergrund: feines, wanderndes Raster ──── */
+/* ─── Seitenweites, wanderndes Raster ──────────────── */
 @keyframes rasterWandern {
   from { background-position: 0 0; }
   to   { background-position: 90px 90px; }
 }
-.hero-grid {
+/* Liegt hinter der gesamten Seite (z-index -1), wandert diagonal
+   und blendet nach unten hin langsam aus.                       */
+.page-grid {
   position: absolute;
   inset: 0;
+  z-index: -1;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
   background-size: 90px 90px;
-  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, black 25%, transparent 75%);
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, black 25%, transparent 75%);
+  /* Oben voll sichtbar, verschwindet zum Seitenende hin sanft */
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 18%, rgba(0,0,0,0.4) 55%, transparent 90%);
+  mask-image: linear-gradient(to bottom, black 0%, black 18%, rgba(0,0,0,0.4) 55%, transparent 90%);
   pointer-events: none;
-  /* Wandert diagonal, nahtlos (genau eine Rasterzelle pro Durchlauf) */
   animation: rasterWandern 10s linear infinite;
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-grid { animation: none; }
+  .page-grid { animation: none; }
 }
 
 /* ─── Hero-Deko: kleine Marken-Formen ──────────────── */

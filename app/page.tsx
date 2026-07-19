@@ -14,7 +14,10 @@ export default async function Home() {
   const t = TEXTE[sprache];
   const MARQUEE_TEXT = t.hero.marquee;
   return (
-    <main style={{ background: "var(--bg)", minHeight: "100vh" }}>
+    <main style={{ minHeight: "100vh", position: "relative" }}>
+      {/* Seitenweites, wanderndes Raster (blendet nach unten aus) */}
+      <div className="page-grid" aria-hidden="true" />
+
       <Navbar sprache={sprache} />
 
       {/* ─── Hero ─────────────────────────────────────── */}
@@ -31,7 +34,6 @@ export default async function Home() {
           overflow: "hidden",
         }}
       >
-        <div className="hero-grid" aria-hidden="true" />
         <div className="hero-glow" aria-hidden="true" />
 
         {/* Kleine Marken-Formen im Hintergrund */}
