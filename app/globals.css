@@ -210,7 +210,11 @@ body {
   opacity: 1;
 }
 
-/* ─── Hero-Hintergrund: feines Raster ──────────────── */
+/* ─── Hero-Hintergrund: feines, wanderndes Raster ──── */
+@keyframes rasterWandern {
+  from { background-position: 0 0; }
+  to   { background-position: 90px 90px; }
+}
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -221,6 +225,11 @@ body {
   -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, black 25%, transparent 75%);
   mask-image: radial-gradient(ellipse 75% 65% at 50% 45%, black 25%, transparent 75%);
   pointer-events: none;
+  /* Wandert diagonal, nahtlos (genau eine Rasterzelle pro Durchlauf) */
+  animation: rasterWandern 10s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-grid { animation: none; }
 }
 
 /* ─── Hero-Deko: kleine Marken-Formen ──────────────── */
