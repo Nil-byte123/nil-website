@@ -190,6 +190,38 @@ body {
   animation: logoFloat 5s ease-in-out infinite;
 }
 
+/* ─── Scroll-Hinweis im Hero ───────────────────────── */
+@keyframes scrollHint {
+  0%   { transform: translateY(0);    opacity: 0.7; }
+  50%  { transform: translateY(8px);  opacity: 0.25; }
+  100% { transform: translateY(0);    opacity: 0.7; }
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--fg-muted));
+  pointer-events: none;
+}
+.scroll-hint::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-right: 1px solid var(--fg-muted);
+  border-bottom: 1px solid var(--fg-muted);
+  transform: translateX(-50%) rotate(45deg);
+  animation: scrollHint 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint::after { animation: none; }
+}
+
 /* ─── Pulsierender Glow für Warteliste-Buttons ─────── */
 @keyframes pulsGlow {
   0%, 100% { box-shadow: 0 0 0 rgba(250, 250, 250, 0); }

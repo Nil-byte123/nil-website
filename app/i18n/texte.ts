@@ -50,6 +50,26 @@ const de = {
     text: "NIL steht für Reduktion: schwarz, weiß, harte Kanten, ehrliche Basics. Gegründet in Deutschland, gedacht für alle, die keine Logos-Überall-Optik brauchen, um aufzufallen.",
     cta: "Mehr über NIL",
   },
+  werte: {
+    overline: "Wofür wir stehen",
+    punkte: [
+      {
+        nr: "01",
+        titel: "In Europa produziert",
+        text: "Kurze Wege, faire Fertigung, Lieferung in 5 bis 8 Tagen.",
+      },
+      {
+        nr: "02",
+        titel: "On Demand",
+        text: "Erst bestellt, dann produziert. Keine Überproduktion, kein Müll.",
+      },
+      {
+        nr: "03",
+        titel: "Schwarz & Weiß",
+        text: "Reduziert auf zwei Farben. Kompromisslos konsequent.",
+      },
+    ],
+  },
   warteliste: {
     overline: "Der erste Drop",
     titel: "Trag dich auf die Warteliste",
@@ -246,6 +266,26 @@ const en: typeof de = {
     titel: "Less noise. More attitude.",
     text: "NIL stands for reduction: black, white, hard edges, honest basics. Founded in Germany, made for everyone who doesn't need logos everywhere to stand out.",
     cta: "More about NIL",
+  },
+  werte: {
+    overline: "What we stand for",
+    punkte: [
+      {
+        nr: "01",
+        titel: "Made in Europe",
+        text: "Short distances, fair production, delivery in 5 to 8 days.",
+      },
+      {
+        nr: "02",
+        titel: "On demand",
+        text: "Ordered first, then produced. No overproduction, no waste.",
+      },
+      {
+        nr: "03",
+        titel: "Black & white",
+        text: "Reduced to two colors. Relentlessly consistent.",
+      },
+    ],
   },
   warteliste: {
     overline: "The first drop",

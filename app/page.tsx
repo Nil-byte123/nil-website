@@ -121,6 +121,8 @@ export default async function Home() {
             {t.hero.cta}
           </Link>
         </Reveal>
+
+        <div className="scroll-hint" aria-hidden="true" />
       </section>
 
       {/* ─── Doppelte Marquee (gegenläufig) ───────────── */}
@@ -293,6 +295,67 @@ export default async function Home() {
               {t.marke.cta}
             </Link>
           </Reveal>
+        </div>
+      </section>
+
+      {/* ─── Werte / Prinzipien ───────────────────────── */}
+      <section
+        style={{
+          borderTop: "1px solid var(--line)",
+          padding: "80px 24px",
+        }}
+      >
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <Reveal>
+            <p style={{ ...overline, textAlign: "center", marginBottom: "48px" }}>
+              {t.werte.overline}
+            </p>
+          </Reveal>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+              gap: "1px",
+              background: "var(--line)",
+              border: "1px solid var(--line)",
+            }}
+          >
+            {t.werte.punkte.map((w, i) => (
+              <Reveal key={w.nr} delay={i * 0.1} fill>
+                <div
+                  style={{
+                    background: "var(--bg)",
+                    padding: "40px 32px",
+                    height: "100%",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "13px",
+                      fontWeight: 800,
+                      letterSpacing: "0.1em",
+                      color: "var(--fg-faint)",
+                    }}
+                  >
+                    {w.nr}
+                  </span>
+                  <h3
+                    style={{
+                      fontSize: "19px",
+                      fontWeight: 800,
+                      letterSpacing: "-0.02em",
+                      margin: "16px 0 10px",
+                    }}
+                  >
+                    {w.titel}
+                  </h3>
+                  <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.7 }}>
+                    {w.text}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
