@@ -6,7 +6,7 @@ import { Reveal } from "../components/Reveal";
 import { PRODUKTE } from "./produkte";
 import { ermittleSprache } from "../i18n/sprache";
 import { TEXTE } from "../i18n/texte";
-import { ProduktBild } from "./[slug]/ProduktDetail";
+import { ProduktBild, StatementBild } from "./[slug]/ProduktDetail";
 
 export const metadata: Metadata = {
   title: "Shop – Vorschau",
@@ -76,9 +76,17 @@ export default async function Shop() {
                     aspectRatio: "1 / 1",
                     borderBottom: "1px solid var(--line)",
                     overflow: "hidden",
+                    position: "relative",
                   }}
                 >
                   <ProduktBild farbe="Schwarz" slug={p.slug} />
+                  {/* Beim Drüberfahren: Statement statt Foto */}
+                  <div className="hover-tausch">
+                    <StatementBild
+                      titel={p.statements[0].titel[sprache]}
+                      text={p.statements[0].text[sprache]}
+                    />
+                  </div>
                 </div>
                 <div style={{ padding: "18px 20px", flex: 1, display: "flex", flexDirection: "column" }}>
                   <div
@@ -124,7 +132,7 @@ export default async function Shop() {
           </p>
           <Link
             href="/#warteliste"
-            className="btn-solid"
+            className="btn-solid btn-puls"
             style={{
               display: "inline-block",
               textDecoration: "none",

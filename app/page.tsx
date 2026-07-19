@@ -7,6 +7,7 @@ import { NilLogoBox } from "./components/NilLogo";
 import { Reveal, RevealStagger } from "./components/Reveal";
 import { ermittleSprache } from "./i18n/sprache";
 import { TEXTE } from "./i18n/texte";
+import { PRODUKTE } from "./shop/produkte";
 
 export default async function Home() {
   const sprache = await ermittleSprache();
@@ -191,8 +192,15 @@ export default async function Home() {
           }}
         >
           <RevealStagger>
-            {t.teaser.karten.map((k) => (
-              <TeaserCard key={k.titel} title={k.titel} text={k.text} badge={t.teaser.badge} />
+            {t.teaser.karten.map((k, i) => (
+              <TeaserCard
+                key={k.titel}
+                title={k.titel}
+                text={k.text}
+                badge={t.teaser.badge}
+                slug={PRODUKTE[i].slug}
+                preis={PRODUKTE[i].preis}
+              />
             ))}
           </RevealStagger>
         </div>
@@ -333,39 +341,75 @@ const h2: React.CSSProperties = {
   letterSpacing: "-0.03em",
 };
 
-function TeaserCard({ title, text, badge }: { title: string; text: string; badge: string }) {
+function TeaserCard({
+  title,
+  text,
+  badge,
+  slug,
+  preis,
+}: {
+  title: string;
+  text: string;
+  badge: string;
+  slug: string;
+  preis: string;
+}) {
   return (
-    <div
+    <Link
+      href={`/shop/${slug}`}
       className="card-hover"
       style={{
-        border: "1px solid var(--line)",
-        background: "var(--bg-soft)",
-        padding: "32px 28px",
         display: "flex",
         flexDirection: "column",
         height: "100%",
-        minHeight: "220px",
+        textDecoration: "none",
+        color: "inherit",
+        border: "1px solid var(--line)",
+        background: "var(--bg-soft)",
       }}
     >
+      {/* Echtes Produktfoto als Augenfänger */}
       <div
+        className="img-zoom"
         style={{
-          display: "inline-block",
-          fontSize: "10px",
-          fontWeight: 700,
-          letterSpacing: "0.18em",
-          textTransform: "uppercase",
-          color: "var(--fg-faint)",
-          border: "1px solid var(--line)",
-          padding: "4px 10px",
-          marginBottom: "20px",
+          aspectRatio: "1 / 1",
+          borderBottom: "1px solid var(--line)",
+          overflow: "hidden",
+          position: "relative",
+          background: "#EDEDED",
         }}
       >
-        {badge}
+        <Image
+          src={`/produkte/${slug}-schwarz.webp`}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, 33vw"
+          priority
+          style={{ objectFit: "contain" }}
+        />
       </div>
-      <h3 style={{ fontSize: "20px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "12px" }}>
-        {title}
-      </h3>
-      <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.7, flex: 1 }}>{text}</p>
-    </div>
+      <div style={{ padding: "24px 26px 22px", flex: 1, display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            alignSelf: "flex-start",
+            fontSize: "10px",
+            fontWeight: 700,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "var(--fg-faint)",
+            border: "1px solid var(--line)",
+            padding: "4px 10px",
+            marginBottom: "16px",
+          }}
+        >
+          {badge}
+        </div>
+        <h3 style={{ fontSize: "20px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "10px" }}>
+          {title}
+        </h3>
+        <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.7, flex: 1 }}>{text}</p>
+        <p style={{ fontSize: "15px", fontWeight: 800, marginTop: "14px" }}>{preis}</p>
+      </div>
+    </Link>
   );
 }

@@ -22,6 +22,25 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
         borderBottom: "1px solid var(--line)",
       }}
     >
+      {/* Ansage-Leiste: Augenfänger ganz oben */}
+      <Link
+        href="/#warteliste"
+        onClick={() => setOpen(false)}
+        style={{
+          display: "block",
+          textDecoration: "none",
+          background: "#FAFAFA",
+          color: "#0A0A0A",
+          textAlign: "center",
+          padding: "8px 16px",
+          fontSize: "11px",
+          fontWeight: 800,
+          letterSpacing: "0.18em",
+          textTransform: "uppercase",
+        }}
+      >
+        {t.ansage} →
+      </Link>
       <div
         style={{
           maxWidth: "1200px",
@@ -62,7 +81,7 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
           ))}
           <Link
             href="/#warteliste"
-            className="btn-solid"
+            className="btn-solid btn-puls"
             style={{
               textDecoration: "none",
               background: "#FAFAFA",

@@ -15,6 +15,7 @@ const de = {
     warteliste: "Warteliste",
     menueAuf: "Menü öffnen",
     menueZu: "Menü schließen",
+    ansage: "Drop 1 in Arbeit · Trag dich auf die Warteliste ein",
   },
   hero: {
     badge: "Bald verfügbar",
@@ -211,6 +212,7 @@ const en: typeof de = {
     warteliste: "Waitlist",
     menueAuf: "Open menu",
     menueZu: "Close menu",
+    ansage: "Drop 1 in the works · Join the waitlist",
   },
   hero: {
     badge: "Coming soon",

@@ -42,7 +42,7 @@ export function ProduktBild({
 
 /* ─── Statement-Kachel: Verkaufs-Sätze statt leerer Fläche ──── */
 
-function StatementBild({
+export function StatementBild({
   titel,
   text,
   klein = false,
@@ -333,7 +333,7 @@ export function ProduktDetail({ produkt, sprache = "de" }: { produkt: Produkt; s
           <div style={{ marginTop: "36px" }}>
             <Link
               href="/#warteliste"
-              className="btn-solid"
+              className="btn-solid btn-puls"
               style={{
                 display: "block",
                 textAlign: "center",
