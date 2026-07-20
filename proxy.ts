@@ -35,19 +35,22 @@ function generateNonce(): string {
 function buildPageCsp(nonce: string): string {
   return [
     "default-src 'self'",
-    // nonce-based: modern browsers require the nonce; unsafe-inline is the legacy fallback
+    // nonce-based: modern browsers require the nonce; unsafe-inline is the legacy fallback.
+    // Nur noch Google Analytics als externe Skriptquelle (Stripe/Calendly entfernt — nicht genutzt).
     `script-src 'self' 'nonce-${nonce}' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com`,
-    `script-src-elem 'self' 'nonce-${nonce}' 'unsafe-inline' https://www.googletagmanager.com https://js.stripe.com https://assets.calendly.com`,
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "font-src 'self' data: https://fonts.gstatic.com",
+    `script-src-elem 'self' 'nonce-${nonce}' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com`,
+    "style-src 'self' 'unsafe-inline'",
+    "style-src-elem 'self' 'unsafe-inline'",
+    "font-src 'self' data:",
     "img-src 'self' data: blob: https:",
     "media-src 'self'",
     "object-src 'none'",
     "worker-src 'self' blob:",
     "manifest-src 'self'",
-    "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://api.mailchimp.com https://*.mailchimp.com",
-    "frame-src 'self' https://calendly.com https://js.stripe.com",
+    // Mailchimp wird serverseitig aufgerufen — der Browser verbindet sich nie dorthin, daher raus.
+    "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com",
+    // Nichts wird eingebettet — keine Fremd-Frames mehr erlaubt.
+    "frame-src 'self'",
     "frame-ancestors 'self'",
     "base-uri 'self'",
     "form-action 'self'",
