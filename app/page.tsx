@@ -55,8 +55,12 @@ export default async function Home() {
             letterSpacing: "0.3em",
             textTransform: "uppercase",
             marginBottom: "32px",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "12px",
           }}
         >
+          <span className="live-dot" aria-hidden="true" />
           {t.hero.badge}
         </p>
 
@@ -132,6 +136,10 @@ export default async function Home() {
           borderTop: "1px solid var(--line)",
           borderBottom: "1px solid var(--line)",
           overflow: "hidden",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+          maskImage:
+            "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
         }}
       >
         <div style={{ padding: "14px 0", overflow: "hidden" }}>
