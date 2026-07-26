@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><title>NIL Logo Export</title></head>
+<body style="background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:24px;font-family:system-ui">
+
+<svg id="logo" width="400" height="133" viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- N -->
+  <path d="M16 14V86 M16 14L84 86 M84 14V86" stroke="#08152A" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- I glow layers -->
+  <line x1="150" y1="14" x2="150" y2="86" stroke="#38BDF8" stroke-width="30" stroke-linecap="round" opacity="0.12"/>
+  <line x1="150" y1="14" x2="150" y2="86" stroke="#0EA5E9" stroke-width="16" stroke-linecap="round" opacity="0.35"/>
+  <line x1="150" y1="14" x2="150" y2="86" stroke="#0EA5E9" stroke-width="9" stroke-linecap="round" opacity="0.65"/>
+  <line x1="150" y1="14" x2="150" y2="86" stroke="#BAE6FD" stroke-width="5.5" stroke-linecap="round"/>
+  <line x1="150" y1="16" x2="150" y2="84" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+  <!-- L -->
+  <path d="M216 14V86 M216 86H284" stroke="#08152A" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<canvas id="canvas" style="display:none"></canvas>
+
+<button onclick="download()" style="padding:14px 32px;background:#0EA5E9;color:#fff;border:none;border-radius:99px;font-size:16px;font-weight:600;cursor:pointer">
+  PNG herunterladen
+</button>
+
+<script>
+function download() {
+  const svg = document.getElementById('logo');
+  const canvas = document.getElementById('canvas');
+  const scale = 3;
+  canvas.width = 400 * scale;
+  canvas.height = 133 * scale;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const svgData = new XMLSerializer().serializeToString(svg);
+  const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
+  const url = URL.createObjectURL(svgBlob);
+  const img = new Image();
+  img.onload = () => {
+    ctx.scale(scale, scale);
+    ctx.drawImage(img, 0, 0, 400, 133);
+    URL.revokeObjectURL(url);
+    const a = document.createElement('a');
+    a.download = 'nil-logo.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  };
+  img.src = url;
+}
+</script>
+</body>
+</html>
