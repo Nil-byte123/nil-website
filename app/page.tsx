@@ -7,7 +7,6 @@ import { NilLogoBox } from "./components/NilLogo";
 import { Reveal, RevealStagger } from "./components/Reveal";
 import { ermittleSprache } from "./i18n/sprache";
 import { TEXTE } from "./i18n/texte";
-import { PRODUKTE } from "./shop/produkte";
 
 export default async function Home() {
   const sprache = await ermittleSprache();
@@ -107,17 +106,17 @@ export default async function Home() {
 
         <Reveal delay={0.4}>
           <Link
-            href="/shop"
-            className="btn-outline"
+            href="/kontakt"
+            className="btn-solid btn-puls"
             style={{
               display: "inline-block",
               marginTop: "40px",
               textDecoration: "none",
-              border: "1px solid var(--line-strong)",
-              color: "var(--fg)",
-              padding: "14px 32px",
+              background: "#FAFAFA",
+              color: "#0A0A0A",
+              padding: "16px 36px",
               fontSize: "13px",
-              fontWeight: 700,
+              fontWeight: 800,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
             }}
@@ -205,13 +204,12 @@ export default async function Home() {
         >
           <RevealStagger>
             {t.teaser.karten.map((k, i) => (
-              <TeaserCard
+              <UseCaseCard
                 key={k.titel}
+                nr={String(i + 1).padStart(2, "0")}
                 title={k.titel}
                 text={k.text}
                 badge={t.teaser.badge}
-                slug={PRODUKTE[i].slug}
-                preis={PRODUKTE[i].preis}
               />
             ))}
           </RevealStagger>
@@ -220,7 +218,7 @@ export default async function Home() {
         <div style={{ textAlign: "center", marginTop: "48px" }}>
           <Reveal delay={0.15}>
             <Link
-              href="/shop"
+              href="/kontakt"
               className="btn-outline"
               style={{
                 display: "inline-block",
@@ -413,22 +411,20 @@ const h2: React.CSSProperties = {
   letterSpacing: "-0.03em",
 };
 
-function TeaserCard({
+function UseCaseCard({
+  nr,
   title,
   text,
   badge,
-  slug,
-  preis,
 }: {
+  nr: string;
   title: string;
   text: string;
   badge: string;
-  slug: string;
-  preis: string;
 }) {
   return (
     <Link
-      href={`/shop/${slug}`}
+      href="/kontakt"
       className="card-hover"
       style={{
         display: "flex",
@@ -438,32 +434,30 @@ function TeaserCard({
         color: "inherit",
         border: "1px solid var(--line)",
         background: "var(--bg-soft)",
+        padding: "32px 28px",
       }}
     >
-      {/* Echtes Produktfoto als Augenfänger */}
       <div
-        className="img-zoom"
         style={{
-          aspectRatio: "1 / 1",
-          borderBottom: "1px solid var(--line)",
-          overflow: "hidden",
-          position: "relative",
-          background: "#EDEDED",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: "24px",
         }}
       >
-        <Image
-          src={`/produkte/${slug}-schwarz.webp`}
-          alt=""
-          fill
-          sizes="(max-width: 768px) 100vw, 33vw"
-          priority
-          style={{ objectFit: "contain" }}
-        />
-      </div>
-      <div style={{ padding: "24px 26px 22px", flex: 1, display: "flex", flexDirection: "column" }}>
-        <div
+        <span
           style={{
-            alignSelf: "flex-start",
+            fontSize: "28px",
+            fontWeight: 800,
+            letterSpacing: "-0.03em",
+            color: "var(--fg-faint)",
+            lineHeight: 1,
+          }}
+        >
+          {nr}
+        </span>
+        <span
+          style={{
             fontSize: "10px",
             fontWeight: 700,
             letterSpacing: "0.18em",
@@ -471,17 +465,15 @@ function TeaserCard({
             color: "var(--fg-faint)",
             border: "1px solid var(--line)",
             padding: "4px 10px",
-            marginBottom: "16px",
           }}
         >
           {badge}
-        </div>
-        <h3 style={{ fontSize: "20px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "10px" }}>
-          {title}
-        </h3>
-        <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.7, flex: 1 }}>{text}</p>
-        <p style={{ fontSize: "15px", fontWeight: 800, marginTop: "14px" }}>{preis}</p>
+        </span>
       </div>
+      <h3 style={{ fontSize: "19px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "12px" }}>
+        {title}
+      </h3>
+      <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.7, flex: 1 }}>{text}</p>
     </Link>
   );
 }
