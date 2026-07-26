@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import CookieBanner from "./components/CookieBanner";
+import { ermittleSprache } from "./i18n/sprache";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -12,16 +13,15 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default:  "NIL – Smarte Automatisierung für jedes Unternehmen",
+    default:  "NIL – Maßgeschneiderte KI- & Software-Lösungen",
     template: "%s | NIL",
   },
   description:
-    "KI-Assistent für Handwerk, Gastronomie und Dienstleister in Bayern. Kundenanfragen automatisch beantworten – rund um die Uhr.",
+    "Beschreib uns dein Problem, wir bauen die passende KI- oder Software-Lösung. Individuell statt von der Stange, projektbasiert, entwickelt in Deutschland.",
   keywords: [
-    "KI Assistent Bayern", "KI Automatisierung Bayern", "Automatisierung", "Softwarelösung",
-    "Digitalisierung", "Terminbuchung", "Softwareentwicklung", "Unternehmensautomatisierung",
-    "Gastronomie Automatisierung", "Handwerk Automatisierung", "nilogik", "NIL",
-    "München", "Augsburg", "digitaler Assistent",
+    "KI-Lösungen", "Custom AI", "Softwareentwicklung", "Automatisierung",
+    "individuelle Software", "KI-Assistent", "Kiosk-App", "Prozessautomatisierung",
+    "nilogik", "NIL", "Made in Germany", "DSGVO",
   ],
   authors:     [{ name: "NIL", url: "https://www.nilogik.de" }],
   creator:     "NIL",
@@ -32,15 +32,13 @@ export const metadata: Metadata = {
     locale:      "de_DE",
     url:         "https://www.nilogik.de",
     siteName:    "NIL",
-    title:       "NIL – Smarte Automatisierung für jedes Unternehmen",
-    description: "Smarte Softwarelösungen und digitale Automatisierung für Unternehmen jeder Branche. Mehr Zeit, mehr Umsatz – automatisch.",
-    images:      [{ url: "/icon.png", width: 612, height: 628, alt: "NIL Logo" }],
+    title:       "NIL – Maßgeschneiderte KI- & Software-Lösungen",
+    description: "Beschreib uns dein Problem, wir bauen die passende Lösung. Individuell, projektbasiert, entwickelt in Deutschland.",
   },
   twitter: {
     card:        "summary_large_image",
-    title:       "NIL – Smarte Automatisierung für jedes Unternehmen",
-    description: "Smarte Softwarelösungen und digitale Automatisierung für Unternehmen jeder Branche. Mehr Zeit, mehr Umsatz – automatisch.",
-    images:      ["/icon.png"],
+    title:       "NIL – Maßgeschneiderte KI- & Software-Lösungen",
+    description: "Beschreib uns dein Problem, wir bauen die passende Lösung. Individuell, projektbasiert, entwickelt in Deutschland.",
   },
   robots:   { index: true, follow: true, googleBot: { index: true, follow: true } },
   manifest: "/manifest.webmanifest",
@@ -52,7 +50,7 @@ const STRUCTURED_DATA = JSON.stringify({
   "@context": "https://schema.org",
   "@type":    "WebSite",
   "name":     "NIL",
-  "alternateName": "NIL – Smarte Automatisierung",
+  "alternateName": "NIL – KI- & Software-Lösungen",
   "url":      "https://www.nilogik.de",
 });
 
@@ -60,14 +58,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // Read the per-request nonce injected by middleware.
   // Server Components receive it via the x-nonce request header.
   const nonce = (await headers()).get("x-nonce") ?? "";
+  const sprache = await ermittleSprache();
 
   return (
-    <html lang="de">
+    <html lang={sprache}>
       <head>
         <link rel="apple-touch-icon" href="/icon.png" />
         <meta name="apple-mobile-web-app-capable"        content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="theme-color" content="#0F172A" />
+        <meta name="theme-color" content="#0A0A0A" />
         {/*
           JSON-LD is type="application/ld+json" — browsers never execute it as JS.
           We still supply the nonce so strict CSP policies don't flag the tag.
@@ -77,24 +76,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: STRUCTURED_DATA }}
         />
-        {/* Theme initialization script — runs BEFORE React hydration to prevent flash */}
-        <script
-          nonce={nonce}
-          dangerouslySetInnerHTML={{
-            __html: `(function() {
-              const isDark = localStorage.getItem('nil-dark') === 'true';
-              if (isDark) {
-                document.documentElement.setAttribute('data-dark', 'true');
-              }
-            })();`,
-          }}
-        />
       </head>
       <body className={geist.className}>
         {/* Pass nonce to Client Component so next/script can apply it */}
         <GoogleAnalytics nonce={nonce} />
         {children}
-        <CookieBanner />
+        <CookieBanner sprache={sprache} />
       </body>
     </html>
   );

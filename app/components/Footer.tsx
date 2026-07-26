@@ -1,0 +1,103 @@
+import Link from "next/link";
+import { NilLogo } from "./NilLogo";
+import { TEXTE, type Sprache } from "../i18n/texte";
+
+export function Footer({ sprache = "de" }: { sprache?: Sprache }) {
+  const t = TEXTE[sprache].footer;
+  return (
+    <footer
+      style={{
+        background: "linear-gradient(180deg, var(--bg) 0%, #050505 140px)",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "56px 24px 32px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "40px",
+            justifyContent: "space-between",
+            marginBottom: "48px",
+          }}
+        >
+          <div style={{ maxWidth: "280px" }}>
+            <NilLogo size={30} />
+            <p style={{ color: "var(--fg-faint)", fontSize: "13px", lineHeight: 1.7, marginTop: "16px" }}>
+              {t.beschreibung}
+            </p>
+          </div>
+
+          <div style={{ display: "flex", gap: "56px", flexWrap: "wrap" }}>
+            <div>
+              <p style={footHead}>{t.marke}</p>
+              <FootLink href="/#leistungen">{t.markeLinks.shop}</FootLink>
+              <FootLink href="/ueber-uns">{t.markeLinks.ueberUns}</FootLink>
+              <FootLink href="/faq">{t.markeLinks.faq}</FootLink>
+            </div>
+            <div>
+              <p style={footHead}>{t.kontakt}</p>
+              <FootLink href="/kontakt">{t.kontaktformular}</FootLink>
+              <FootLink href="mailto:info@nilogik.de">info@nilogik.de</FootLink>
+            </div>
+            <div>
+              <p style={footHead}>{t.rechtliches}</p>
+              <FootLink href="/impressum">{t.impressum}</FootLink>
+              <FootLink href="/datenschutz">{t.datenschutz}</FootLink>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style={{
+            borderTop: "1px solid var(--line)",
+            paddingTop: "24px",
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "12px",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <p style={{ color: "var(--fg-faint)", fontSize: "12px" }}>
+            © {new Date().getFullYear()} NIL. {t.rechte}
+          </p>
+          <p style={{ color: "var(--fg-faint)", fontSize: "12px", letterSpacing: "0.08em", textTransform: "uppercase" }}>
+            {t.comingSoon}
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+const footHead: React.CSSProperties = {
+  color: "var(--fg)",
+  fontSize: "12px",
+  fontWeight: 700,
+  letterSpacing: "0.12em",
+  textTransform: "uppercase",
+  marginBottom: "14px",
+};
+
+function FootLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link
+      href={href}
+      style={{
+        display: "block",
+        textDecoration: "none",
+        color: "var(--fg-muted)",
+        fontSize: "13px",
+        marginBottom: "10px",
+      }}
+    >
+      {children}
+    </Link>
+  );
+}

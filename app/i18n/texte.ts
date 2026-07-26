@@ -1,0 +1,477 @@
+/* ─── Zweisprachige Texte (DE/EN) ────────────────────────────────
+   Die Sprache richtet sich nach der Geräte-Einstellung des
+   Besuchers (Accept-Language-Header): Deutsch → de, sonst → en.  */
+
+export type Sprache = "de" | "en";
+
+const de = {
+  nav: {
+    links: [
+      { href: "/#leistungen", label: "Leistungen" },
+      { href: "/#preise", label: "Preise" },
+      { href: "/ueber-uns", label: "Über uns" },
+      { href: "/kontakt", label: "Kontakt" },
+    ],
+    warteliste: "Termin buchen",
+    menueAuf: "Menü öffnen",
+    menueZu: "Menü schließen",
+    ansage: "Kostenloses Erstgespräch · Beschreib uns dein Problem",
+  },
+  hero: {
+    badge: "KI-Lösungen nach Maß",
+    titel: "Beschreib uns dein Problem. Wir bauen die passende KI-Lösung.",
+    text: "Keine Software von der Stange. Du schilderst uns eine konkrete Herausforderung in deinem Betrieb, wir entwickeln eine maßgeschneiderte KI- oder Software-Lösung genau dafür.",
+    cta: "Problem beschreiben",
+    marquee: "CUSTOM AI — MASSGESCHNEIDERT — KEINE STANDARDLÖSUNG — MADE IN GERMANY — ",
+  },
+  teaser: {
+    overline: "Was möglich ist",
+    titel: "Von E-Mail-Chaos bis Kiosk-App",
+    badge: "Use-Case",
+    karten: [
+      {
+        titel: "E-Mails automatisch sortieren",
+        text: "Eingehende Mails werden nach Thema, Dringlichkeit und Zuständigkeit vorsortiert. Dein Postfach ordnet sich von selbst.",
+      },
+      {
+        titel: "Kundenanfragen automatisieren",
+        text: "Wiederkehrende Fragen beantwortet eine KI rund um die Uhr. Komplexe Fälle landen automatisch beim richtigen Menschen.",
+      },
+      {
+        titel: "Individuelle interne Tools",
+        text: "Ein Werkzeug, das genau deinen Ablauf abbildet, vom Angebot bis zur Auswertung. Gebaut für deinen Betrieb, nicht für alle.",
+      },
+      {
+        titel: "Kiosk-Apps für Tablets",
+        text: "Bestell- oder Info-Terminals für die iPads in deinem Laden. Schlank, robust und auf deine Prozesse zugeschnitten.",
+      },
+    ],
+    cta: "Dein Problem besprechen →",
+  },
+  marke: {
+    overline: "Die Idee",
+    titel: "Maßgeschneidert statt von der Stange.",
+    text: "Standard-Software zwingt dich, deinen Ablauf an das Tool anzupassen. Wir drehen das um: Du beschreibst dein Problem, wir bauen die Lösung drumherum. Genau für deinen Betrieb, nichts Überflüssiges.",
+    cta: "Mehr über NIL",
+  },
+  werte: {
+    overline: "Warum NIL",
+    punkte: [
+      {
+        nr: "01",
+        titel: "DSGVO-konform",
+        text: "Datenschutz von Anfang an. Deine Daten bleiben in Europa und werden DSGVO-konform verarbeitet.",
+      },
+      {
+        nr: "02",
+        titel: "Made in Germany",
+        text: "Entwickelt in Deutschland. Direkter Kontakt, klare Absprachen, kein anonymes Callcenter.",
+      },
+      {
+        nr: "03",
+        titel: "Projektbasiert",
+        text: "Kein Abo-Zwang. Du zahlst pro Projekt, fair nach Aufwand und Komplexität.",
+      },
+    ],
+  },
+  warteliste: {
+    overline: "Loslegen",
+    titel: "Kostenloses Erstgespräch",
+    text: "Erzähl uns in 15 Minuten von deinem Problem. Wir sagen dir ehrlich, ob und wie wir helfen können und was es ungefähr kostet. Unverbindlich.",
+    cta: "Termin buchen",
+    oder: "oder schreib uns dein Problem",
+  },
+  preise: {
+    overline: "Preise",
+    titel: "Fair nach Aufwand, nicht nach Tarif",
+    text: "Feste Abo-Stufen ergeben bei individuellen Lösungen keinen Sinn. Nach einem kostenlosen Erstgespräch bekommst du ein Festangebot. Der Preis richtet sich nach der Komplexität, hier zur Orientierung:",
+    stufen: [
+      { label: "Klein", titel: "Einzelne Automatisierung", text: "Z.B. E-Mails sortieren, ein Formular oder eine Schnittstelle automatisieren.", rahmen: "Richtwert ab ~300 €" },
+      { label: "Mittel", titel: "Individuelles Tool", text: "Ein internes Werkzeug oder eine App, die genau deinen Ablauf abbildet.", rahmen: "Richtwert ab ~1.500 €" },
+      { label: "Groß", titel: "Komplette Lösung", text: "Mehrere Systeme, Kiosk-Apps oder ein KI-Assistent inkl. Backend.", rahmen: "individuell" },
+    ],
+    hinweis: "Optional: monatliche Wartungspauschale für Betrieb, Updates und Support. Der finale Preis steht immer erst nach dem Gespräch fest.",
+    cta: "Unverbindliches Angebot anfragen",
+  },
+  wartelisteForm: {
+    platzhalter: "deine@email.de",
+    knopf: "Benachrichtige mich",
+    laden: "Moment…",
+    erfolgTitel: "Du bist dabei ✓",
+    erfolgText: "Wir melden uns, sobald der erste Drop live geht.",
+    hinweis: "Kein Spam. Nur eine Mail, wenn's losgeht.",
+    fehler: "Etwas ist schiefgelaufen. Versuch es nochmal.",
+    fehlerVerbindung: "Verbindungsfehler. Versuch es nochmal.",
+  },
+  shop: {
+    overline: "Vorschau",
+    titel: "Der erste Drop",
+    introVor: "Klick auf ein Produkt für alle Details: Ansichten, Größen, Farben und wie die Bestellung später abläuft. Kaufen ist noch nicht möglich. Trag dich auf die ",
+    introLink: "Warteliste",
+    introNach: " ein, dann bekommst du Bescheid, sobald es losgeht.",
+    badge: "Bald verfügbar",
+    boxTitel: "Nichts verpassen",
+    boxText: "Preise, Fotos und Launch-Datum kommen zuerst an die Warteliste.",
+    boxCta: "Zur Warteliste",
+  },
+  produkt: {
+    zurueck: "← Zurück zum Shop",
+    fotoLabel: "Produktfoto",
+    fotoHinweis: "Produktfoto: Vorschau unseres Print-Partners. Eigene Fotos folgen zum Launch.",
+    badge: "Bald verfügbar",
+    farbe: "Farbe",
+    groesse: "Größe",
+    farbNamen: { Schwarz: "Schwarz", "Weiß": "Weiß" } as Record<string, string>,
+    zzglVersand: "zzgl. Versand",
+    cta: "Auf die Warteliste",
+    ctaHinweis: "Kaufen geht noch nicht. Der Verkauf startet mit dem ersten Drop.",
+    warum: "Warum so reduziert?",
+    details: "Details",
+    bestellung: "So läuft die Bestellung später",
+    bestellPunkte: [
+      "Jedes Teil wird erst nach deiner Bestellung produziert (on demand). Keine Überproduktion.",
+      "Produziert bei unserem Print-Partner in Europa ({herstellung}).",
+      "Lieferung nach Deutschland: insgesamt ca. 5 bis 8 Tage nach Bestellung (Produktion + Versand).",
+      "Der Verkauf startet mit dem ersten Drop. Die Warteliste erfährt es zuerst.",
+    ],
+    masseTitel: "Größentabelle (cm)",
+    masseGroesse: "Größe",
+    masseHinweis: "Liegend gemessen. Kann um 1 bis 2 cm abweichen.",
+  },
+  faq: {
+    overline: "FAQ",
+    titel: "Häufige Fragen",
+    fragen: [
+      {
+        q: "Was macht NIL genau?",
+        a: "Wir entwickeln maßgeschneiderte KI- und Software-Lösungen. Du schilderst ein konkretes Problem in deinem Betrieb, wir bauen ein Werkzeug, das genau dieses Problem löst.",
+      },
+      {
+        q: "Was kostet das?",
+        a: "Es gibt keine festen Tarife. Nach einem kostenlosen Erstgespräch bekommst du ein Festangebot, der Preis richtet sich nach der Komplexität. Kleine Automatisierungen starten schon bei wenigen hundert Euro.",
+      },
+      {
+        q: "Für wen lohnt sich das?",
+        a: "Für Handwerk, Gastronomie, Handel und Dienstleister, überall wo wiederkehrende Aufgaben Zeit fressen: E-Mails, Kundenanfragen, Termine oder interne Abläufe.",
+      },
+      {
+        q: "Wie läuft ein Projekt ab?",
+        a: "1. Kostenloses Erstgespräch. 2. Du bekommst ein Festangebot. 3. Wir entwickeln die Lösung. 4. Optional: laufende Wartung und Support.",
+      },
+      {
+        q: "Wie steht es um den Datenschutz?",
+        a: "DSGVO-konform von Anfang an. Deine Daten bleiben in Europa, und wir verarbeiten nur, was für die Lösung wirklich nötig ist.",
+      },
+      {
+        q: "Wie schnell geht das?",
+        a: "Kleine Automatisierungen oft in wenigen Tagen, größere Projekte je nach Umfang. Einen konkreten Zeitrahmen bekommst du immer mit dem Angebot.",
+      },
+      {
+        q: "Ich habe eine andere Frage.",
+        a: "Schreib uns einfach über das Kontaktformular oder direkt an info@nilogik.de. Wir antworten so schnell wie möglich.",
+      },
+    ],
+    frageNicht: "Frage nicht dabei?",
+    kontaktCta: "Kontakt aufnehmen",
+  },
+  ueberUns: {
+    overline: "Über uns",
+    titel: "Die Idee hinter NIL",
+    bloecke: [
+      {
+        titel: "Der Anfang",
+        text: "NIL ist in Deutschland entstanden, aus einer einfachen Beobachtung: Große Firmen automatisieren längst mit KI, kleine Betriebe bleiben außen vor. Zu teuer, zu kompliziert, zu abgehoben. Das wollten wir ändern.",
+      },
+      {
+        titel: "Wie wir arbeiten",
+        text: "Du beschreibst dein Problem, wir bauen die Lösung. Keine Standard-Software, in die du dich reinquetschen musst, sondern ein Werkzeug, das genau zu deinem Ablauf passt.",
+      },
+      {
+        titel: "Was uns wichtig ist",
+        text: "Ehrliche Beratung, faire Preise nach Aufwand und Datenschutz von Anfang an. Wir sagen dir auch, wenn eine KI-Lösung nicht der richtige Weg ist.",
+      },
+      {
+        titel: "Wer dahinter steht",
+        text: "Hinter NIL steht Nil, Entwickler aus Bayern mit einer Leidenschaft für KI und praktische Lösungen. Direkter Kontakt, kurze Wege, kein anonymes Callcenter.",
+      },
+    ],
+    cta: "Kostenloses Erstgespräch",
+  },
+  kontakt: {
+    overline: "Kontakt",
+    titel: "Beschreib uns dein Problem",
+    text: "Schildere uns deine Herausforderung und wie wir dich erreichen. Wir melden uns mit einer ehrlichen Einschätzung, meist innerhalb eines Werktags.",
+    direkt: "Oder direkt per Mail:",
+  },
+  kontaktForm: {
+    nameLabel: "Name",
+    namePlatzhalter: "Dein Name",
+    emailLabel: "E-Mail",
+    emailPlatzhalter: "deine@email.de",
+    nachrichtLabel: "Nachricht",
+    nachrichtPlatzhalter: "Worum geht's?",
+    senden: "Nachricht senden",
+    laden: "Wird gesendet…",
+    erfolgTitel: "Nachricht gesendet ✓",
+    erfolgText: "Danke! Wir melden uns so schnell wie möglich bei dir.",
+    fehler: "Etwas ist schiefgelaufen. Versuch es nochmal.",
+    fehlerVerbindung: "Verbindungsfehler. Versuch es nochmal.",
+  },
+  footer: {
+    beschreibung: "Maßgeschneiderte KI- und Software-Lösungen für Unternehmen. Individuell, projektbasiert, entwickelt in Deutschland.",
+    marke: "Marke",
+    markeLinks: { shop: "Leistungen", ueberUns: "Über uns", faq: "FAQ" },
+    kontakt: "Kontakt",
+    kontaktformular: "Kontaktformular",
+    rechtliches: "Rechtliches",
+    impressum: "Impressum",
+    datenschutz: "Datenschutz",
+    rechte: "Alle Rechte vorbehalten.",
+    comingSoon: "Coming Soon",
+  },
+  cookie: {
+    titel: "Datenschutz",
+    textVor: "Diese Website verwendet technisch notwendige Cookies sowie Google Analytics für anonyme Reichweitenmessung. Mehr dazu in unserer ",
+    linkText: "Datenschutzerklärung",
+    textNach: ".",
+    nurNotwendige: "Nur notwendige",
+    alleAkzeptieren: "Alle akzeptieren",
+  },
+};
+
+const en: typeof de = {
+  nav: {
+    links: [
+      { href: "/#leistungen", label: "Services" },
+      { href: "/#preise", label: "Pricing" },
+      { href: "/ueber-uns", label: "About" },
+      { href: "/kontakt", label: "Contact" },
+    ],
+    warteliste: "Book a call",
+    menueAuf: "Open menu",
+    menueZu: "Close menu",
+    ansage: "Free first call · Describe your problem",
+  },
+  hero: {
+    badge: "Custom AI solutions",
+    titel: "Describe your problem. We build the AI solution that fits.",
+    text: "No off-the-shelf software. You describe a concrete challenge in your business, we develop a tailor-made AI or software solution exactly for it.",
+    cta: "Describe your problem",
+    marquee: "CUSTOM AI — TAILOR-MADE — NO OFF-THE-SHELF — MADE IN GERMANY — ",
+  },
+  teaser: {
+    overline: "What's possible",
+    titel: "From email chaos to kiosk app",
+    badge: "Use case",
+    karten: [
+      {
+        titel: "Sort emails automatically",
+        text: "Incoming mail is pre-sorted by topic, urgency and responsibility. Your inbox organizes itself.",
+      },
+      {
+        titel: "Automate customer requests",
+        text: "An AI answers recurring questions around the clock. Complex cases are routed to the right person automatically.",
+      },
+      {
+        titel: "Custom internal tools",
+        text: "A tool that mirrors your exact workflow, from quote to reporting. Built for your business, not for everyone.",
+      },
+      {
+        titel: "Kiosk apps for tablets",
+        text: "Ordering or info terminals for the iPads in your store. Lean, robust and tailored to your processes.",
+      },
+    ],
+    cta: "Discuss your problem →",
+  },
+  marke: {
+    overline: "The idea",
+    titel: "Tailor-made, not off-the-shelf.",
+    text: "Standard software forces you to bend your workflow to the tool. We flip it: you describe your problem, we build the solution around it. Exactly for your business, nothing unnecessary.",
+    cta: "More about NIL",
+  },
+  werte: {
+    overline: "Why NIL",
+    punkte: [
+      {
+        nr: "01",
+        titel: "GDPR-compliant",
+        text: "Privacy from the start. Your data stays in Europe and is processed GDPR-compliant.",
+      },
+      {
+        nr: "02",
+        titel: "Made in Germany",
+        text: "Developed in Germany. Direct contact, clear agreements, no anonymous call center.",
+      },
+      {
+        nr: "03",
+        titel: "Project-based",
+        text: "No subscription lock-in. You pay per project, fair to effort and complexity.",
+      },
+    ],
+  },
+  warteliste: {
+    overline: "Get started",
+    titel: "Free first call",
+    text: "Tell us about your problem in 15 minutes. We'll honestly tell you whether and how we can help and roughly what it costs. No obligation.",
+    cta: "Book a call",
+    oder: "or write us your problem",
+  },
+  preise: {
+    overline: "Pricing",
+    titel: "Fair to the effort, not to a tier",
+    text: "Fixed subscription tiers make no sense for custom solutions. After a free first call you get a fixed quote. The price depends on complexity, for orientation:",
+    stufen: [
+      { label: "Small", titel: "Single automation", text: "E.g. sorting emails, automating a form or an integration.", rahmen: "from ~€300" },
+      { label: "Medium", titel: "Custom tool", text: "An internal tool or app that mirrors your exact workflow.", rahmen: "from ~€1,500" },
+      { label: "Large", titel: "Complete solution", text: "Multiple systems, kiosk apps or an AI assistant incl. backend.", rahmen: "custom" },
+    ],
+    hinweis: "Optional: monthly maintenance flat rate for operation, updates and support. The final price is always set after the call.",
+    cta: "Request a no-obligation quote",
+  },
+  wartelisteForm: {
+    platzhalter: "your@email.com",
+    knopf: "Notify me",
+    laden: "One sec…",
+    erfolgTitel: "You're in ✓",
+    erfolgText: "We'll let you know as soon as the first drop goes live.",
+    hinweis: "No spam. Just one email when it's time.",
+    fehler: "Something went wrong. Please try again.",
+    fehlerVerbindung: "Connection error. Please try again.",
+  },
+  shop: {
+    overline: "Preview",
+    titel: "The first drop",
+    introVor: "Click a product for all details: views, sizes, colors and how ordering will work. Buying isn't possible yet. Join the ",
+    introLink: "waitlist",
+    introNach: " and we'll let you know as soon as it starts.",
+    badge: "Coming soon",
+    boxTitel: "Don't miss out",
+    boxText: "Prices, photos and the launch date go to the waitlist first.",
+    boxCta: "Join the waitlist",
+  },
+  produkt: {
+    zurueck: "← Back to shop",
+    fotoLabel: "Product photo",
+    fotoHinweis: "Product photo: preview from our print partner. Our own photos are coming at launch.",
+    badge: "Coming soon",
+    farbe: "Color",
+    groesse: "Size",
+    farbNamen: { Schwarz: "Black", "Weiß": "White" } as Record<string, string>,
+    zzglVersand: "plus shipping",
+    cta: "Join the waitlist",
+    ctaHinweis: "You can't buy yet. Sales start with the first drop.",
+    warum: "Why so minimal?",
+    details: "Details",
+    bestellung: "How ordering will work",
+    bestellPunkte: [
+      "Every piece is made only after you order it (on demand). No overproduction.",
+      "Produced by our print partner in Europe ({herstellung}).",
+      "Delivery to Germany: about 5 to 8 days in total after ordering (production + shipping).",
+      "Sales start with the first drop. The waitlist hears about it first.",
+    ],
+    masseTitel: "Size chart (cm)",
+    masseGroesse: "Size",
+    masseHinweis: "Measured flat. May vary by 1 to 2 cm.",
+  },
+  faq: {
+    overline: "FAQ",
+    titel: "Frequently asked questions",
+    fragen: [
+      {
+        q: "What exactly does NIL do?",
+        a: "We build tailor-made AI and software solutions. You describe a concrete problem in your business, we build a tool that solves exactly that problem.",
+      },
+      {
+        q: "What does it cost?",
+        a: "There are no fixed tiers. After a free first call you get a fixed quote, the price depends on complexity. Small automations start at just a few hundred euros.",
+      },
+      {
+        q: "Who is it for?",
+        a: "For trades, hospitality, retail and service businesses, anywhere recurring tasks eat up time: emails, customer requests, appointments or internal workflows.",
+      },
+      {
+        q: "How does a project work?",
+        a: "1. Free first call. 2. You get a fixed quote. 3. We build the solution. 4. Optional: ongoing maintenance and support.",
+      },
+      {
+        q: "What about data protection?",
+        a: "GDPR-compliant from the start. Your data stays in Europe, and we only process what's really needed for the solution.",
+      },
+      {
+        q: "How fast is it?",
+        a: "Small automations often within a few days, larger projects depending on scope. You always get a concrete timeframe with the quote.",
+      },
+      {
+        q: "I have another question.",
+        a: "Just write to us via the contact form or directly at info@nilogik.de. We'll reply as fast as we can.",
+      },
+    ],
+    frageNicht: "Question not answered?",
+    kontaktCta: "Get in touch",
+  },
+  ueberUns: {
+    overline: "About us",
+    titel: "The idea behind NIL",
+    bloecke: [
+      {
+        titel: "The beginning",
+        text: "NIL was founded in Germany, from a simple observation: big companies have long automated with AI, small businesses are left out. Too expensive, too complex, too detached. We wanted to change that.",
+      },
+      {
+        titel: "How we work",
+        text: "You describe your problem, we build the solution. No standard software you have to squeeze yourself into, but a tool that fits your exact workflow.",
+      },
+      {
+        titel: "What matters to us",
+        text: "Honest advice, fair pricing by effort and data protection from the start. We'll also tell you when an AI solution isn't the right way.",
+      },
+      {
+        titel: "Who's behind it",
+        text: "Behind NIL is Nil, a developer from Bavaria with a passion for AI and practical solutions. Direct contact, short paths, no anonymous call center.",
+      },
+    ],
+    cta: "Free first call",
+  },
+  kontakt: {
+    overline: "Contact",
+    titel: "Describe your problem",
+    text: "Tell us about your challenge and how to reach you. We'll get back to you with an honest assessment, usually within one business day.",
+    direkt: "Or directly by email:",
+  },
+  kontaktForm: {
+    nameLabel: "Name",
+    namePlatzhalter: "Your name",
+    emailLabel: "Email",
+    emailPlatzhalter: "your@email.com",
+    nachrichtLabel: "Message",
+    nachrichtPlatzhalter: "What's it about?",
+    senden: "Send message",
+    laden: "Sending…",
+    erfolgTitel: "Message sent ✓",
+    erfolgText: "Thanks! We'll get back to you as soon as possible.",
+    fehler: "Something went wrong. Please try again.",
+    fehlerVerbindung: "Connection error. Please try again.",
+  },
+  footer: {
+    beschreibung: "Tailor-made AI and software solutions for businesses. Custom, project-based, developed in Germany.",
+    marke: "Brand",
+    markeLinks: { shop: "Services", ueberUns: "About", faq: "FAQ" },
+    kontakt: "Contact",
+    kontaktformular: "Contact form",
+    rechtliches: "Legal",
+    impressum: "Imprint",
+    datenschutz: "Privacy policy",
+    rechte: "All rights reserved.",
+    comingSoon: "Coming Soon",
+  },
+  cookie: {
+    titel: "Privacy",
+    textVor: "This website uses technically necessary cookies and Google Analytics for anonymous traffic measurement. Learn more in our ",
+    linkText: "privacy policy",
+    textNach: ".",
+    nurNotwendige: "Essential only",
+    alleAkzeptieren: "Accept all",
+  },
+};
+
+export const TEXTE: Record<Sprache, typeof de> = { de, en };
