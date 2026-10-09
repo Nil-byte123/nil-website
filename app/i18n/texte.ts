@@ -46,6 +46,22 @@ const de = {
         titel: "Kiosk-Apps für Tablets",
         text: "Bestell- oder Info-Terminals für die iPads in deinem Laden. Schlank, robust und auf deine Prozesse zugeschnitten.",
       },
+      {
+        titel: "Dokumente automatisch auswerten",
+        text: "Rechnungen, Lieferscheine oder Formulare werden ausgelesen und sauber ins System übertragen. Kein Abtippen mehr.",
+      },
+      {
+        titel: "Chatbot für deine Website",
+        text: "Ein Assistent auf deiner Seite berät Besucher, beantwortet Fragen und qualifiziert Anfragen, rund um die Uhr.",
+      },
+      {
+        titel: "Angebote & Rechnungen erstellen",
+        text: "Aus ein paar Eingaben entsteht automatisch ein sauberes Angebot oder eine Rechnung, fertig zum Versenden.",
+      },
+      {
+        titel: "Bewertungen & Social Media",
+        text: "Neue Bewertungen werden erkannt, passende Antworten vorgeschlagen und Routine-Posts vorbereitet.",
+      },
     ],
     cta: "Dein Problem besprechen →",
   },
@@ -295,6 +311,22 @@ const en: typeof de = {
       {
         titel: "Kiosk apps for tablets",
         text: "Ordering or info terminals for the iPads in your store. Lean, robust and tailored to your processes.",
+      },
+      {
+        titel: "Read documents automatically",
+        text: "Invoices, delivery notes or forms are read and transferred cleanly into your system. No more retyping.",
+      },
+      {
+        titel: "Chatbot for your website",
+        text: "An assistant on your site advises visitors, answers questions and qualifies leads, around the clock.",
+      },
+      {
+        titel: "Create quotes & invoices",
+        text: "From a few inputs, a clean quote or invoice is generated automatically, ready to send.",
+      },
+      {
+        titel: "Reviews & social media",
+        text: "New reviews are detected, fitting replies suggested and routine posts prepared.",
       },
     ],
     cta: "Discuss your problem →",
