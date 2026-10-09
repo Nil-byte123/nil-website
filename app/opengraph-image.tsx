@@ -26,7 +26,7 @@ export default async function OpengraphImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0A0A0A",
+          background: "#080B14",
           gap: 48,
         }}
       >
@@ -34,7 +34,7 @@ export default async function OpengraphImage() {
         <img src={logoSrc} width={520} height={268} alt="" />
         <div
           style={{
-            color: "#A3A3A3",
+            color: "#5BB8FF",
             fontSize: 30,
             letterSpacing: 12,
             display: "flex",

@@ -66,7 +66,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <link rel="apple-touch-icon" href="/icon.png" />
         <meta name="apple-mobile-web-app-capable"        content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="theme-color" content="#0A0A0A" />
+        <meta name="theme-color" content="#080B14" />
         {/*
           JSON-LD is type="application/ld+json" — browsers never execute it as JS.
           We still supply the nonce so strict CSP policies don't flag the tag.

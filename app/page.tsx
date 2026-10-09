@@ -174,7 +174,7 @@ export default async function Home() {
                   fontSize: "14px",
                   letterSpacing: "0.25em",
                   whiteSpace: "nowrap",
-                  WebkitTextStroke: "1px rgba(255,255,255,0.3)",
+                  WebkitTextStroke: "1px rgba(120,170,255,0.35)",
                 }}
               >
                 {MARQUEE_TEXT.repeat(4)}

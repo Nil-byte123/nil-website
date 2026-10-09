@@ -30,7 +30,7 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
         position: "sticky",
         top: 0,
         zIndex: 100,
-        background: "rgba(10,10,10,0.85)",
+        background: "rgba(8,11,20,0.85)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
         borderBottom: "1px solid var(--line)",
@@ -169,7 +169,7 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
             display: "flex",
             flexDirection: "column",
             gap: "4px",
-            background: "rgba(10,10,10,0.97)",
+            background: "rgba(8,11,20,0.97)",
           }}
         >
           {LINKS.map((l) => (

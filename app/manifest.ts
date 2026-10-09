@@ -8,10 +8,10 @@ export default function manifest(): MetadataRoute.Manifest {
       "Maßgeschneiderte KI- und Software-Lösungen. Beschreib dein Problem, wir bauen die Lösung.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0A0A0A",
-    theme_color: "#0A0A0A",
+    background_color: "#080B14",
+    theme_color: "#1F6DFF",
     orientation: "portrait-primary",
-    categories: ["shopping", "lifestyle"],
+    categories: ["business", "productivity"],
     icons: [
       { src: "/icon.png", sizes: "192x192", type: "image/png", purpose: "any" },
       { src: "/icon.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
