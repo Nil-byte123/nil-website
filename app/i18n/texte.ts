@@ -8,9 +8,9 @@ const de = {
   nav: {
     links: [
       { href: "/#leistungen", label: "Leistungen" },
+      { href: "/#demo", label: "Demo" },
       { href: "/vorlagen", label: "Vorlagen" },
       { href: "/#preise", label: "Preise" },
-      { href: "/ueber-uns", label: "Über uns" },
       { href: "/kontakt", label: "Kontakt" },
     ],
     warteliste: "Termin buchen",
@@ -102,6 +102,11 @@ const de = {
     boxTitel: "Deine Branche ist nicht dabei?",
     boxText: "Kein Problem, wir bauen jede Seite individuell. Beschreib uns einfach dein Projekt.",
     boxCta: "Projekt anfragen",
+  },
+  demo: {
+    overline: "Live-Demo",
+    titel: "Teste einen KI-Assistenten",
+    text: "So ein Assistent beantwortet Kundenanfragen rund um die Uhr, bucht Termine und entlastet dein Team. Probier's aus, wähle eine Branche und schreib los.",
   },
   wartelisteForm: {
     platzhalter: "deine@email.de",
@@ -253,9 +258,9 @@ const en: typeof de = {
   nav: {
     links: [
       { href: "/#leistungen", label: "Services" },
+      { href: "/#demo", label: "Demo" },
       { href: "/vorlagen", label: "Templates" },
       { href: "/#preise", label: "Pricing" },
-      { href: "/ueber-uns", label: "About" },
       { href: "/kontakt", label: "Contact" },
     ],
     warteliste: "Book a call",
@@ -347,6 +352,11 @@ const en: typeof de = {
     boxTitel: "Your industry isn't listed?",
     boxText: "No problem, we build every site individually. Just describe your project to us.",
     boxCta: "Request a project",
+  },
+  demo: {
+    overline: "Live demo",
+    titel: "Try an AI assistant",
+    text: "An assistant like this answers customer questions around the clock, books appointments and takes work off your team. Try it, pick an industry and start typing.",
   },
   wartelisteForm: {
     platzhalter: "your@email.com",

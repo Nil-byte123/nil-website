@@ -304,6 +304,20 @@ body::before {
   animation: livePuls 2s ease-out infinite;
 }
 
+/* ─── Tipp-Indikator im Chat ───────────────────────── */
+@keyframes tippPunkt {
+  0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
+  30%           { opacity: 1;    transform: translateY(-4px); }
+}
+.tipp-punkt {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--fg-muted);
+  display: inline-block;
+  animation: tippPunkt 1.3s ease-in-out infinite;
+}
+
 /* ─── Scroll-Hinweis im Hero ───────────────────────── */
 @keyframes scrollHint {
   0%   { transform: translateY(0);    opacity: 0.7; }
@@ -412,4 +426,74 @@ body::before {
   height: 56px;
   border: 1px solid rgba(120, 170, 255, 0.14);
   pointer-events: none;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DEMO-VORLAGEN: wiederverwendbare Animationen & Effekte
+   (für die Beispiel-Websites unter /vorlagen/<slug>)
+   ════════════════════════════════════════════════════════════════ */
+
+/* Einblenden beim Laden (gestaffelt über inline animation-delay) */
+@keyframes demoFadeUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.d-in { animation: demoFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* Sanftes Zoom-Ken-Burns für Hero-Hintergründe */
+@keyframes demoKen {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+.d-ken { animation: demoKen 14s ease-in-out infinite alternate; }
+
+/* Scroll-Reveal: blendet ein, sobald das Element in den Blick scrollt.
+   Progressive Enhancement, ohne Unterstützung bleibt alles sichtbar. */
+@supports (animation-timeline: view()) {
+  .d-reveal {
+    opacity: 0;
+    animation: demoFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 50%;
+  }
+}
+
+/* Karten: Hover-Lift mit Schatten */
+.d-card {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+  will-change: transform;
+}
+.d-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.22);
+}
+
+/* Bild-/Flächen-Zoom beim Hover */
+.d-zoom { overflow: hidden; }
+.d-zoom > .d-zoom-inner { transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); height: 100%; width: 100%; }
+.d-zoom:hover > .d-zoom-inner { transform: scale(1.07); }
+
+/* Buttons: Lift + Schatten + Glanz */
+.d-btn {
+  transition: transform 0.25s ease, box-shadow 0.3s ease, filter 0.25s ease;
+  will-change: transform;
+}
+.d-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+  filter: brightness(1.05);
+}
+
+/* Unterstrich-Link, der beim Hover aufzieht */
+.d-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.d-underline:hover { background-size: 100% 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .d-in, .d-ken, .d-reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
 }

@@ -4,6 +4,7 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { NilLogoBox } from "./components/NilLogo";
 import { Reveal, RevealStagger } from "./components/Reveal";
+import { ChatDemo } from "./components/ChatDemo";
 import { ermittleSprache } from "./i18n/sprache";
 import { TEXTE } from "./i18n/texte";
 
@@ -233,6 +234,22 @@ export default async function Home() {
             >
               {t.teaser.cta}
             </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ─── Live-Demo: Branchen-Chatbot ───────────────── */}
+      <section id="demo" style={{ borderTop: "1px solid var(--line)", padding: "100px 24px" }}>
+        <div style={{ maxWidth: "720px", margin: "0 auto", textAlign: "center" }}>
+          <Reveal>
+            <p style={{ ...overline, textAlign: "center" }}>{t.demo.overline}</p>
+            <h2 style={{ ...h2, marginBottom: "16px" }}>{t.demo.titel}</h2>
+            <p style={{ color: "var(--fg-muted)", fontSize: "16px", lineHeight: 1.8, maxWidth: "560px", margin: "0 auto 48px" }}>
+              {t.demo.text}
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <ChatDemo />
           </Reveal>
         </div>
       </section>
