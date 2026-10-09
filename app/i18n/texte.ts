@@ -8,6 +8,7 @@ const de = {
   nav: {
     links: [
       { href: "/#leistungen", label: "Leistungen" },
+      { href: "/vorlagen", label: "Vorlagen" },
       { href: "/#preise", label: "Preise" },
       { href: "/ueber-uns", label: "Über uns" },
       { href: "/kontakt", label: "Kontakt" },
@@ -92,6 +93,15 @@ const de = {
     ],
     hinweis: "Optional: monatliche Wartungspauschale für Betrieb, Updates und Support. Der finale Preis steht immer erst nach dem Gespräch fest.",
     cta: "Unverbindliches Angebot anfragen",
+  },
+  vorlagen: {
+    overline: "Website-Vorlagen",
+    titel: "So könnte deine Seite aussehen",
+    text: "Echte Beispiel-Websites, die wir für verschiedene Branchen bauen. Klick dich rein und schau sie dir an. So eine Seite bekommst du auch, individuell für deinen Betrieb.",
+    ansehen: "Vorschau ansehen",
+    boxTitel: "Deine Branche ist nicht dabei?",
+    boxText: "Kein Problem, wir bauen jede Seite individuell. Beschreib uns einfach dein Projekt.",
+    boxCta: "Projekt anfragen",
   },
   wartelisteForm: {
     platzhalter: "deine@email.de",
@@ -243,6 +253,7 @@ const en: typeof de = {
   nav: {
     links: [
       { href: "/#leistungen", label: "Services" },
+      { href: "/vorlagen", label: "Templates" },
       { href: "/#preise", label: "Pricing" },
       { href: "/ueber-uns", label: "About" },
       { href: "/kontakt", label: "Contact" },
@@ -327,6 +338,15 @@ const en: typeof de = {
     ],
     hinweis: "Optional: monthly maintenance flat rate for operation, updates and support. The final price is always set after the call.",
     cta: "Request a no-obligation quote",
+  },
+  vorlagen: {
+    overline: "Website templates",
+    titel: "This is how your site could look",
+    text: "Real example websites we build for different industries. Click in and take a look. You'll get a site like this too, tailored to your business.",
+    ansehen: "View preview",
+    boxTitel: "Your industry isn't listed?",
+    boxText: "No problem, we build every site individually. Just describe your project to us.",
+    boxCta: "Request a project",
   },
   wartelisteForm: {
     platzhalter: "your@email.com",

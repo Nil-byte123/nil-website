@@ -58,8 +58,8 @@ export default function NotFound() {
           href="/"
           style={{
             display: "inline-block",
-            background: "#FAFAFA",
-            color: "#0A0A0A",
+            background: "var(--accent)",
+            color: "var(--accent-fg)",
             padding: "14px 32px",
             fontWeight: 800,
             fontSize: "13px",

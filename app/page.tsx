@@ -111,8 +111,8 @@ export default async function Home() {
               display: "inline-block",
               marginTop: "40px",
               textDecoration: "none",
-              background: "#FAFAFA",
-              color: "#0A0A0A",
+              background: "var(--accent)",
+              color: "var(--accent-fg)",
               padding: "16px 36px",
               fontSize: "13px",
               fontWeight: 800,
@@ -455,8 +455,8 @@ export default async function Home() {
                 className="btn-solid btn-puls"
                 style={{
                   textDecoration: "none",
-                  background: "#FAFAFA",
-                  color: "#0A0A0A",
+                  background: "var(--accent)",
+                  color: "var(--accent-fg)",
                   padding: "16px 32px",
                   fontSize: "13px",
                   fontWeight: 800,

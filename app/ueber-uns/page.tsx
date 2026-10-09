@@ -106,8 +106,8 @@ export default async function UeberUns() {
               style={{
                 display: "inline-block",
                 textDecoration: "none",
-                background: "#FAFAFA",
-                color: "#0A0A0A",
+                background: "var(--accent)",
+                color: "var(--accent-fg)",
                 padding: "14px 32px",
                 fontSize: "13px",
                 fontWeight: 800,

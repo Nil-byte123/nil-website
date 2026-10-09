@@ -10,14 +10,19 @@
 }
 
 :root {
-  --bg: #0A0A0A;
-  --bg-soft: #111111;
-  --bg-card: #161616;
-  --fg: #FAFAFA;
-  --fg-muted: #A3A3A3;
-  --fg-faint: #6B6B6B;
-  --line: rgba(255, 255, 255, 0.1);
-  --line-strong: rgba(255, 255, 255, 0.22);
+  /* IONOS-inspiriert: Blau + Hellblau + Navy-Schwarz */
+  --bg: #080B14;          /* tiefes Navy-Schwarz */
+  --bg-soft: #0F1524;     /* dunkles Navy */
+  --bg-card: #141D33;     /* Karten-Navy */
+  --fg: #EEF4FF;          /* Fast-Weiß, leichter Blaustich */
+  --fg-muted: #A2B2CE;    /* gedämpftes Blaugrau */
+  --fg-faint: #5E6E8C;    /* schwaches Blaugrau */
+  --line: rgba(120, 170, 255, 0.14);
+  --line-strong: rgba(120, 170, 255, 0.30);
+  /* Akzente */
+  --accent: #1F6DFF;      /* IONOS-Blau (kräftig) */
+  --accent-2: #5BB8FF;    /* Hellblau / Sky */
+  --accent-fg: #FFFFFF;   /* Text auf Blau */
 }
 
 html,

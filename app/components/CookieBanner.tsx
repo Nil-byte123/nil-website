@@ -119,9 +119,9 @@ export default function CookieBanner({ sprache = "de" }: { sprache?: Sprache }) 
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 style={{
-                  background: "#FAFAFA",
+                  background: "var(--accent)",
                   border: "1px solid #FAFAFA",
-                  color: "#0A0A0A",
+                  color: "var(--accent-fg)",
                   fontSize: "12px",
                   fontWeight: 700,
                   letterSpacing: "0.1em",

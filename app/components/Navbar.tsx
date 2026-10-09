@@ -43,8 +43,8 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
         style={{
           display: "block",
           textDecoration: "none",
-          background: "#FAFAFA",
-          color: "#0A0A0A",
+          background: "var(--accent)",
+          color: "var(--accent-fg)",
           textAlign: "center",
           padding: "8px 16px",
           fontSize: "11px",
@@ -127,8 +127,8 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
             className="btn-solid btn-puls"
             style={{
               textDecoration: "none",
-              background: "#FAFAFA",
-              color: "#0A0A0A",
+              background: "var(--accent)",
+              color: "var(--accent-fg)",
               fontSize: "12px",
               fontWeight: 700,
               letterSpacing: "0.08em",
@@ -196,8 +196,8 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
             onClick={() => setOpen(false)}
             style={{
               textDecoration: "none",
-              background: "#FAFAFA",
-              color: "#0A0A0A",
+              background: "var(--accent)",
+              color: "var(--accent-fg)",
               fontSize: "13px",
               fontWeight: 700,
               letterSpacing: "0.08em",

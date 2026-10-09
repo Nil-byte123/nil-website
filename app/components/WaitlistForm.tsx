@@ -87,8 +87,8 @@ export function WaitlistForm({ sprache = "de" }: { sprache?: Sprache }) {
           disabled={status === "loading"}
           className="btn-solid"
           style={{
-            background: "#FAFAFA",
-            color: "#0A0A0A",
+            background: "var(--accent)",
+            color: "var(--accent-fg)",
             border: "none",
             padding: "14px 28px",
             fontSize: "13px",
