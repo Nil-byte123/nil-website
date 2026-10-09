@@ -33,6 +33,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
+      url: "https://www.nilogik.de/vorlagen/fitness",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: "https://www.nilogik.de/vorlagen/immobilien",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: "https://www.nilogik.de/vorlagen/zahnarzt",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
       url: "https://www.nilogik.de/ueber-uns",
       lastModified: new Date(),
       changeFrequency: "monthly",

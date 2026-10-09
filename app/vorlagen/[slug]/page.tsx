@@ -5,6 +5,9 @@ import { DEMOS, findeDemo } from "../demos";
 import { RestaurantDemo } from "./templates/RestaurantDemo";
 import { HandwerkDemo } from "./templates/HandwerkDemo";
 import { SalonDemo } from "./templates/SalonDemo";
+import { FitnessDemo } from "./templates/FitnessDemo";
+import { ImmobilienDemo } from "./templates/ImmobilienDemo";
+import { ZahnarztDemo } from "./templates/ZahnarztDemo";
 
 export function generateStaticParams() {
   return DEMOS.map((d) => ({ slug: d.slug }));
@@ -28,6 +31,9 @@ const TEMPLATES: Record<string, () => React.ReactElement> = {
   restaurant: RestaurantDemo,
   handwerk: HandwerkDemo,
   salon: SalonDemo,
+  fitness: FitnessDemo,
+  immobilien: ImmobilienDemo,
+  zahnarzt: ZahnarztDemo,
 };
 
 export default async function VorlagenDemo({
