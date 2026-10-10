@@ -1,14 +1,16 @@
 /* Demo-Vorlage: Handwerksbetrieb — seriös, hochwertig, vertrauenswürdig.
    Navigation, bewegter Hero, Stat-Counter, Hover-Karten, Scroll-Reveals. */
 
+import { IconDroplet, IconFlame, IconWrench } from "./icons";
+
 const BLAU = "#0F2A5C";
 const ORANGE = "#FF7A00";
 const sans = "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
 
 const leistungen = [
-  { icon: "🚿", titel: "Sanitär", text: "Installation, Reparatur und Wartung von Bädern, Leitungen und Armaturen." },
-  { icon: "🔥", titel: "Heizung", text: "Moderne Heizungsanlagen, Wärmepumpen und schneller Notdienst." },
-  { icon: "🛁", titel: "Bad-Sanierung", text: "Komplette Badsanierung aus einer Hand, von der Planung bis zur Übergabe." },
+  { Icon: IconDroplet, titel: "Sanitär", text: "Installation, Reparatur und Wartung von Bädern, Leitungen und Armaturen." },
+  { Icon: IconFlame, titel: "Heizung", text: "Moderne Heizungsanlagen, Wärmepumpen und schneller Notdienst." },
+  { Icon: IconWrench, titel: "Bad-Sanierung", text: "Komplette Badsanierung aus einer Hand, von der Planung bis zur Übergabe." },
 ];
 
 const stats = [
@@ -81,7 +83,9 @@ export function HandwerkDemo() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(270px, 1fr))", gap: "24px" }}>
           {leistungen.map((l) => (
             <div key={l.titel} className="d-reveal d-card" style={{ borderRadius: "14px", padding: "36px 30px", background: "#fff", boxShadow: "0 12px 34px rgba(15,42,92,0.08)", borderTop: `4px solid ${ORANGE}` }}>
-              <div style={{ fontSize: "40px", marginBottom: "16px" }}>{l.icon}</div>
+              <div style={{ width: "58px", height: "58px", borderRadius: "14px", background: "#FFF3E8", color: ORANGE, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "20px" }}>
+                <l.Icon size={30} />
+              </div>
               <h3 style={{ fontSize: "22px", fontWeight: 800, marginBottom: "12px" }}>{l.titel}</h3>
               <p style={{ fontSize: "15px", lineHeight: 1.7, color: "#44506A" }}>{l.text}</p>
             </div>

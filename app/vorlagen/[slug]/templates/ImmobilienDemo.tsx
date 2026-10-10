@@ -1,15 +1,17 @@
 /* Demo-Vorlage: Immobilienmakler — hochwertig, Weiß + Navy + Gold.
    Navigation, bewegter Hero, Objekt-Karten mit Hover-Zoom, Reveals. */
 
+import { IconHome, IconBuilding, IconWaves } from "./icons";
+
 const NAVY = "#0E1C2B";
 const GOLD = "#B38B4D";
 const serif = "Georgia, 'Times New Roman', serif";
 const sans = "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
 
 const objekte = [
-  { ort: "München · Bogenhausen", typ: "Villa", zimmer: "6 Zi · 240 m²", preis: "2.450.000 €", bg: "linear-gradient(135deg,#1B3148,#2E4A68)", emoji: "🏡" },
-  { ort: "Augsburg · Innenstadt", typ: "Altbau-Wohnung", zimmer: "3 Zi · 98 m²", preis: "495.000 €", bg: "linear-gradient(135deg,#2E4A68,#44648A)", emoji: "🏢" },
-  { ort: "Starnberg · Seenähe", typ: "Neubau-Haus", zimmer: "5 Zi · 180 m²", preis: "1.290.000 €", bg: "linear-gradient(135deg,#44648A,#1B3148)", emoji: "🌊" },
+  { ort: "München · Bogenhausen", typ: "Villa", zimmer: "6 Zi · 240 m²", preis: "2.450.000 €", bg: "linear-gradient(135deg,#1B3148,#2E4A68)", Icon: IconHome },
+  { ort: "Augsburg · Innenstadt", typ: "Altbau-Wohnung", zimmer: "3 Zi · 98 m²", preis: "495.000 €", bg: "linear-gradient(135deg,#2E4A68,#44648A)", Icon: IconBuilding },
+  { ort: "Starnberg · Seenähe", typ: "Neubau-Haus", zimmer: "5 Zi · 180 m²", preis: "1.290.000 €", bg: "linear-gradient(135deg,#44648A,#1B3148)", Icon: IconWaves },
 ];
 
 const schritte = [
@@ -65,7 +67,9 @@ export function ImmobilienDemo() {
           {objekte.map((o) => (
             <div key={o.ort} className="d-reveal d-card" style={{ border: "1px solid #E5E0D8", borderRadius: "14px", overflow: "hidden", background: "#fff", boxShadow: "0 14px 40px rgba(14,28,43,0.08)" }}>
               <div className="d-zoom" style={{ height: "200px", position: "relative" }}>
-                <div className="d-zoom-inner" style={{ background: o.bg, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "60px" }}>{o.emoji}</div>
+                <div className="d-zoom-inner" style={{ background: o.bg, display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(255,255,255,0.55)" }}>
+                  <o.Icon size={72} stroke={1.2} />
+                </div>
                 <span style={{ position: "absolute", top: "14px", left: "14px", background: GOLD, color: NAVY, fontSize: "12px", fontWeight: 700, padding: "5px 12px", borderRadius: "999px" }}>{o.typ}</span>
               </div>
               <div style={{ padding: "26px" }}>

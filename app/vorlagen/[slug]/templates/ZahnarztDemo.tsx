@@ -1,16 +1,18 @@
 /* Demo-Vorlage: Zahnarztpraxis — ruhig, Weiß + Teal/Mint, vertrauensvoll.
    Navigation, Split-Hero, Trust-Badges, Hover-Karten, Scroll-Reveals. */
 
+import { IconShield, IconSparkle, IconTooth, IconHeart } from "./icons";
+
 const TEAL = "#0B3A3A";
 const MINT = "#4FD1C5";
 const HELL = "#F2F8F7";
 const sans = "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif";
 
 const leistungen = [
-  { icon: "✨", titel: "Prophylaxe", text: "Professionelle Zahnreinigung und Vorsorge für ein gesundes Lächeln." },
-  { icon: "😁", titel: "Ästhetik", text: "Bleaching, Veneers und unsichtbare Zahnkorrekturen." },
-  { icon: "🦷", titel: "Implantologie", text: "Hochwertiger, langlebiger Zahnersatz, schonend eingesetzt." },
-  { icon: "🧸", titel: "Kinderzahnheilkunde", text: "Einfühlsame Behandlung, damit der Zahnarztbesuch Spaß macht." },
+  { Icon: IconShield, titel: "Prophylaxe", text: "Professionelle Zahnreinigung und Vorsorge für ein gesundes Lächeln." },
+  { Icon: IconSparkle, titel: "Ästhetik", text: "Bleaching, Veneers und unsichtbare Zahnkorrekturen." },
+  { Icon: IconTooth, titel: "Implantologie", text: "Hochwertiger, langlebiger Zahnersatz, schonend eingesetzt." },
+  { Icon: IconHeart, titel: "Kinderzahnheilkunde", text: "Einfühlsame Behandlung, damit der Zahnarztbesuch Spaß macht." },
 ];
 
 const badges = ["★ 4,9 bei Google", "Über 20 Jahre Erfahrung", "Angstpatienten willkommen", "Alle Kassen & privat"];
@@ -42,8 +44,8 @@ export function ZahnarztDemo() {
             </a>
           </div>
           <div className="d-in" style={{ position: "relative", animationDelay: "0.3s" }}>
-            <div className="d-ken" style={{ aspectRatio: "4 / 3", background: `linear-gradient(135deg, ${MINT} 0%, ${TEAL} 100%)`, borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: "100px", boxShadow: "0 30px 70px rgba(11,58,58,0.25)" }}>
-              🦷
+            <div className="d-ken" style={{ aspectRatio: "4 / 3", background: `linear-gradient(135deg, ${MINT} 0%, ${TEAL} 100%)`, borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", boxShadow: "0 30px 70px rgba(11,58,58,0.25)" }}>
+              <IconTooth size={128} stroke={1.1} />
             </div>
             <div style={{ position: "absolute", bottom: "-18px", left: "-18px", background: "#fff", borderRadius: "14px", padding: "16px 20px", boxShadow: "0 16px 40px rgba(11,58,58,0.18)" }}>
               <div style={{ fontSize: "22px", fontWeight: 800, color: MINT, filter: "brightness(0.8)" }}>★ 4,9</div>
@@ -71,7 +73,9 @@ export function ZahnarztDemo() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))", gap: "22px" }}>
           {leistungen.map((l) => (
             <div key={l.titel} className="d-reveal d-card" style={{ background: HELL, borderRadius: "16px", padding: "32px 28px" }}>
-              <div style={{ width: "56px", height: "56px", borderRadius: "50%", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "26px", marginBottom: "18px", boxShadow: "0 8px 22px rgba(11,58,58,0.1)" }}>{l.icon}</div>
+              <div style={{ width: "58px", height: "58px", borderRadius: "50%", background: "#fff", color: TEAL, display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "18px", boxShadow: "0 8px 22px rgba(11,58,58,0.1)" }}>
+                <l.Icon size={28} />
+              </div>
               <h3 style={{ fontSize: "19px", fontWeight: 800, marginBottom: "10px" }}>{l.titel}</h3>
               <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#3E5C5C" }}>{l.text}</p>
             </div>
