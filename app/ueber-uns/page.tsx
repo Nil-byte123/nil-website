@@ -10,7 +10,7 @@ import { TEXTE } from "../i18n/texte";
 export const metadata: Metadata = {
   title: "Über uns",
   description:
-    "Die Idee hinter NIL: maßgeschneiderte KI- und Software-Lösungen aus Deutschland.",
+    "Die Idee hinter NIL: maßgeschneiderte Software-Lösungen aus Deutschland.",
 };
 
 export default async function UeberUns() {

@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "NIL – KI- & Software-Lösungen",
+    name: "NIL – Software-Lösungen",
     short_name: "NIL",
     description:
-      "Maßgeschneiderte KI- und Software-Lösungen. Beschreib dein Problem, wir bauen die Lösung.",
+      "Maßgeschneiderte Software-Lösungen. Beschreib dein Problem, wir bauen die Lösung.",
     start_url: "/",
     display: "standalone",
     background_color: "#080B14",

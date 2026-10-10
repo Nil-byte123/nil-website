@@ -19,11 +19,11 @@ const de = {
     ansage: "Kostenloses Erstgespräch · Beschreib uns dein Problem",
   },
   hero: {
-    badge: "KI-Lösungen nach Maß",
-    titel: "Beschreib uns dein Problem. Wir bauen die passende KI-Lösung.",
-    text: "Keine Software von der Stange. Du schilderst uns eine konkrete Herausforderung in deinem Betrieb, wir entwickeln eine maßgeschneiderte KI- oder Software-Lösung genau dafür.",
+    badge: "Software nach Maß",
+    titel: "Beschreib uns dein Problem. Wir bauen die passende Lösung.",
+    text: "Keine Software von der Stange. Du schilderst uns eine konkrete Herausforderung in deinem Betrieb, wir entwickeln ein maßgeschneidertes digitales Werkzeug genau dafür.",
     cta: "Problem beschreiben",
-    marquee: "CUSTOM AI — MASSGESCHNEIDERT — KEINE STANDARDLÖSUNG — MADE IN GERMANY — ",
+    marquee: "SMARTE SOFTWARE — MASSGESCHNEIDERT — KEINE STANDARDLÖSUNG — MADE IN GERMANY — ",
   },
   teaser: {
     overline: "Was möglich ist",
@@ -36,7 +36,7 @@ const de = {
       },
       {
         titel: "Kundenanfragen automatisieren",
-        text: "Wiederkehrende Fragen beantwortet eine KI rund um die Uhr. Komplexe Fälle landen automatisch beim richtigen Menschen.",
+        text: "Wiederkehrende Fragen beantwortet ein smarter Assistent rund um die Uhr. Komplexe Fälle landen automatisch beim richtigen Menschen.",
       },
       {
         titel: "Individuelle interne Tools",
@@ -105,7 +105,7 @@ const de = {
     stufen: [
       { label: "Klein", titel: "Einzelne Automatisierung", text: "Z.B. E-Mails sortieren, ein Formular oder eine Schnittstelle automatisieren.", rahmen: "Richtwert ab ~300 €" },
       { label: "Mittel", titel: "Individuelles Tool", text: "Ein internes Werkzeug oder eine App, die genau deinen Ablauf abbildet.", rahmen: "Richtwert ab ~1.500 €" },
-      { label: "Groß", titel: "Komplette Lösung", text: "Mehrere Systeme, Kiosk-Apps oder ein KI-Assistent inkl. Backend.", rahmen: "individuell" },
+      { label: "Groß", titel: "Komplette Lösung", text: "Mehrere Systeme, Kiosk-Apps oder ein intelligenter Assistent inkl. Backend.", rahmen: "individuell" },
     ],
     hinweis: "Optional: monatliche Wartungspauschale für Betrieb, Updates und Support. Der finale Preis steht immer erst nach dem Gespräch fest.",
     cta: "Unverbindliches Angebot anfragen",
@@ -121,7 +121,7 @@ const de = {
   },
   demo: {
     overline: "Live-Demo",
-    titel: "Teste einen KI-Assistenten",
+    titel: "Teste einen smarten Assistenten",
     text: "So ein Assistent beantwortet Kundenanfragen rund um die Uhr, bucht Termine und entlastet dein Team. Probier's aus, wähle eine Branche und schreib los.",
   },
   wartelisteForm: {
@@ -175,7 +175,7 @@ const de = {
     fragen: [
       {
         q: "Was macht NIL genau?",
-        a: "Wir entwickeln maßgeschneiderte KI- und Software-Lösungen. Du schilderst ein konkretes Problem in deinem Betrieb, wir bauen ein Werkzeug, das genau dieses Problem löst.",
+        a: "Wir entwickeln maßgeschneiderte digitale Lösungen. Du schilderst ein konkretes Problem in deinem Betrieb, wir bauen ein Werkzeug, das genau dieses Problem löst.",
       },
       {
         q: "Was kostet das?",
@@ -211,7 +211,7 @@ const de = {
     bloecke: [
       {
         titel: "Der Anfang",
-        text: "NIL ist in Deutschland entstanden, aus einer einfachen Beobachtung: Große Firmen automatisieren längst mit KI, kleine Betriebe bleiben außen vor. Zu teuer, zu kompliziert, zu abgehoben. Das wollten wir ändern.",
+        text: "NIL ist in Deutschland entstanden, aus einer einfachen Beobachtung: Große Firmen automatisieren längst mit smarter Technik, kleine Betriebe bleiben außen vor. Zu teuer, zu kompliziert, zu abgehoben. Das wollten wir ändern.",
       },
       {
         titel: "Wie wir arbeiten",
@@ -219,11 +219,11 @@ const de = {
       },
       {
         titel: "Was uns wichtig ist",
-        text: "Ehrliche Beratung, faire Preise nach Aufwand und Datenschutz von Anfang an. Wir sagen dir auch, wenn eine KI-Lösung nicht der richtige Weg ist.",
+        text: "Ehrliche Beratung, faire Preise nach Aufwand und Datenschutz von Anfang an. Wir sagen dir auch, wenn eine digitale Lösung nicht der richtige Weg ist.",
       },
       {
         titel: "Wer dahinter steht",
-        text: "Hinter NIL steht Nil, Entwickler aus Bayern mit einer Leidenschaft für KI und praktische Lösungen. Direkter Kontakt, kurze Wege, kein anonymes Callcenter.",
+        text: "Hinter NIL steht Nil, Entwickler aus Bayern mit einer Leidenschaft für smarte Technik und praktische Lösungen. Direkter Kontakt, kurze Wege, kein anonymes Callcenter.",
       },
     ],
     cta: "Kostenloses Erstgespräch",
@@ -249,7 +249,7 @@ const de = {
     fehlerVerbindung: "Verbindungsfehler. Versuch es nochmal.",
   },
   footer: {
-    beschreibung: "Maßgeschneiderte KI- und Software-Lösungen für Unternehmen. Individuell, projektbasiert, entwickelt in Deutschland.",
+    beschreibung: "Maßgeschneiderte Software-Lösungen für Unternehmen. Individuell, projektbasiert, entwickelt in Deutschland.",
     marke: "Marke",
     markeLinks: { shop: "Leistungen", ueberUns: "Über uns", faq: "FAQ" },
     kontakt: "Kontakt",
@@ -285,11 +285,11 @@ const en: typeof de = {
     ansage: "Free first call · Describe your problem",
   },
   hero: {
-    badge: "Custom AI solutions",
-    titel: "Describe your problem. We build the AI solution that fits.",
-    text: "No off-the-shelf software. You describe a concrete challenge in your business, we develop a tailor-made AI or software solution exactly for it.",
+    badge: "Software made to measure",
+    titel: "Describe your problem. We build the solution that fits.",
+    text: "No off-the-shelf software. You describe a concrete challenge in your business, we develop a tailor-made digital tool exactly for it.",
     cta: "Describe your problem",
-    marquee: "CUSTOM AI — TAILOR-MADE — NO OFF-THE-SHELF — MADE IN GERMANY — ",
+    marquee: "SMART SOFTWARE — TAILOR-MADE — NO OFF-THE-SHELF — MADE IN GERMANY — ",
   },
   teaser: {
     overline: "What's possible",
@@ -302,7 +302,7 @@ const en: typeof de = {
       },
       {
         titel: "Automate customer requests",
-        text: "An AI answers recurring questions around the clock. Complex cases are routed to the right person automatically.",
+        text: "A smart assistant answers recurring questions around the clock. Complex cases are routed to the right person automatically.",
       },
       {
         titel: "Custom internal tools",
@@ -371,7 +371,7 @@ const en: typeof de = {
     stufen: [
       { label: "Small", titel: "Single automation", text: "E.g. sorting emails, automating a form or an integration.", rahmen: "from ~€300" },
       { label: "Medium", titel: "Custom tool", text: "An internal tool or app that mirrors your exact workflow.", rahmen: "from ~€1,500" },
-      { label: "Large", titel: "Complete solution", text: "Multiple systems, kiosk apps or an AI assistant incl. backend.", rahmen: "custom" },
+      { label: "Large", titel: "Complete solution", text: "Multiple systems, kiosk apps or an intelligent assistant incl. backend.", rahmen: "custom" },
     ],
     hinweis: "Optional: monthly maintenance flat rate for operation, updates and support. The final price is always set after the call.",
     cta: "Request a no-obligation quote",
@@ -387,7 +387,7 @@ const en: typeof de = {
   },
   demo: {
     overline: "Live demo",
-    titel: "Try an AI assistant",
+    titel: "Try a smart assistant",
     text: "An assistant like this answers customer questions around the clock, books appointments and takes work off your team. Try it, pick an industry and start typing.",
   },
   wartelisteForm: {
@@ -441,7 +441,7 @@ const en: typeof de = {
     fragen: [
       {
         q: "What exactly does NIL do?",
-        a: "We build tailor-made AI and software solutions. You describe a concrete problem in your business, we build a tool that solves exactly that problem.",
+        a: "We build tailor-made digital solutions. You describe a concrete problem in your business, we build a tool that solves exactly that problem.",
       },
       {
         q: "What does it cost?",
@@ -477,7 +477,7 @@ const en: typeof de = {
     bloecke: [
       {
         titel: "The beginning",
-        text: "NIL was founded in Germany, from a simple observation: big companies have long automated with AI, small businesses are left out. Too expensive, too complex, too detached. We wanted to change that.",
+        text: "NIL was founded in Germany, from a simple observation: big companies have long automated with smart tech, small businesses are left out. Too expensive, too complex, too detached. We wanted to change that.",
       },
       {
         titel: "How we work",
@@ -485,11 +485,11 @@ const en: typeof de = {
       },
       {
         titel: "What matters to us",
-        text: "Honest advice, fair pricing by effort and data protection from the start. We'll also tell you when an AI solution isn't the right way.",
+        text: "Honest advice, fair pricing by effort and data protection from the start. We'll also tell you when a digital solution isn't the right way.",
       },
       {
         titel: "Who's behind it",
-        text: "Behind NIL is Nil, a developer from Bavaria with a passion for AI and practical solutions. Direct contact, short paths, no anonymous call center.",
+        text: "Behind NIL is Nil, a developer from Bavaria with a passion for smart tech and practical solutions. Direct contact, short paths, no anonymous call center.",
       },
     ],
     cta: "Free first call",
@@ -515,7 +515,7 @@ const en: typeof de = {
     fehlerVerbindung: "Connection error. Please try again.",
   },
   footer: {
-    beschreibung: "Tailor-made AI and software solutions for businesses. Custom, project-based, developed in Germany.",
+    beschreibung: "Tailor-made software solutions for businesses. Custom, project-based, developed in Germany.",
     marke: "Brand",
     markeLinks: { shop: "Services", ueberUns: "About", faq: "FAQ" },
     kontakt: "Contact",

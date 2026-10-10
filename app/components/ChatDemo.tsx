@@ -276,7 +276,7 @@ export function ChatDemo() {
         </form>
       </div>
       <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "12px", textAlign: "center" }}>
-        Echter KI-Assistent (Demo). Deinen eigenen bauen wir individuell für deinen Betrieb, mit deinen Daten und Abläufen.
+        Echter smarter Assistent (Demo). Deinen eigenen bauen wir individuell für deinen Betrieb, mit deinen Daten und Abläufen.
       </p>
     </div>
   );

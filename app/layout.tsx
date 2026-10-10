@@ -13,14 +13,14 @@ const geist = Geist({
 
 export const metadata: Metadata = {
   title: {
-    default:  "NIL – Maßgeschneiderte KI- & Software-Lösungen",
+    default:  "NIL – Maßgeschneiderte Software-Lösungen",
     template: "%s | NIL",
   },
   description:
-    "Beschreib uns dein Problem, wir bauen die passende KI- oder Software-Lösung. Individuell statt von der Stange, projektbasiert, entwickelt in Deutschland.",
+    "Beschreib uns dein Problem, wir bauen die passende Lösung. Individuell statt von der Stange, projektbasiert, entwickelt in Deutschland.",
   keywords: [
-    "KI-Lösungen", "Custom AI", "Softwareentwicklung", "Automatisierung",
-    "individuelle Software", "KI-Assistent", "Kiosk-App", "Prozessautomatisierung",
+    "Software-Lösungen", "Softwareentwicklung", "Automatisierung", "Custom AI",
+    "individuelle Software", "digitaler Assistent", "Kiosk-App", "Prozessautomatisierung",
     "nilogik", "NIL", "Made in Germany", "DSGVO",
   ],
   authors:     [{ name: "NIL", url: "https://www.nilogik.de" }],
@@ -32,12 +32,12 @@ export const metadata: Metadata = {
     locale:      "de_DE",
     url:         "https://www.nilogik.de",
     siteName:    "NIL",
-    title:       "NIL – Maßgeschneiderte KI- & Software-Lösungen",
+    title:       "NIL – Maßgeschneiderte Software-Lösungen",
     description: "Beschreib uns dein Problem, wir bauen die passende Lösung. Individuell, projektbasiert, entwickelt in Deutschland.",
   },
   twitter: {
     card:        "summary_large_image",
-    title:       "NIL – Maßgeschneiderte KI- & Software-Lösungen",
+    title:       "NIL – Maßgeschneiderte Software-Lösungen",
     description: "Beschreib uns dein Problem, wir bauen die passende Lösung. Individuell, projektbasiert, entwickelt in Deutschland.",
   },
   robots:   { index: true, follow: true, googleBot: { index: true, follow: true } },
@@ -50,7 +50,7 @@ const STRUCTURED_DATA = JSON.stringify({
   "@context": "https://schema.org",
   "@type":    "WebSite",
   "name":     "NIL",
-  "alternateName": "NIL – KI- & Software-Lösungen",
+  "alternateName": "NIL – Software-Lösungen",
   "url":      "https://www.nilogik.de",
 });
 

@@ -6,7 +6,7 @@ import path from "node:path";
    NIL Logo auf Schwarz mit Coming-Soon-Zeile. */
 
 export const runtime = "nodejs";
-export const alt = "NIL – KI- und Software-Lösungen";
+export const alt = "NIL – Software-Lösungen";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -40,7 +40,7 @@ export default async function OpengraphImage() {
             display: "flex",
           }}
         >
-KI- & SOFTWARE-LÖSUNGEN
+MASSGESCHNEIDERTE SOFTWARE
         </div>
       </div>
     ),
