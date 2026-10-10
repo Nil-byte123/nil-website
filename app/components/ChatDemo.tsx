@@ -73,10 +73,39 @@ const BRANCHEN: Branche[] = [
 
 type Msg = { role: "user" | "bot"; text: string };
 
+function hatWort(t: string, keys: string[]): boolean {
+  return keys.some((k) => t.includes(k));
+}
+
+/* Backup-Logik (nur aktiv, wenn die echte KI nicht erreichbar ist).
+   Behandelt erst Smalltalk, dann branchenspezifische Fragen.      */
 function antwortFinden(b: Branche, eingabe: string): string {
-  const t = eingabe.toLowerCase();
+  const t = eingabe.toLowerCase().trim();
+
+  // Begrüßung
+  if (hatWort(t, ["hallo", "hallöchen", "hi ", "hey", "moin", "servus", "guten tag", "guten morgen", "guten abend", "grüß"]) || t === "hi") {
+    return `Hallo! 😊 Schön, dass du da bist. Wie kann ich dir helfen? Du kannst mich zum Beispiel nach „${b.schnell[0]}" oder „${b.schnell[1]}" fragen.`;
+  }
+  // Wie geht's
+  if (hatWort(t, ["wie geht", "wies läuft", "alles gut"])) {
+    return "Mir geht's bestens, danke der Nachfrage! 😊 Und wie kann ich dir weiterhelfen?";
+  }
+  // Danke
+  if (hatWort(t, ["danke", "dankeschön", "vielen dank", "merci", "thx", "thanks"])) {
+    return "Sehr gern! 😊 Kann ich sonst noch etwas für dich tun?";
+  }
+  // Verabschiedung
+  if (hatWort(t, ["tschüss", "tschau", "ciao", "bye", "wiedersehen", "bis dann", "bis bald"])) {
+    return "Bis bald und einen schönen Tag! 👋";
+  }
+  // Zustimmung (kurz)
+  if (["ja", "gerne", "gern", "ok", "okay", "passt", "klar", "jap", "jo"].includes(t)) {
+    return "Super! Sag mir einfach kurz, worum es geht, dann kümmere ich mich direkt darum.";
+  }
+
+  // Branchenspezifisch
   for (const r of b.regeln) {
-    if (r.keys.some((k) => t.includes(k))) return r.antwort;
+    if (hatWort(t, r.keys)) return r.antwort;
   }
   return b.fallback;
 }
