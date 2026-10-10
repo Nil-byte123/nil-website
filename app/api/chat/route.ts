@@ -276,7 +276,10 @@ export async function POST(req: NextRequest) {
     if (!response.ok) {
       console.error("GROQ API error:", sanitizeLog(JSON.stringify(data)));
       return NextResponse.json(
-        { response: "Ich bin gerade nicht erreichbar. Bitte versuche es gleich nochmal!" },
+        {
+          response: "Ich bin gerade nicht erreichbar. Bitte versuche es gleich nochmal!",
+          _debug: { status: response.status, err: (data?.error?.message ?? JSON.stringify(data)).slice(0, 220) },
+        },
         { status: 200 }
       );
     }
