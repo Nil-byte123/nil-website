@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/* ─── Branchen-Chat-Demo (skriptbasiert, zuverlässig) ─────────────
-   Zeigt, wie ein NIL-Assistent für verschiedene Betriebe antwortet.
+/* ─── Branchen-Chat-Demo ──────────────────────────────────────────
+   Echter KI-Assistent (GROQ via /api/chat). Antwortet sinnvoll und
+   im Kontext des jeweiligen Betriebs. Fällt auf Skript-Antworten
+   zurück, falls die KI gerade nicht erreichbar ist (z.B. kein Key).
    Umschaltbar zwischen Friseur, Handwerk und Restaurant.          */
 
 type Regel = { keys: string[]; antwort: string };
@@ -15,6 +17,8 @@ type Branche = {
   schnell: string[];
   regeln: Regel[];
   fallback: string;
+  /* Kontext für die echte KI (/api/chat erwartet name/type/services) */
+  ctx: { name: string; type: string; services: string[] };
 };
 
 const BRANCHEN: Branche[] = [
@@ -32,6 +36,7 @@ const BRANCHEN: Branche[] = [
       { keys: ["wo", "adresse", "anfahrt", "parken"], antwort: "Du findest uns in der Leopoldstraße 44, 80802 München. Parkplätze gibt's direkt gegenüber." },
     ],
     fallback: "Gute Frage! Das kläre ich kurz mit dem Team. Möchtest du, dass wir dich zurückrufen, oder direkt einen Termin buchen?",
+    ctx: { name: "Salon Nova", type: "friseur", services: ["Haarschnitt", "Coloration", "Balayage", "Styling", "Pflege-Treatments"] },
   },
   {
     id: "handwerk",
@@ -46,6 +51,7 @@ const BRANCHEN: Branche[] = [
       { keys: ["termin", "wann", "kommen"], antwort: "Ich kann dir einen Termin vormerken. Diese Woche hätten wir Donnerstag oder Freitag Kapazität. Vormittags oder nachmittags?" },
     ],
     fallback: "Alles klar! Schildere mir dein Anliegen am besten in einem Satz, dann leite ich das direkt an Meister Vogt weiter.",
+    ctx: { name: "Meister Vogt", type: "handwerk", services: ["Sanitär", "Heizung", "Wärmepumpen", "Bad-Sanierung", "24h-Notdienst"] },
   },
   {
     id: "restaurant",
@@ -61,6 +67,7 @@ const BRANCHEN: Branche[] = [
       { keys: ["liefer", "abhol", "to go"], antwort: "Zum Abholen gerne! Ruf uns einfach an unter 0821 123456, wir machen deine Bestellung in ca. 20 Minuten fertig." },
     ],
     fallback: "Gute Frage! Ruf uns gern an oder reservier direkt online, dann klären wir alles persönlich.",
+    ctx: { name: "Trattoria Bella", type: "restaurant", services: ["Tischreservierung", "Speisekarte", "Abholung", "vegane & glutenfreie Gerichte"] },
   },
 ];
 
@@ -95,18 +102,42 @@ export function ChatDemo() {
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, tippt]);
 
-  function senden(text: string) {
+  async function senden(text: string) {
     const t = text.trim();
     if (!t || tippt) return;
+    const vorher = messages; // bisheriger Verlauf (vor dieser Nachricht)
     setMessages((m) => [...m, { role: "user", text: t }]);
     setInput("");
     setTippt(true);
-    const antwort = antwortFinden(b, t);
-    const delay = 650 + Math.min(antwort.length * 12, 1100);
-    setTimeout(() => {
-      setMessages((m) => [...m, { role: "bot", text: antwort }]);
-      setTippt(false);
-    }, delay);
+
+    let antwort = "";
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: t,
+          history: vorher.slice(-8).map((m) => ({
+            role: m.role === "bot" ? "assistant" : "user",
+            content: m.text,
+          })),
+          businessContext: b.ctx,
+        }),
+      });
+      const data = await res.json();
+      antwort = typeof data?.response === "string" ? data.response.trim() : "";
+    } catch {
+      antwort = "";
+    }
+
+    // Fallback auf Skript, falls KI nicht erreichbar oder leer antwortet
+    const schwach =
+      !antwort ||
+      /nicht erreichbar|serverfehler|ungültige anfrage|zu große anfrage|zu viele anfragen/i.test(antwort);
+    if (schwach) antwort = antwortFinden(b, t);
+
+    setMessages((m) => [...m, { role: "bot", text: antwort }]);
+    setTippt(false);
   }
 
   return (
@@ -216,7 +247,7 @@ export function ChatDemo() {
         </form>
       </div>
       <p style={{ color: "var(--fg-faint)", fontSize: "12px", marginTop: "12px", textAlign: "center" }}>
-        Demo-Assistent, Antworten sind Beispiele. Deinen echten Assistenten bauen wir individuell für deinen Betrieb.
+        Echter KI-Assistent (Demo). Deinen eigenen bauen wir individuell für deinen Betrieb, mit deinen Daten und Abläufen.
       </p>
     </div>
   );
