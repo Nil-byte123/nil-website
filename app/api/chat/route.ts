@@ -251,35 +251,44 @@ export async function POST(req: NextRequest) {
       { role: "user",      content: cleanMessage },
     ];
 
-    // 9. Call GROQ with timeout
-    const response = await fetchWithTimeout(
-      "https://api.groq.com/openai/v1/chat/completions",
-      {
-        method:  "POST",
-        headers: {
-          "Authorization": `Bearer ${apiKey}`,
-          "Content-Type":  "application/json",
+    // 9. Call GROQ — try several current models (Fallback-Kette), falls
+    //    GROQ eins abschaltet. Erstes Modell, das 200 liefert, gewinnt.
+    const MODELS = [
+      "llama-3.1-8b-instant",
+      "llama-3.3-70b-versatile",
+      "openai/gpt-oss-20b",
+      "gemma2-9b-it",
+    ];
+    let response: Response | null = null;
+    let data: { choices?: Array<{ message?: { content?: string } }>; error?: { message?: string } } | null = null;
+    for (const model of MODELS) {
+      response = await fetchWithTimeout(
+        "https://api.groq.com/openai/v1/chat/completions",
+        {
+          method:  "POST",
+          headers: {
+            "Authorization": `Bearer ${apiKey}`,
+            "Content-Type":  "application/json",
+          },
+          body: JSON.stringify({
+            model,
+            max_tokens:  250,
+            temperature: 0.5,
+            top_p:       0.9,
+            messages:    messagesForAI,
+          }),
         },
-        body: JSON.stringify({
-          model:       "llama-3.3-70b-versatile",
-          max_tokens:  250,      // tightened: enough for 2-3 sentences
-          temperature: 0.5,      // lower = less creative = more predictable
-          top_p:       0.9,
-          messages:    messagesForAI,
-        }),
-      },
-      12_000
-    );
+        12_000
+      );
+      data = await response.json();
+      if (response.ok) break; // Modell hat funktioniert
+      // sonst: nächstes Modell probieren
+    }
 
-    const data = await response.json();
-
-    if (!response.ok) {
+    if (!response || !response.ok) {
       console.error("GROQ API error:", sanitizeLog(JSON.stringify(data)));
       return NextResponse.json(
-        {
-          response: "Ich bin gerade nicht erreichbar. Bitte versuche es gleich nochmal!",
-          _debug: { status: response.status, err: (data?.error?.message ?? JSON.stringify(data)).slice(0, 220) },
-        },
+        { response: "Ich bin gerade nicht erreichbar. Bitte versuche es gleich nochmal!" },
         { status: 200 }
       );
     }
