@@ -494,6 +494,49 @@ body::before {
 }
 .d-underline:hover { background-size: 100% 2px; }
 
+/* ─── CTA-Karte (Erstgespräch) ───────────────────── */
+.cta-card {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  border: 1px solid var(--line-strong);
+  border-radius: 24px;
+  padding: clamp(32px, 5vw, 56px);
+  text-align: center;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(31,109,255,0.12), transparent 60%),
+    linear-gradient(180deg, var(--bg-card), var(--bg-soft));
+  box-shadow: 0 40px 90px -30px rgba(0,0,0,0.7), inset 0 1px 0 rgba(120,170,255,0.08);
+}
+.cta-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-2), transparent);
+  opacity: 0.6;
+}
+.cta-points {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 22px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+.cta-point {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--fg-muted);
+}
+.cta-point svg { color: var(--accent-2); flex: none; }
+
 /* ─── Chat-Demo ──────────────────────────────────── */
 .chat-tab {
   display: inline-flex;

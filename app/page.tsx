@@ -420,19 +420,12 @@ export default async function Home() {
       </section>
 
       {/* ─── Kostenloses Erstgespräch / Terminbuchung ──── */}
-      <section
-        style={{
-          background:
-            "linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 30%, var(--bg-soft) 70%, var(--bg) 100%)",
-          padding: "100px 24px",
-        }}
-        id="termin"
-      >
-        <div style={{ maxWidth: "600px", margin: "0 auto", textAlign: "center" }}>
-          <Reveal>
+      <section style={{ padding: "100px 24px" }} id="termin">
+        <Reveal>
+          <div className="cta-card">
             <p style={{ ...overline, textAlign: "center" }}>{t.warteliste.overline}</p>
             <h2 style={{ ...h2, marginBottom: "16px" }}>{t.warteliste.titel}</h2>
-            <p style={{ color: "var(--fg-muted)", fontSize: "15px", lineHeight: 1.8, marginBottom: "40px" }}>
+            <p style={{ color: "var(--fg-muted)", fontSize: "15px", lineHeight: 1.8, marginBottom: "36px", maxWidth: "480px", marginLeft: "auto", marginRight: "auto" }}>
               {t.warteliste.text}
             </p>
             <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap" }}>
@@ -471,8 +464,19 @@ export default async function Home() {
                 {t.warteliste.oder}
               </Link>
             </div>
-          </Reveal>
-        </div>
+            <div className="cta-points">
+              {(sprache === "de"
+                ? ["100% kostenlos", "Unverbindlich", "Antwort in 24 Std.", "DSGVO-konform"]
+                : ["100% free", "No obligation", "Reply within 24h", "GDPR-compliant"]
+              ).map((p) => (
+                <span key={p} className="cta-point">
+                  <CheckIcon />
+                  {p}
+                </span>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       <Footer sprache={sprache} />
@@ -494,6 +498,14 @@ const h2: React.CSSProperties = {
   fontWeight: 800,
   letterSpacing: "-0.03em",
 };
+
+function CheckIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  );
+}
 
 function UseCaseCard({
   nr,
