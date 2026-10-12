@@ -509,12 +509,25 @@ body::before {
 }
 .d-underline:hover { background-size: 100% 2px; }
 
-/* ─── Ansage-Leiste mit wanderndem Verlauf ─────────── */
+/* ─── Ansage-Leiste: dezentes Glas mit Blau-Schimmer ── */
 .ansage-bar {
-  background: linear-gradient(90deg, var(--accent) 0%, #3F8BFF 30%, var(--accent-2) 50%, #3F8BFF 70%, var(--accent) 100%);
+  position: relative;
+  background:
+    linear-gradient(90deg, rgba(31,109,255,0.20) 0%, rgba(91,184,255,0.12) 50%, rgba(31,109,255,0.20) 100%);
   background-size: 220% 100%;
-  animation: ansageShimmer 9s linear infinite;
+  animation: ansageShimmer 14s linear infinite;
+  border-bottom: 1px solid rgba(120,170,255,0.16);
+  transition: filter 0.25s ease;
 }
+/* feine Akzent-Linie ganz oben */
+.ansage-bar::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(91,184,255,0.6), transparent);
+}
+.ansage-bar:hover { filter: brightness(1.25); }
 @keyframes ansageShimmer {
   from { background-position: 0% 0; }
   to   { background-position: 220% 0; }

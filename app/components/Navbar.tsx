@@ -45,12 +45,12 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
         style={{
           display: "block",
           textDecoration: "none",
-          color: "var(--accent-fg)",
+          color: "#D4E6FF",
           textAlign: "center",
-          padding: "8px 16px",
+          padding: "9px 16px",
           fontSize: "11px",
-          fontWeight: 800,
-          letterSpacing: "0.18em",
+          fontWeight: 700,
+          letterSpacing: "0.16em",
           textTransform: "uppercase",
         }}
       >
