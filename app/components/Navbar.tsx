@@ -30,20 +30,21 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
         position: "sticky",
         top: 0,
         zIndex: 100,
-        background: "rgba(8,11,20,0.85)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        borderBottom: "1px solid var(--line)",
+        background: "linear-gradient(180deg, rgba(14,20,36,0.72), rgba(8,11,20,0.55))",
+        backdropFilter: "blur(22px) saturate(160%)",
+        WebkitBackdropFilter: "blur(22px) saturate(160%)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)",
       }}
     >
-      {/* Ansage-Leiste: Augenfänger ganz oben */}
+      {/* Ansage-Leiste: Augenfänger ganz oben, mit Blau-Verlauf */}
       <Link
         href="/#termin"
         onClick={() => setOpen(false)}
+        className="ansage-bar"
         style={{
           display: "block",
           textDecoration: "none",
-          background: "var(--accent)",
           color: "var(--accent-fg)",
           textAlign: "center",
           padding: "8px 16px",

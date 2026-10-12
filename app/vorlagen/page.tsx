@@ -58,16 +58,13 @@ export default async function Vorlagen() {
             <Reveal key={d.slug} delay={i * 0.1} fill>
               <Link
                 href={`/vorlagen/${d.slug}`}
-                className="card-hover"
+                className="glass glass-hover"
                 style={{
                   display: "flex",
                   flexDirection: "column",
                   height: "100%",
                   textDecoration: "none",
                   color: "inherit",
-                  border: "1px solid var(--line)",
-                  background: "var(--bg-soft)",
-                  overflow: "hidden",
                 }}
               >
                 {/* Farb-Vorschau */}
@@ -109,10 +106,9 @@ export default async function Vorlagen() {
 
         {/* CTA */}
         <div
+          className="glass"
           style={{
             marginTop: "64px",
-            border: "1px solid var(--line)",
-            background: "var(--bg-soft)",
             padding: "40px 32px",
             textAlign: "center",
           }}

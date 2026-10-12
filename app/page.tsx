@@ -308,16 +308,14 @@ export default async function Home() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-              gap: "1px",
-              background: "var(--line)",
-              border: "1px solid var(--line)",
+              gap: "20px",
             }}
           >
             {t.werte.punkte.map((w, i) => (
               <Reveal key={w.nr} delay={i * 0.1} fill>
                 <div
+                  className="glass glass-hover"
                   style={{
-                    background: "var(--bg)",
                     padding: "40px 32px",
                     height: "100%",
                   }}
@@ -377,9 +375,8 @@ export default async function Home() {
               {t.preise.stufen.map((st) => (
                 <div
                   key={st.label}
+                  className="glass glass-hover"
                   style={{
-                    border: "1px solid var(--line)",
-                    background: "var(--bg-soft)",
                     padding: "32px 28px",
                     display: "flex",
                     flexDirection: "column",
@@ -521,15 +518,13 @@ function UseCaseCard({
   return (
     <Link
       href="/kontakt"
-      className="card-hover"
+      className="glass glass-hover"
       style={{
         display: "flex",
         flexDirection: "column",
         height: "100%",
         textDecoration: "none",
         color: "inherit",
-        border: "1px solid var(--line)",
-        background: "var(--bg-soft)",
         padding: "32px 28px",
       }}
     >

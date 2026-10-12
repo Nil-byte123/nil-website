@@ -54,17 +54,16 @@ export default async function UeberUns() {
         </Reveal>
 
         {/* Nummerierte Editorial-Blöcke */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           {t.bloecke.map((b, i) => (
             <Reveal key={b.titel} delay={i * 0.08}>
               <div
+                className="glass glass-hover"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "auto 1fr",
                   gap: "28px",
-                  padding: "36px 0",
-                  borderTop: "1px solid var(--line)",
-                  borderBottom: i === t.bloecke.length - 1 ? "1px solid var(--line)" : "none",
+                  padding: "32px 30px",
                 }}
               >
                 <span
