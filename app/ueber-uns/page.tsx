@@ -23,26 +23,10 @@ export default async function UeberUns() {
 
       <section style={{ maxWidth: "820px", margin: "0 auto", padding: "80px 24px 100px" }}>
         <Reveal>
-          <p
-            style={{
-              color: "var(--fg-faint)",
-              fontSize: "12px",
-              fontWeight: 700,
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              marginBottom: "12px",
-            }}
-          >
+          <p className="kicker">
             {t.overline}
           </p>
-          <h1
-            style={{
-              fontSize: "clamp(32px, 5vw, 52px)",
-              fontWeight: 800,
-              letterSpacing: "-0.03em",
-              lineHeight: 1.1,
-            }}
-          >
+          <h1 className="h-section">
             {t.titel}
           </h1>
         </Reveal>
@@ -99,21 +83,7 @@ export default async function UeberUns() {
 
         <Reveal delay={0.1}>
           <div style={{ marginTop: "64px", textAlign: "center" }}>
-            <Link
-              href="/#warteliste"
-              className="btn-solid btn-puls"
-              style={{
-                display: "inline-block",
-                textDecoration: "none",
-                background: "var(--accent)",
-                color: "var(--accent-fg)",
-                padding: "14px 32px",
-                fontSize: "13px",
-                fontWeight: 800,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-              }}
-            >
+            <Link href="/#termin" className="btn btn-primary">
               {t.cta}
             </Link>
           </div>

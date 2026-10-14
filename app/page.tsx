@@ -1,251 +1,137 @@
 import Link from "next/link";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import { NilLogoBox } from "./components/NilLogo";
 import { Reveal, RevealStagger } from "./components/Reveal";
 import { ChatDemo } from "./components/ChatDemo";
+import { Icon } from "./components/Icons";
 import { ermittleSprache } from "./i18n/sprache";
 import { TEXTE } from "./i18n/texte";
+import { DEMOS } from "./vorlagen/demos";
+
+const CALENDLY = "https://calendly.com/nilogik";
+const WERTE_ICONS = ["schild", "ort", "paket"];
 
 export default async function Home() {
   const sprache = await ermittleSprache();
   const t = TEXTE[sprache];
-  const MARQUEE_TEXT = t.hero.marquee;
+
   return (
     <main style={{ minHeight: "100vh", position: "relative" }}>
-      {/* Seitenweites, wanderndes Raster (blendet nach unten aus) */}
       <div className="page-grid" aria-hidden="true" />
 
       <Navbar sprache={sprache} />
 
       {/* ─── Hero ─────────────────────────────────────── */}
-      <section
-        style={{
-          minHeight: "calc(100vh - 64px)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
-          padding: "80px 24px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div className="hero-glow" aria-hidden="true" />
+      <section className="hero">
+        <div className="hero-orb" aria-hidden="true" />
 
-        {/* Kleine Marken-Formen im Hintergrund */}
-        <div aria-hidden="true" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
-          <span className="deko-kreuz" style={{ top: "16%", left: "11%" }} />
-          <span className="deko-kreuz" style={{ top: "34%", right: "13%" }} />
-          <span className="deko-kreuz" style={{ bottom: "24%", left: "20%" }} />
-          <span className="deko-kreuz" style={{ bottom: "14%", right: "9%" }} />
-          <span className="deko-quadrat" style={{ top: "20%", right: "22%" }} />
-          <span className="deko-quadrat" style={{ bottom: "26%", left: "7%" }} />
-        </div>
-
-        <p
-          className="fade-up"
-          style={{
-            color: "var(--fg-muted)",
-            fontSize: "13px",
-            fontWeight: 600,
-            letterSpacing: "0.3em",
-            textTransform: "uppercase",
-            marginBottom: "32px",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "12px",
-          }}
-        >
+        <p className="pill fade-up">
           <span className="live-dot" aria-hidden="true" />
           {t.hero.badge}
         </p>
 
-        <div
-          className="fade-up"
-          style={{
-            animationDelay: "0.1s",
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-          }}
-        >
-          <NilLogoBox size={100} />
-        </div>
-
-        <h1
-          className="fade-up"
-          style={{
-            animationDelay: "0.2s",
-            fontSize: "clamp(24px, 4vw, 40px)",
-            fontWeight: 800,
-            letterSpacing: "-0.03em",
-            marginTop: "48px",
-            maxWidth: "640px",
-            lineHeight: 1.2,
-          }}
-        >
+        <h1 className="h-display fade-up" style={{ animationDelay: "0.1s", marginTop: "28px", maxWidth: "900px" }}>
           {t.hero.titel}
+          <br />
+          <span className="grad-text">{t.hero.titelAkzent}</span>
         </h1>
 
-        <p
-          className="fade-up"
-          style={{
-            animationDelay: "0.3s",
-            color: "var(--fg-muted)",
-            fontSize: "16px",
-            lineHeight: 1.7,
-            maxWidth: "480px",
-            marginTop: "20px",
-          }}
-        >
+        <p className="lead fade-up" style={{ animationDelay: "0.2s", maxWidth: "580px", marginTop: "24px" }}>
           {t.hero.text}
         </p>
 
-        <Reveal delay={0.4}>
-          <Link
-            href="/kontakt"
-            className="btn-solid btn-puls"
-            style={{
-              display: "inline-block",
-              marginTop: "40px",
-              textDecoration: "none",
-              background: "var(--accent)",
-              color: "var(--accent-fg)",
-              padding: "16px 36px",
-              fontSize: "13px",
-              fontWeight: 800,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-            }}
-          >
+        <div className="hero-buttons fade-up" style={{ animationDelay: "0.3s" }}>
+          <Link href="/#termin" className="btn btn-primary">
             {t.hero.cta}
+            <Icon name="pfeil" size={18} strich={2} />
           </Link>
-        </Reveal>
+          <Link href="/#demo" className="btn btn-glass">
+            {t.hero.cta2}
+          </Link>
+        </div>
 
-        <div className="scroll-hint" aria-hidden="true" />
+        <div className="vertrauen fade-up" style={{ animationDelay: "0.4s", marginTop: "48px" }}>
+          {t.hero.vertrauen.map((p) => (
+            <span key={p}>
+              <Icon name="check" size={16} strich={2.2} />
+              {p}
+            </span>
+          ))}
+        </div>
       </section>
 
-      {/* ─── Doppelte Marquee (gegenläufig) ───────────── */}
-      <div
-        aria-hidden="true"
-        style={{
-          borderTop: "1px solid var(--line)",
-          borderBottom: "1px solid var(--line)",
-          overflow: "hidden",
-          WebkitMaskImage:
-            "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
-          maskImage:
-            "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
-        }}
-      >
-        <div style={{ padding: "14px 0", overflow: "hidden" }}>
-          <div className="marquee-track">
-            {[0, 1].map((i) => (
-              <span
-                key={i}
-                style={{
-                  fontSize: "14px",
-                  fontWeight: 800,
-                  letterSpacing: "0.25em",
-                  color: "var(--fg-faint)",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {MARQUEE_TEXT.repeat(4)}
-              </span>
-            ))}
+      {/* ─── Leistungen ───────────────────────────────── */}
+      <section id="leistungen" className="section">
+        <div className="container">
+          <Reveal>
+            <div className="section-kopf">
+              <p className="kicker">{t.leistungen.overline}</p>
+              <h2 className="h-section">{t.leistungen.titel}</h2>
+              <p className="lead">{t.leistungen.text}</p>
+            </div>
+          </Reveal>
+
+          <div className="raster-3">
+            <RevealStagger gap={0.08}>
+              {t.leistungen.karten.map((k) => (
+                <div key={k.titel} className="glass glass-hover karte">
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "24px" }}>
+                    <span className="icon-badge">
+                      <Icon name={k.icon} />
+                    </span>
+                    <span className="tag">{k.tag}</span>
+                  </div>
+                  <h3 className="h-karte" style={{ marginBottom: "10px" }}>{k.titel}</h3>
+                  <p className="text-karte">{k.text}</p>
+                </div>
+              ))}
+            </RevealStagger>
           </div>
-        </div>
-        <div
-          style={{
-            padding: "14px 0",
-            overflow: "hidden",
-            borderTop: "1px solid var(--line)",
-          }}
-        >
-          <div className="marquee-track-reverse">
-            {[0, 1].map((i) => (
-              <span
-                key={i}
-                className="outline-text"
-                style={{
-                  fontSize: "14px",
-                  letterSpacing: "0.25em",
-                  whiteSpace: "nowrap",
-                  WebkitTextStroke: "1px rgba(120,170,255,0.35)",
-                }}
-              >
-                {MARQUEE_TEXT.repeat(4)}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
 
-      {/* ─── Leistungen / Use-Cases ────────────────────── */}
-      <section id="leistungen" style={{ maxWidth: "1200px", margin: "0 auto", padding: "100px 24px" }}>
-        <Reveal>
-          <p style={overline}>{t.teaser.overline}</p>
-          <h2 style={h2}>{t.teaser.titel}</h2>
-        </Reveal>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gridAutoRows: "1fr",
-            gap: "20px",
-            marginTop: "48px",
-            alignItems: "stretch",
-          }}
-        >
-          <RevealStagger>
-            {t.teaser.karten.map((k, i) => (
-              <UseCaseCard
-                key={k.titel}
-                nr={String(i + 1).padStart(2, "0")}
-                title={k.titel}
-                text={k.text}
-                badge={t.teaser.badge}
-              />
-            ))}
-          </RevealStagger>
-        </div>
-
-        <div style={{ textAlign: "center", marginTop: "48px" }}>
-          <Reveal delay={0.15}>
-            <Link
-              href="/kontakt"
-              className="btn-outline"
-              style={{
-                display: "inline-block",
-                textDecoration: "none",
-                border: "1px solid var(--line-strong)",
-                color: "var(--fg)",
-                padding: "14px 32px",
-                fontSize: "13px",
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-              }}
-            >
-              {t.teaser.cta}
-            </Link>
+          <Reveal delay={0.1}>
+            <div style={{ marginTop: "40px", textAlign: "center" }}>
+              <Link href="/kontakt" className="btn btn-glass">
+                {t.leistungen.cta}
+                <Icon name="pfeil" size={18} strich={2} />
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ─── Live-Demo: Branchen-Chatbot ───────────────── */}
-      <section id="demo" style={{ borderTop: "1px solid var(--line)", padding: "100px 24px" }}>
-        <div style={{ maxWidth: "720px", margin: "0 auto", textAlign: "center" }}>
+      {/* ─── Ablauf ───────────────────────────────────── */}
+      <section id="ablauf" className="section">
+        <div className="container">
           <Reveal>
-            <p style={{ ...overline, textAlign: "center" }}>{t.demo.overline}</p>
-            <h2 style={{ ...h2, marginBottom: "16px" }}>{t.demo.titel}</h2>
-            <p style={{ color: "var(--fg-muted)", fontSize: "16px", lineHeight: 1.8, maxWidth: "560px", margin: "0 auto 48px" }}>
-              {t.demo.text}
-            </p>
+            <div className="section-kopf mittig">
+              <p className="kicker">{t.ablauf.overline}</p>
+              <h2 className="h-section">{t.ablauf.titel}</h2>
+            </div>
+          </Reveal>
+
+          <div className="schritte">
+            <RevealStagger>
+              {t.ablauf.schritte.map((s, i) => (
+                <div key={s.titel} className="glass karte">
+                  <span className="schritt-nr">{i + 1}</span>
+                  <h3 className="h-karte" style={{ marginBottom: "10px" }}>{s.titel}</h3>
+                  <p className="text-karte">{s.text}</p>
+                </div>
+              ))}
+            </RevealStagger>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Live-Demo: Branchen-Chatbot ───────────────── */}
+      <section id="demo" className="section">
+        <div className="container-schmal" style={{ textAlign: "center" }}>
+          <Reveal>
+            <div className="section-kopf mittig">
+              <p className="kicker">{t.demo.overline}</p>
+              <h2 className="h-section">{t.demo.titel}</h2>
+              <p className="lead">{t.demo.text}</p>
+            </div>
           </Reveal>
           <Reveal delay={0.1}>
             <ChatDemo />
@@ -253,96 +139,32 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ─── Brand Statement ──────────────────────────── */}
-      <section
-        style={{
-          borderTop: "1px solid var(--line)",
-          padding: "100px 24px",
-          textAlign: "center",
-        }}
-      >
-        <div style={{ maxWidth: "700px", margin: "0 auto" }}>
+      {/* ─── Warum NIL ────────────────────────────────── */}
+      <section className="section">
+        <div className="container werte-split">
           <Reveal>
-            <p style={overline}>{t.marke.overline}</p>
-            <h2 style={{ ...h2, marginBottom: "24px" }}>
-              {t.marke.titel}
-            </h2>
-            <p style={{ color: "var(--fg-muted)", fontSize: "16px", lineHeight: 1.8 }}>
-              {t.marke.text}
-            </p>
-            <Link
-              href="/ueber-uns"
-              style={{
-                display: "inline-block",
-                marginTop: "32px",
-                textDecoration: "none",
-                color: "var(--fg)",
-                fontSize: "13px",
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                borderBottom: "1px solid var(--fg)",
-                paddingBottom: "4px",
-              }}
-            >
-              {t.marke.cta}
-            </Link>
+            <div>
+              <p className="kicker">{t.werte.overline}</p>
+              <h2 className="h-section">{t.werte.titel}</h2>
+              <p className="lead">{t.werte.text}</p>
+              <Link href="/ueber-uns" className="link-pfeil" style={{ marginTop: "28px" }}>
+                {t.werte.cta}
+                <Icon name="pfeil" size={16} strich={2} />
+              </Link>
+            </div>
           </Reveal>
-        </div>
-      </section>
 
-      {/* ─── Werte / Prinzipien ───────────────────────── */}
-      <section
-        style={{
-          borderTop: "1px solid var(--line)",
-          padding: "80px 24px",
-        }}
-      >
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-          <Reveal>
-            <p style={{ ...overline, textAlign: "center", marginBottom: "48px" }}>
-              {t.werte.overline}
-            </p>
-          </Reveal>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-              gap: "20px",
-            }}
-          >
+          <div className="werte-liste">
             {t.werte.punkte.map((w, i) => (
-              <Reveal key={w.nr} delay={i * 0.1} fill>
-                <div
-                  className="glass glass-hover"
-                  style={{
-                    padding: "40px 32px",
-                    height: "100%",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "13px",
-                      fontWeight: 800,
-                      letterSpacing: "0.1em",
-                      color: "var(--fg-faint)",
-                    }}
-                  >
-                    {w.nr}
+              <Reveal key={w.titel} delay={i * 0.1} direction="right">
+                <div className="glass glass-hover werte-punkt">
+                  <span className="icon-badge">
+                    <Icon name={WERTE_ICONS[i]} />
                   </span>
-                  <h3
-                    style={{
-                      fontSize: "19px",
-                      fontWeight: 800,
-                      letterSpacing: "-0.02em",
-                      margin: "16px 0 10px",
-                    }}
-                  >
-                    {w.titel}
-                  </h3>
-                  <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.7 }}>
-                    {w.text}
-                  </p>
+                  <div>
+                    <h3 className="h-karte" style={{ marginBottom: "6px" }}>{w.titel}</h3>
+                    <p className="text-karte">{w.text}</p>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -350,221 +172,114 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ─── Preise nach Komplexität ───────────────────── */}
-      <section id="preise" style={{ borderTop: "1px solid var(--line)", padding: "100px 24px" }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+      {/* ─── Vorlagen-Vorschau ────────────────────────── */}
+      <section className="section">
+        <div className="container">
           <Reveal>
-            <p style={overline}>{t.preise.overline}</p>
-            <h2 style={{ ...h2, marginBottom: "16px" }}>{t.preise.titel}</h2>
-            <p style={{ color: "var(--fg-muted)", fontSize: "16px", lineHeight: 1.8, maxWidth: "640px" }}>
-              {t.preise.text}
-            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "20px", marginBottom: "48px" }}>
+              <div style={{ maxWidth: "640px" }}>
+                <p className="kicker">{t.vorlagen.overline}</p>
+                <h2 className="h-section">{t.vorlagen.titel}</h2>
+              </div>
+              <Link href="/vorlagen" className="link-pfeil">
+                {t.vorlagen.alle}
+                <Icon name="pfeil" size={16} strich={2} />
+              </Link>
+            </div>
           </Reveal>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-              gridAutoRows: "1fr",
-              gap: "20px",
-              marginTop: "48px",
-              alignItems: "stretch",
-            }}
-          >
+          <div className="raster-3">
             <RevealStagger>
-              {t.preise.stufen.map((st) => (
-                <div
-                  key={st.label}
+              {DEMOS.slice(0, 3).map((d) => (
+                <Link
+                  key={d.slug}
+                  href={`/vorlagen/${d.slug}`}
                   className="glass glass-hover"
-                  style={{
-                    padding: "32px 28px",
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                  }}
+                  style={{ display: "flex", flexDirection: "column", height: "100%", textDecoration: "none", color: "inherit" }}
                 >
-                  <span
-                    style={{
-                      alignSelf: "flex-start",
-                      fontSize: "10px",
-                      fontWeight: 700,
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
-                      color: "var(--fg-faint)",
-                      border: "1px solid var(--line)",
-                      padding: "4px 10px",
-                      marginBottom: "20px",
-                    }}
-                  >
-                    {st.label}
-                  </span>
-                  <h3 style={{ fontSize: "19px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "10px" }}>
-                    {st.titel}
-                  </h3>
-                  <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.7, flex: 1 }}>{st.text}</p>
-                  <p style={{ fontSize: "16px", fontWeight: 800, marginTop: "16px" }}>{st.rahmen}</p>
-                </div>
+                  <div className="vorlage-farben">
+                    {d.farben.map((c) => (
+                      <div key={c} style={{ background: c }} />
+                    ))}
+                  </div>
+                  <div style={{ padding: "22px 24px", flex: 1, display: "flex", flexDirection: "column" }}>
+                    <span className="tag" style={{ alignSelf: "flex-start", marginBottom: "14px" }}>{d.branche}</span>
+                    <h3 className="h-karte" style={{ marginBottom: "8px" }}>{d.name}</h3>
+                    <p className="text-karte" style={{ flex: 1 }}>{d.beschreibung}</p>
+                    <span className="link-pfeil" style={{ marginTop: "16px" }}>
+                      {t.vorlagen.ansehen}
+                      <Icon name="pfeil" size={16} strich={2} />
+                    </span>
+                  </div>
+                </Link>
               ))}
             </RevealStagger>
           </div>
+        </div>
+      </section>
 
-          <Reveal delay={0.1}>
-            <p style={{ color: "var(--fg-faint)", fontSize: "13px", lineHeight: 1.7, marginTop: "24px", maxWidth: "640px" }}>
-              {t.preise.hinweis}
-            </p>
+      {/* ─── Kurz-FAQ ─────────────────────────────────── */}
+      <section className="section">
+        <div className="container-schmal">
+          <Reveal>
+            <div className="section-kopf mittig">
+              <p className="kicker">{t.faq.overline}</p>
+              <h2 className="h-section">{t.faq.titel}</h2>
+            </div>
+          </Reveal>
+          {t.faq.fragen.slice(0, 4).map((f, i) => (
+            <Reveal key={f.q} delay={i * 0.05}>
+              <details className="faq-item">
+                <summary>
+                  {f.q}
+                  <span className="faq-zeichen" aria-hidden="true" />
+                </summary>
+                <p className="faq-antwort">{f.a}</p>
+              </details>
+            </Reveal>
+          ))}
+          <div style={{ textAlign: "center", marginTop: "32px" }}>
+            <Link href="/faq" className="link-pfeil">
+              {t.faq.alle}
+              <Icon name="pfeil" size={16} strich={2} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Kostenloses Erstgespräch ─────────────────── */}
+      <section id="termin" className="section">
+        <div className="container">
+          <Reveal>
+            <div className="cta-card">
+              <p className="kicker">{t.erstgespraech.overline}</p>
+              <h2 className="h-section" style={{ marginBottom: "16px" }}>{t.erstgespraech.titel}</h2>
+              <p className="lead" style={{ maxWidth: "500px", margin: "0 auto 36px" }}>
+                {t.erstgespraech.text}
+              </p>
+              <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap" }}>
+                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                  <Icon name="kalender" size={18} strich={2} />
+                  {t.erstgespraech.cta}
+                </a>
+                <Link href="/kontakt" className="btn btn-glass">
+                  {t.erstgespraech.oder}
+                </Link>
+              </div>
+              <div className="cta-points">
+                {t.erstgespraech.punkte.map((p) => (
+                  <span key={p} className="cta-point">
+                    <Icon name="check" size={16} strich={2.2} />
+                    {p}
+                  </span>
+                ))}
+              </div>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ─── Kostenloses Erstgespräch / Terminbuchung ──── */}
-      <section style={{ padding: "100px 24px" }} id="termin">
-        <Reveal>
-          <div className="cta-card">
-            <p style={{ ...overline, textAlign: "center" }}>{t.warteliste.overline}</p>
-            <h2 style={{ ...h2, marginBottom: "16px" }}>{t.warteliste.titel}</h2>
-            <p style={{ color: "var(--fg-muted)", fontSize: "15px", lineHeight: 1.8, marginBottom: "36px", maxWidth: "480px", marginLeft: "auto", marginRight: "auto" }}>
-              {t.warteliste.text}
-            </p>
-            <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap" }}>
-              <a
-                href="https://calendly.com/nilogik"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-solid btn-puls"
-                style={{
-                  textDecoration: "none",
-                  background: "var(--accent)",
-                  color: "var(--accent-fg)",
-                  padding: "16px 32px",
-                  fontSize: "13px",
-                  fontWeight: 800,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                }}
-              >
-                {t.warteliste.cta}
-              </a>
-              <Link
-                href="/kontakt"
-                className="btn-outline"
-                style={{
-                  textDecoration: "none",
-                  border: "1px solid var(--line-strong)",
-                  color: "var(--fg)",
-                  padding: "16px 32px",
-                  fontSize: "13px",
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                }}
-              >
-                {t.warteliste.oder}
-              </Link>
-            </div>
-            <div className="cta-points">
-              {(sprache === "de"
-                ? ["100% kostenlos", "Unverbindlich", "Antwort in 24 Std.", "DSGVO-konform"]
-                : ["100% free", "No obligation", "Reply within 24h", "GDPR-compliant"]
-              ).map((p) => (
-                <span key={p} className="cta-point">
-                  <CheckIcon />
-                  {p}
-                </span>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
       <Footer sprache={sprache} />
     </main>
-  );
-}
-
-const overline: React.CSSProperties = {
-  color: "var(--fg-faint)",
-  fontSize: "12px",
-  fontWeight: 700,
-  letterSpacing: "0.25em",
-  textTransform: "uppercase",
-  marginBottom: "12px",
-};
-
-const h2: React.CSSProperties = {
-  fontSize: "clamp(26px, 3.5vw, 36px)",
-  fontWeight: 800,
-  letterSpacing: "-0.03em",
-};
-
-function CheckIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
-  );
-}
-
-function UseCaseCard({
-  nr,
-  title,
-  text,
-  badge,
-}: {
-  nr: string;
-  title: string;
-  text: string;
-  badge: string;
-}) {
-  return (
-    <Link
-      href="/kontakt"
-      className="glass glass-hover"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        textDecoration: "none",
-        color: "inherit",
-        padding: "32px 28px",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: "24px",
-        }}
-      >
-        <span
-          style={{
-            fontSize: "28px",
-            fontWeight: 800,
-            letterSpacing: "-0.03em",
-            color: "var(--fg-faint)",
-            lineHeight: 1,
-          }}
-        >
-          {nr}
-        </span>
-        <span
-          style={{
-            fontSize: "10px",
-            fontWeight: 700,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            color: "var(--fg-faint)",
-            border: "1px solid var(--line)",
-            padding: "4px 10px",
-          }}
-        >
-          {badge}
-        </span>
-      </div>
-      <h3 style={{ fontSize: "19px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "12px" }}>
-        {title}
-      </h3>
-      <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.7, flex: 1 }}>{text}</p>
-    </Link>
   );
 }

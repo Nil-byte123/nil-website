@@ -23,27 +23,10 @@ export default async function FAQ() {
 
       <section style={{ maxWidth: "760px", margin: "0 auto", padding: "80px 24px 100px" }}>
         <Reveal>
-          <p
-            style={{
-              color: "var(--fg-faint)",
-              fontSize: "12px",
-              fontWeight: 700,
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              marginBottom: "12px",
-            }}
-          >
+          <p className="kicker">
             {t.faq.overline}
           </p>
-          <h1
-            style={{
-              fontSize: "clamp(32px, 5vw, 52px)",
-              fontWeight: 800,
-              letterSpacing: "-0.03em",
-              lineHeight: 1.1,
-              marginBottom: "48px",
-            }}
-          >
+          <h1 className="h-section" style={{ marginBottom: "48px" }}>
             {t.faq.titel}
           </h1>
         </Reveal>
@@ -67,21 +50,7 @@ export default async function FAQ() {
             <p style={{ color: "var(--fg-muted)", fontSize: "14px", marginBottom: "20px" }}>
               {t.faq.frageNicht}
             </p>
-            <Link
-              href="/kontakt"
-              className="btn-outline"
-              style={{
-                display: "inline-block",
-                textDecoration: "none",
-                border: "1px solid var(--line-strong)",
-                color: "var(--fg)",
-                padding: "14px 32px",
-                fontSize: "13px",
-                fontWeight: 700,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-              }}
-            >
+            <Link href="/kontakt" className="btn btn-glass">
               {t.faq.kontaktCta}
             </Link>
           </div>

@@ -8,7 +8,7 @@ import { TEXTE } from "../i18n/texte";
 
 export const metadata: Metadata = {
   title: "Kontakt",
-  description: "Fragen zu NIL, zum Launch oder zu Kooperationen? Schreib uns – wir melden uns schnellstmöglich zurück.",
+  description: "Beschreib uns dein Problem – wir melden uns mit einer ehrlichen Einschätzung, meist innerhalb eines Werktags.",
 };
 
 export default async function Kontakt() {
@@ -21,26 +21,10 @@ export default async function Kontakt() {
 
       <section style={{ maxWidth: "640px", margin: "0 auto", padding: "80px 24px 100px" }}>
         <Reveal>
-          <p
-            style={{
-              color: "var(--fg-faint)",
-              fontSize: "12px",
-              fontWeight: 700,
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              marginBottom: "12px",
-            }}
-          >
+          <p className="kicker">
             {t.overline}
           </p>
-          <h1
-            style={{
-              fontSize: "clamp(32px, 5vw, 52px)",
-              fontWeight: 800,
-              letterSpacing: "-0.03em",
-              lineHeight: 1.1,
-            }}
-          >
+          <h1 className="h-section">
             {t.titel}
           </h1>
           <p style={{ color: "var(--fg-muted)", fontSize: "15px", lineHeight: 1.7, marginTop: "16px", marginBottom: "48px" }}>

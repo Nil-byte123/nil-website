@@ -82,7 +82,7 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
           onMouseLeave={() => setLinie((l) => ({ ...l, an: false }))}
           style={{
             display: "flex",
-            gap: "32px",
+            gap: "30px",
             alignItems: "center",
             position: "relative",
             height: "100%",
@@ -114,30 +114,15 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
               style={{
                 textDecoration: "none",
                 color: "var(--fg-muted)",
-                fontSize: "13px",
-                fontWeight: 600,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
+                fontSize: "14px",
+                fontWeight: 500,
               }}
             >
               {l.label}
             </Link>
           ))}
-          <Link
-            href="/#termin"
-            className="btn-solid btn-puls"
-            style={{
-              textDecoration: "none",
-              background: "var(--accent)",
-              color: "var(--accent-fg)",
-              fontSize: "12px",
-              fontWeight: 700,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              padding: "10px 18px",
-            }}
-          >
-            {t.warteliste}
+          <Link href="/#termin" className="btn btn-primary btn-sm">
+            {t.termin}
           </Link>
         </div>
 
@@ -170,7 +155,9 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
             display: "flex",
             flexDirection: "column",
             gap: "4px",
-            background: "rgba(8,11,20,0.97)",
+            background: "rgba(8,11,20,0.9)",
+            backdropFilter: "blur(22px) saturate(160%)",
+            WebkitBackdropFilter: "blur(22px) saturate(160%)",
           }}
         >
           {LINKS.map((l) => (
@@ -181,11 +168,9 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
               style={{
                 textDecoration: "none",
                 color: "var(--fg)",
-                fontSize: "15px",
-                fontWeight: 600,
-                letterSpacing: "0.06em",
-                textTransform: "uppercase",
-                padding: "12px 0",
+                fontSize: "16px",
+                fontWeight: 500,
+                padding: "14px 0",
                 borderBottom: "1px solid var(--line)",
               }}
             >
@@ -195,20 +180,10 @@ export function Navbar({ sprache = "de" }: { sprache?: Sprache }) {
           <Link
             href="/#termin"
             onClick={() => setOpen(false)}
-            style={{
-              textDecoration: "none",
-              background: "var(--accent)",
-              color: "var(--accent-fg)",
-              fontSize: "13px",
-              fontWeight: 700,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              padding: "14px 18px",
-              textAlign: "center",
-              marginTop: "16px",
-            }}
+            className="btn btn-primary"
+            style={{ marginTop: "18px" }}
           >
-            {t.warteliste}
+            {t.termin}
           </Link>
         </div>
       )}

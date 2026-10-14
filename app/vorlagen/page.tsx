@@ -25,22 +25,13 @@ export default async function Vorlagen() {
 
       <section style={{ maxWidth: "1200px", margin: "0 auto", padding: "80px 24px 100px" }}>
         <Reveal>
-          <p
-            style={{
-              color: "var(--fg-faint)",
-              fontSize: "12px",
-              fontWeight: 700,
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              marginBottom: "12px",
-            }}
-          >
+          <p className="kicker">
             {v.overline}
           </p>
-          <h1 style={{ fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+          <h1 className="h-section">
             {v.titel}
           </h1>
-          <p style={{ color: "var(--fg-muted)", fontSize: "16px", lineHeight: 1.7, marginTop: "16px", maxWidth: "620px" }}>
+          <p className="lead" style={{ maxWidth: "620px" }}>
             {v.text}
           </p>
         </Reveal>
@@ -74,28 +65,16 @@ export default async function Vorlagen() {
                   ))}
                 </div>
                 <div style={{ padding: "24px 26px", flex: 1, display: "flex", flexDirection: "column" }}>
-                  <span
-                    style={{
-                      alignSelf: "flex-start",
-                      fontSize: "10px",
-                      fontWeight: 700,
-                      letterSpacing: "0.18em",
-                      textTransform: "uppercase",
-                      color: "var(--accent-2)",
-                      border: "1px solid var(--line)",
-                      padding: "4px 10px",
-                      marginBottom: "16px",
-                    }}
-                  >
+                  <span className="tag" style={{ alignSelf: "flex-start", marginBottom: "16px" }}>
                     {d.branche}
                   </span>
-                  <h3 style={{ fontSize: "22px", fontWeight: 800, letterSpacing: "-0.02em", marginBottom: "10px" }}>
+                  <h3 className="h-karte" style={{ fontSize: "22px", marginBottom: "10px" }}>
                     {d.name}
                   </h3>
-                  <p style={{ color: "var(--fg-muted)", fontSize: "14px", lineHeight: 1.7, flex: 1 }}>
+                  <p className="text-karte" style={{ flex: 1 }}>
                     {d.beschreibung}
                   </p>
-                  <span style={{ marginTop: "18px", color: "var(--accent-2)", fontSize: "13px", fontWeight: 700, letterSpacing: "0.04em" }}>
+                  <span className="link-pfeil" style={{ marginTop: "18px" }}>
                     {v.ansehen} →
                   </span>
                 </div>
@@ -117,21 +96,7 @@ export default async function Vorlagen() {
           <p style={{ color: "var(--fg-muted)", fontSize: "14px", marginTop: "10px", marginBottom: "24px" }}>
             {v.boxText}
           </p>
-          <Link
-            href="/kontakt"
-            className="btn-solid btn-puls"
-            style={{
-              display: "inline-block",
-              textDecoration: "none",
-              background: "var(--accent)",
-              color: "var(--accent-fg)",
-              padding: "14px 32px",
-              fontSize: "13px",
-              fontWeight: 800,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-            }}
-          >
+          <Link href="/kontakt" className="btn btn-primary">
             {v.boxCta}
           </Link>
         </div>

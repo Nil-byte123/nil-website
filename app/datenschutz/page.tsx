@@ -71,11 +71,6 @@ export default function Datenschutz() {
           <p style={pStyle}>
             Wenn Sie unser Kontaktformular nutzen, werden folgende Daten erhoben: Name, E-Mail-Adresse und Ihre Nachricht. Diese werden ausschließlich zur Bearbeitung Ihrer Anfrage genutzt und nicht an Dritte weitergegeben. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.
           </p>
-
-          <h3 style={{ ...h3Style, marginTop: "24px" }}>Warteliste / Newsletter</h3>
-          <p style={pStyle}>
-            Wenn Sie sich auf unsere Warteliste eintragen, wird Ihre E-Mail-Adresse gespeichert, um Sie über den Start unseres Shops zu informieren. Die Verarbeitung erfolgt über den Dienstleister Mailchimp (The Rocket Science Group LLC, USA). Sie können sich jederzeit über den Abmeldelink in jeder E-Mail oder per Nachricht an info@nilogik.de austragen. Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO (Einwilligung).
-          </p>
         </section>
 
         <section style={sectionStyle}>

@@ -3,27 +3,6 @@
 import { useState } from "react";
 import { TEXTE, type Sprache } from "../i18n/texte";
 
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  background: "var(--bg-soft)",
-  border: "1px solid var(--line)",
-  color: "var(--fg)",
-  padding: "14px 18px",
-  fontSize: "15px",
-  outline: "none",
-  fontFamily: "inherit",
-};
-
-const labelStyle: React.CSSProperties = {
-  display: "block",
-  fontSize: "12px",
-  fontWeight: 700,
-  letterSpacing: "0.1em",
-  textTransform: "uppercase",
-  color: "var(--fg-muted)",
-  marginBottom: "8px",
-};
-
 export function ContactForm({ sprache = "de" }: { sprache?: Sprache }) {
   const t = TEXTE[sprache].kontaktForm;
   const [name, setName] = useState("");
@@ -60,8 +39,8 @@ export function ContactForm({ sprache = "de" }: { sprache?: Sprache }) {
 
   if (status === "success") {
     return (
-      <div style={{ border: "1px solid var(--line-strong)", padding: "32px", textAlign: "center" }}>
-        <p style={{ fontSize: "16px", fontWeight: 700, letterSpacing: "0.04em", textTransform: "uppercase" }}>
+      <div className="glass" style={{ padding: "32px", textAlign: "center" }}>
+        <p className="h-karte">
           {t.erfolgTitel}
         </p>
         <p style={{ color: "var(--fg-muted)", fontSize: "14px", marginTop: "10px" }}>
@@ -74,7 +53,7 @@ export function ContactForm({ sprache = "de" }: { sprache?: Sprache }) {
   return (
     <form onSubmit={submit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
       <div>
-        <label htmlFor="name" style={labelStyle}>{t.nameLabel}</label>
+        <label htmlFor="name" className="feld-label">{t.nameLabel}</label>
         <input
           id="name"
           type="text"
@@ -83,12 +62,12 @@ export function ContactForm({ sprache = "de" }: { sprache?: Sprache }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder={t.namePlatzhalter}
-          style={inputStyle}
+          className="feld"
         />
       </div>
 
       <div>
-        <label htmlFor="email" style={labelStyle}>{t.emailLabel}</label>
+        <label htmlFor="email" className="feld-label">{t.emailLabel}</label>
         <input
           id="email"
           type="email"
@@ -97,12 +76,12 @@ export function ContactForm({ sprache = "de" }: { sprache?: Sprache }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder={t.emailPlatzhalter}
-          style={inputStyle}
+          className="feld"
         />
       </div>
 
       <div>
-        <label htmlFor="message" style={labelStyle}>{t.nachrichtLabel}</label>
+        <label htmlFor="message" className="feld-label">{t.nachrichtLabel}</label>
         <textarea
           id="message"
           required
@@ -111,7 +90,8 @@ export function ContactForm({ sprache = "de" }: { sprache?: Sprache }) {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder={t.nachrichtPlatzhalter}
-          style={{ ...inputStyle, resize: "vertical" }}
+          className="feld"
+          style={{ resize: "vertical" }}
         />
       </div>
 
@@ -122,19 +102,7 @@ export function ContactForm({ sprache = "de" }: { sprache?: Sprache }) {
       <button
         type="submit"
         disabled={status === "loading"}
-        className="btn-solid"
-        style={{
-          background: "var(--accent)",
-          color: "var(--accent-fg)",
-          border: "none",
-          padding: "16px 32px",
-          fontSize: "13px",
-          fontWeight: 800,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          cursor: status === "loading" ? "wait" : "pointer",
-          opacity: status === "loading" ? 0.7 : 1,
-        }}
+        className="btn btn-primary"
       >
         {status === "loading" ? t.laden : t.senden}
       </button>

@@ -37,7 +37,7 @@ export default function Impressum() {
       {/* Content */}
       <div style={{ maxWidth: "760px", margin: "0 auto", padding: "60px 24px 100px" }}>
         <h1 style={{ fontSize: "36px", fontWeight: 700, letterSpacing: "-0.04em", marginBottom: "8px" }}>Impressum</h1>
-        <p style={{ color: "#6B6B6B", fontSize: "14px", marginBottom: "48px" }}>Angaben gemäß § 5 TMG</p>
+        <p style={{ color: "#6B6B6B", fontSize: "14px", marginBottom: "48px" }}>Angaben gemäß § 5 DDG</p>
 
         <section style={sectionStyle}>
           <h2 style={h2Style}>Anbieter</h2>
@@ -47,6 +47,14 @@ export default function Impressum() {
             Aschauerstraße 17<br />
             82445 Schwaigen<br />
             Deutschland
+          </p>
+        </section>
+
+        <section style={sectionStyle}>
+          <h2 style={h2Style}>Gesetzliche Vertretung</h2>
+          <p style={pStyle}>
+            Der Anbieter ist minderjährig und wird gesetzlich vertreten durch:<br />
+            <strong>Cecilia Quezada Capa</strong>
           </p>
         </section>
 

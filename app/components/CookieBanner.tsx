@@ -32,32 +32,28 @@ export default function CookieBanner({ sprache = "de" }: { sprache?: Sprache }) 
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 120, opacity: 0 }}
           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="glass"
           style={{
             position: "fixed",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            width: "100%",
-            background: "var(--bg-soft)",
-            borderTop: "1px solid var(--line)",
-            borderRadius: "0",
-            padding: "24px",
-            paddingBottom: "calc(24px + env(safe-area-inset-bottom, 8px))",
-            boxShadow: "0 -8px 32px rgba(0,0,0,0.4)",
+            bottom: "calc(16px + env(safe-area-inset-bottom, 0px))",
+            left: "16px",
+            right: "16px",
+            maxWidth: "760px",
+            margin: "0 auto",
+            padding: "22px 24px",
+            background: "rgba(14, 20, 36, 0.95)",
             zIndex: 9999,
             fontFamily: "inherit",
           }}
         >
-          <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
-            <div style={{ marginBottom: "20px" }}>
+          <div>
+            <div style={{ marginBottom: "18px" }}>
               <p
                 style={{
                   color: "var(--fg)",
-                  fontSize: "14px",
+                  fontSize: "15px",
                   fontWeight: 700,
-                  letterSpacing: "0.05em",
-                  textTransform: "uppercase",
-                  marginBottom: "8px",
+                  marginBottom: "6px",
                 }}
               >
                 {t.titel}
@@ -93,48 +89,12 @@ export default function CookieBanner({ sprache = "de" }: { sprache?: Sprache }) 
                 flexWrap: "wrap",
               }}
             >
-              <motion.button
-                onClick={decline}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.97 }}
-                style={{
-                  background: "transparent",
-                  border: "1px solid var(--line-strong)",
-                  color: "var(--fg)",
-                  fontSize: "12px",
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  padding: "12px 24px",
-                  borderRadius: "0",
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  transition: "all 0.2s ease",
-                }}
-              >
+              <button onClick={decline} className="btn btn-glass btn-sm">
                 {t.nurNotwendige}
-              </motion.button>
-              <motion.button
-                onClick={accept}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.97 }}
-                style={{
-                  background: "var(--accent)",
-                  border: "1px solid #FAFAFA",
-                  color: "var(--accent-fg)",
-                  fontSize: "12px",
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  padding: "12px 24px",
-                  borderRadius: "0",
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  transition: "all 0.2s ease",
-                }}
-              >
+              </button>
+              <button onClick={accept} className="btn btn-primary btn-sm">
                 {t.alleAkzeptieren}
-              </motion.button>
+              </button>
             </div>
           </div>
         </motion.div>

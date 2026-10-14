@@ -92,17 +92,6 @@ body::before {
   outline-offset: 2px;
 }
 
-/* ─── Marquee (laufender Schriftzug) ───────────────── */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.marquee-track {
-  display: inline-flex;
-  white-space: nowrap;
-  animation: marquee 28s linear infinite;
-}
-
 /* ─── Fade-up beim Laden ───────────────────────────── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
@@ -110,39 +99,6 @@ body::before {
 }
 .fade-up {
   animation: fadeUp 0.7s ease both;
-}
-
-/* ─── Marquee rückwärts (zweite Zeile) ─────────────── */
-@keyframes marqueeReverse {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
-}
-.marquee-track-reverse {
-  display: inline-flex;
-  white-space: nowrap;
-  animation: marqueeReverse 32s linear infinite;
-}
-
-/* ─── Hover: Buttons ───────────────────────────────── */
-.btn-solid {
-  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
-  border: 1px solid var(--accent) !important;
-}
-.btn-solid:hover {
-  background: var(--accent-2) !important;
-  border-color: var(--accent-2) !important;
-  color: var(--accent-fg) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(31, 109, 255, 0.4);
-}
-.btn-outline {
-  transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease, border-color 0.25s ease;
-}
-.btn-outline:hover {
-  background: var(--accent) !important;
-  color: var(--accent-fg) !important;
-  border-color: var(--accent) !important;
-  transform: translateY(-2px);
 }
 
 /* ─── Hover: Navigation ────────────────────────────── */
@@ -153,77 +109,6 @@ body::before {
 }
 .nav-link:hover {
   color: var(--accent-2) !important;
-}
-
-/* ─── Hover: Karten ────────────────────────────────── */
-.card-hover {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.card-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(91, 184, 255, 0.4) !important;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-}
-
-/* ─── Produktbild-Zoom ─────────────────────────────── */
-.img-zoom {
-  overflow: hidden;
-}
-.img-zoom > * {
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.img-zoom:hover > * {
-  transform: scale(1.08);
-}
-
-/* ─── Riesiger Outline-Schriftzug ──────────────────── */
-.outline-text {
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(120, 170, 255, 0.22);
-  user-select: none;
-  transition: -webkit-text-stroke-color 0.4s ease;
-}
-.outline-text:hover {
-  -webkit-text-stroke-color: rgba(91, 184, 255, 0.5);
-}
-
-/* ─── Hero-Hintergrund: dezenter Puls ──────────────── */
-@keyframes heroGlow {
-  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-  50%      { opacity: 0.9; transform: translate(-50%, -50%) scale(1.15); }
-}
-.hero-glow {
-  position: absolute;
-  top: 42%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(700px, 90vw);
-  height: min(700px, 90vw);
-  background: radial-gradient(
-    circle,
-    rgba(31, 109, 255, 0.22) 0%,
-    rgba(31, 109, 255, 0.15) 20%,
-    rgba(91, 184, 255, 0.10) 35%,
-    rgba(91, 184, 255, 0.06) 48%,
-    rgba(91, 184, 255, 0.03) 60%,
-    rgba(91, 184, 255, 0.012) 70%,
-    transparent 82%
-  );
-  filter: blur(40px);
-  pointer-events: none;
-  animation: heroGlow 7s ease-in-out infinite;
-}
-
-/* ─── Logo-Schwebe-Animation im Hero ───────────────── */
-@keyframes logoFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-10px); }
-}
-.logo-float {
-  animation: logoFloat 5s ease-in-out infinite;
 }
 
 /* ─── FAQ-Akkordeon ────────────────────────────────── */
@@ -333,115 +218,361 @@ body::before {
   animation: tippPunkt 1.3s ease-in-out infinite;
 }
 
-/* ─── Scroll-Hinweis im Hero ───────────────────────── */
-@keyframes scrollHint {
-  0%   { transform: translateY(0);    opacity: 0.7; }
-  50%  { transform: translateY(8px);  opacity: 0.25; }
-  100% { transform: translateY(0);    opacity: 0.7; }
-}
-.scroll-hint {
-  position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, transparent, var(--fg-muted));
-  pointer-events: none;
-}
-.scroll-hint::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 5px;
-  height: 5px;
-  border-right: 1px solid var(--fg-muted);
-  border-bottom: 1px solid var(--fg-muted);
-  transform: translateX(-50%) rotate(45deg);
-  animation: scrollHint 1.8s ease-in-out infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .scroll-hint::after { animation: none; }
-}
-
-/* ─── Pulsierender Glow für Warteliste-Buttons ─────── */
-@keyframes pulsGlow {
-  0%, 100% { box-shadow: 0 0 0 rgba(31, 109, 255, 0); }
-  50%      { box-shadow: 0 0 22px rgba(31, 109, 255, 0.5); }
-}
-.btn-puls {
-  animation: pulsGlow 2.6s ease-in-out infinite;
-}
-
-/* ─── Hover-Bildwechsel auf Produktkarten ──────────── */
-.hover-tausch {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-.card-hover:hover .hover-tausch {
-  opacity: 1;
-}
-
-/* ─── Seitenweites, wanderndes Raster ──────────────── */
-@keyframes rasterWandern {
-  from { background-position: 0 0; }
-  to   { background-position: 90px 90px; }
-}
-/* Liegt hinter der gesamten Seite (z-index -1), wandert diagonal
-   und blendet nach unten hin langsam aus.                       */
+/* ─── Seitenweites Raster ──────────────────────────── */
+/* Liegt hinter der gesamten Seite (z-index -1) und blendet
+   nach unten hin langsam aus.                              */
 .page-grid {
   position: absolute;
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(rgba(120, 170, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(120, 170, 255, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(120, 170, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 170, 255, 0.045) 1px, transparent 1px);
   background-size: 90px 90px;
   /* Oben voll sichtbar, verschwindet zum Seitenende hin sanft */
   -webkit-mask-image: linear-gradient(to bottom, black 0%, black 18%, rgba(0,0,0,0.4) 55%, transparent 90%);
   mask-image: linear-gradient(to bottom, black 0%, black 18%, rgba(0,0,0,0.4) 55%, transparent 90%);
   pointer-events: none;
-  animation: rasterWandern 10s linear infinite;
-}
-@media (prefers-reduced-motion: reduce) {
-  .page-grid { animation: none; }
 }
 
-/* ─── Hero-Deko: kleine Marken-Formen ──────────────── */
-.deko-kreuz {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  pointer-events: none;
+/* ════════════════════════════════════════════════════════════════
+   DESIGN-SYSTEM: Layout, Typografie, Buttons (Liquid Glass)
+   ════════════════════════════════════════════════════════════════ */
+
+/* ─── Layout ───────────────────────────────────────── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
-.deko-kreuz::before,
-.deko-kreuz::after {
-  content: "";
-  position: absolute;
-  background: rgba(120, 170, 255, 0.24);
+.container-schmal {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
-.deko-kreuz::before {
-  left: 50%;
-  top: 0;
-  width: 1px;
+.section {
+  padding: clamp(72px, 10vw, 112px) 0;
+}
+.section-kopf {
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+.section-kopf.mittig {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* ─── Typografie ───────────────────────────────────── */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--accent-2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.h-display {
+  font-size: clamp(40px, 7vw, 76px);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+}
+.h-section {
+  font-size: clamp(30px, 4.5vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+.h-karte {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+.lead {
+  color: var(--fg-muted);
+  font-size: clamp(16px, 1.6vw, 18px);
+  line-height: 1.7;
+  margin-top: 18px;
+}
+.text-karte {
+  color: var(--fg-muted);
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+/* Verlaufs-Schrift für Schlüsselwörter */
+.grad-text {
+  background: linear-gradient(100deg, #FFFFFF 0%, var(--accent-2) 55%, #8FA8FF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ─── Buttons (Pillen-Form) ────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease,
+    color 0.25s ease;
+}
+.btn svg { transition: transform 0.25s ease; }
+.btn:hover svg { transform: translateX(3px); }
+.btn-sm {
+  padding: 9px 18px;
+  font-size: 13.5px;
+}
+.btn-primary {
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent) 0%, #3D8BFF 100%);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 10px 30px -10px rgba(31, 109, 255, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 40px -10px rgba(31, 109, 255, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.btn-glass {
+  color: var(--fg);
+  background: linear-gradient(140deg, rgba(120, 170, 255, 0.12), rgba(120, 170, 255, 0.04));
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+.btn-glass:hover {
+  transform: translateY(-2px);
+  border-color: rgba(120, 190, 255, 0.5);
+}
+.btn:disabled { opacity: 0.6; cursor: wait; transform: none; }
+
+/* Text-Link mit Pfeil */
+.link-pfeil {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent-2);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.link-pfeil svg { transition: transform 0.25s ease; }
+.link-pfeil:hover svg { transform: translateX(4px); }
+
+/* ─── Kleine Bausteine ─────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px 7px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  background: rgba(120, 170, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  color: var(--accent-2);
+  background: linear-gradient(140deg, rgba(31, 109, 255, 0.28), rgba(91, 184, 255, 0.08));
+  border: 1px solid rgba(120, 190, 255, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  flex: none;
+}
+.vertrauen {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 26px;
+  color: var(--fg-muted);
+  font-size: 13.5px;
+}
+.vertrauen span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.vertrauen svg { color: var(--accent-2); flex: none; }
+
+/* ─── Raster ───────────────────────────────────────── */
+.raster-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.karte {
+  padding: 30px 28px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-.deko-kreuz::after {
-  top: 50%;
-  left: 0;
-  height: 1px;
-  width: 100%;
+
+/* ─── Hero ─────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: calc(100svh - 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 96px 24px 80px;
+  overflow: hidden;
 }
-.deko-quadrat {
+.hero-orb {
   position: absolute;
-  width: 56px;
-  height: 56px;
-  border: 1px solid rgba(120, 170, 255, 0.14);
+  top: 38%;
+  left: 50%;
+  width: min(820px, 110vw);
+  height: min(520px, 80vw);
+  transform: translate(-50%, -50%);
+  background:
+    radial-gradient(closest-side, rgba(31, 109, 255, 0.32), transparent),
+    radial-gradient(closest-side at 70% 60%, rgba(122, 92, 255, 0.18), transparent);
+  filter: blur(60px);
   pointer-events: none;
+  z-index: -1;
 }
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+/* ─── Ablauf-Schritte ──────────────────────────────── */
+.schritte {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  position: relative;
+}
+.schritt-nr {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  box-shadow: 0 8px 22px -6px rgba(31, 109, 255, 0.7);
+  margin-bottom: 22px;
+}
+@media (max-width: 960px) {
+  .schritte { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .schritte { grid-template-columns: 1fr; }
+}
+
+/* ─── Warum-NIL: Text links, Punkte rechts ─────────── */
+.werte-split {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+.werte-liste {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.werte-punkt {
+  display: flex;
+  gap: 18px;
+  padding: 22px 24px;
+}
+@media (max-width: 860px) {
+  .werte-split { grid-template-columns: 1fr; }
+}
+
+/* ─── Vorlagen-Kacheln ─────────────────────────────── */
+.vorlage-farben {
+  display: flex;
+  height: 110px;
+}
+.vorlage-farben > div { flex: 1; }
+
+/* ─── Formular-Felder ──────────────────────────────── */
+.feld {
+  width: 100%;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--fg);
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(120, 170, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.feld::placeholder { color: var(--fg-faint); }
+.feld:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(31, 109, 255, 0.2);
+}
+.feld-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fg-muted);
+  margin-bottom: 8px;
+}
+
+/* ─── Unterseiten-Kopf ─────────────────────────────── */
+.seiten-kopf {
+  padding: clamp(64px, 9vw, 96px) 0 48px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn, .btn svg, .link-pfeil svg, .feld { transition: none !important; }
+}
+
 
 /* ════════════════════════════════════════════════════════════════
    DEMO-VORLAGEN: wiederverwendbare Animationen & Effekte
@@ -582,17 +713,19 @@ body::before {
 /* ─── CTA-Karte (Erstgespräch) ───────────────────── */
 .cta-card {
   position: relative;
-  max-width: 680px;
+  max-width: 760px;
   margin: 0 auto;
-  border: 1px solid var(--line-strong);
-  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 28px;
   padding: clamp(32px, 5vw, 56px);
   text-align: center;
   overflow: hidden;
   background:
-    radial-gradient(120% 80% at 50% 0%, rgba(31,109,255,0.12), transparent 60%),
-    linear-gradient(180deg, var(--bg-card), var(--bg-soft));
-  box-shadow: 0 40px 90px -30px rgba(0,0,0,0.7), inset 0 1px 0 rgba(120,170,255,0.08);
+    radial-gradient(120% 80% at 50% 0%, rgba(31,109,255,0.22), transparent 60%),
+    linear-gradient(140deg, rgba(120,170,255,0.10), rgba(120,170,255,0.03));
+  backdrop-filter: blur(20px) saturate(155%);
+  -webkit-backdrop-filter: blur(20px) saturate(155%);
+  box-shadow: 0 40px 90px -30px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.18);
 }
 .cta-card::before {
   content: "";
