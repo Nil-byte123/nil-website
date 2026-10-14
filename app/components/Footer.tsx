@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NilLogo } from "./NilLogo";
+import { CookieEinstellungen } from "./CookieEinstellungen";
 import { TEXTE, type Sprache } from "../i18n/texte";
 
 export function Footer({ sprache = "de" }: { sprache?: Sprache }) {
@@ -53,6 +54,7 @@ export function Footer({ sprache = "de" }: { sprache?: Sprache }) {
             <ul style={footList}>
               <li><Link href="/impressum" className="foot-link">{t.impressum}</Link></li>
               <li><Link href="/datenschutz" className="foot-link">{t.datenschutz}</Link></li>
+              <li><CookieEinstellungen label={t.cookieEinstellungen} /></li>
             </ul>
           </nav>
         </div>

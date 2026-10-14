@@ -1,28 +1,57 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { TEXTE, type Sprache } from "../i18n/texte";
+import { EINSTELLUNGEN_EVENT, EINWILLIGUNG_EVENT, EINWILLIGUNG_KEY } from "./einwilligung";
+
+function abonnieren(neu: () => void) {
+  window.addEventListener(EINWILLIGUNG_EVENT, neu);
+  window.addEventListener("storage", neu);
+  return () => {
+    window.removeEventListener(EINWILLIGUNG_EVENT, neu);
+    window.removeEventListener("storage", neu);
+  };
+}
+
+/* Falls localStorage gesperrt ist, gilt die Wahl wenigstens für diese Sitzung */
+let sitzungsWahl = false;
+
+function hatGewaehlt(): boolean {
+  if (sitzungsWahl) return true;
+  try {
+    return localStorage.getItem(EINWILLIGUNG_KEY) !== null;
+  } catch {
+    return false;
+  }
+}
 
 export default function CookieBanner({ sprache = "de" }: { sprache?: Sprache }) {
   const t = TEXTE[sprache].cookie;
-  const [visible, setVisible] = useState(false);
+  // Auf dem Server „schon gewählt“ annehmen, damit der Banner nicht kurz aufblitzt
+  const gewaehlt = useSyncExternalStore(abonnieren, hatGewaehlt, () => true);
+  const [neuGeoeffnet, setNeuGeoeffnet] = useState(false);
+  const visible = !gewaehlt || neuGeoeffnet;
 
+  // „Cookie-Einstellungen“ im Footer öffnet den Banner erneut
   useEffect(() => {
-    const consent = localStorage.getItem("nil-cookie-consent");
-    if (!consent) setVisible(true);
+    const oeffnen = () => setNeuGeoeffnet(true);
+    window.addEventListener(EINSTELLUNGEN_EVENT, oeffnen);
+    return () => window.removeEventListener(EINSTELLUNGEN_EVENT, oeffnen);
   }, []);
 
-  const accept = () => {
-    localStorage.setItem("nil-cookie-consent", "accepted");
-    setVisible(false);
-  };
-
-  const decline = () => {
-    localStorage.setItem("nil-cookie-consent", "declined");
-    setVisible(false);
-  };
+  function waehle(wert: "accepted" | "declined") {
+    try {
+      localStorage.setItem(EINWILLIGUNG_KEY, wert);
+    } catch {
+      sitzungsWahl = true;
+    }
+    setNeuGeoeffnet(false);
+    window.dispatchEvent(new Event(EINWILLIGUNG_EVENT));
+  }
+  const accept = () => waehle("accepted");
+  const decline = () => waehle("declined");
 
   return (
     <AnimatePresence>

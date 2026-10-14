@@ -12,7 +12,6 @@ export default function Impressum() {
   return (
     <main style={{
       background: "var(--bg)", color: "var(--fg)", minHeight: "100vh",
-      fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
     }}>
       {/* Navbar */}
       <nav style={{
@@ -54,7 +53,10 @@ export default function Impressum() {
           <h2 style={h2Style}>Gesetzliche Vertretung</h2>
           <p style={pStyle}>
             Der Anbieter ist minderjährig und wird gesetzlich vertreten durch:<br />
-            <strong>Cecilia Quezada Capa</strong>
+            <strong>Cecilia Quezada Capa</strong><br />
+            Aschauerstraße 17<br />
+            82445 Schwaigen<br />
+            Deutschland
           </p>
         </section>
 
@@ -63,15 +65,6 @@ export default function Impressum() {
           <p style={pStyle}>
             E-Mail: <a href="mailto:info@nilogik.de" style={linkStyle}>info@nilogik.de</a><br />
             Telefon: <a href="tel:+4915129436338" style={linkStyle}>0151 29436338</a>
-          </p>
-        </section>
-
-        <section style={sectionStyle}>
-          <h2 style={h2Style}>Umsatzsteuer-ID</h2>
-          <p style={pStyle}>
-            {/* ⚠️ Falls vorhanden, sonst diese Sektion entfernen */}
-            Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:<br />
-            [UST-ID oder „nicht vorhanden"]
           </p>
         </section>
 
@@ -88,7 +81,7 @@ export default function Impressum() {
           <h2 style={h2Style}>Haftungsausschluss</h2>
           <h3 style={h3Style}>Haftung für Inhalte</h3>
           <p style={pStyle}>
-            Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+            Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Wir sind als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
           </p>
           <h3 style={{ ...h3Style, marginTop: "20px" }}>Haftung für Links</h3>
           <p style={pStyle}>
