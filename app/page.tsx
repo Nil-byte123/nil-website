@@ -4,6 +4,10 @@ import { Footer } from "./components/Footer";
 import { Reveal, RevealStagger } from "./components/Reveal";
 import { ChatDemo } from "./components/ChatDemo";
 import { Icon } from "./components/Icons";
+import { PunkteNav } from "./components/PunkteNav";
+import { FaltKarte } from "./components/FaltKarte";
+import { HeroTitel } from "./components/HeroTitel";
+import { AblaufSchritte } from "./components/AblaufSchritte";
 import { ermittleSprache } from "./i18n/sprache";
 import { TEXTE } from "./i18n/texte";
 import { DEMOS } from "./vorlagen/demos";
@@ -14,15 +18,27 @@ const WERTE_ICONS = ["schild", "ort", "paket"];
 export default async function Home() {
   const sprache = await ermittleSprache();
   const t = TEXTE[sprache];
+  const sek = t.sektionen;
+  const ABSCHNITTE = [
+    { id: "start", label: sek.start },
+    { id: "leistungen", label: sek.leistungen },
+    { id: "ablauf", label: sek.ablauf },
+    { id: "demo", label: sek.demo },
+    { id: "warum", label: sek.warum },
+    { id: "vorlagen", label: sek.vorlagen },
+    { id: "faq", label: sek.faq },
+    { id: "termin", label: sek.termin },
+  ];
 
   return (
     <main style={{ minHeight: "100vh", position: "relative" }}>
       <div className="page-grid" aria-hidden="true" />
 
       <Navbar sprache={sprache} />
+      <PunkteNav abschnitte={ABSCHNITTE} label={sek.navLabel} />
 
       {/* ─── Hero ─────────────────────────────────────── */}
-      <section className="hero">
+      <section id="start" className="hero">
         <div className="hero-orb" aria-hidden="true" />
 
         <p className="pill fade-up">
@@ -30,17 +46,15 @@ export default async function Home() {
           {t.hero.badge}
         </p>
 
-        <h1 className="h-display fade-up" style={{ animationDelay: "0.1s", marginTop: "28px", maxWidth: "900px" }}>
-          {t.hero.titel}
-          <br />
-          <span className="grad-text">{t.hero.titelAkzent}</span>
+        <h1 className="h-display" style={{ marginTop: "28px", maxWidth: "900px" }}>
+          <HeroTitel titel={t.hero.titel} akzent={t.hero.titelAkzent} />
         </h1>
 
-        <p className="lead fade-up" style={{ animationDelay: "0.2s", maxWidth: "580px", marginTop: "24px" }}>
+        <p className="lead fade-up" style={{ animationDelay: "0.55s", maxWidth: "580px", marginTop: "24px" }}>
           {t.hero.text}
         </p>
 
-        <div className="hero-buttons fade-up" style={{ animationDelay: "0.3s" }}>
+        <div className="hero-buttons fade-up" style={{ animationDelay: "0.7s" }}>
           <Link href="/#termin" className="btn btn-primary">
             {t.hero.cta}
             <Icon name="pfeil" size={18} strich={2} />
@@ -50,7 +64,7 @@ export default async function Home() {
           </Link>
         </div>
 
-        <div className="vertrauen fade-up" style={{ animationDelay: "0.4s", marginTop: "48px" }}>
+        <div className="vertrauen fade-up" style={{ animationDelay: "0.85s", marginTop: "48px" }}>
           {t.hero.vertrauen.map((p) => (
             <span key={p}>
               <Icon name="check" size={16} strich={2.2} />
@@ -72,20 +86,19 @@ export default async function Home() {
           </Reveal>
 
           <div className="raster-3">
-            <RevealStagger gap={0.08}>
-              {t.leistungen.karten.map((k) => (
-                <div key={k.titel} className="glass glass-hover karte">
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "24px" }}>
-                    <span className="icon-badge">
-                      <Icon name={k.icon} />
-                    </span>
-                    <span className="tag">{k.tag}</span>
-                  </div>
-                  <h3 className="h-karte" style={{ marginBottom: "10px" }}>{k.titel}</h3>
-                  <p className="text-karte">{k.text}</p>
-                </div>
-              ))}
-            </RevealStagger>
+            {t.leistungen.karten.map((k, i) => (
+              <FaltKarte
+                key={k.titel}
+                index={i}
+                icon={k.icon}
+                tag={k.tag}
+                titel={k.titel}
+                text={k.text}
+                details={k.details}
+                mehr={t.leistungen.mehr}
+                weniger={t.leistungen.weniger}
+              />
+            ))}
           </div>
 
           <Reveal delay={0.1}>
@@ -109,17 +122,7 @@ export default async function Home() {
             </div>
           </Reveal>
 
-          <div className="schritte">
-            <RevealStagger>
-              {t.ablauf.schritte.map((s, i) => (
-                <div key={s.titel} className="glass karte">
-                  <span className="schritt-nr">{i + 1}</span>
-                  <h3 className="h-karte" style={{ marginBottom: "10px" }}>{s.titel}</h3>
-                  <p className="text-karte">{s.text}</p>
-                </div>
-              ))}
-            </RevealStagger>
-          </div>
+          <AblaufSchritte schritte={t.ablauf.schritte} />
         </div>
       </section>
 
@@ -140,7 +143,7 @@ export default async function Home() {
       </section>
 
       {/* ─── Warum NIL ────────────────────────────────── */}
-      <section className="section">
+      <section id="warum" className="section">
         <div className="container werte-split">
           <Reveal>
             <div>
@@ -173,7 +176,7 @@ export default async function Home() {
       </section>
 
       {/* ─── Vorlagen-Vorschau ────────────────────────── */}
-      <section className="section">
+      <section id="vorlagen" className="section">
         <div className="container">
           <Reveal>
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: "20px", marginBottom: "48px" }}>
@@ -219,7 +222,7 @@ export default async function Home() {
       </section>
 
       {/* ─── Kurz-FAQ ─────────────────────────────────── */}
-      <section className="section">
+      <section id="faq" className="section">
         <div className="container-schmal">
           <Reveal>
             <div className="section-kopf mittig">

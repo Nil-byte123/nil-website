@@ -41,7 +41,7 @@ export default function CookieBanner({ sprache = "de" }: { sprache?: Sprache }) 
             maxWidth: "760px",
             margin: "0 auto",
             padding: "22px 24px",
-            background: "rgba(14, 20, 36, 0.95)",
+            background: "rgba(12, 17, 31, 0.98)",
             zIndex: 9999,
             fontFamily: "inherit",
           }}

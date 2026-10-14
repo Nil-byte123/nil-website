@@ -934,3 +934,215 @@ body::before {
   .d-in, .d-ken, .d-reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
   .foot-link, .foot-mail, .foot-top { transition: none !important; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   ANIMATIONEN & SCROLL-NAVIGATION
+   ════════════════════════════════════════════════════════════════ */
+
+/* Sprungziele landen unter der Navbar, nicht dahinter */
+html { scroll-padding-top: 96px; }
+
+/* Desktop: Seite rastet sanft am nächsten Abschnitt ein */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  html { scroll-snap-type: y proximity; }
+  .hero, .section { scroll-snap-align: start; }
+}
+
+/* ─── Fortschrittsbalken oben ──────────────────────── */
+.scroll-fortschritt {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 300;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), #8FA8FF);
+  box-shadow: 0 0 12px rgba(91, 184, 255, 0.6);
+  pointer-events: none;
+}
+
+/* ─── Punkte-Navigation mit wanderndem Logo ────────── */
+.punkte-nav {
+  position: fixed;
+  right: 26px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  width: 44px;
+}
+.punkte-spur,
+.punkte-spur-voll {
+  position: absolute;
+  top: 17px;
+  left: calc(50% - 0.5px);
+  width: 1px;
+  pointer-events: none;
+}
+.punkte-spur { background: rgba(255, 255, 255, 0.12); }
+.punkte-spur-voll {
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 8px rgba(91, 184, 255, 0.6);
+}
+.punkte-logo {
+  position: absolute;
+  top: 4px;
+  left: calc(50% - 21px);
+  width: 42px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), #3D8BFF);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 18px -4px rgba(31, 109, 255, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  z-index: 2;
+  pointer-events: none;
+}
+.punkt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.punkt::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 0 0 3px var(--bg);
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+.punkt:hover::before { transform: scale(1.5); background: var(--accent-2); }
+.punkt-label {
+  position: absolute;
+  right: 44px;
+  top: 50%;
+  transform: translate(8px, -50%);
+  white-space: nowrap;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--fg);
+  background: rgba(14, 20, 36, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.25s ease;
+}
+.punkt:hover .punkt-label,
+.punkt:focus-visible .punkt-label {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+@media (max-width: 1299px) {
+  .punkte-nav { display: none; }
+}
+
+/* ─── Falt-Karten ──────────────────────────────────── */
+.falt-details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.falt-details li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--fg);
+  padding-top: 12px;
+}
+.falt-details li:first-child {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.falt-details svg { color: var(--accent-2); flex: none; margin-top: 3px; }
+.falt-knopf {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--accent-2);
+  cursor: pointer;
+}
+.falt-plus {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(120, 190, 255, 0.4);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;
+}
+.falt-plus::before,
+.falt-plus::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 8px;
+  height: 1.5px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+}
+.falt-plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+.falt-knopf:hover .falt-plus { background: rgba(91, 184, 255, 0.15); }
+.falt-karte.ist-offen .falt-plus { transform: rotate(135deg); }
+.falt-karte.ist-offen { border-color: rgba(120, 190, 255, 0.45); }
+
+/* ─── Zeitstrahl-Linie im Ablauf ───────────────────── */
+.schritte-linie {
+  position: absolute;
+  /* von der Mitte der ersten bis zur Mitte der letzten Nummer
+     (Karten-Innenabstand 28px + halbe Nummer 20px)            */
+  top: 49px;
+  left: 48px;
+  right: calc((100% - 60px) / 4 - 48px);
+  height: 2px;
+  z-index: 0;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  box-shadow: 0 0 12px rgba(91, 184, 255, 0.5);
+  pointer-events: none;
+}
+.schritte > .karte { z-index: 1; }
+@media (max-width: 960px) {
+  .schritte-linie { display: none; }
+}
+
+/* ─── Hero-Licht schwebt langsam ───────────────────── */
+@keyframes orbSchweben {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%      { transform: translate(-46%, -54%) scale(1.08); }
+}
+.hero-orb { animation: orbSchweben 14s ease-in-out infinite; }
+
+/* ─── Vorlagen: Farbstreifen reagieren auf Hover ───── */
+.vorlage-farben > div { transition: flex 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.glass:hover .vorlage-farben > div:first-child { flex: 2.2; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orb { animation: none; }
+  .vorlage-farben > div, .falt-plus, .punkt::before, .punkt-label { transition: none !important; }
+}
