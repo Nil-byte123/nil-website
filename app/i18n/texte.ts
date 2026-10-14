@@ -28,7 +28,19 @@ const de = {
     faq: "FAQ",
     termin: "Erstgespräch",
     navLabel: "Abschnitte der Seite",
+    zurueck: "Vorheriger Abschnitt",
+    weiter: "Nächster Abschnitt",
   },
+  branchen: {
+    titel: "Gebaut für Betriebe wie deinen",
+    liste: ["Handwerk", "Gastronomie", "Friseur & Beauty", "Arztpraxen", "Einzelhandel", "Immobilien", "Fitnessstudios", "Kanzleien", "Hotels", "Logistik"],
+  },
+  zahlen: [
+    { wert: 15, einheit: " Min.", label: "kostenloses Erstgespräch" },
+    { wert: 24, einheit: " Std.", label: "bis zu deiner Antwort" },
+    { wert: 4, einheit: "", label: "klare Schritte zur Lösung" },
+    { wert: 100, einheit: " %", label: "auf deinen Betrieb zugeschnitten" },
+  ],
   hero: {
     badge: "Software & KI nach Maß",
     titel: "Beschreib uns dein Problem.",
@@ -89,6 +101,14 @@ const de = {
     cta: "Dein Problem besprechen",
     mehr: "Mehr erfahren",
     weniger: "Weniger anzeigen",
+    vorschau: {
+      mail: ["Anfrage", "Rechnung", "Spam"],
+      chat: ["Habt ihr morgen noch was frei?", "Ja, um 14:00 Uhr! Soll ich das für dich buchen?"],
+      dokument: ["Betrag", "Datum", "Kunde"],
+      rechnung: ["Angebot", "PDF fertig"],
+      werkzeug: ["Aufträge diese Woche"],
+      tablet: ["Bestellung gesendet"],
+    },
   },
   ablauf: {
     overline: "Ablauf",
@@ -281,7 +301,19 @@ const en: typeof de = {
     faq: "FAQ",
     termin: "First call",
     navLabel: "Page sections",
+    zurueck: "Previous section",
+    weiter: "Next section",
   },
+  branchen: {
+    titel: "Built for businesses like yours",
+    liste: ["Trades", "Restaurants", "Hair & beauty", "Medical practices", "Retail", "Real estate", "Gyms", "Law firms", "Hotels", "Logistics"],
+  },
+  zahlen: [
+    { wert: 15, einheit: " min", label: "free first call" },
+    { wert: 24, einheit: " h", label: "until you get a reply" },
+    { wert: 4, einheit: "", label: "clear steps to your solution" },
+    { wert: 100, einheit: " %", label: "tailored to your business" },
+  ],
   hero: {
     badge: "Custom software & AI",
     titel: "Describe your problem.",
@@ -342,6 +374,14 @@ const en: typeof de = {
     cta: "Discuss your problem",
     mehr: "Learn more",
     weniger: "Show less",
+    vorschau: {
+      mail: ["Request", "Invoice", "Spam"],
+      chat: ["Any free slots tomorrow?", "Yes, at 2 pm! Shall I book it for you?"],
+      dokument: ["Amount", "Date", "Customer"],
+      rechnung: ["Quote", "PDF ready"],
+      werkzeug: ["Jobs this week"],
+      tablet: ["Order sent"],
+    },
   },
   ablauf: {
     overline: "Process",

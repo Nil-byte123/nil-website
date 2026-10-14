@@ -3,6 +3,7 @@
 import { useId, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Icon } from "./Icons";
+import { LeistungsVorschau } from "./LeistungsVorschau";
 
 /* ─── Falt-Karte ─────────────────────────────────────────────────
    Klappt beim Scrollen von oben auf wie ein Blatt Papier.
@@ -14,6 +15,7 @@ export function FaltKarte({
   titel,
   text,
   details,
+  vorschau,
   mehr,
   weniger,
   index = 0,
@@ -23,6 +25,7 @@ export function FaltKarte({
   titel: string;
   text: string;
   details: string[];
+  vorschau: string[];
   mehr: string;
   weniger: string;
   index?: number;
@@ -51,7 +54,7 @@ export function FaltKarte({
 
         <AnimatePresence initial={false}>
           {offen && (
-            <motion.ul
+            <motion.div
               id={detailId}
               key="details"
               className="falt-details"
@@ -61,6 +64,8 @@ export function FaltKarte({
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               style={{ transformOrigin: "top center", transformPerspective: 800 }}
             >
+              <LeistungsVorschau art={icon} labels={vorschau} />
+              <ul>
               {details.map((d, i) => (
                 <motion.li
                   key={d}
@@ -72,7 +77,8 @@ export function FaltKarte({
                   {d}
                 </motion.li>
               ))}
-            </motion.ul>
+              </ul>
+            </motion.div>
           )}
         </AnimatePresence>
 

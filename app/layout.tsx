@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import CookieBanner from "./components/CookieBanner";
+import { Spotlight } from "./components/Spotlight";
 import { ermittleSprache } from "./i18n/sprache";
 
 const geist = Geist({
@@ -82,6 +83,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <GoogleAnalytics nonce={nonce} />
         {children}
         <CookieBanner sprache={sprache} />
+        <Spotlight />
       </body>
     </html>
   );

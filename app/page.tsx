@@ -8,6 +8,8 @@ import { PunkteNav } from "./components/PunkteNav";
 import { FaltKarte } from "./components/FaltKarte";
 import { HeroTitel } from "./components/HeroTitel";
 import { AblaufSchritte } from "./components/AblaufSchritte";
+import { Zahlen } from "./components/Zahlen";
+import { Laufband } from "./components/Laufband";
 import { ermittleSprache } from "./i18n/sprache";
 import { TEXTE } from "./i18n/texte";
 import { DEMOS } from "./vorlagen/demos";
@@ -35,7 +37,7 @@ export default async function Home() {
       <div className="page-grid" aria-hidden="true" />
 
       <Navbar sprache={sprache} />
-      <PunkteNav abschnitte={ABSCHNITTE} label={sek.navLabel} />
+      <PunkteNav abschnitte={ABSCHNITTE} label={sek.navLabel} zurueck={sek.zurueck} weiter={sek.weiter} />
 
       {/* ─── Hero ─────────────────────────────────────── */}
       <section id="start" className="hero">
@@ -74,6 +76,9 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ─── Branchen-Laufband ────────────────────────── */}
+      <Laufband titel={t.branchen.titel} liste={t.branchen.liste} />
+
       {/* ─── Leistungen ───────────────────────────────── */}
       <section id="leistungen" className="section">
         <div className="container">
@@ -95,6 +100,7 @@ export default async function Home() {
                 titel={k.titel}
                 text={k.text}
                 details={k.details}
+                vorschau={t.leistungen.vorschau[k.icon as keyof typeof t.leistungen.vorschau]}
                 mehr={t.leistungen.mehr}
                 weniger={t.leistungen.weniger}
               />
@@ -123,6 +129,9 @@ export default async function Home() {
           </Reveal>
 
           <AblaufSchritte schritte={t.ablauf.schritte} />
+          <Reveal delay={0.1}>
+            <Zahlen punkte={t.zahlen} />
+          </Reveal>
         </div>
       </section>
 

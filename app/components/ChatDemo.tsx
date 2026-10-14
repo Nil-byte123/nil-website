@@ -6,7 +6,10 @@ import { useEffect, useRef, useState } from "react";
    Echter KI-Assistent (GROQ via /api/chat). Antwortet sinnvoll und
    im Kontext des jeweiligen Betriebs. Fällt auf Skript-Antworten
    zurück, falls die KI gerade nicht erreichbar ist (z.B. kein Key).
-   Umschaltbar zwischen Friseur, Handwerk und Restaurant.          */
+   Umschaltbar zwischen Friseur, Handwerk und Restaurant.
+   Scrollt man hin, tippt die Demo von selbst eine Beispiel-Frage
+   vor (rein lokal, ohne KI-Aufruf). Sobald der Besucher selbst
+   klickt oder tippt, bricht die Vorführung ab.                     */
 
 type Regel = { keys: string[]; antwort: string };
 type Branche = {
@@ -151,9 +154,66 @@ export function ChatDemo() {
   const [input, setInput] = useState("");
   const [tippt, setTippt] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const interagiert = useRef(false);
+  const autoLaeuft = useRef(false);
+
+  // Besucher übernimmt: Vorführung sofort beenden und aufräumen
+  function stoppeAuto() {
+    interagiert.current = true;
+    if (autoLaeuft.current) {
+      autoLaeuft.current = false;
+      setTippt(false);
+      setInput("");
+    }
+  }
+
+  // Automatische Vorführung beim ersten Hinscrollen
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer: ReturnType<typeof setTimeout>[] = [];
+    const nach = (ms: number, fn: () => void) =>
+      timer.push(setTimeout(() => { if (!interagiert.current) fn(); }, ms));
+
+    const beobachter = new IntersectionObserver(
+      ([eintrag]) => {
+        if (!eintrag.isIntersecting || interagiert.current) return;
+        beobachter.disconnect();
+        autoLaeuft.current = true;
+        const br = BRANCHEN[0];
+        const frage = br.schnell[0];
+        let zeit = 700;
+        // Frage Buchstabe für Buchstabe ins Eingabefeld tippen
+        for (let i = 1; i <= frage.length; i++) {
+          nach(zeit, () => setInput(frage.slice(0, i)));
+          zeit += 55;
+        }
+        zeit += 450;
+        nach(zeit, () => {
+          setMessages((m) => [...m, { role: "user", text: frage }]);
+          setInput("");
+          setTippt(true);
+        });
+        zeit += 1400;
+        nach(zeit, () => {
+          setMessages((m) => [...m, { role: "bot", text: antwortFinden(br, frage) }]);
+          setTippt(false);
+          autoLaeuft.current = false;
+        });
+      },
+      { threshold: 0.6 }
+    );
+    beobachter.observe(el);
+    return () => {
+      beobachter.disconnect();
+      timer.forEach(clearTimeout);
+    };
+  }, []);
 
   // Branche wechseln → Chat zurücksetzen
   function wechsle(i: number) {
+    stoppeAuto();
     setAktiv(i);
     setMessages([{ role: "bot", text: BRANCHEN[i].gruss }]);
     setInput("");
@@ -167,7 +227,9 @@ export function ChatDemo() {
 
   async function senden(text: string) {
     const t = text.trim();
-    if (!t || tippt) return;
+    const warAuto = autoLaeuft.current;
+    stoppeAuto();
+    if (!t || (tippt && !warAuto)) return;
     const vorher = messages; // bisheriger Verlauf (vor dieser Nachricht)
     setMessages((m) => [...m, { role: "user", text: t }]);
     setInput("");
@@ -204,7 +266,7 @@ export function ChatDemo() {
   }
 
   return (
-    <div style={{ maxWidth: "560px", margin: "0 auto" }}>
+    <div ref={wrapRef} style={{ maxWidth: "560px", margin: "0 auto" }}>
       {/* Branchen-Tabs */}
       <div style={{ display: "flex", gap: "10px", marginBottom: "20px", flexWrap: "wrap", justifyContent: "center" }}>
         {BRANCHEN.map((br, i) => {
@@ -304,7 +366,11 @@ export function ChatDemo() {
           <div className="chat-inputwrap">
             <input
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                stoppeAuto();
+                setInput(e.target.value);
+              }}
+              onFocus={stoppeAuto}
               placeholder="Schreib eine Nachricht…"
               aria-label="Nachricht an den Demo-Assistenten"
               maxLength={300}
